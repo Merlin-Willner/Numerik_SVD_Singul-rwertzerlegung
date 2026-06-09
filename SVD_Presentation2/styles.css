@@ -117,25 +117,21 @@
   width: min(280px, 100%);
   margin: 0 auto;
   padding: 0;
-  border: 1.5px solid #8d8d8d;
   position: relative;
-}
-
-.matrix-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.16) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.16) 1px, transparent 1px);
-  background-size: calc(100% / 13) calc(100% / 13);
-  pointer-events: none;
 }
 
 .matrix-frame img {
   width: 100%;
   display: block;
-  image-rendering: pixelated;
+}
+
+.generated-matrix-frame {
+  border: 0;
+}
+
+.hook-duck-grid {
+  width: 100%;
+  display: block;
 }
 
 .caption {
@@ -274,6 +270,22 @@
   border: 2px solid var(--ink);
 }
 
+.svd-image-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 2px solid var(--ink);
+  background: #ffffff;
+}
+
+.image-rank-demo .rank-grids {
+  align-items: start;
+}
+
+.image-rank-demo .grid-title {
+  margin-bottom: 0.3rem;
+}
+
 .svd-grid-svg text {
   font-family: "Computer Modern Serif", Georgia, "Times New Roman", serif;
   font-size: 8px;
@@ -351,11 +363,35 @@
   align-content: center;
 }
 
-.concept-chain {
+.concept-chain,
+.concept-compact {
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr;
   gap: 0.65rem;
   align-items: stretch;
+}
+
+.concept-with-steps {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.concept-with-steps .generated-steps {
+  max-height: 230px;
+  object-fit: contain;
+}
+
+.concept-compact .concept-step {
+  padding: 0.35rem 0.4rem 0.2rem;
+}
+
+.concept-compact .concept-step p {
+  font-size: 0.45em;
+  margin-bottom: 0.25rem;
+}
+
+.concept-compact .concept-step mjx-container {
+  font-size: 0.8em !important;
 }
 
 .concept-step {
@@ -392,6 +428,42 @@
   grid-template-columns: 68% 32%;
   gap: 1.1rem;
   align-items: start;
+}
+
+.steps-svd-summary {
+  display: grid;
+  grid-template-columns: 56% 44%;
+  gap: 1.15rem;
+  align-items: start;
+}
+
+.summary-left {
+  border-right: 2px solid var(--ink);
+  padding-right: 0.9rem;
+}
+
+.summary-left p,
+.summary-right p {
+  font-size: 0.56em;
+  margin: 0 0 0.6rem;
+}
+
+.compact-formula {
+  font-size: 1.42em;
+  margin: 0.2rem 0 0.95rem;
+}
+
+.svd-mini-cards {
+  display: grid;
+  gap: 0.62rem;
+}
+
+.svd-mini-card {
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  padding: 0.62rem 0.72rem;
+  font-size: 0.62em;
+  line-height: 1.25;
 }
 
 .steps-explanation {

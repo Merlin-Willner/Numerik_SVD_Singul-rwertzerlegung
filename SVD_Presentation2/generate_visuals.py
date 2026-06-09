@@ -17,6 +17,8 @@ plt.rcParams.update(
 OUT_DIR = Path(__file__).parent / "assets" / "generated"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 DUCK_PATH = Path(__file__).parent / "Folieninhalte" / "Gummiente.png"
+EINSTEIN_PATH = Path(__file__).parent / "assets" / "Albert_Einstein_Gute_Qualität.jpg"
+EINSTEIN_PRESENTATION_WIDTH = 600
 
 RED = "#c62828"
 BLUE = "#1e5aa8"
@@ -119,6 +121,27 @@ def save_duck_matrix_svg():
     (OUT_DIR / "duck_image_to_matrix.svg").write_text("\n".join(parts), encoding="utf-8")
 
 
+def save_duck_original_grid_svg():
+    values = duck_matrix()
+    cell = 22
+    size = cell * 13
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{size}" height="{size}" viewBox="0 0 {size} {size}">',
+    ]
+    for row in range(13):
+        for col in range(13):
+            value = values[row, col]
+            x = col * cell
+            y = row * cell
+            parts.append(
+                f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" '
+                f'fill="{luminance_to_hex(value)}" stroke="#111" stroke-width="0.8"/>'
+            )
+    parts.append(f'<rect x="0" y="0" width="{size}" height="{size}" fill="none" stroke="#111" stroke-width="2"/>')
+    parts.append("</svg>")
+    (OUT_DIR / "duck_original_grid.svg").write_text("\n".join(parts), encoding="utf-8")
+
+
 def save_duck_svd_data():
     values = duck_matrix().astype(float)
     u, singular_values, vt = np.linalg.svd(values, full_matrices=True)
@@ -133,6 +156,28 @@ def save_duck_svd_data():
     }
     js = "window.DUCK_SVD_DATA = " + json.dumps(payload, separators=(",", ":")) + ";\n"
     (OUT_DIR / "duck_svd_data.js").write_text(js, encoding="utf-8")
+
+
+def save_einstein_svd_data():
+    image = Image.open(EINSTEIN_PATH).convert("L")
+    source_width, source_height = image.size
+    target_height = round(source_height * EINSTEIN_PRESENTATION_WIDTH / source_width)
+    image = image.resize((EINSTEIN_PRESENTATION_WIDTH, target_height), Image.Resampling.LANCZOS)
+    values = np.array(image, dtype=float)
+    u, singular_values, vt = np.linalg.svd(values, full_matrices=False)
+    payload = {
+        "rows": int(values.shape[0]),
+        "cols": int(values.shape[1]),
+        "sourceRows": int(source_height),
+        "sourceCols": int(source_width),
+        "rank": int(len(singular_values)),
+        "original": values.astype(int).tolist(),
+        "u": np.round(u, 8).tolist(),
+        "s": np.round(singular_values, 8).tolist(),
+        "vt": np.round(vt, 8).tolist(),
+    }
+    js = "window.EINSTEIN_SVD_DATA = " + json.dumps(payload, separators=(",", ":")) + ";\n"
+    (OUT_DIR / "einstein_svd_data.js").write_text(js, encoding="utf-8")
 
 
 def transform_points(points: np.ndarray, matrix: np.ndarray) -> np.ndarray:
@@ -182,7 +227,7 @@ def add_arc_arrow(ax, xy_a, xy_b, rad=0.32, text=None):
     if text:
         ax.text(
             (xy_a[0] + xy_b[0]) / 2,
-            max(xy_a[1], xy_b[1]) + 0.55,
+            max(xy_a[1], xy_b[1]) + 0.75,
             text,
             ha="center",
             va="bottom",
@@ -235,20 +280,19 @@ def save_intro_symbols():
 
     ax.add_patch(
         FancyArrowPatch(
-            (1.03, 2.55),
-            (2.60, 2.55),
-            connectionstyle="arc3,rad=-0.85",
+            (0.95, 2.45),
+            (2.68, 2.45),
+            connectionstyle="arc3,rad=-1.05",
             arrowstyle="-|>",
-            mutation_scale=24,
-            linewidth=4.2,
+            mutation_scale=26,
+            linewidth=4.6,
             color=INK,
         )
     )
     ax.add_patch(FancyArrowPatch((0.55, 0.72), (3.55, 0.72), arrowstyle="<|-|>", mutation_scale=22, linewidth=4.8, color=INK))
     ax.add_patch(FancyArrowPatch((3.70, 0.95), (3.70, 3.35), arrowstyle="<|-|>", mutation_scale=22, linewidth=4.8, color=INK))
-    ax.text(0.45, 0.18, "drehen", fontsize=15, color=MUTED)
-    ax.text(1.72, 0.18, "strecken", fontsize=15, color=MUTED)
-    ax.text(2.95, 0.18, "stauchen", fontsize=15, color=MUTED)
+    ax.text(0.78, 0.18, "Rotieren", fontsize=15, color=MUTED)
+    ax.text(2.35, 0.18, "Skalieren", fontsize=15, color=MUTED)
 
     fig.savefig(OUT_DIR / "intro_transform_symbols.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
@@ -256,7 +300,9 @@ def save_intro_symbols():
 
 if __name__ == "__main__":
     save_duck_matrix_svg()
+    save_duck_original_grid_svg()
     save_duck_svd_data()
+    save_einstein_svd_data()
     save_intro_symbols()
     save_puzzle()
     save_steps()

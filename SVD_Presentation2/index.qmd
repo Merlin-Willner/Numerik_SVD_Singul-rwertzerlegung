@@ -32,12 +32,12 @@ Erklärt anhand von Bildkomprimierung
 
 ::: {.hook-visual}
 ::: {.transform-panel}
-![](assets/generated/intro_transform_symbols.svg){.generated-symbols fig-alt="Rotation, horizontale Streckung und vertikale Stauchung"}
+![](assets/generated/intro_transform_symbols.svg){.generated-symbols fig-alt="Rotations- und Skalierungssymbole"}
 :::
 
 ::: {.duck-matrix}
-::: {.matrix-frame}
-![](Folieninhalte/Gummiente.png){fig-alt="Pixelgrafik einer Ente"}
+::: {.matrix-frame .generated-matrix-frame}
+![](assets/generated/duck_original_grid.svg){.hook-duck-grid fig-alt="Pixelente als exakt gerasterte Matrix"}
 :::
 
 ::: {.caption}
@@ -56,6 +56,76 @@ $$A \approx U_k \Sigma_k V_k^T$$
 :::
 
 Je kleiner $k$ ist, desto weniger Daten müssen gespeichert werden. Das Bild verliert Details, bleibt aber oft erstaunlich gut erkennbar.
+:::
+
+:::
+
+## Von einer Form zur anderen
+
+::: {.lead-text}
+Bevor wir Bilder komprimieren, betrachten wir eine einfachere Frage: Wie kann eine lineare Abbildung einen Kreis in ein gedrehtes Oval verwandeln?
+:::
+
+::: {.generated-visual-wrap}
+![](assets/generated/transformation_puzzle.svg){.generated-puzzle fig-alt="Ausgangskreis wird mathematisch zu einem gestauchten und rotierten Oval transformiert"}
+:::
+
+## Die Idee: Rotation, Streckung, Rotation
+
+::: {.concept-with-steps}
+
+::: {.concept-compact}
+::: {.concept-step}
+**1. Rotation**
+
+Koordinatensystem passend ausrichten.
+
+$$R_{-90^\circ} =
+\begin{pmatrix}
+0 & 1 \\
+-1 & 0
+\end{pmatrix}$$
+:::
+
+::: {.concept-arrow}
+$\longrightarrow$
+:::
+
+::: {.concept-step}
+**2. Streckung**
+
+Eine Achse stauchen, die andere unverändert lassen.
+
+$$\Sigma =
+\begin{pmatrix}
+0.45 & 0 \\
+0 & 1
+\end{pmatrix}$$
+:::
+
+::: {.concept-arrow}
+$\longrightarrow$
+:::
+
+::: {.concept-step}
+**3. Rotation**
+
+Das Ergebnis in die Zielrichtung drehen.
+
+$$R_{-45^\circ} =
+\begin{pmatrix}
+\frac{\sqrt2}{2} & \frac{\sqrt2}{2} \\
+-\frac{\sqrt2}{2} & \frac{\sqrt2}{2}
+\end{pmatrix}$$
+:::
+:::
+
+::: {.generated-visual-wrap .compact}
+![](assets/generated/transformation_steps.svg){.generated-steps fig-alt="Vier Transformationsschritte: Start, Rotation, Streckung, Rotation"}
+:::
+
+::: {.concept-result}
+$$A = R_{-45^\circ}\,\Sigma\,R_{-90^\circ}$$
 :::
 
 :::
@@ -156,134 +226,76 @@ Der Slider berechnet die Rekonstruktion aus den SVD-Faktoren neu. Kleine Ränge 
 
 :::
 
-## Von einer Form zur anderen
+## Rang-k-Näherung von Albert Einstein
 
-::: {.lead-text}
-Bevor wir Bilder komprimieren, betrachten wir eine einfachere Frage: Wie kann eine lineare Abbildung einen Kreis in ein gedrehtes Oval verwandeln?
-:::
+::: {.rank-slide}
 
-::: {.generated-visual-wrap}
-![](assets/generated/transformation_puzzle.svg){.generated-puzzle fig-alt="Ausgangskreis wird mathematisch zu einem gestauchten und rotierten Oval transformiert"}
-:::
-
-## Die Idee: Rotation, Streckung, Rotation
-
-::: {.concept-slide}
-
-::: {.concept-chain}
-::: {.concept-step}
-**1. Rotation**
-
-Koordinatensystem passend ausrichten.
+::: {.rank-explanation}
+Das gleiche Prinzip funktioniert auch für ein echtes Graustufenbild:
 
 $$
-R_{-90^\circ} =
-\begin{pmatrix}
-0 & 1 \\
--1 & 0
-\end{pmatrix}
+A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 $$
+
+Hier wird das Einstein-Bild aus der hochauflösenden Vorlage als Matrix zerlegt. Kleine Ränge zeigen zuerst die grobe Struktur; höhere Ränge ergänzen Details, Kanten und feine Kontraste.
 :::
 
-::: {.concept-arrow}
-$\longrightarrow$
-:::
-
-::: {.concept-step}
-**2. Streckung**
-
-Eine Achse stauchen, die andere unverändert lassen.
-
-$$
-\Sigma =
-\begin{pmatrix}
-0.45 & 0 \\
-0 & 1
-\end{pmatrix}
-$$
-:::
-
-::: {.concept-arrow}
-$\longrightarrow$
-:::
-
-::: {.concept-step}
-**3. Rotation**
-
-Das Ergebnis in die Zielrichtung drehen.
-
-$$
-R_{-45^\circ} =
-\begin{pmatrix}
-\frac{\sqrt2}{2} & \frac{\sqrt2}{2} \\
--\frac{\sqrt2}{2} & \frac{\sqrt2}{2}
-\end{pmatrix}
-$$
-:::
-:::
-
-::: {.concept-result}
-$$
-A = R_{-45^\circ}\,\Sigma\,R_{-90^\circ}
-$$
-:::
+```{=html}
+<div class="svd-rank-demo image-rank-demo" data-svd-source="einstein" data-render="canvas">
+  <div class="rank-control">
+    <label>Rang k = <strong data-role="rank-label">1</strong></label>
+    <input data-role="rank-slider" type="range" min="1" max="202" value="1" step="1">
+    <span data-role="storage-label"></span>
+  </div>
+  <div class="rank-grids">
+    <div>
+      <div class="grid-title">Original</div>
+      <div data-role="original-grid"></div>
+    </div>
+    <div>
+      <div class="grid-title">Rekonstruktion</div>
+      <div data-role="reconstructed-grid"></div>
+    </div>
+  </div>
+</div>
+```
 
 :::
 
 ## Was daran schon SVD ist und was noch fehlt
 
-::: {.steps-explain-slide}
+::: {.steps-svd-summary}
 
-::: {.steps-left}
+::: {.summary-left}
 ::: {.generated-visual-wrap .compact}
 ![](assets/generated/transformation_steps.svg){.generated-steps fig-alt="Vier Transformationsschritte: Start, Rotation, Streckung, Rotation"}
 :::
 
-::: {.math-grid}
-::: {.math-cell}
-$$
-R_{-90^\circ} =
-\begin{pmatrix}
-0 & 1 \\
--1 & 0
-\end{pmatrix}
-$$
-:::
-
-::: {.math-cell}
-$$
-\Sigma =
-\begin{pmatrix}
-0.45 & 0 \\
-0 & 1
-\end{pmatrix}
-$$
-:::
-
-::: {.math-cell}
-$$
-R_{-45^\circ} =
-\begin{pmatrix}
-\frac{\sqrt2}{2} & \frac{\sqrt2}{2} \\
--\frac{\sqrt2}{2} & \frac{\sqrt2}{2}
-\end{pmatrix}
-$$
-:::
-:::
-:::
-
-::: {.steps-explanation}
 Diese Zerlegung zeigt das Grundprinzip der SVD: Eine kompliziertere lineare Abbildung wird in einfache geometrische Bausteine zerlegt.
 
-Die echte SVD schreibt allgemein
-
-$$
-A = U \Sigma V^T.
-$$
-
-Dabei sind $U$ und $V^T$ orthogonale Matrizen, also Rotationen oder Spiegelungen. $\Sigma$ enthält die Singulärwerte und beschreibt die Streckung entlang unabhängiger Achsen.
-
 Unser Beispiel ist didaktisch vereinfacht: Es zeigt die geometrische Idee, aber noch nicht die vollständige SVD-Definition mit sortierten Singulärwerten, Vorzeichenwahl und allgemeiner Matrixgröße.
+:::
+
+::: {.summary-right}
+::: {.svd-formula .compact-formula}
+$$
+A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#ff3b35}{V^T}}
+$$
+:::
+
+::: {.svd-mini-cards}
+::: {.svd-mini-card .u-card}
+**U**: zweite Drehung oder Spiegelung im Zielraum
+:::
+
+::: {.svd-mini-card .sigma-card}
+**Σ**: Streckung oder Stauchung durch Singulärwerte
+:::
+
+::: {.svd-mini-card .v-card}
+**Vᵀ**: erste Drehung oder Spiegelung der Eingangsrichtungen
+:::
+:::
 :::
 
 :::

@@ -17,14 +17,14 @@
     return out;
   }
 
-  function svgGrid(values, showNumbers) {
+  function svgGrid(values, showNumbers, label) {
     const rows = values.length;
     const cols = values[0].length;
     const cell = 22;
     const width = cols * cell;
     const height = rows * cell;
     const parts = [
-      `<svg class="svd-grid-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Rangrekonstruktion der Entenmatrix">`,
+      `<svg class="svd-grid-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${label}">`,
     ];
 
     for (let row = 0; row < rows; row += 1) {
@@ -45,15 +45,62 @@
     return parts.join("");
   }
 
+  function drawCanvas(container, values, label) {
+    const rows = values.length;
+    const cols = values[0].length;
+    let canvas = container.querySelector("canvas");
+    if (!canvas) {
+      canvas = document.createElement("canvas");
+      canvas.className = "svd-image-canvas";
+      canvas.setAttribute("role", "img");
+      container.innerHTML = "";
+      container.appendChild(canvas);
+    }
+
+    canvas.width = cols;
+    canvas.height = rows;
+    canvas.setAttribute("aria-label", label);
+
+    const context = canvas.getContext("2d");
+    const imageData = context.createImageData(cols, rows);
+    let offset = 0;
+    for (let row = 0; row < rows; row += 1) {
+      for (let col = 0; col < cols; col += 1) {
+        const value = clampByte(values[row][col]);
+        imageData.data[offset] = value;
+        imageData.data[offset + 1] = value;
+        imageData.data[offset + 2] = value;
+        imageData.data[offset + 3] = 255;
+        offset += 4;
+      }
+    }
+    context.putImageData(imageData, 0, 0);
+  }
+
+  function renderImage(container, values, showNumbers, label, renderMode) {
+    if (renderMode === "canvas") {
+      drawCanvas(container, values, label);
+      return;
+    }
+    container.innerHTML = svgGrid(values, showNumbers, label);
+  }
+
+  function dataFor(root) {
+    const source = root.dataset.svdSource || "duck";
+    if (source === "einstein") return window.EINSTEIN_SVD_DATA;
+    return window.DUCK_SVD_DATA;
+  }
+
   function storageCount(data, rank) {
     return rank * (data.rows + data.cols + 1);
   }
 
   function initDemo(root) {
-    const data = window.DUCK_SVD_DATA;
+    const data = dataFor(root);
     if (!data || root.dataset.ready === "true") return;
     root.dataset.ready = "true";
 
+    const renderMode = root.dataset.render || "svg";
     const slider = root.querySelector('[data-role="rank-slider"]');
     const rankLabel = root.querySelector('[data-role="rank-label"]');
     const storageLabel = root.querySelector('[data-role="storage-label"]');
@@ -62,12 +109,12 @@
 
     slider.max = String(data.rank);
     slider.value = "1";
-    original.innerHTML = svgGrid(data.original, false);
+    renderImage(original, data.original, false, "Originalbild als Matrix", renderMode);
 
     function render() {
       const rank = Number(slider.value);
       const approx = reconstruct(data, rank);
-      reconstructed.innerHTML = svgGrid(approx, false);
+      renderImage(reconstructed, approx, false, `Rang-${rank}-Rekonstruktion`, renderMode);
       rankLabel.textContent = String(rank);
       storageLabel.textContent = `${storageCount(data, rank)} statt ${data.rows * data.cols} Zahlen`;
     }
