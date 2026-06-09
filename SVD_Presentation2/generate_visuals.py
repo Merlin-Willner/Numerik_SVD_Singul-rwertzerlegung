@@ -25,6 +25,9 @@ BLUE = "#1e5aa8"
 GREEN = "#2e7d32"
 INK = "#111111"
 MUTED = "#666666"
+YELLOW = "#f2aa00"
+SVDBLUE = "#1e88ff"
+SVDRED = "#ff3b35"
 
 
 def rotation_clockwise(degrees: float) -> np.ndarray:
@@ -211,6 +214,42 @@ def draw_shape(ax, matrix=None, points=None, label=None):
         ax.text(0, -1.35, label, ha="center", va="top", fontsize=15, color=MUTED)
 
 
+def draw_grid(ax, extent=1.5, step=0.25):
+    ax.set_aspect("equal")
+    ax.set_xlim(-extent, extent)
+    ax.set_ylim(-extent, extent)
+    ticks = np.arange(-extent, extent + 1e-9, step)
+    for tick in ticks:
+        ax.plot([-extent, extent], [tick, tick], color="#d0d0d0", linewidth=0.6, zorder=0)
+        ax.plot([tick, tick], [-extent, extent], color="#d0d0d0", linewidth=0.6, zorder=0)
+    ax.axhline(0, color="#666666", linewidth=1.1, zorder=1)
+    ax.axvline(0, color="#666666", linewidth=1.1, zorder=1)
+
+
+def draw_shape_on_grid(ax, matrix=None, line=False, label=None):
+    draw_grid(ax)
+    if line:
+        direction = matrix @ np.array([0.0, 1.0]) if matrix is not None else np.array([0.0, 1.0])
+        norm = np.linalg.norm(direction)
+        if norm == 0:
+            direction = np.array([1.0, 0.0])
+        else:
+            direction = direction / norm
+        line_pts = np.array([-1.55 * direction, 1.55 * direction])
+        ax.plot(line_pts[:, 0], line_pts[:, 1], color=INK, linewidth=3.0, zorder=2)
+    else:
+        boundary = circle_points(matrix)
+        ax.plot(boundary[:, 0], boundary[:, 1], color=INK, linewidth=2.8, zorder=2)
+
+    pts = transform_points(POINTS, matrix) if matrix is not None else POINTS
+    for (x, y), color in zip(pts, POINT_COLORS):
+        ax.scatter([x], [y], s=110, color=color, edgecolor="white", linewidth=1.8, zorder=3)
+
+    ax.axis("off")
+    if label:
+        ax.text(0, -1.78, label, ha="center", va="top", fontsize=13, color=MUTED)
+
+
 def add_arc_arrow(ax, xy_a, xy_b, rad=0.32, text=None):
     arrow = FancyArrowPatch(
         xy_a,
@@ -272,19 +311,348 @@ def save_steps():
     plt.close(fig)
 
 
+def save_step_actions():
+    matrices = [
+        np.eye(2),
+        R90,
+        S @ R90,
+        R45 @ S @ R90,
+    ]
+    fig, ax = plt.subplots(figsize=(12.0, 4.25))
+    ax.set_xlim(0, 12.0)
+    ax.set_ylim(0, 4.25)
+    ax.axis("off")
+
+    xs = [0.45, 3.35, 6.25, 9.15]
+    for x, matrix in zip(xs, matrices):
+        sub = ax.inset_axes([x / 12.0, 0.43, 0.18, 0.55])
+        draw_shape(sub, matrix=matrix)
+
+    actions = [
+        ("Rotation", "R_-90°"),
+        ("Skalierung", "Σ"),
+        ("Rotation", "R_-45°"),
+    ]
+    arrow_y = 2.55
+    for i, (action, formula) in enumerate(actions):
+        start = xs[i] + 2.05
+        end = xs[i + 1] - 0.12
+        ax.add_patch(
+            FancyArrowPatch(
+                (start, arrow_y),
+                (end, arrow_y),
+                arrowstyle="-|>",
+                mutation_scale=21,
+                linewidth=2.4,
+                color=INK,
+            )
+        )
+        mid = (start + end) / 2
+        ax.text(mid, 1.25, action, ha="center", va="center", fontsize=15, color=INK)
+        ax.text(mid, 0.72, formula, ha="center", va="center", fontsize=18, color=MUTED)
+
+    fig.savefig(OUT_DIR / "transformation_step_actions.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
+def save_svd_bridge():
+    matrices = [
+        np.eye(2),
+        R90,
+        S @ R90,
+        R45 @ S @ R90,
+    ]
+    colors = [INK, SVDRED, YELLOW, SVDBLUE]
+    labels = ["Start", "Rotation", "Skalierung", "Rotation"]
+
+    fig, ax = plt.subplots(figsize=(7.0, 4.7))
+    ax.set_xlim(0, 7.0)
+    ax.set_ylim(0, 4.7)
+    ax.axis("off")
+
+    xs = [0.20, 1.85, 3.50, 5.15]
+    for x, matrix, label, color in zip(xs, matrices, labels, colors):
+        sub = ax.inset_axes([x / 7.0, 0.43, 0.19, 0.43])
+        draw_shape(sub, matrix=matrix)
+        ax.text(x + 0.66, 1.36, label, ha="center", va="center", fontsize=13, color=MUTED)
+
+    for i, (color, label) in enumerate([(SVDRED, "Vᵀ"), (YELLOW, "Σ"), (SVDBLUE, "U")]):
+        ax.add_patch(
+            FancyArrowPatch(
+                (xs[i] + 1.30, 2.62),
+                (xs[i + 1] - 0.05, 2.62),
+                arrowstyle="-|>",
+                mutation_scale=16,
+                linewidth=2.0,
+                color=color,
+            )
+        )
+        ax.text((xs[i] + xs[i + 1] + 1.25) / 2, 2.95, label, ha="center", va="center", fontsize=16, color=color)
+
+    ax.text(
+        3.5,
+        0.48,
+        "Vᵀ = R_-90°      Σ = diag(0.45, 1)      U = R_-45°",
+        ha="center",
+        va="center",
+        fontsize=13,
+        color=INK,
+    )
+
+    fig.savefig(OUT_DIR / "svd_bridge.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
+def save_dimension_reduction():
+    sigma_rank1 = np.array([[0.0, 0.0], [0.0, 1.0]])
+    matrices = [
+        np.eye(2),
+        R90,
+        sigma_rank1 @ R90,
+        R45 @ sigma_rank1 @ R90,
+    ]
+    labels = ["Start", "Vᵀ: drehen", "Σ₁: eine Richtung", "U: zurück drehen"]
+    action_labels = [("Vᵀ", SVDRED), ("Σ₁", YELLOW), ("U", SVDBLUE)]
+
+    fig, ax = plt.subplots(figsize=(12.0, 3.9))
+    ax.set_xlim(0, 12.0)
+    ax.set_ylim(0, 3.9)
+    ax.axis("off")
+
+    xs = [0.35, 3.08, 5.81, 8.54]
+    for x, label, matrix, is_line in zip(xs, labels, matrices, [False, False, True, True]):
+        sub = ax.inset_axes([x / 12.0, 0.30, 0.19, 0.56])
+        draw_shape_on_grid(sub, matrix=matrix, line=is_line, label=label)
+
+    for i, (label, color) in enumerate(action_labels):
+        start_x = xs[i] + 2.18
+        end_x = xs[i + 1] - 0.18
+        arrow_y = 2.02
+        ax.add_patch(
+            FancyArrowPatch(
+                (start_x, arrow_y),
+                (end_x, arrow_y),
+                arrowstyle="-|>",
+                mutation_scale=20,
+                linewidth=2.2,
+                color=color,
+            )
+        )
+        ax.text((start_x + end_x) / 2, 2.34, label, ha="center", va="center", fontsize=18, color=color)
+
+    fig.savefig(OUT_DIR / "dimension_reduction.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
+def save_rank1_matrix():
+    fig, ax = plt.subplots(figsize=(11.0, 3.8))
+    ax.set_xlim(0, 11.0)
+    ax.set_ylim(0, 3.8)
+    ax.axis("off")
+
+    matrix = np.array(
+        [
+            [1, 2, 3, 4],
+            [-1, -2, -3, -4],
+            [2, 4, 6, 8],
+            [10, 20, 30, 40],
+        ]
+    )
+    left_vec = [1, -1, 2, 10]
+    right_vec = [1, 2, 3, 4]
+
+    def cell(x, y, w, h, text, fill="#ffffff", fontsize=15):
+        rect = plt.Rectangle((x, y), w, h, facecolor=fill, edgecolor=INK, linewidth=1.15)
+        ax.add_patch(rect)
+        ax.text(x + w / 2, y + h / 2, str(text), ha="center", va="center", fontsize=fontsize, color=INK, fontweight="bold")
+
+    cell_w = 0.48
+    cell_h = 0.42
+    x0 = 0.85
+    y0 = 2.55
+    for row in range(4):
+        for col in range(4):
+            cell(x0 + col * cell_w, y0 - row * cell_h, cell_w, cell_h, matrix[row, col])
+    ax.text(x0 + 2 * cell_w, 0.72, "16 Zahlen", ha="center", va="center", fontsize=18, color=MUTED)
+
+    ax.text(3.65, 1.93, "=", ha="center", va="center", fontsize=24, color=MUTED)
+
+    vx = 4.40
+    blue = "#19a7ff"
+    for row, value in enumerate(left_vec):
+        cell(vx, y0 - row * cell_h, cell_w, cell_h, value, fill=blue)
+
+    ax.text(5.28, 1.93, r"$\cdot$", ha="center", va="center", fontsize=24, color=MUTED)
+
+    hx = 5.75
+    hy = 1.72
+    green = "#55c63a"
+    for col, value in enumerate(right_vec):
+        cell(hx + col * cell_w, hy, cell_w, cell_h, value, fill=green)
+    ax.text(hx + 2 * cell_w, 0.72, "8 Zahlen", ha="center", va="center", fontsize=18, color=MUTED)
+
+    ax.text(7.85, 2.48, r"$A = u v^T$", ha="left", va="center", fontsize=25, color=INK)
+    ax.text(7.85, 1.82, "Alle Zeilen sind Vielfache\nvon (1, 2, 3, 4).", ha="left", va="top", fontsize=15, color=INK, linespacing=1.25)
+    ax.text(7.85, 0.92, "Deshalb hat die Matrix Rang 1:\n4 Dimensionen, aber nur eine\nunabhängige Richtung.", ha="left", va="top", fontsize=14, color=MUTED, linespacing=1.25)
+
+    fig.savefig(OUT_DIR / "rank1_matrix.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
+def save_rank_approximation():
+    fig, ax = plt.subplots(figsize=(11.2, 3.8))
+    ax.set_xlim(0, 11.2)
+    ax.set_ylim(0, 3.8)
+    ax.axis("off")
+
+    matrix = np.array(
+        [
+            [3, 1, 4, 1],
+            [5, 9, 2, 6],
+            [5, 3, 5, 8],
+            [9, 7, 9, 3],
+        ]
+    )
+
+    def cell(x, y, w, h, text="", fill="#ffffff", fontsize=14):
+        rect = plt.Rectangle((x, y), w, h, facecolor=fill, edgecolor=INK, linewidth=1.05)
+        ax.add_patch(rect)
+        if text != "":
+            ax.text(x + w / 2, y + h / 2, str(text), ha="center", va="center", fontsize=fontsize, color=INK, fontweight="bold")
+
+    cell_w = 0.42
+    cell_h = 0.39
+    x0 = 0.55
+    y0 = 2.70
+    for row in range(4):
+        for col in range(4):
+            cell(x0 + col * cell_w, y0 - row * cell_h, cell_w, cell_h, matrix[row, col])
+
+    ax.text(x0 + 2 * cell_w, 0.78, "Rang 4", ha="center", va="center", fontsize=16, color=MUTED)
+    ax.text(2.95, 1.95, "≈", ha="center", va="center", fontsize=24, color=MUTED)
+
+    blue = "#19a7ff"
+    green = "#55c63a"
+
+    def rank_one_block(x, y, label, alpha):
+        for row in range(4):
+            cell(x, y0 - row * cell_h, cell_w, cell_h, "", fill=blue)
+        ax.text(x + cell_w / 2, y0 - 4 * cell_h - 0.20, label, ha="center", va="center", fontsize=14, color=MUTED)
+        hx = x + 0.74
+        hy = y0 - 1.72 * cell_h
+        for col in range(4):
+            cell(hx + col * cell_w, hy, cell_w, cell_h, "", fill=green)
+        ax.text(hx + 2 * cell_w, hy - 0.38, r"$u_i v_i^T$", ha="center", va="center", fontsize=15, color=MUTED)
+        ax.text(x + 0.50, y0 + 0.18, alpha, ha="center", va="center", fontsize=16, color=YELLOW)
+
+    rank_one_block(3.55, 1.80, "1. Baustein", r"$\sigma_1$")
+    ax.text(6.05, 1.95, "+", ha="center", va="center", fontsize=22, color=MUTED)
+    rank_one_block(6.65, 1.80, "2. Baustein", r"$\sigma_2$")
+    ax.text(9.15, 1.95, "+", ha="center", va="center", fontsize=22, color=MUTED)
+    ax.text(9.70, 1.95, "…", ha="left", va="center", fontsize=25, color=MUTED)
+
+    ax.text(0.55, 3.42, "Voller Rang", ha="left", va="center", fontsize=16, color=INK)
+    ax.text(3.55, 3.42, "Approximation durch Rang-1-Matrizen", ha="left", va="center", fontsize=16, color=INK)
+
+    fig.savefig(OUT_DIR / "rank_approximation.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
+def save_duck_rank_terms():
+    values = duck_matrix().astype(float)
+    u, singular_values, vt = np.linalg.svd(values, full_matrices=True)
+    accents = [RED, BLUE, GREEN]
+    names = ["Rang 1", "Rang 2", "Rang 3"]
+
+    fig, ax = plt.subplots(figsize=(12.0, 4.55))
+    ax.set_xlim(0, 12.0)
+    ax.set_ylim(0, 4.55)
+    ax.axis("off")
+
+    def draw_pixel_grid(matrix, x0, y0, cell, stroke="#111", show_values=False, normalize=False):
+        display = matrix.copy().astype(float)
+        if normalize:
+            lo = display.min()
+            hi = display.max()
+            if hi > lo:
+                display = (display - lo) / (hi - lo) * 255
+            else:
+                display = np.zeros_like(display) + 128
+        for row in range(display.shape[0]):
+            for col in range(display.shape[1]):
+                value = display[row, col]
+                rect = plt.Rectangle(
+                    (x0 + col * cell, y0 - (row + 1) * cell),
+                    cell,
+                    cell,
+                    facecolor=luminance_to_hex(value),
+                    edgecolor=stroke,
+                    linewidth=0.35,
+                )
+                ax.add_patch(rect)
+                if show_values:
+                    ax.text(x0 + (col + 0.5) * cell, y0 - (row + 0.5) * cell, str(int(round(value))), ha="center", va="center", fontsize=5)
+
+    def draw_vector(values_1d, x0, y0, cell_w, cell_h, vertical, color):
+        scaled = values_1d / (np.max(np.abs(values_1d)) or 1)
+        for idx, value in enumerate(scaled):
+            alpha = 0.18 + 0.75 * abs(value)
+            face = color
+            if vertical:
+                x = x0
+                y = y0 - (idx + 1) * cell_h
+            else:
+                x = x0 + idx * cell_w
+                y = y0 - cell_h
+            rect = plt.Rectangle((x, y), cell_w, cell_h, facecolor=face, alpha=alpha, edgecolor=INK, linewidth=0.25)
+            ax.add_patch(rect)
+
+    duck_cell = 0.115
+    draw_pixel_grid(values, 0.45, 3.98, duck_cell)
+    ax.text(1.30, 2.22, "Ente als Matrix A", ha="center", va="center", fontsize=13, color=MUTED)
+
+    ax.text(3.05, 3.55, r"$A = U\Sigma V^T$", ha="left", va="center", fontsize=30, color=INK)
+    ax.text(3.05, 2.95, "Die SVD zerlegt die Bildmatrix in einzelne Rang-1-Beiträge.", ha="left", va="center", fontsize=15, color=INK)
+    ax.text(3.05, 2.48, "Jeder Beitrag ist ein Spaltenvektor, ein Singulärwert und ein Zeilenvektor.", ha="left", va="center", fontsize=14, color=MUTED)
+
+    card_y = 1.62
+    card_xs = [0.35, 4.18, 8.01]
+    for idx, x in enumerate(card_xs):
+        color = accents[idx]
+        component = singular_values[idx] * np.outer(u[:, idx], vt[idx, :])
+        ax.add_patch(plt.Rectangle((x, 0.15), 3.25, 1.95, facecolor="none", edgecolor=color, linewidth=2.0))
+        ax.text(x + 0.15, 1.90, f"{names[idx]} einzeln", ha="left", va="center", fontsize=13, color=color, fontweight="bold")
+
+        draw_vector(u[:, idx], x + 0.20, card_y, 0.08, 0.10, True, color)
+        ax.text(x + 0.36, 1.05, r"$u_" + str(idx + 1) + r"$", ha="center", va="center", fontsize=11, color=MUTED)
+
+        ax.text(x + 0.72, 1.17, f"σ{idx + 1}", ha="center", va="center", fontsize=13, color=color)
+        ax.text(x + 0.72, 0.82, f"{singular_values[idx]:.0f}", ha="center", va="center", fontsize=11, color=MUTED)
+
+        draw_vector(vt[idx, :], x + 1.00, 1.20, 0.095, 0.08, False, color)
+        ax.text(x + 1.62, 1.05, r"$v_" + str(idx + 1) + r"^T$", ha="center", va="center", fontsize=11, color=MUTED)
+
+        ax.text(x + 2.08, 1.05, "=", ha="center", va="center", fontsize=16, color=MUTED)
+        draw_pixel_grid(component, x + 2.32, 1.55, 0.052, stroke="#444", normalize=True)
+        ax.text(x + 2.76, 0.72, r"$\sigma_" + str(idx + 1) + r"u_" + str(idx + 1) + r"v_" + str(idx + 1) + r"^T$", ha="center", va="center", fontsize=11, color=MUTED)
+
+    fig.savefig(OUT_DIR / "duck_rank_terms.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
 def save_intro_symbols():
     fig, ax = plt.subplots(figsize=(4.3, 4.0))
     ax.set_xlim(0, 4.3)
     ax.set_ylim(0, 4.0)
     ax.axis("off")
 
+    ax.add_patch(Arc((1.72, 2.42), 1.72, 1.72, theta1=28, theta2=318, linewidth=4.6, color=INK))
     ax.add_patch(
         FancyArrowPatch(
-            (0.95, 2.45),
-            (2.68, 2.45),
-            connectionstyle="arc3,rad=-1.05",
+            (2.30, 1.93),
+            (2.50, 1.76),
             arrowstyle="-|>",
-            mutation_scale=26,
+            mutation_scale=27,
             linewidth=4.6,
             color=INK,
         )
@@ -306,3 +674,9 @@ if __name__ == "__main__":
     save_intro_symbols()
     save_puzzle()
     save_steps()
+    save_step_actions()
+    save_svd_bridge()
+    save_dimension_reduction()
+    save_rank1_matrix()
+    save_rank_approximation()
+    save_duck_rank_terms()

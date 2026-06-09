@@ -144,132 +144,230 @@
 <p>Erklärt anhand von Bildkomprimierung</p>
 </div>
 </section>
-<section id="warum-hilft-svd-bei-bildkomprimierung" class="slide level2">
-<h2>Warum hilft SVD bei Bildkomprimierung?</h2>
-<div class="compression-hook">
-<div class="hook-visual">
-<div class="transform-panel">
-<p><img data-src="assets/generated/intro_transform_symbols.svg" class="generated-symbols" alt="Rotations- und Skalierungssymbole"></p>
+<section id="rotation-und-skalierung" class="slide level2">
+<h2>Rotation und Skalierung</h2>
+<div class="basics-slide">
+<div class="basics-visual">
+<p><img data-src="assets/generated/intro_transform_symbols.svg" class="generated-symbols" alt="Rotieren und Skalieren als geometrische Grundoperationen"></p>
 </div>
-<div class="duck-matrix">
-<div class="matrix-frame generated-matrix-frame">
-<p><img data-src="assets/generated/duck_original_grid.svg" class="hook-duck-grid" alt="Pixelente als exakt gerasterte Matrix"></p>
+<div class="basics-text">
+<p>Eine <strong>Rotation</strong> ist eine Drehung um einen Winkel.</p>
+<p>Eine <strong>Skalierung</strong> streckt oder staucht entlang einer Achse.</p>
+<p>Diese beiden Operationen sind die geometrischen Bausteine, mit denen wir gleich eine lineare Abbildung in einfache Schritte zerlegen.</p>
+<div class="quiet-note">
+<p>Die Matrixschreibweise kommt später; hier geht es zuerst nur um die sichtbare Wirkung.</p>
 </div>
-<div class="caption">
-<p>Ein Bild als Matrix aus Pixelwerten</p>
-</div>
-</div>
-</div>
-<div class="hook-text">
-<p>Ein Graustufenbild ist im Kern eine Matrix: jeder Eintrag steht für einen Pixelwert.</p>
-<p>Die SVD findet in dieser Matrix die wichtigsten Muster zuerst. Für eine komprimierte Näherung speichern wir nicht mehr jeden einzelnen Pixelwert, sondern nur die stärksten Muster und ihre Gewichte.</p>
-<div class="hook-equation">
-<p><span class="math display">\[A \approx U_k \Sigma_k V_k^T\]</span></p>
-</div>
-<p>Je kleiner <span class="math inline">\(k\)</span> ist, desto weniger Daten müssen gespeichert werden. Das Bild verliert Details, bleibt aber oft erstaunlich gut erkennbar.</p>
 </div>
 </div>
 </section>
 <section id="von-einer-form-zur-anderen" class="slide level2">
 <h2>Von einer Form zur anderen</h2>
 <div class="lead-text">
-<p>Bevor wir Bilder komprimieren, betrachten wir eine einfachere Frage: Wie kann eine lineare Abbildung einen Kreis in ein gedrehtes Oval verwandeln?</p>
+<p>Bevor wir Bilder komprimieren, betrachten wir ein Rätsel: Wie kommt man nur durch Rotationen und Skalierungen entlang der Achsen von der linken Grafik zur rechten?</p>
 </div>
 <div class="generated-visual-wrap">
 <p><img data-src="assets/generated/transformation_puzzle.svg" class="generated-puzzle" alt="Ausgangskreis wird mathematisch zu einem gestauchten und rotierten Oval transformiert"></p>
 </div>
 </section>
-<section id="die-idee-rotation-streckung-rotation" class="slide level2">
-<h2>Die Idee: Rotation, Streckung, Rotation</h2>
-<div class="concept-with-steps">
-<div class="concept-compact">
-<div class="concept-step">
-<p><strong>1. Rotation</strong></p>
-<p>Koordinatensystem passend ausrichten.</p>
-<p><span class="math display">\[R_{-90^\circ} =
+<section id="rotation-skalierung-rotation" class="slide level2">
+<h2>Rotation, Skalierung, Rotation</h2>
+<div class="step-action-slide">
+<p><img data-src="assets/generated/transformation_step_actions.svg" class="step-actions" alt="Vier Zustände mit drei Aktionen: Rotation, Skalierung, Rotation"></p>
+<div class="step-action-matrices">
+<p><span class="math display">\[
+R_{-90^\circ} =
 \begin{pmatrix}
 0 &amp; 1 \\
 -1 &amp; 0
-\end{pmatrix}\]</span></p>
-</div>
-<div class="concept-arrow">
-<p><span class="math inline">\(\longrightarrow\)</span></p>
-</div>
-<div class="concept-step">
-<p><strong>2. Streckung</strong></p>
-<p>Eine Achse stauchen, die andere unverändert lassen.</p>
-<p><span class="math display">\[\Sigma =
+\end{pmatrix}
+\qquad
+\Sigma =
 \begin{pmatrix}
 0.45 &amp; 0 \\
 0 &amp; 1
-\end{pmatrix}\]</span></p>
-</div>
-<div class="concept-arrow">
-<p><span class="math inline">\(\longrightarrow\)</span></p>
-</div>
-<div class="concept-step">
-<p><strong>3. Rotation</strong></p>
-<p>Das Ergebnis in die Zielrichtung drehen.</p>
-<p><span class="math display">\[R_{-45^\circ} =
+\end{pmatrix}
+\qquad
+R_{-45^\circ} =
 \begin{pmatrix}
 \frac{\sqrt2}{2} &amp; \frac{\sqrt2}{2} \\
 -\frac{\sqrt2}{2} &amp; \frac{\sqrt2}{2}
-\end{pmatrix}\]</span></p>
+\end{pmatrix}
+\]</span></p>
+</div>
+<div class="transition-question">
+<p>Doch was hat das mit SVD zu tun?</p>
 </div>
 </div>
-<div class="generated-visual-wrap compact">
-<p><img data-src="assets/generated/transformation_steps.svg" class="generated-steps" alt="Vier Transformationsschritte: Start, Rotation, Streckung, Rotation"></p>
+</section>
+<section id="die-idee-der-svd" class="slide level2">
+<h2>Die Idee der SVD</h2>
+<div class="svd-bridge-slide">
+<div class="svd-bridge-visual">
+<p><img data-src="assets/generated/svd_bridge.svg" class="svd-bridge" alt="Miniatur der Transformation und Zusammenhang mit A gleich U Sigma V transponiert"></p>
 </div>
-<div class="concept-result">
-<p><span class="math display">\[A = R_{-45^\circ}\,\Sigma\,R_{-90^\circ}\]</span></p>
+<div class="svd-bridge-text">
+<p>Im Kern ist das das Prinzip der SVD:</p>
+<p><span class="math display">\[
+A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#ff3b35}{V^T}}
+\]</span></p>
+<p>Eine lineare Abbildung wird in drei lesbare Bausteine zerlegt: erst eine Rotation oder Spiegelung, dann eine Skalierung, dann erneut eine Rotation oder Spiegelung.</p>
+<p>Für unser Beispiel entsteht die Gesamtmatrix durch Multiplikation:</p>
+<p><span class="math display">\[
+A =
+{\color{#1e88ff}{R_{-45^\circ}}}
+{\color{#f2aa00}{\begin{pmatrix}0.45&amp;0\\0&amp;1\end{pmatrix}}}
+{\color{#ff3b35}{R_{-90^\circ}}}
+\approx
+\begin{pmatrix}
+-0.707 &amp; 0.318 \\
+-0.707 &amp; -0.318
+\end{pmatrix}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="dimensionsreduktion" class="slide level2">
+<h2>Dimensionsreduktion</h2>
+<div class="dimension-slide">
+<div class="dimension-visual">
+<p><img data-src="assets/generated/dimension_reduction.svg" class="dimension-reduction" alt="Dimensionsreduktion: Kreis wird nach Rotation und Rang-1-Skalierung zu einer Linie"></p>
+</div>
+<div class="dimension-text">
+<p>Warum ist die Zerlegung nützlich, wenn eine einzige Matrix <span class="math inline">\(A\)</span> die Abbildung auch direkt beschreibt?</p>
+<p>Der entscheidende Punkt liegt in <span class="math inline">\(\Sigma\)</span>: Wenn ein Skalierungswert auf <span class="math inline">\(0\)</span> gesetzt wird, bleibt eine Richtung erhalten und die andere verschwindet.</p>
+<p>Aus einer Fläche wird eine Linie. Genau diese Idee steckt hinter Dimensionsreduktion und später hinter Bildkomprimierung.</p>
+</div>
+</div>
+</section>
+<section id="rang-1-matrix" class="slide level2">
+<h2>Rang-1-Matrix</h2>
+<div class="rank1-slide">
+<div class="rank1-visual">
+<p><img data-src="assets/generated/rank1_matrix.svg" class="rank1-matrix" alt="Eine Rang-1-Matrix wird als Spaltenvektor mal Zeilenvektor dargestellt"></p>
+</div>
+<div class="rank1-text">
+<p>Diese Matrix wirkt zuerst wie 16 einzelne Zahlen. Tatsächlich steckt aber viel weniger unabhängige Information darin.</p>
+<p>Alle Zeilen sind Vielfache der ersten Zeile:</p>
+<p><span class="math display">\[
+(1,2,3,4),\quad -(1,2,3,4),\quad 2(1,2,3,4),\quad 10(1,2,3,4).
+\]</span></p>
+<p>Die Matrix hat also vier Zeilen und vier Spalten, aber nur <strong>eine unabhängige Richtung</strong>. Deshalb ist ihr Rang gleich <span class="math inline">\(1\)</span>.</p>
+<p>Statt 16 Zahlen speichern wir nur zwei Vektoren mit insgesamt 8 Zahlen:</p>
+<p><span class="math display">\[
+A = u v^T.
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="höherer-rang-summe-aus-rang-1-matrizen" class="slide level2">
+<h2>Höherer Rang: Summe aus Rang-1-Matrizen</h2>
+<div class="rank-approx-slide">
+<div class="rank-approx-visual">
+<p><img data-src="assets/generated/rank_approximation.svg" class="rank-approx" alt="Eine Matrix mit höherem Rang wird durch mehrere Rang-1-Matrizen angenähert"></p>
+</div>
+<div class="rank-approx-text">
+<p>Bei einer Matrix mit Rang <span class="math inline">\(4\)</span> sind die Zeilen nicht mehr alle Vielfache voneinander. Die einfache Zerlegung aus der vorherigen Folie reicht dann nicht mehr aus.</p>
+<p>Das Grundprinzip bleibt aber gleich: Wir beschreiben die Matrix als Summe mehrerer Rang-1-Matrizen.</p>
+<p><span class="math display">\[
+A \approx \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \dots + \sigma_k u_k v_k^T
+\]</span></p>
+<p>Je mehr Bausteine wir addieren, desto genauer wird die Annäherung. Für Kompression speichern wir nur die wichtigsten Bausteine und lassen kleine Beiträge weg.</p>
+</div>
+</div>
+</section>
+<section id="svd-als-summe-von-rang-1-beiträgen" class="slide level2">
+<h2>SVD als Summe von Rang-1-Beiträgen</h2>
+<div class="svd-sum-slide">
+<div class="svd-sum-top">
+<p>Die Produktform</p>
+<p><span class="math display">\[
+A =
+{\color{#1e88ff}{U}}
+{\color{#f2aa00}{\Sigma}}
+{\color{#ff3b35}{V^T}}
+\]</span></p>
+<p>ist gleichbedeutend mit einer Summe aus einzelnen Rang-1-Matrizen:</p>
+<p><span class="math display">\[
+A =
+{\color{#f2aa00}{\sigma_1}}
+{\color{#1e88ff}{u_1}}
+{\color{#ff3b35}{v_1^T}}
++
+{\color{#f2aa00}{\sigma_2}}
+{\color{#1e88ff}{u_2}}
+{\color{#ff3b35}{v_2^T}}
++
+\dots
++
+{\color{#f2aa00}{\sigma_r}}
+{\color{#1e88ff}{u_r}}
+{\color{#ff3b35}{v_r^T}}.
+\]</span></p>
+</div>
+<div class="svd-sum-bottom">
+<div class="sum-piece blue-piece">
+<p><span class="math inline">\(u_i\)</span><br>
+Spalte aus <span class="math inline">\(U\)</span></p>
+</div>
+<div class="sum-times">
+<p><span class="math inline">\(\times\)</span></p>
+</div>
+<div class="sum-piece yellow-piece">
+<p><span class="math inline">\(\sigma_i\)</span><br>
+Gewichtung aus <span class="math inline">\(\Sigma\)</span></p>
+</div>
+<div class="sum-times">
+<p><span class="math inline">\(\times\)</span></p>
+</div>
+<div class="sum-piece red-piece">
+<p><span class="math inline">\(v_i^T\)</span><br>
+Zeile aus <span class="math inline">\(V^T\)</span></p>
+</div>
+<div class="sum-result">
+<p><span class="math inline">\(=\)</span> ein Rang-1-Beitrag</p>
+</div>
 </div>
 </div>
 </section>
 <section id="bild-als-matrix" class="slide level2">
 <h2>Bild als Matrix</h2>
 <div class="image-matrix-slide">
+<div class="image-matrix-visual">
 <p><img data-src="assets/generated/duck_image_to_matrix.svg" class="duck-to-matrix" alt="Pixelente wird in eine Matrix mit Werten von 0 bis 255 umgewandelt"></p>
 </div>
-</section>
-<section id="was-bedeutet-die-svd-zerlegung" class="slide level2">
-<h2>Was bedeutet die SVD-Zerlegung?</h2>
-<div class="svd-explain-slide">
-<div class="svd-formula">
+<div class="image-matrix-text">
+<p>Ein Graustufenbild kann als Matrix <span class="math inline">\(A\)</span> verstanden werden: Jeder Eintrag beschreibt den Helligkeitswert eines Pixels.</p>
+<p>Wenn wir diese Matrix mit der SVD zerlegen,</p>
 <p><span class="math display">\[
-A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#ff3b35}{V^T}}
+A = U\Sigma V^T,
+\]</span></p>
+<p>dann sortiert <span class="math inline">\(\Sigma\)</span> die wichtigsten Bildmuster nach ihrer Stärke.</p>
+<p>Für eine Kompression speichern wir nur die größten Singulärwerte und die zugehörigen Vektoren. Dadurch behalten wir die grobe Bildstruktur, müssen aber deutlich weniger Daten speichern.</p>
+</div>
+</div>
+</section>
+<section id="einzelne-rang-beiträge-der-ente" class="slide level2">
+<h2>Einzelne Rang-Beiträge der Ente</h2>
+<div class="duck-rank-terms-slide">
+<div class="duck-rank-terms-visual">
+<p><img data-src="assets/generated/duck_rank_terms.svg" class="duck-rank-terms" alt="Die Ente wird in einzelne farbige SVD-Rang-Beiträge zerlegt"></p>
+</div>
+<div class="duck-rank-terms-text">
+<div class="duck-rank-note">
+<p>Oben steht die SVD-Zerlegung der Bildmatrix:</p>
+<p><span class="math display">\[
+A = U\Sigma V^T.
 \]</span></p>
 </div>
-<div class="svd-cards">
-<div class="svd-card u-card">
-<div class="factor-name">
-<p>U</p>
+<div class="duck-rank-note">
+<p>Unten sind einzelne Rang-Beiträge der Ente zu sehen. Jeder Beitrag besteht aus einem Vektor aus <span class="math inline">\(U\)</span>, einem Singulärwert aus <span class="math inline">\(\Sigma\)</span> und einem Vektor aus <span class="math inline">\(V^T\)</span>.</p>
 </div>
-<p>Zweite Drehung oder Spiegelung</p>
-<div class="factor-detail">
-<p>Ausrichtung im Zielraum</p>
+<div class="duck-rank-note">
+<p><span class="math display">\[
+A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T
+\]</span></p>
+<p>Wichtig: Die kleinen Enten unten sind <strong>nicht aufsummiert</strong>, sondern zeigen jeweils nur den einzelnen Beitrag eines Rangs.</p>
 </div>
-</div>
-<div class="svd-card sigma-card">
-<div class="factor-name">
-<p>Σ</p>
-</div>
-<p>Streckung oder Stauchung</p>
-<div class="factor-detail">
-<p>Singulärwerte auf der Diagonalen</p>
-</div>
-</div>
-<div class="svd-card v-card">
-<div class="factor-name">
-<p>Vᵀ</p>
-</div>
-<p>Erste Drehung oder Spiegelung</p>
-<div class="factor-detail">
-<p>Wahl der Eingangsrichtungen</p>
-</div>
-</div>
-</div>
-<div class="svd-footnote">
-<p>SVD steht für <strong>Singular Value Decomposition</strong>, auf Deutsch <strong>Singularwertzerlegung</strong>.</p>
 </div>
 </div>
 </section>
@@ -277,11 +375,11 @@ A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#ff3b35}{V^T}}
 <h2>Rang-k-Näherung der Ente</h2>
 <div class="rank-slide">
 <div class="rank-explanation">
-<p>Mit jedem Rang kommt ein weiteres Muster dazu:</p>
+<p>Bei einem Bild ist <span class="math inline">\(A\)</span> die Matrix der Pixelwerte.</p>
 <p><span class="math display">\[
 A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 \]</span></p>
-<p>Der Slider berechnet die Rekonstruktion aus den SVD-Faktoren neu. Kleine Ränge speichern wenig, verlieren aber Details. Größere Ränge nähern sich der Originalmatrix an.</p>
+<p>Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, verlieren aber Details; größere Ränge nähern sich der Originalmatrix an.</p>
 </div>
 <div class="svd-rank-demo">
   <div class="rank-control">
@@ -315,7 +413,7 @@ A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 <div class="svd-rank-demo image-rank-demo" data-svd-source="einstein" data-render="canvas">
   <div class="rank-control">
     <label>Rang k = <strong data-role="rank-label">1</strong></label>
-    <input data-role="rank-slider" type="range" min="1" max="202" value="1" step="1">
+    <input data-role="rank-slider" type="range" min="1" max="600" value="1" step="1">
     <span data-role="storage-label"></span>
   </div>
   <div class="rank-grids">
@@ -331,33 +429,271 @@ A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 </div>
 </div>
 </section>
-<section id="was-daran-schon-svd-ist-und-was-noch-fehlt" class="slide level2">
-<h2>Was daran schon SVD ist und was noch fehlt</h2>
-<div class="steps-svd-summary">
-<div class="summary-left">
-<div class="generated-visual-wrap compact">
-<p><img data-src="assets/generated/transformation_steps.svg" class="generated-steps" alt="Vier Transformationsschritte: Start, Rotation, Streckung, Rotation"></p>
-</div>
-<p>Diese Zerlegung zeigt das Grundprinzip der SVD: Eine kompliziertere lineare Abbildung wird in einfache geometrische Bausteine zerlegt.</p>
-<p>Unser Beispiel ist didaktisch vereinfacht: Es zeigt die geometrische Idee, aber noch nicht die vollständige SVD-Definition mit sortierten Singulärwerten, Vorzeichenwahl und allgemeiner Matrixgröße.</p>
-</div>
-<div class="summary-right">
-<div class="svd-formula compact-formula">
+<section id="von-der-matrix-zur-svd" class="slide level2">
+<h2>Von der Matrix zur SVD</h2>
+<div class="svd-question-slide">
+<div class="svd-question-left">
+<p>Die SVD kann man auf zwei gleichwertige Arten lesen:</p>
 <p><span class="math display">\[
-A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#ff3b35}{V^T}}
+A =
+{\color{#1e88ff}{U}}
+{\color{#f2aa00}{\Sigma}}
+{\color{#ff3b35}{V^T}}
+\]</span></p>
+<p>oder als Summe einzelner Rang-1-Bausteine:</p>
+<p><span class="math display">\[
+A =
+\sum_{i=1}^{r}
+{\color{#f2aa00}{\sigma_i}}\,
+{\color{#1e88ff}{u_i}}\,
+{\color{#ff3b35}{v_i^T}}.
 \]</span></p>
 </div>
-<div class="svd-mini-cards">
-<div class="svd-mini-card u-card">
-<p><strong>U</strong>: zweite Drehung oder Spiegelung im Zielraum</p>
+<div class="svd-question-right">
+<div class="mini-example">
+<p>Mini-Beispiel:</p>
+<p><span class="math display">\[
+A =
+\begin{pmatrix}
+1 &amp; 2\\
+2 &amp; 4
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+2
+\end{pmatrix}
+\begin{pmatrix}
+1 &amp; 2
+\end{pmatrix}
+\]</span></p>
+<p>Das ist ein einzelner Rang-1-Baustein. Bei Bildern addieren wir viele solcher Bausteine.</p>
 </div>
-<div class="svd-mini-card sigma-card">
-<p><strong>Σ</strong>: Streckung oder Stauchung durch Singulärwerte</p>
-</div>
-<div class="svd-mini-card v-card">
-<p><strong>Vᵀ</strong>: erste Drehung oder Spiegelung der Eingangsrichtungen</p>
+<div class="big-question">
+<p>Wie findet man aus einer Pixelmatrix wie der Ente eigentlich die drei Matrizen <span class="math inline">\({\color{#1e88ff}{U}}\)</span>, <span class="math inline">\({\color{#f2aa00}{\Sigma}}\)</span> und <span class="math inline">\({\color{#ff3b35}{V^T}}\)</span>?</p>
 </div>
 </div>
+</div>
+</section>
+<section id="herleitung-was-suchen-wir" class="slide level2">
+<h2>Herleitung: Was suchen wir?</h2>
+<div class="derivation-slide derivation-start">
+<div class="derivation-main">
+<p>Für eine Matrix <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> suchen wir</p>
+<p><span class="math display">\[
+A =
+{\color{#1e88ff}{U}}
+{\color{#f2aa00}{\Sigma}}
+{\color{#ff3b35}{V^T}},
+\]</span></p>
+<p>wobei <span class="math inline">\(U\)</span> und <span class="math inline">\(V\)</span> orthogonale Matrizen sind und <span class="math inline">\(\Sigma\)</span> nur auf der Diagonalen Einträge hat.</p>
+</div>
+<div class="derivation-cards">
+<div class="derivation-card blue-card">
+<p><span class="math inline">\(U\)</span><br>
+orthogonale Richtungen im Zielraum</p>
+</div>
+<div class="derivation-card yellow-card">
+<p><span class="math inline">\(\Sigma\)</span><br>
+Stärken der einzelnen Richtungen</p>
+</div>
+<div class="derivation-card red-card">
+<p><span class="math inline">\(V^T\)</span><br>
+orthogonale Richtungen im Eingaberaum</p>
+</div>
+</div>
+<div class="derivation-note">
+<p>Die Frage ist also nicht, ob so eine Zerlegung nützlich ist, sondern wie wir diese Richtungen und Stärken systematisch aus <span class="math inline">\(A\)</span> berechnen.</p>
+</div>
+</div>
+</section>
+<section id="schritt-1-eingaberichtungen-finden" class="slide level2">
+<h2>Schritt 1: Eingaberichtungen finden</h2>
+<div class="derivation-slide two-column-derivation">
+<div class="derivation-left">
+<p>Wir betrachten zuerst</p>
+<p><span class="math display">\[
+A^T A.
+\]</span></p>
+<p>Diese Matrix hat zwei wichtige Eigenschaften:</p>
+<ol type="1">
+<li>Sie ist symmetrisch: <span class="math inline">\((A^T A)^T = A^T A\)</span>.</li>
+<li>Sie ist positiv semidefinit:</li>
+</ol>
+<p><span class="math display">\[
+x^T A^T A x = \|Ax\|^2 \ge 0.
+\]</span></p>
+</div>
+<div class="derivation-right">
+<p>Symmetrische Matrizen haben orthogonale Eigenvektoren. Deshalb wählen wir die Spalten von <span class="math inline">\(V\)</span> als Eigenvektoren von <span class="math inline">\(A^T A\)</span>:</p>
+<p><span class="math display">\[
+A^T A v_i = \lambda_i v_i.
+\]</span></p>
+<p>Diese <span class="math inline">\(v_i\)</span> sind die Eingaberichtungen, also die Richtungen, die vor der Skalierung betrachtet werden.</p>
+</div>
+</div>
+</section>
+<section id="schritt-2-singulärwerte" class="slide level2">
+<h2>Schritt 2: Singulärwerte</h2>
+<div class="derivation-slide two-column-derivation">
+<div class="derivation-left">
+<p>Weil</p>
+<p><span class="math display">\[
+x^T A^T A x = \|Ax\|^2 \ge 0,
+\]</span></p>
+<p>sind alle Eigenwerte von <span class="math inline">\(A^T A\)</span> nichtnegativ:</p>
+<p><span class="math display">\[
+\lambda_i \ge 0.
+\]</span></p>
+<p>Daraus definieren wir die Singulärwerte:</p>
+<p><span class="math display">\[
+{\color{#f2aa00}{\sigma_i}} = \sqrt{\lambda_i}.
+\]</span></p>
+</div>
+<div class="derivation-right">
+<p>Die Singulärwerte stehen in <span class="math inline">\(\Sigma\)</span> auf der Diagonalen:</p>
+<p><span class="math display">\[
+\Sigma =
+\begin{pmatrix}
+\sigma_1 &amp; 0 &amp; \dots \\
+0 &amp; \sigma_2 &amp; \dots \\
+\vdots &amp; \vdots &amp; \ddots
+\end{pmatrix}.
+\]</span></p>
+<p>Große <span class="math inline">\(\sigma_i\)</span> bedeuten: Diese Richtung trägt viel zur Matrix bei. Kleine <span class="math inline">\(\sigma_i\)</span> können wir für eine Rang-<span class="math inline">\(k\)</span>-Näherung weglassen.</p>
+</div>
+</div>
+</section>
+<section id="schritt-3-zielrichtungen-berechnen" class="slide level2">
+<h2>Schritt 3: Zielrichtungen berechnen</h2>
+<div class="derivation-slide two-column-derivation">
+<div class="derivation-left">
+<p>Wenn <span class="math inline">\(v_i\)</span> eine Eingaberichtung ist, dann zeigt <span class="math inline">\(A v_i\)</span>, wohin diese Richtung durch <span class="math inline">\(A\)</span> abgebildet wird.</p>
+<p>Die Länge dieses Bildes ist der Singulärwert:</p>
+<p><span class="math display">\[
+\|A v_i\| = \sigma_i.
+\]</span></p>
+<p>Für <span class="math inline">\(\sigma_i &gt; 0\)</span> normieren wir deshalb:</p>
+<p><span class="math display">\[
+{\color{#1e88ff}{u_i}} =
+\frac{1}{\sigma_i} A{\color{#ff3b35}{v_i}}.
+\]</span></p>
+</div>
+<div class="derivation-right">
+<p>Damit gilt für jede wichtige Richtung:</p>
+<p><span class="math display">\[
+A{\color{#ff3b35}{v_i}}
+=
+{\color{#f2aa00}{\sigma_i}}
+{\color{#1e88ff}{u_i}}.
+\]</span></p>
+<p>Schreibt man alle Richtungen gleichzeitig als Matrizen, erhält man:</p>
+<p><span class="math display">\[
+A{\color{#ff3b35}{V}}
+=
+{\color{#1e88ff}{U}}
+{\color{#f2aa00}{\Sigma}}.
+\]</span></p>
+<p>Multiplikation mit <span class="math inline">\(V^T\)</span> liefert die SVD:</p>
+<p><span class="math display">\[
+A =
+{\color{#1e88ff}{U}}
+{\color{#f2aa00}{\Sigma}}
+{\color{#ff3b35}{V^T}}.
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="rechenweg-für-eine-bildmatrix" class="slide level2">
+<h2>Rechenweg für eine Bildmatrix</h2>
+<div class="derivation-slide algorithm-slide">
+<div class="algorithm-steps">
+<div class="algorithm-step">
+<p><strong>1.</strong> Pixelmatrix <span class="math inline">\(A\)</span> aufstellen.</p>
+</div>
+<div class="algorithm-step">
+<p><strong>2.</strong> <span class="math inline">\(A^T A\)</span> berechnen.</p>
+</div>
+<div class="algorithm-step">
+<p><strong>3.</strong> Eigenvektoren von <span class="math inline">\(A^T A\)</span> bestimmen. Diese bilden <span class="math inline">\(V\)</span>.</p>
+</div>
+<div class="algorithm-step">
+<p><strong>4.</strong> Singulärwerte berechnen: <span class="math inline">\(\sigma_i = \sqrt{\lambda_i}\)</span>.</p>
+</div>
+<div class="algorithm-step">
+<p><strong>5.</strong> Zielrichtungen berechnen: <span class="math inline">\(u_i = \frac{1}{\sigma_i} A v_i\)</span>.</p>
+</div>
+</div>
+<div class="algorithm-summary">
+<p>Danach haben wir</p>
+<p><span class="math display">\[
+A =
+{\color{#1e88ff}{U}}
+{\color{#f2aa00}{\Sigma}}
+{\color{#ff3b35}{V^T}}
+\qquad\text{und}\qquad
+A_k =
+\sum_{i=1}^{k}
+\sigma_i u_i v_i^T.
+\]</span></p>
+<p>Für echte Bilder wird dieser Prozess numerisch berechnet. Mathematisch passiert aber genau das: Wir finden Richtungen, ordnen sie nach Stärke und behalten für die Kompression nur die wichtigsten.</p>
+</div>
+</div>
+</section>
+<section id="mini-beispiel-rang-1" class="slide level2">
+<h2>Mini-Beispiel: Rang 1</h2>
+<div class="derivation-slide example-slide">
+<div class="example-left">
+<p>Nehmen wir</p>
+<p><span class="math display">\[
+A =
+\begin{pmatrix}
+1 &amp; 2\\
+2 &amp; 4
+\end{pmatrix}.
+\]</span></p>
+<p>Dann ist</p>
+<p><span class="math display">\[
+A^T A =
+\begin{pmatrix}
+5 &amp; 10\\
+10 &amp; 20
+\end{pmatrix}.
+\]</span></p>
+<p>Die Eigenwerte sind</p>
+<p><span class="math display">\[
+\lambda_1 = 25,\qquad \lambda_2 = 0.
+\]</span></p>
+</div>
+<div class="example-right">
+<p>Also sind die Singulärwerte</p>
+<p><span class="math display">\[
+\sigma_1 = 5,\qquad \sigma_2 = 0.
+\]</span></p>
+<p>Ein passender Eigenvektor ist</p>
+<p><span class="math display">\[
+v_1 =
+\frac{1}{\sqrt5}
+\begin{pmatrix}
+1\\
+2
+\end{pmatrix}.
+\]</span></p>
+<p>Daraus folgt</p>
+<p><span class="math display">\[
+u_1 =
+\frac{1}{5} A v_1
+=
+\frac{1}{\sqrt5}
+\begin{pmatrix}
+1\\
+2
+\end{pmatrix}.
+\]</span></p>
+<p>Damit besteht <span class="math inline">\(A\)</span> aus einem einzigen Rang-1-Beitrag:</p>
+<p><span class="math display">\[
+A = 5\,u_1 v_1^T.
+\]</span></p>
 </div>
 </div>
 
