@@ -1,0 +1,426 @@
+---
+title: "Singular Value Decomposition"
+subtitle: "Bildkompression mit einer Gummiente"
+author: "Numerik"
+format:
+  revealjs:
+    theme: simple
+    width: 1600
+    height: 900
+    transition: none
+    background-color: "#ffffff"
+    center: false
+    margin: 0.045
+    html-math-method: katex
+    controls: false
+    progress: true
+    menu: false
+    css: styles.css
+execute:
+  echo: false
+---
+
+## Die Gummiente
+
+```{=html}
+<div class="stage grid2">
+  <div>
+    <div class="big">Unser Beispiel ist ein Bild.</div>
+    <p class="muted">Genauer: ein kleines Graustufenbild mit 13 × 13 Pixeln.</p>
+  </div>
+  <div style="text-align:center;">
+    <canvas class="duck-canvas duck-large" width="13" height="13" data-duck="original"></canvas>
+    <div class="caption">Weißer Hintergrund, grauer Körper, dunkler Schnabel, schwarzes Auge</div>
+  </div>
+</div>
+```
+
+## Was hat diese Ente mit SVD zu tun?
+
+```{=html}
+<div class="stage grid2">
+  <div style="text-align:center;">
+    <canvas class="duck-canvas duck-large" width="13" height="13" data-duck="original"></canvas>
+  </div>
+  <div>
+    <p>Ein Bild kann als Matrix verstanden werden.</p>
+    <p>Bei einem Graustufenbild entspricht jeder Pixel einem Zahlenwert.</p>
+    <p>SVD zerlegt diese Bildmatrix in einfachere Bausteine.</p>
+    <p class="muted">Dadurch kann man das Bild schrittweise annähern und komprimieren.</p>
+  </div>
+</div>
+```
+
+## Was bedeutet SVD?
+
+::: {.formula}
+$$
+A = {\color{#007aff}U}\,{\color{#ffb000}\Sigma}\,{\color{#ff3b30}V^T}
+$$
+:::
+
+```{=html}
+<div class="grid3" style="margin-top: 52px;">
+  <div class="card" style="border-color: var(--u);">
+    <div class="label">U</div>
+    <p>Zweite Drehung oder Spiegelung</p>
+    <p class="muted">Ausrichtung im Zielraum</p>
+  </div>
+  <div class="card" style="border-color: var(--sigma);">
+    <div class="label">Σ</div>
+    <p>Streckung oder Stauchung</p>
+    <p class="muted">Singularwerte auf der Diagonalen</p>
+  </div>
+  <div class="card" style="border-color: var(--v);">
+    <div class="label">Vᵀ</div>
+    <p>Erste Drehung oder Spiegelung</p>
+    <p class="muted">Wahl der Eingangsrichtungen</p>
+  </div>
+</div>
+```
+
+SVD steht für **Singular Value Decomposition**, auf Deutsch **Singularwertzerlegung**.
+
+## Geometrische Motivation
+
+```{=html}
+<div class="stage row">
+  <svg width="430" height="430" viewBox="-120 -120 240 240">
+    <path d="M -82 0 A 82 82 0 0 1 82 0 L 0 0 Z" fill="var(--u)" stroke="var(--ink)" stroke-width="2"/>
+    <path d="M -82 0 A 82 82 0 0 0 82 0 L 0 0 Z" fill="var(--v)" stroke="var(--ink)" stroke-width="2"/>
+  </svg>
+  <div style="text-align:center;">
+    <div class="big">?</div>
+    <p class="muted">Welche Transformation bringt uns dorthin?</p>
+  </div>
+  <svg width="430" height="430" viewBox="-170 -130 340 260">
+    <g transform="rotate(-33)">
+      <path d="M -138 0 A 138 47 0 0 1 138 0" fill="none" stroke="var(--v)" stroke-width="22" stroke-linecap="round"/>
+      <path d="M -138 0 A 138 47 0 0 0 138 0" fill="none" stroke="var(--u)" stroke-width="22" stroke-linecap="round"/>
+      <ellipse cx="0" cy="0" rx="138" ry="47" class="thin"/>
+    </g>
+  </svg>
+</div>
+```
+
+Wie wird aus einem Kreis ein verdrehtes Oval?
+
+## Lösung: Drehen - Strecken - Drehen
+
+```{=html}
+<div class="stage row" style="gap: 34px;">
+  <div style="text-align:center;">
+    <svg width="190" height="190" viewBox="-100 -100 200 200">
+      <circle cx="0" cy="0" r="68" class="thin"/>
+    </svg>
+    <div class="caption">1. Ausgangskreis</div>
+  </div>
+  <div class="arrow">→</div>
+  <div style="text-align:center;">
+    <svg width="190" height="190" viewBox="-100 -100 200 200">
+      <circle cx="0" cy="0" r="68" class="thin"/>
+      <g transform="rotate(-38)">
+        <line x1="0" y1="0" x2="72" y2="0" stroke="var(--v)" stroke-width="7" stroke-linecap="round"/>
+        <line x1="0" y1="0" x2="0" y2="-72" stroke="var(--v)" stroke-width="7" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <div class="caption">2. Vᵀ richtet Eingangsrichtungen aus</div>
+  </div>
+  <div class="arrow">→</div>
+  <div style="text-align:center;">
+    <svg width="230" height="190" viewBox="-120 -100 240 200">
+      <ellipse cx="0" cy="0" rx="96" ry="34" fill="none" stroke="var(--sigma)" stroke-width="8"/>
+      <line x1="-96" y1="0" x2="96" y2="0" stroke="#8e8e93" stroke-width="2" stroke-dasharray="7 7"/>
+    </svg>
+    <div class="caption">3. Σ streckt mit Singularwerten</div>
+  </div>
+  <div class="arrow">→</div>
+  <div style="text-align:center;">
+    <svg width="230" height="190" viewBox="-120 -100 240 200">
+      <ellipse cx="0" cy="0" rx="96" ry="34" fill="none" stroke="var(--u)" stroke-width="8" transform="rotate(-33)"/>
+    </svg>
+    <div class="caption">4. U richtet den Zielraum aus</div>
+  </div>
+</div>
+```
+
+::: {.formula-small}
+$$
+A = U \cdot \Sigma \cdot V^T
+$$
+:::
+
+## Zurück zur Ente: Bild als Matrix
+
+```{=html}
+<div class="stage" style="display:grid; grid-template-columns: 0.8fr 0.25fr 1fr 0.25fr 0.95fr; gap: 24px; align-items:center;">
+  <div style="text-align:center;">
+    <canvas class="duck-canvas" width="13" height="13" data-duck="original"></canvas>
+    <div class="caption">Bild</div>
+  </div>
+  <div class="arrow">→</div>
+  <div style="text-align:center;">
+    <div id="duck-matrix" class="matrix" aria-label="13x13 Matrix der Ente"></div>
+    <div class="caption">Matrixwerte 0 bis 255</div>
+  </div>
+  <div class="arrow">→</div>
+  <div>
+    <table class="legend-table">
+      <tr><td><span class="swatch" style="background:#fff;"></span>255</td><td>weiß / Hintergrund</td></tr>
+      <tr><td><span class="swatch" style="background:#969696;"></span>150</td><td>grauer Körper</td></tr>
+      <tr><td><span class="swatch" style="background:#505050;"></span>80</td><td>dunkler Schnabel</td></tr>
+      <tr><td><span class="swatch" style="background:#000;"></span>0</td><td>schwarzes Auge</td></tr>
+    </table>
+    <p style="margin-top: 18px;">Jede Zelle entspricht einem Pixel.</p>
+  </div>
+</div>
+```
+
+Ein Graustufenbild kann als Matrix dargestellt werden. Ein Farbbild besteht typischerweise aus mehreren Matrizen, zum Beispiel je einer Matrix für Rot, Grün und Blau.
+
+## Auf Bilder wirken Matrixmethoden
+
+```{=html}
+<div class="stage grid2">
+  <div>
+    <div class="big">Wenn das Bild eine Matrix ist, kann SVD darauf angewendet werden.</div>
+    <p class="muted">Die Ente wird nicht als Form gespeichert, sondern als Zahlenmuster.</p>
+  </div>
+  <div class="formula-small">
+    X → U · Σ · Vᵀ
+  </div>
+</div>
+```
+
+## Ein Rang-1-Baustein
+
+```{=html}
+<div class="stage component" style="gap: 22px;">
+  <div style="text-align:center;">
+    <div class="card" style="border-color: var(--sigma); font-size:1.45em; padding: 18px 24px;">σ₁</div>
+    <div class="caption">Gewicht</div>
+  </div>
+  <div>·</div>
+  <div style="text-align:center;">
+    <div class="vector-column">
+      <div class="vector-cell-u">u</div><div class="vector-cell-u">u</div><div class="vector-cell-u">u</div>
+      <div class="vector-cell-u">u</div><div class="vector-cell-u">u</div><div class="vector-cell-u">u</div><div class="vector-cell-u">u</div>
+    </div>
+    <div class="caption">blauer Spaltenvektor u₁<br>vertikales Muster</div>
+  </div>
+  <div>·</div>
+  <div style="text-align:center;">
+    <div class="vector-row">
+      <div class="vector-cell-v">v</div><div class="vector-cell-v">v</div><div class="vector-cell-v">v</div>
+      <div class="vector-cell-v">v</div><div class="vector-cell-v">v</div><div class="vector-cell-v">v</div><div class="vector-cell-v">v</div>
+    </div>
+    <div class="caption">roter Zeilenvektor v₁ᵀ<br>horizontales Muster</div>
+  </div>
+  <div>=</div>
+  <div style="text-align:center;">
+    <div class="rank-surface">
+      <div class="surface-cell" style="background:#eee"></div><div class="surface-cell" style="background:#ddd"></div><div class="surface-cell" style="background:#ccc"></div><div class="surface-cell" style="background:#c8c8c8"></div><div class="surface-cell" style="background:#ddd"></div><div class="surface-cell" style="background:#eee"></div><div class="surface-cell" style="background:#f8f8f8"></div>
+      <div class="surface-cell" style="background:#ddd"></div><div class="surface-cell" style="background:#c7c7c7"></div><div class="surface-cell" style="background:#b8b8b8"></div><div class="surface-cell" style="background:#b2b2b2"></div><div class="surface-cell" style="background:#c8c8c8"></div><div class="surface-cell" style="background:#ddd"></div><div class="surface-cell" style="background:#eee"></div>
+      <div class="surface-cell" style="background:#d0d0d0"></div><div class="surface-cell" style="background:#bcbcbc"></div><div class="surface-cell" style="background:#a8a8a8"></div><div class="surface-cell" style="background:#a2a2a2"></div><div class="surface-cell" style="background:#b8b8b8"></div><div class="surface-cell" style="background:#d0d0d0"></div><div class="surface-cell" style="background:#e8e8e8"></div>
+      <div class="surface-cell" style="background:#d6d6d6"></div><div class="surface-cell" style="background:#c0c0c0"></div><div class="surface-cell" style="background:#adadad"></div><div class="surface-cell" style="background:#a7a7a7"></div><div class="surface-cell" style="background:#bdbdbd"></div><div class="surface-cell" style="background:#d4d4d4"></div><div class="surface-cell" style="background:#ededed"></div>
+      <div class="surface-cell" style="background:#e3e3e3"></div><div class="surface-cell" style="background:#d0d0d0"></div><div class="surface-cell" style="background:#c2c2c2"></div><div class="surface-cell" style="background:#bdbdbd"></div><div class="surface-cell" style="background:#d0d0d0"></div><div class="surface-cell" style="background:#e2e2e2"></div><div class="surface-cell" style="background:#f3f3f3"></div>
+      <div class="surface-cell" style="background:#f0f0f0"></div><div class="surface-cell" style="background:#e3e3e3"></div><div class="surface-cell" style="background:#d7d7d7"></div><div class="surface-cell" style="background:#d3d3d3"></div><div class="surface-cell" style="background:#e3e3e3"></div><div class="surface-cell" style="background:#f0f0f0"></div><div class="surface-cell" style="background:#fafafa"></div>
+      <div class="surface-cell" style="background:#fafafa"></div><div class="surface-cell" style="background:#f2f2f2"></div><div class="surface-cell" style="background:#e9e9e9"></div><div class="surface-cell" style="background:#e5e5e5"></div><div class="surface-cell" style="background:#f2f2f2"></div><div class="surface-cell" style="background:#fafafa"></div><div class="surface-cell" style="background:#fff"></div>
+    </div>
+    <div class="caption">Matrixfläche<br>Rang 1</div>
+  </div>
+</div>
+```
+
+Der Spaltenvektor **u₁** beschreibt ein **vertikales Muster**, der Zeilenvektor **v₁ᵀ** ein **horizontales Muster**, und **σ₁** gewichtet, wie stark dieser Baustein ist.
+
+## Rang-1 heißt: sehr einfache Matrix
+
+```{=html}
+<div class="stage grid2">
+  <div style="text-align:center;">
+    <canvas class="duck-canvas duck-large" width="13" height="13" data-duck="rank" data-k="1"></canvas>
+    <div class="caption">Approximation mit Rang 1</div>
+  </div>
+  <div>
+    <p>Ein Rang-1-Baustein kann bereits die grobe Richtung der Bildstruktur erfassen.</p>
+    <p class="muted">Für Details reicht ein einzelner Baustein noch nicht.</p>
+  </div>
+</div>
+```
+
+## Mehrere Ränge addieren
+
+::: {.formula-small}
+$$
+A \approx \sigma_1u_1v_1^T + \sigma_2u_2v_2^T + \sigma_3u_3v_3^T + \dots
+$$
+:::
+
+```{=html}
+<p class="muted" style="text-align:center; margin-top: -8px;">Jeder zusätzliche Rang-1-Baustein ergänzt weitere Bilddetails.</p>
+<div class="row" style="gap: 34px; margin-top: 36px;">
+  <div style="text-align:center;">
+    <canvas class="duck-canvas mini-canvas" width="13" height="13" data-duck="rank" data-k="1"></canvas>
+    <div class="caption">Approximation mit Rang 1</div>
+  </div>
+  <div style="text-align:center;">
+    <canvas class="duck-canvas mini-canvas" width="13" height="13" data-duck="rank" data-k="2"></canvas>
+    <div class="caption">Approximation mit Rang 2</div>
+  </div>
+  <div style="text-align:center;">
+    <canvas class="duck-canvas mini-canvas" width="13" height="13" data-duck="rank" data-k="5"></canvas>
+    <div class="caption">Approximation mit Rang 5</div>
+  </div>
+  <div style="text-align:center;">
+    <canvas class="duck-canvas mini-canvas" width="13" height="13" data-duck="rank" data-k="13"></canvas>
+    <div class="caption">Approximation mit Rang 13</div>
+  </div>
+  <div style="text-align:center;">
+    <canvas class="duck-canvas mini-canvas" width="13" height="13" data-duck="original"></canvas>
+    <div class="caption">Originalbild</div>
+  </div>
+</div>
+```
+
+## Warum SVD komprimieren kann
+
+```{=html}
+<div class="stage grid2">
+  <div>
+    <p>Die Singularwerte sind nach Wichtigkeit sortiert.</p>
+    <p>Große Singularwerte tragen meist die wichtigsten Bildinformationen.</p>
+    <p>Kleine Singularwerte beschreiben feinere Details oder weniger wichtige Anteile.</p>
+    <p class="muted">Für Kompression behält man nur die größten k Singularwerte und die zugehörigen Vektoren.</p>
+  </div>
+  <div>
+    <div class="sv-bar">
+      <div><div class="bar" style="height:330px;"></div><div class="bar-label">σ₁</div></div>
+      <div><div class="bar" style="height:121px;"></div><div class="bar-label">σ₂</div></div>
+      <div><div class="bar" style="height:71px;"></div><div class="bar-label">σ₃</div></div>
+      <div><div class="bar" style="height:67px;"></div><div class="bar-label">σ₄</div></div>
+      <div><div class="bar" style="height:42px;"></div><div class="bar-label">σ₅</div></div>
+      <div><div class="bar" style="height:30px;"></div><div class="bar-label">σ₆</div></div>
+    </div>
+    <div class="caption">σ₁ > σ₂ > σ₃ > …</div>
+  </div>
+</div>
+```
+
+## Kompression als Entscheidung
+
+```{=html}
+<div class="stage">
+  <table class="rank-table">
+    <thead>
+      <tr><th>Behalten</th><th>Gespeicherte Bausteine</th><th>Erklärte Energie</th><th>Bildwirkung</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>k = 1</td><td>1 Rang-1-Baustein</td><td>80.1%</td><td>sehr grobe Ente</td></tr>
+      <tr><td>k = 2</td><td>2 Rang-1-Bausteine</td><td>86.9%</td><td>Form wird deutlich</td></tr>
+      <tr><td>k = 5</td><td>5 Rang-1-Bausteine</td><td>96.4%</td><td>nahe am Original</td></tr>
+      <tr><td>k = 13</td><td>alle Bausteine</td><td>100%</td><td>Originalmatrix</td></tr>
+    </tbody>
+  </table>
+</div>
+```
+
+Weniger Daten, aber eine brauchbare Annäherung: das ist die Kompressionsidee.
+
+## Kernaussage
+
+```{=html}
+<div class="stage grid2">
+  <div style="text-align:center;">
+    <canvas class="duck-canvas duck-large" width="13" height="13" data-duck="rank" data-k="5"></canvas>
+  </div>
+  <div>
+    <p>Ein Bild kann als Matrix dargestellt werden.</p>
+    <p>SVD zerlegt diese Matrix in geordnete Bausteine.</p>
+    <p>Jeder Baustein besteht aus einem vertikalen Muster, einem horizontalen Muster und einem Gewicht.</p>
+    <p>Je mehr Bausteine man addiert, desto genauer wird das Bild.</p>
+    <p class="muted">Für Kompression speichert man nur die wichtigsten Bausteine.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+  let duckData = null;
+
+  function reconstruct(data, k) {
+    const {U, S, Vt, n, m} = data;
+    const out = Array.from({ length: n }, () => Array(m).fill(0));
+    for (let i = 0; i < k; i++) {
+      for (let y = 0; y < n; y++) {
+        for (let x = 0; x < m; x++) {
+          out[y][x] += S[i] * U[y][i] * Vt[i][x];
+        }
+      }
+    }
+    return out;
+  }
+
+  function drawMatrix() {
+    const target = document.getElementById("duck-matrix");
+    if (!target || !duckData || target.childElementCount) return;
+    duckData.brightness_original.flat().forEach((v) => {
+      const cell = document.createElement("div");
+      const gray = clamp(v, 0, 255);
+      cell.className = "cell";
+      cell.style.background = `rgb(${gray},${gray},${gray})`;
+      cell.style.color = gray < 130 ? "#fff" : "#111";
+      cell.textContent = Math.round(v);
+      target.appendChild(cell);
+    });
+  }
+
+  function drawCanvas(canvas) {
+    if (!duckData) return;
+    const ctx = canvas.getContext("2d");
+    const img = ctx.createImageData(duckData.m, duckData.n);
+    const mode = canvas.dataset.duck;
+    const k = Number(canvas.dataset.k || "0");
+    const values = mode === "original" ? duckData.original : reconstruct(duckData, k);
+
+    for (let y = 0; y < duckData.n; y++) {
+      for (let x = 0; x < duckData.m; x++) {
+        const darkness = clamp(values[y][x], 0, 255);
+        const gray = 255 - darkness;
+        const idx = (y * duckData.m + x) * 4;
+        img.data[idx] = gray;
+        img.data[idx + 1] = gray;
+        img.data[idx + 2] = gray;
+        img.data[idx + 3] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+
+  function renderDuckSlides() {
+    drawMatrix();
+    document.querySelectorAll("canvas[data-duck]").forEach(drawCanvas);
+  }
+
+  async function initDuck() {
+    try {
+      const response = await fetch("assets/duck_gray_svd.json?v=11");
+      duckData = await response.json();
+      renderDuckSlides();
+      if (window.Reveal) {
+        Reveal.on("slidechanged", renderDuckSlides);
+        Reveal.on("ready", renderDuckSlides);
+      }
+    } catch (error) {
+      console.error("Could not load duck SVD data", error);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDuck);
+  } else {
+    initDuck();
+  }
+})();
+</script>
+```

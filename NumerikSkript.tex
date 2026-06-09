@@ -1,0 +1,295 @@
+\documentclass[10pt, aspectratio=169]{beamer}
+
+% --- Pakete und Design ---
+\usetheme{metropolis}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, calc, positioning, matrix, decorations.pathreplacing}
+
+% --- Farbschema ---
+\definecolor{rot}{HTML}{D93025}    % Sigma / Streckung
+\definecolor{blau}{HTML}{1A73E8}   % V / Start-Rotation
+\definecolor{gruen}{HTML}{188038}  % U / Ziel-Rotation
+\definecolor{dunkel}{HTML}{202124}
+
+\newcommand{\heartpixel}[2]{\fill[dunkel] (#1,#2) rectangle ++(1,-1);}
+
+\setbeamercolor{normal text}{fg=dunkel}
+\setbeamercolor{alerted text}{fg=rot}
+
+\title{Die Geometrie der Singulärwertzerlegung}
+\subtitle{Eine intuitive Herleitung der SVD}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% --- ABSCHNITT 1: DIE WERKZEUGE ---
+\begin{frame}{Lineare Transformationen: Die Werkzeugkiste}
+    Bevor wir eine Matrix zerlegen, müssen wir verstehen, wie sie den Raum verändert.
+    \vspace{0.5cm}
+    \begin{columns}[T]
+        \begin{column}{0.45\textwidth}
+            \textbf{1. Skalierung (Strecken/Stauchen)}
+            \begin{center}
+            \begin{tikzpicture}[scale=0.6]
+                \draw[help lines, step=0.5, gray!20] (-1.5,-1) grid (1.5,2);
+                \draw[thick, fill=rot!10] (0,0) circle (0.8);
+                \draw[->, thick] (1.8,0.5) -- (3,0.5) node[midway, above]{\tiny Skalieren};
+                \draw[thick, fill=rot!40] (4.5,0.5) ellipse (1.4 and 0.4);
+            \end{tikzpicture}
+            \end{center}
+            Findet nur entlang der Hauptachsen statt.
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \textbf{2. Rotation (Drehen)}
+            \begin{center}
+            \begin{tikzpicture}[scale=0.6]
+                \draw[help lines, step=0.5, gray!20] (-1.5,-1) grid (1.5,2);
+                \draw[thick, fill=blau!10] (0,0) rectangle (1,1.2);
+                \draw[->, thick] (1.8,0.5) -- (3,0.5) node[midway, above]{\tiny Rotieren};
+                \draw[thick, fill=blau!40, rotate around={30:(4.5,0.5)}] (4,0) rectangle (5,1.2);
+            \end{tikzpicture}
+            \end{center}
+            Verändert den Winkel, aber nicht die Form.
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% --- ABSCHNITT 2: DAS RÄTSEL ---
+\begin{frame}{Das einfache Puzzle}
+    \textbf{Aufgabe:} Verwandle den Kreis links in die Ellipse rechts.
+    \begin{center}
+    \begin{tikzpicture}[scale=1.2]
+        \draw[thick] (0,0) circle (1);
+        \node at (0,-1.3) {Start};
+        
+        \draw[double, ->, >=Stealth, thick] (1.5,0) -- (3.5,0) node[midway, above]{Transformation?};
+        
+        \begin{scope}[shift={(5,0)}]
+            \draw[thick, rotate=35] (0,0) ellipse (1.6 and 0.5);
+            \node at (0,-1.3) {Ziel-Ellipse};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    \onslide<2->{\textbf{Lösung:} Wir skalieren horizontal/vertikal und rotieren das Ergebnis am Ende.}
+\end{frame}
+
+\begin{frame}{Das schwierige Puzzle: Die Punkt-Zuordnung}
+    In der Datenanalyse reicht die Form nicht. Wir müssen wissen, \textbf{welcher Punkt wohin} wandert.
+    \begin{center}
+    \begin{tikzpicture}[scale=1.2]
+        \draw[thick] (0,0) circle (1);
+        \fill[blau] (0,1) circle (0.1) node[above]{$P$}; % Punkt oben
+        \fill[rot] (1,0) circle (0.1) node[right]{$Q$}; % Punkt rechts
+        
+        \draw[double, ->, >=Stealth, thick] (1.5,0) -- (3.5,0);
+        
+        \begin{scope}[shift={(5,0)}]
+            \draw[thick, rotate=35] (0,0) ellipse (1.6 and 0.5);
+            % Zielpositionen
+            \fill[blau, rotate=35] (0,0.5) circle (0.1) node[above left]{$P'$};
+            \fill[rot, rotate=35] (1.6,0) circle (0.1) node[right]{$Q'$};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    \onslide<2->{Wenn wir erst skalieren und dann drehen, landen die Punkte am falschen Ort. \\ \alert{Wir brauchen einen dritten Schritt!}}
+\end{frame}
+
+% --- ABSCHNITT 3: DIE 3 SCHRITTE DER SVD ---
+\begin{frame}{Die Lösung: Die 3 Phasen der SVD}
+    Jede Matrix $A$ lässt sich in drei spezifische geometrische Schritte zerlegen:
+    \vspace{0.3cm}
+    \begin{center}
+    \begin{tikzpicture}[scale=0.8]
+        % 1. Start
+        \onslide<1->{
+            \node (s1) at (0,0) {
+                \begin{tikzpicture}
+                    \draw[help lines, step=0.5, gray!10] (-1.2,-1.2) grid (1.2,1.2);
+                    \draw[thick] (0,0) circle (1);
+                    \fill[blau] (45:1) circle (0.1);
+                    \node at (0,-1.5) {\small 1. Startraum};
+                \end{tikzpicture}
+            };
+        }
+        % 2. V^T
+        \onslide<2->{
+            \node (s2) at (4,0) {
+                \begin{tikzpicture}
+                    \draw[help lines, step=0.5, gray!10] (-1.2,-1.2) grid (1.2,1.2);
+                    \draw[thick, blau] (0,0) circle (1);
+                    \fill[blau] (0:1) circle (0.1);
+                    \node at (0,-1.5) {\small 2. Rotation ($V^T$)};
+                \end{tikzpicture}
+            };
+            \draw[->, thick] (s1) -- (s2);
+        }
+        % 3. Sigma
+        \onslide<3->{
+            \node (s3) at (8,0) {
+                \begin{tikzpicture}
+                    \draw[help lines, step=0.5, gray!10] (-1.8,-1.2) grid (1.8,1.2);
+                    \draw[thick, rot] (0,0) ellipse (1.6 and 0.5);
+                    \fill[blau] (0:1.6) circle (0.1);
+                    \node at (0,-1.5) {\small 3. Streckung ($\Sigma$)};
+                \end{tikzpicture}
+            };
+            \draw[->, thick] (s2) -- (s3);
+        }
+        % 4. U
+        \onslide<4->{
+            \node (s4) at (12,0) {
+                \begin{tikzpicture}
+                    \draw[help lines, step=0.5, gray!10] (-1.8,-1.2) grid (1.8,1.2);
+                    \draw[thick, gruen, rotate=35] (0,0) ellipse (1.6 and 0.5);
+                    \fill[blau, rotate=35] (0:1.6) circle (0.1);
+                    \node at (0,-1.5) {\small 4. Zielraum ($U$)};
+                \end{tikzpicture}
+            };
+            \draw[->, thick] (s3) -- (s4);
+        }
+    \end{tikzpicture}
+    \end{center}
+    \onslide<5->{\centering \Large $A = {\color{gruen}U} \cdot {\color{rot}\Sigma} \cdot {\color{blau}V^T}$}
+\end{frame}
+
+% --- ABSCHNITT 4: MATRIX ALS SUMME ---
+\begin{frame}{Matrix-Anatomie: Schicht für Schicht}
+    Die SVD erlaubt uns, eine Matrix als Summe von Rang-1-Matrizen zu betrachten.
+    Jeder Singulärwert $\sigma_i$ steuert eine "Informationsschicht" bei.
+    
+    \[ A = \sigma_1 {\color{gruen}u_1}{\color{blau}v_1^T} + \sigma_2 {\color{gruen}u_2}{\color{blau}v_2^T} + \dots + \sigma_n {\color{gruen}u_n}{\color{blau}v_n^T} \]
+    
+    \vspace{0.5cm}
+    \begin{center}
+    \begin{tikzpicture}
+        % Visualisierung Rang-1
+        \draw[fill=gruen!20] (0,0) rectangle (0.3,1.5);
+        \node at (0.5,0.75) {$\times$};
+        \draw[fill=blau!20] (0.7,0.6) rectangle (2.2,0.9);
+        \node at (2.5,0.75) {=};
+        \draw[fill=gray!5] (3,0) rectangle (4.5,1.5);
+        \draw[step=0.3, gray!30] (3,0) grid (4.5,1.5);
+        
+        \node at (1.5,-0.5) {\footnotesize Eine Schicht (Rang 1)};
+        
+        \onslide<2->{
+            \node at (5.2,0.75) {\Huge +};
+            \begin{scope}[shift={(6,0)}]
+                \draw[fill=gray!20] (0,0) rectangle (1.5,1.5);
+                \node at (0.75,-0.5) {\footnotesize Nächste Schicht};
+            \end{scope}
+        }
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+% --- ABSCHNITT 5: DAS HERZ-BEISPIEL ---
+\begin{frame}{Die Kraft der Kompression: Das Herz-Beispiel}
+    Ein Bild ist eine Matrix. Schwarze Pixel = 1, weiße Pixel = 0.
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{center}
+            \begin{tikzpicture}[scale=0.45]
+                \draw[fill=white, draw=gray!20] (0,0) rectangle (7,-6);
+
+                \heartpixel{1}{0}
+                \heartpixel{2}{0}
+                \heartpixel{4}{0}
+                \heartpixel{5}{0}
+
+                \heartpixel{0}{-1}
+                \heartpixel{1}{-1}
+                \heartpixel{2}{-1}
+                \heartpixel{3}{-1}
+                \heartpixel{4}{-1}
+                \heartpixel{5}{-1}
+                \heartpixel{6}{-1}
+
+                \heartpixel{0}{-2}
+                \heartpixel{1}{-2}
+                \heartpixel{2}{-2}
+                \heartpixel{3}{-2}
+                \heartpixel{4}{-2}
+                \heartpixel{5}{-2}
+                \heartpixel{6}{-2}
+
+                \heartpixel{1}{-3}
+                \heartpixel{2}{-3}
+                \heartpixel{3}{-3}
+                \heartpixel{4}{-3}
+                \heartpixel{5}{-3}
+
+                \heartpixel{2}{-4}
+                \heartpixel{3}{-4}
+                \heartpixel{4}{-4}
+
+                \heartpixel{3}{-5}
+
+                \draw[step=1, gray!20] (0,0) grid (7,-6);
+            \end{tikzpicture}
+            \end{center}
+        \end{column}
+        \begin{column}{0.55\textwidth}
+            \textbf{Was passiert bei der Rang-Reduktion?}
+            \begin{itemize}[<+->]
+                \item \textbf{Rang 1:} $\sigma_1$ fängt die größte Masse ein (ein grauer Block).
+                \item \textbf{Rang 2:} $\sigma_2$ fügt die V-Form an der Unterseite hinzu.
+                \item \textbf{Rang 3:} Das Herz wird scharf gezeichnet.
+                \item \textbf{Rang 4-6:} Fast keine Veränderung ($\sigma \approx 0$).
+            \end{itemize}
+            \vspace{0.3cm}
+            \onslide<5->{\alert{Fazit:} Wir können 90\% der Matrix wegwerfen und behalten 100\% der Bedeutung.}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% --- ABSCHNITT 6: UNIVERSELL ---
+\begin{frame}{Keine quadratische Matrix? Kein Problem!}
+    Die SVD funktioniert für \textbf{jede} $m \times n$ Matrix durch "Null-Padding" in $\Sigma$.
+    \vspace{0.5cm}
+    \begin{center}
+    \begin{tikzpicture}[scale=0.9]
+        \draw[fill=gray!10] (0,0) rectangle (1.5,0.9);
+        \draw[step=0.3, gray!30] (0,0) grid (1.5,0.9);
+        \node at (0.75,0.45) {$A$};
+        \node at (0.75,-0.35) {\footnotesize $m \times n$};
+
+        \node at (2.0,0.45) {$=$};
+
+        \draw[fill=gruen!20] (2.6,0) rectangle (3.5,0.9);
+        \draw[step=0.3, gray!30] (2.6,0) grid (3.5,0.9);
+        \node at (3.05,0.45) {$U$};
+        \node at (3.05,-0.35) {\footnotesize $m \times m$};
+
+        \node at (3.9,0.45) {$\cdot$};
+
+        \draw[fill=rot!20] (4.3,0) rectangle (5.8,0.9);
+        \draw[step=0.3, gray!30] (4.3,0) grid (5.8,0.9);
+        \foreach \i in {0,1,2} {
+            \fill[rot] ({4.3+0.3*\i},{0.6-0.3*\i}) rectangle ++(0.3,0.3);
+        }
+        \node at (5.05,1.25) {$\Sigma$};
+        \node at (5.05,-0.35) {\footnotesize $m \times n$};
+        \node[rotate=90] at (5.65,0.45) {\tiny Nullen};
+
+        \node at (6.2,0.45) {$\cdot$};
+
+        \draw[fill=blau!20] (6.7,-0.3) rectangle (8.2,1.2);
+        \draw[step=0.3, gray!30] (6.7,-0.3) grid (8.2,1.2);
+        \node at (7.45,0.45) {$V^T$};
+        \node at (7.45,-0.65) {\footnotesize $n \times n$};
+    \end{tikzpicture}
+    \end{center}
+    \begin{itemize}
+        \item $U$: Drehmatrix für den Zielraum ($m \times m$)
+        \item $V^T$: Drehmatrix für den Startraum ($n \times n$)
+        \item $\Sigma$: Streckungsmatrix mit zusätzlicher Dimensionen-Anpassung.
+    \end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,11 @@
+---
+title: "SVD Rang-Aufbau"
+format:
+  revealjs:
+    theme: simple
+---
+
+## SVD-Raenge als Animation
+
+{{< video media/videos/svd_rank_animation/480p15/SVDRankBuildUp.mp4 >}}
+

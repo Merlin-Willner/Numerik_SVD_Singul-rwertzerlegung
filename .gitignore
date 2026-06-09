@@ -1,0 +1,45 @@
+# Windows-reserved accidental file
+NUL
+
+# Local browser/test artifacts
+.playwright-cli/
+**/.playwright-cli/
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env/
+
+# Manim render output
+SVD_Manim_Animation/media/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+
+# Quarto/RevealJS generated dependency bundles
+**/index_files/
+**/*_files/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
