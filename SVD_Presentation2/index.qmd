@@ -107,7 +107,9 @@ $$
 
 Eine lineare Abbildung wird in drei lesbare Bausteine zerlegt: erst eine Rotation oder Spiegelung, dann eine Skalierung, dann erneut eine Rotation oder Spiegelung.
 
-Für unser Beispiel entsteht die Gesamtmatrix durch Multiplikation:
+Unser Ablauf von der vorherigen Folie ist dabei ein **didaktisches Beispiel im Stil der SVD**. Er zeigt das Grundprinzip, ist aber nicht die kanonische SVD, weil die Singulärwerte dort nach Größe sortiert werden und die stärkste Skalierung zuerst steht.
+
+Für dieses Beispiel entsteht die Gesamtmatrix durch Multiplikation:
 
 $$
 A =
@@ -184,10 +186,10 @@ Bei einer Matrix mit Rang $4$ sind die Zeilen nicht mehr alle Vielfache voneinan
 Das Grundprinzip bleibt aber gleich: Wir beschreiben die Matrix als Summe mehrerer Rang-1-Matrizen.
 
 $$
-A \approx \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \dots + \sigma_k u_k v_k^T
+A_k = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \dots + \sigma_k u_k v_k^T
 $$
 
-Je mehr Bausteine wir addieren, desto genauer wird die Annäherung. Für Kompression speichern wir nur die wichtigsten Bausteine und lassen kleine Beiträge weg.
+Für $k=r$ ist das die vollständige Zerlegung. Für $k<r$ entsteht eine Näherung: Je mehr Bausteine wir addieren, desto genauer wird sie. Für Kompression speichern wir nur die wichtigsten Bausteine und lassen kleine Beiträge weg.
 :::
 
 :::
@@ -257,6 +259,12 @@ $=$ ein Rang-1-Beitrag
 
 :::
 
+## SVD-Rang-1-Zerlegung {.rank-sum-reconstruction-slide}
+
+::: {.rank-sum-reconstruction-wrap}
+![](assets/generated/svd_rank_sum_reconstruction.svg){.rank-sum-reconstruction fig-alt="SVD als Produkt A gleich U Sigma V transponiert und als Summe von vier Rang-1-Beiträgen"}
+:::
+
 ## Bild als Matrix
 
 ::: {.image-matrix-slide}
@@ -265,40 +273,60 @@ $=$ ein Rang-1-Beitrag
 :::
 
 ::: {.image-matrix-text}
-Ein Graustufenbild kann als Matrix $A$ verstanden werden: Jeder Eintrag beschreibt den Helligkeitswert eines Pixels.
+Bis hierhin haben wir Matrizen als Summen von Rang-1-Beiträgen betrachtet. Jetzt wenden wir genau diese Idee auf ein Bild an.
 
-Wenn wir diese Matrix mit der SVD zerlegen,
+Ein Graustufenbild ist nichts anderes als eine Matrix $A$: Jeder Eintrag ist ein Pixelwert zwischen $0$ und $255$.
 
 $$
 A = U\Sigma V^T,
 $$
 
-dann sortiert $\Sigma$ die wichtigsten Bildmuster nach ihrer Stärke.
+zerlegt diese Pixelmatrix in geordnete Bildbausteine.
 
-Für eine Kompression speichern wir nur die größten Singulärwerte und die zugehörigen Vektoren. Dadurch behalten wir die grobe Bildstruktur, müssen aber deutlich weniger Daten speichern.
+Die größten Singulärwerte beschreiben die wichtigsten Strukturen der Ente. Für die Kompression speichern wir nur diese stärksten Beiträge und lassen kleinere Details weg.
+
+Auf der nächsten Folie sieht man diese Beiträge einzeln.
 :::
 
 :::
 
-## Einzelne Rang-Beiträge der Ente
+## SVD der Ente: erster Beitrag {.duck-svd-first-slide}
+
+::: {.duck-svd-first-wrap}
+![](assets/generated/duck_svd_first_component_layout.svg){.duck-svd-first fig-alt="Entenmatrix mit SVD-Matrizen U Sigma V transponiert und erstem Rang-1-Beitrag"}
+:::
+
+## Rang-1-Beiträge der Ente: Konzept A
 
 ::: {.duck-rank-terms-slide}
 
 ::: {.duck-rank-terms-visual}
-![](assets/generated/duck_rank_terms.svg){.duck-rank-terms fig-alt="Die Ente wird in einzelne farbige SVD-Rang-Beiträge zerlegt"}
+![](assets/generated/duck_rank_terms_v1.svg){.duck-rank-terms fig-alt="Drei einzelne Rang-1-Beiträge der Ente mit erklärendem Textfeld"}
+:::
+
+:::
+
+## Rang-1-Beiträge der Ente: Konzept B
+
+::: {.duck-rank-terms-slide}
+
+::: {.duck-rank-terms-visual}
+![](assets/generated/duck_rank_terms_v2.svg){.duck-rank-terms fig-alt="Drei Rang-1-Beiträge als Produkt aus Spaltenvektor, Singulärwert und Zeilenvektor"}
 :::
 
 ::: {.duck-rank-terms-text}
 ::: {.duck-rank-note}
-Oben steht die SVD-Zerlegung der Bildmatrix:
+Jeder Term
 
 $$
-A = U\Sigma V^T.
+\sigma_i u_i v_i^T
 $$
+
+ist eine Matrix vom Rang $1$.
 :::
 
 ::: {.duck-rank-note}
-Unten sind einzelne Rang-Beiträge der Ente zu sehen. Jeder Beitrag besteht aus einem Vektor aus $U$, einem Singulärwert aus $\Sigma$ und einem Vektor aus $V^T$.
+Der Singulärwert $\sigma_i$ gewichtet den Beitrag. Die Vektoren $u_i$ und $v_i^T$ bestimmen das konkrete Muster.
 :::
 
 ::: {.duck-rank-note}
@@ -306,7 +334,35 @@ $$
 A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T
 $$
 
-Wichtig: Die kleinen Enten unten sind **nicht aufsummiert**, sondern zeigen jeweils nur den einzelnen Beitrag eines Rangs.
+Die Bildmatrix entsteht durch Addition dieser Rang-1-Beiträge.
+:::
+:::
+
+:::
+
+## Rang-1-Beiträge der Ente: Konzept C
+
+::: {.duck-rank-terms-slide}
+
+::: {.duck-rank-terms-visual}
+![](assets/generated/duck_rank_terms_v3.svg){.duck-rank-terms fig-alt="Einzelne Rang-1-Beiträge der Ente werden zur Rang-3-Rekonstruktion aufsummiert"}
+:::
+
+::: {.duck-rank-terms-text}
+::: {.duck-rank-note}
+Links sind die ersten drei Beiträge einzeln dargestellt. Jeder einzelne Beitrag hat Rang $1$.
+:::
+
+::: {.duck-rank-note}
+Erst durch Addition entsteht eine bessere Näherung:
+
+$$
+A_3 = \sigma_1u_1v_1^T+\sigma_2u_2v_2^T+\sigma_3u_3v_3^T.
+$$
+:::
+
+::: {.duck-rank-note}
+Diese Variante macht den Unterschied zwischen **einzelnem Beitrag** und **aufsummierter Rekonstruktion** sichtbar.
 :::
 :::
 
@@ -353,13 +409,17 @@ Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, ve
 ::: {.rank-slide}
 
 ::: {.rank-explanation}
-Das gleiche Prinzip funktioniert auch für ein echtes Graustufenbild:
+Bei einem hochaufgelösten Bild wird die Pixelmatrix deutlich größer. Ein Originalbild mit $m$ Zeilen und $n$ Spalten speichert ungefähr $m\cdot n$ Helligkeitswerte.
 
 $$
-A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
+\text{Original: } m\cdot n
+\qquad
+\text{Rang-}k\text{: } k(m+n+1)
 $$
 
-Hier wird das Einstein-Bild aus der hochauflösenden Vorlage als Matrix zerlegt. Kleine Ränge zeigen zuerst die grobe Struktur; höhere Ränge ergänzen Details, Kanten und feine Kontraste.
+Bei hoher Auflösung lohnt sich diese Speicherung stärker: Für kleine $k$ behalten wir nur wenige wichtige Bildmuster, sparen aber sehr viele Pixelwerte ein.
+
+Je höher wir $k$ wählen, desto mehr Details, Kanten und feine Kontraste kommen zurück. Gleichzeitig steigt aber auch die Datenmenge wieder.
 :::
 
 ```{=html}
@@ -389,20 +449,20 @@ Hier wird das Einstein-Bild aus der hochauflösenden Vorlage als Matrix zerlegt.
 ::: {.svd-question-slide}
 
 ::: {.svd-question-left}
-Die SVD kann man auf zwei gleichwertige Arten lesen:
+Bis hierhin haben wir die SVD benutzt. Jetzt klären wir, wie man aus einer gegebenen Matrix $A$ die drei Teile findet:
 
 $$
 A =
 {\color{#1e88ff}{U}}
 {\color{#f2aa00}{\Sigma}}
-{\color{#ff3b35}{V^T}}
+{\color{#ff3b35}{V^T}}.
 $$
 
-oder als Summe einzelner Rang-1-Bausteine:
+Die äquivalente Rang-Form ist:
 
 $$
-A =
-\sum_{i=1}^{r}
+A_k =
+\sum_{i=1}^{k}
 {\color{#f2aa00}{\sigma_i}}\,
 {\color{#1e88ff}{u_i}}\,
 {\color{#ff3b35}{v_i^T}}.
@@ -411,44 +471,38 @@ $$
 
 ::: {.svd-question-right}
 ::: {.mini-example}
-Mini-Beispiel:
+Für ein Bild ist $A$ die Pixelmatrix:
 
 $$
 A =
 \begin{pmatrix}
-1 & 2\\
-2 & 4
-\end{pmatrix}
-=
-\begin{pmatrix}
-1\\
-2
-\end{pmatrix}
-\begin{pmatrix}
-1 & 2
-\end{pmatrix}
+a_{11} & \dots & a_{1n}\\
+\vdots & \ddots & \vdots\\
+a_{m1} & \dots & a_{mn}
+\end{pmatrix}.
 $$
 
-Das ist ein einzelner Rang-1-Baustein. Bei Bildern addieren wir viele solcher Bausteine.
+Die SVD sucht darin geordnete Muster: erst die wichtigsten, dann immer feinere Details.
 :::
 
 ::: {.big-question}
-Wie findet man aus einer Pixelmatrix wie der Ente eigentlich die drei Matrizen
+Wie berechnet man
 ${\color{#1e88ff}{U}}$,
 ${\color{#f2aa00}{\Sigma}}$
 und
-${\color{#ff3b35}{V^T}}$?
+${\color{#ff3b35}{V^T}}$
+aus $A$?
 :::
 :::
 
 :::
 
-## Herleitung: Was suchen wir?
+## Ziel: drei einfache Bausteine
 
 ::: {.derivation-slide .derivation-start}
 
 ::: {.derivation-main}
-Für eine Matrix $A \in \mathbb{R}^{m\times n}$ suchen wir
+Für $A\in\mathbb{R}^{m\times n}$ suchen wir
 
 $$
 A =
@@ -457,7 +511,18 @@ A =
 {\color{#ff3b35}{V^T}},
 $$
 
-wobei $U$ und $V$ orthogonale Matrizen sind und $\Sigma$ nur auf der Diagonalen Einträge hat.
+mit
+
+$$
+{\color{#1e88ff}{U^TU=I}},\qquad
+{\color{#ff3b35}{V^TV=I}},\qquad
+{\color{#f2aa00}{\Sigma}} =
+\begin{pmatrix}
+\sigma_1 & 0 & \dots\\
+0 & \sigma_2 & \dots\\
+\vdots & \vdots & \ddots
+\end{pmatrix}.
+$$
 :::
 
 ::: {.derivation-cards}
@@ -468,7 +533,7 @@ orthogonale Richtungen im Zielraum
 
 ::: {.derivation-card .yellow-card}
 $\Sigma$  
-Stärken der einzelnen Richtungen
+Stärken der Richtungen
 :::
 
 ::: {.derivation-card .red-card}
@@ -478,99 +543,150 @@ orthogonale Richtungen im Eingaberaum
 :::
 
 ::: {.derivation-note}
-Die Frage ist also nicht, ob so eine Zerlegung nützlich ist, sondern wie wir diese Richtungen und Stärken systematisch aus $A$ berechnen.
+Orthogonale Matrizen sind wie Rotationen oder Spiegelungen: Sie verändern Längen nicht. Die eigentliche Streckung steckt vollständig in den Singulärwerten.
 :::
 
 :::
 
-## Schritt 1: Eingaberichtungen finden
+## Schritt 1: Warum $A^TA$?
 
 ::: {.derivation-slide .two-column-derivation}
 
 ::: {.derivation-left}
-Wir betrachten zuerst
+Wir suchen Eingaberichtungen $v_i$, die durch $A$ besonders stark oder schwach gestreckt werden.
+
+Die Länge nach der Abbildung ist
+
+$$
+\|Av\|^2.
+$$
+
+Das lässt sich umformen:
+
+$$
+\|Av\|^2
+= (Av)^T(Av)
+= v^T A^T A v.
+$$
+:::
+
+::: {.derivation-right}
+Deshalb betrachten wir
 
 $$
 A^T A.
 $$
 
-Diese Matrix hat zwei wichtige Eigenschaften:
-
-1. Sie ist symmetrisch: $(A^T A)^T = A^T A$.
-2. Sie ist positiv semidefinit:
+Diese Matrix ist symmetrisch:
 
 $$
-x^T A^T A x = \|Ax\|^2 \ge 0.
-$$
-:::
-
-::: {.derivation-right}
-Symmetrische Matrizen haben orthogonale Eigenvektoren. Deshalb wählen wir die Spalten von $V$ als Eigenvektoren von $A^T A$:
-
-$$
-A^T A v_i = \lambda_i v_i.
+(A^TA)^T=A^TA.
 $$
 
-Diese $v_i$ sind die Eingaberichtungen, also die Richtungen, die vor der Skalierung betrachtet werden.
+Außerdem ist sie positiv semidefinit:
+
+$$
+v^TA^TAv=\|Av\|^2\ge 0.
+$$
 :::
 
 :::
 
-## Schritt 2: Singulärwerte
+## Schritt 2: Eigenzerlegung
 
 ::: {.derivation-slide .two-column-derivation}
 
 ::: {.derivation-left}
-Weil
+Für symmetrische Matrizen gilt der **Spektralsatz**:
+
+Sie besitzen orthogonale Eigenvektoren und lassen sich diagonalisieren.
 
 $$
-x^T A^T A x = \|Ax\|^2 \ge 0,
+A^TA =
+{\color{#ff3b35}{V}}
+\Lambda
+{\color{#ff3b35}{V^T}}.
 $$
 
-sind alle Eigenwerte von $A^T A$ nichtnegativ:
+Die Spalten von $V$ sind Eigenvektoren:
 
 $$
-\lambda_i \ge 0.
-$$
-
-Daraus definieren wir die Singulärwerte:
-
-$$
-{\color{#f2aa00}{\sigma_i}} = \sqrt{\lambda_i}.
+A^TA{\color{#ff3b35}{v_i}}
+=
+\lambda_i{\color{#ff3b35}{v_i}}.
 $$
 :::
 
 ::: {.derivation-right}
-Die Singulärwerte stehen in $\Sigma$ auf der Diagonalen:
+Diese Eigenvektoren sind die Eingaberichtungen der SVD.
+
+Warum ist das nützlich?
+
+$$
+\|A v_i\|^2
+= v_i^TA^TA v_i
+= \lambda_i.
+$$
+
+Die Eigenwerte $\lambda_i$ sagen also, wie stark $A$ die Richtung $v_i$ streckt.
+:::
+:::
+
+## Schritt 3: Singulärwerte
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.derivation-left}
+Aus den Eigenwerten von $A^TA$ werden die Singulärwerte:
+
+$$
+{\color{#f2aa00}{\sigma_i}}=\sqrt{\lambda_i}.
+$$
+
+Da $A^TA$ positiv semidefinit ist, gilt
+
+$$
+\lambda_i\ge 0.
+$$
+
+Also sind die Singulärwerte reell und nichtnegativ.
+:::
+
+::: {.derivation-right}
+Sortiert wird absteigend:
+
+$$
+\sigma_1\ge\sigma_2\ge\dots\ge\sigma_r>0.
+$$
+
+Dadurch stehen die wichtigsten Muster zuerst:
 
 $$
 \Sigma =
 \begin{pmatrix}
-\sigma_1 & 0 & \dots \\
-0 & \sigma_2 & \dots \\
+\sigma_1 & 0 & \dots\\
+0 & \sigma_2 & \dots\\
 \vdots & \vdots & \ddots
 \end{pmatrix}.
 $$
-
-Große $\sigma_i$ bedeuten: Diese Richtung trägt viel zur Matrix bei. Kleine $\sigma_i$ können wir für eine Rang-$k$-Näherung weglassen.
 :::
 
 :::
 
-## Schritt 3: Zielrichtungen berechnen
+## Schritt 4: Zielrichtungen $u_i$
 
 ::: {.derivation-slide .two-column-derivation}
 
 ::: {.derivation-left}
-Wenn $v_i$ eine Eingaberichtung ist, dann zeigt $A v_i$, wohin diese Richtung durch $A$ abgebildet wird.
+Wenn $v_i$ bekannt ist, zeigt $Av_i$ in den Zielraum.
 
-Die Länge dieses Bildes ist der Singulärwert:
+Die Länge kennen wir schon:
 
 $$
 \|A v_i\| = \sigma_i.
 $$
 
-Für $\sigma_i > 0$ normieren wir deshalb:
+Also normieren wir:
 
 $$
 {\color{#1e88ff}{u_i}} =
@@ -579,7 +695,7 @@ $$
 :::
 
 ::: {.derivation-right}
-Damit gilt für jede wichtige Richtung:
+Damit gilt
 
 $$
 A{\color{#ff3b35}{v_i}}
@@ -588,7 +704,7 @@ A{\color{#ff3b35}{v_i}}
 {\color{#1e88ff}{u_i}}.
 $$
 
-Schreibt man alle Richtungen gleichzeitig als Matrizen, erhält man:
+Alle Richtungen zusammen:
 
 $$
 A{\color{#ff3b35}{V}}
@@ -597,7 +713,7 @@ A{\color{#ff3b35}{V}}
 {\color{#f2aa00}{\Sigma}}.
 $$
 
-Multiplikation mit $V^T$ liefert die SVD:
+Da $V$ orthogonal ist, gilt $V^{-1}=V^T$. Also:
 
 $$
 A =
@@ -609,52 +725,122 @@ $$
 
 :::
 
-## Rechenweg für eine Bildmatrix
+## Algorithmus für eine Matrix
 
 ::: {.derivation-slide .algorithm-slide}
 
 ::: {.algorithm-steps}
 ::: {.algorithm-step}
-**1.** Pixelmatrix $A$ aufstellen.
+**1.** Berechne $A^TA$.
 :::
 
 ::: {.algorithm-step}
-**2.** $A^T A$ berechnen.
+**2.** Löse $A^TA v_i=\lambda_i v_i$.
 :::
 
 ::: {.algorithm-step}
-**3.** Eigenvektoren von $A^T A$ bestimmen. Diese bilden $V$.
+**3.** Setze $\sigma_i=\sqrt{\lambda_i}$ und sortiere absteigend.
 :::
 
 ::: {.algorithm-step}
-**4.** Singulärwerte berechnen: $\sigma_i = \sqrt{\lambda_i}$.
+**4.** Baue $V=(v_1,\dots,v_n)$ und $\Sigma$.
 :::
 
 ::: {.algorithm-step}
-**5.** Zielrichtungen berechnen: $u_i = \frac{1}{\sigma_i} A v_i$.
+**5.** Berechne $u_i=\frac{1}{\sigma_i}Av_i$ für $\sigma_i>0$.
 :::
 :::
 
 ::: {.algorithm-summary}
-Danach haben wir
+Für Bilder macht man das numerisch. Die Idee bleibt:
 
 $$
-A =
-{\color{#1e88ff}{U}}
-{\color{#f2aa00}{\Sigma}}
-{\color{#ff3b35}{V^T}}
-\qquad\text{und}\qquad
+\text{Richtungen finden}
+\rightarrow
+\text{Stärken sortieren}
+\rightarrow
+\text{erste }k\text{ behalten}.
+$$
+
+So entsteht die Kompression:
+
+$$
+A_k=\sum_{i=1}^{k}\sigma_i u_i v_i^T.
+$$
+:::
+
+:::
+
+## Numerischer Bezug: QR
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.derivation-left}
+Die Herleitung nutzt die Eigenzerlegung von $A^TA$:
+
+$$
+A^TA=V\Lambda V^T.
+$$
+
+In der Numerik berechnet man Eigenwerte oft iterativ. Ein wichtiger Baustein ist die **QR-Zerlegung**:
+
+$$
+B=QR,
+$$
+
+wobei $Q$ orthogonal und $R$ eine obere Dreiecksmatrix ist.
+:::
+
+::: {.derivation-right}
+Wichtig:
+
+QR ist **nicht** die SVD.
+
+Aber QR ist verwandt über orthogonale Matrizen. QR-Verfahren können Eigenwerte stabil approximieren, und daraus kann man wiederum Singulärwerte gewinnen.
+
+Für große Bilder verwendet man meist direkte oder iterative SVD-Algorithmen, statt $A^TA$ naiv per Hand auszurechnen.
+:::
+
+:::
+
+## Warum Rang-$k$ optimal ist
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.derivation-left}
+Die SVD liefert nicht irgendeine Kürzung, sondern die beste Rang-$k$-Approximation.
+
+Der Satz dahinter heißt **Eckart-Young-Mirsky**:
+
+$$
 A_k =
-\sum_{i=1}^{k}
-\sigma_i u_i v_i^T.
+\sum_{i=1}^{k}\sigma_i u_i v_i^T
 $$
 
-Für echte Bilder wird dieser Prozess numerisch berechnet. Mathematisch passiert aber genau das: Wir finden Richtungen, ordnen sie nach Stärke und behalten für die Kompression nur die wichtigsten.
+minimiert den Fehler unter allen Matrizen mit Rang höchstens $k$:
+
+$$
+\|A-B\|_F
+\quad\text{für}\quad
+\operatorname{rang}(B)\le k.
+$$
+:::
+
+::: {.derivation-right}
+Der Fehler hängt direkt an den weggelassenen Singulärwerten:
+
+$$
+\|A-A_k\|_F^2
+=
+\sigma_{k+1}^2+\sigma_{k+2}^2+\dots
+$$
+
+Deshalb funktioniert Bildkompression gut, wenn viele spätere Singulärwerte klein sind: Wir verlieren wenig sichtbare Information, sparen aber viele Daten.
 :::
 
 :::
 
-## Mini-Beispiel: Rang 1
+## Mini-Beispiel: reine Skalierung
 
 ::: {.derivation-slide .example-slide}
 
@@ -664,64 +850,96 @@ Nehmen wir
 $$
 A =
 \begin{pmatrix}
-1 & 2\\
-2 & 4
+3 & 0\\
+0 & 1
 \end{pmatrix}.
 $$
 
 Dann ist
 
 $$
-A^T A =
+A^TA =
 \begin{pmatrix}
-5 & 10\\
-10 & 20
+9 & 0\\
+0 & 1
 \end{pmatrix}.
 $$
 
-Die Eigenwerte sind
-
-$$
-\lambda_1 = 25,\qquad \lambda_2 = 0.
-$$
+Die Eigenwerte sind $\lambda_1=9$ und $\lambda_2=1$.
 :::
 
 ::: {.example-right}
 Also sind die Singulärwerte
 
 $$
-\sigma_1 = 5,\qquad \sigma_2 = 0.
+\sigma_1=3,\qquad \sigma_2=1.
 $$
 
-Ein passender Eigenvektor ist
+Die Eigenvektoren sind
 
 $$
-v_1 =
-\frac{1}{\sqrt5}
+v_1=\begin{pmatrix}1\\0\end{pmatrix},
+\qquad
+v_2=\begin{pmatrix}0\\1\end{pmatrix}.
+$$
+
+Damit ist
+
+$$
+U=I,\qquad
+\Sigma=
+\begin{pmatrix}3&0\\0&1\end{pmatrix},
+\qquad
+V^T=I.
+$$
+:::
+
+:::
+
+## Mini-Beispiel mit Rotation
+
+::: {.derivation-slide .example-slide}
+
+::: {.example-left}
+Wenn wir vor und nach der Skalierung drehen, wirkt die Matrix komplizierter:
+
+$$
+A =
+{\color{#1e88ff}{R_{-45^\circ}}}
 \begin{pmatrix}
-1\\
-2
-\end{pmatrix}.
+3&0\\
+0&1
+\end{pmatrix}
+{\color{#ff3b35}{R_{-90^\circ}}}.
 $$
 
-Daraus folgt
+Die SVD erkennt trotzdem:
 
 $$
-u_1 =
-\frac{1}{5} A v_1
-=
-\frac{1}{\sqrt5}
-\begin{pmatrix}
-1\\
-2
-\end{pmatrix}.
+\text{Rotation}
+\rightarrow
+\text{Skalierung}
+\rightarrow
+\text{Rotation}.
+$$
+:::
+
+::: {.example-right}
+Die Singulärwerte bleiben
+
+$$
+\sigma_1=3,\qquad \sigma_2=1.
 $$
 
-Damit besteht $A$ aus einem einzigen Rang-1-Beitrag:
+Was sich ändert, sind die Richtungen:
 
 $$
-A = 5\,u_1 v_1^T.
+V^T=R_{-90^\circ},
+\qquad
+U=R_{-45^\circ}.
 $$
+
+Das verbindet die geometrischen Folien am Anfang mit der Bildkompression am Ende.
 :::
 
 :::
