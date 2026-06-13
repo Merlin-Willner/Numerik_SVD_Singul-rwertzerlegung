@@ -250,7 +250,7 @@
 }
 
 .v-card {
-  border-color: #ff3b35;
+  border-color: #16a34a;
 }
 
 .factor-name {
@@ -468,7 +468,7 @@
   display: grid;
   grid-template-rows: auto auto auto;
   align-content: center;
-  gap: 0.55rem;
+  gap: 0.4rem;
   min-height: 520px;
 }
 
@@ -682,7 +682,7 @@
 }
 
 .red-piece {
-  border-color: #ff3b35;
+  border-color: #16a34a;
 }
 
 .reconstruction-lead p {
@@ -865,7 +865,7 @@
 }
 
 .red-card {
-  border-color: #ff3b35;
+  border-color: #16a34a;
 }
 
 .derivation-note {
@@ -902,6 +902,86 @@
 
 .derivation-fullnote mjx-container {
   font-size: 0.86em !important;
+}
+
+.two-column-derivation .leitfrage,
+.two-column-derivation .uebergang {
+  grid-column: 1 / -1;
+}
+
+.leitfrage {
+  border-bottom: 1.5px solid var(--line);
+  padding-bottom: 0.24rem;
+}
+
+.uebergang {
+  border-top: 1.5px solid var(--line);
+  padding-top: 0.26rem;
+}
+
+.leitfrage p,
+.uebergang p {
+  font-size: 0.46em;
+  color: var(--muted);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.leitfrage strong,
+.uebergang strong {
+  color: var(--ink);
+}
+
+.compare-slide {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 0.55rem;
+  align-content: center;
+  min-height: 500px;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  align-items: stretch;
+}
+
+.compare-col {
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  padding: 0.5rem 0.62rem;
+}
+
+.compare-col.is-svd {
+  border-color: #1e88ff;
+  border-width: 2px;
+}
+
+.compare-name {
+  font-weight: 700;
+  font-size: 1.05em;
+}
+
+.compare-col p {
+  font-size: 0.44em;
+  line-height: 1.3;
+  margin: 0 0 0.32rem;
+}
+
+.compare-col mjx-container {
+  font-size: 0.82em !important;
+}
+
+.compare-note {
+  border-top: 1.5px solid var(--line);
+  padding-top: 0.42rem;
+}
+
+.compare-note p {
+  font-size: 0.48em;
+  line-height: 1.32;
+  margin: 0;
 }
 
 .derivation-left,
@@ -1184,13 +1264,13 @@
   width: 56px;
   height: 90px;
   border-color: #f2aa00;
-  background: linear-gradient(to bottom right, #ffffff 0 45%, #f2aa00 45% 49%, #ffffff 49% 100%);
+  background: linear-gradient(to bottom left, #ffffff 0 45%, #f2aa00 45% 49%, #ffffff 49% 100%);
 }
 
 .box-V {
   width: 56px;
   height: 56px;
-  border-color: #ff3b35;
+  border-color: #16a34a;
 }
 
 .svd-theorem-text {

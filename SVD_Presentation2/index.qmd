@@ -102,7 +102,7 @@ Doch was hat das mit SVD zu tun?
 Im Kern ist das das Prinzip der SVD:
 
 $$
-A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#ff3b35}{V^T}}
+A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#16a34a}{V^T}}
 $$
 
 Eine lineare Abbildung wird in drei lesbare Bausteine zerlegt: erst eine Rotation oder Spiegelung, dann eine Skalierung, dann erneut eine Rotation oder Spiegelung.
@@ -115,7 +115,7 @@ $$
 A =
 {\color{#1e88ff}{R_{-45^\circ}}}
 {\color{#f2aa00}{\begin{pmatrix}0.45&0\\0&1\end{pmatrix}}}
-{\color{#ff3b35}{R_{-90^\circ}}}
+{\color{#16a34a}{R_{-90^\circ}}}
 \approx
 \begin{pmatrix}
 -0.707 & 0.318 \\
@@ -136,18 +136,22 @@ $$
 
 ::: {.dimension-example}
 $$
-\Sigma=\begin{pmatrix}3&0\\0&2\end{pmatrix}\binom{1}{1}=\binom{3}{2}
-\qquad\Longrightarrow\qquad
-\begin{pmatrix}3&0\\0&{\color{#ff3b35}0}\end{pmatrix}\binom{1}{1}=\binom{3}{{\color{#ff3b35}0}}
+\underset{\textstyle {\color{#f2aa00}\Sigma}}{\begin{pmatrix}3&0\\0&2\end{pmatrix}}
+\underset{\textstyle \text{Punkte}}{\begin{pmatrix}2&1\\1&2\end{pmatrix}}
+=\begin{pmatrix}6&3\\2&4\end{pmatrix}
+\qquad
+\underset{\textstyle {\color{#f2aa00}\Sigma}\ (\sigma_2={\color{#16a34a}0})}{\begin{pmatrix}3&0\\0&{\color{#16a34a}0}\end{pmatrix}}
+\begin{pmatrix}2&1\\1&2\end{pmatrix}
+=\begin{pmatrix}6&3\\{\color{#16a34a}0}&{\color{#16a34a}0}\end{pmatrix}
 $$
 
-Die Diagonale von $\Sigma$ enthält die **Singulärwerte** $\sigma_1=3,\ \sigma_2=2$. Den kleinsten auf ${\color{#ff3b35}0}$ setzen entfernt eine Richtung — jeder Punkt landet auf der Linie $y=0$.
+Links hat ${\color{#f2aa00}\Sigma}$ die **Singulärwerte** $\sigma_1=3,\ \sigma_2=2$ — die **Punkte** (je Spalte einer) bleiben in der Fläche. Rechts ist $\sigma_2={\color{#16a34a}0}$: die ganze $y$-Zeile wird $0$, alle Punkte landen auf der Linie $y=0$.
 :::
 
 ::: {.dimension-text}
 In der SVD $A=U\Sigma V^T$ steckt die ganze Streckung in $\Sigma$: dort stehen die **Singulärwerte** $\sigma_1\ge\sigma_2\ge\dots\ge 0$.
 
-Sie bestimmen, wie stark jede Richtung gewichtet wird. Der **kleinste Singulärwert** $=0$ entfernt die unwichtigste Richtung — aus einer Fläche wird eine Linie.
+Sie bestimmen die Streckung jeder Richtung. Der **kleinste Singulärwert** $=0$ entfernt die unwichtigste Richtung.
 
 Genau das ist Dimensionsreduktion: kleine Singulärwerte weglassen. Dieselbe Idee trägt später die Bildkompression.
 :::
@@ -215,7 +219,7 @@ $$
 A =
 {\color{#1e88ff}{U}}
 {\color{#f2aa00}{\Sigma}}
-{\color{#ff3b35}{V^T}}
+{\color{#16a34a}{V^T}}
 $$
 
 ist gleichbedeutend mit einer Summe aus einzelnen Rang-1-Matrizen:
@@ -224,17 +228,17 @@ $$
 A =
 {\color{#f2aa00}{\sigma_1}}
 {\color{#1e88ff}{u_1}}
-{\color{#ff3b35}{v_1^T}}
+{\color{#16a34a}{v_1^T}}
 +
 {\color{#f2aa00}{\sigma_2}}
 {\color{#1e88ff}{u_2}}
-{\color{#ff3b35}{v_2^T}}
+{\color{#16a34a}{v_2^T}}
 +
 \dots
 +
 {\color{#f2aa00}{\sigma_r}}
 {\color{#1e88ff}{u_r}}
-{\color{#ff3b35}{v_r^T}}.
+{\color{#16a34a}{v_r^T}}.
 $$
 :::
 
@@ -280,9 +284,9 @@ Dieselbe Zerlegung in zwei Sichtweisen: oben als **Produkt** $A=U\Sigma V^T$, un
 :::
 
 ::: {.reconstruction-caption}
-${\color{#1e88ff}{u_i}}$ — Spalten von $U$ · ${\color{#f2aa00}{\sigma_i}}$ — Singulärwerte in $\Sigma$ · ${\color{#ff3b35}{v_i^T}}$ — Zeilen von $V^T$
+${\color{#1e88ff}{u_i}}$ — Spalten von $U$ · ${\color{#f2aa00}{\sigma_i}}$ — Singulärwerte in $\Sigma$ · ${\color{#16a34a}{v_i^T}}$ — Zeilen von $V^T$
 
-Jeder Block ${\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#ff3b35}{v_i^T}}$ unten ist eine **Rang-1-Matrix**; aufsummiert ergeben sie genau die Produktform oben.
+Jeder Block ${\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}$ unten ist eine **Rang-1-Matrix**; aufsummiert ergeben sie genau die Produktform oben.
 :::
 
 ## Bild als Matrix
@@ -402,405 +406,463 @@ Je höher wir $k$ wählen, desto mehr Details, Kanten und feine Kontraste kommen
 
 :::
 
-## Von der Matrix zur SVD
+## Was haben wir gerade benutzt?
 
 ::: {.svd-question-slide}
 
 ::: {.svd-question-left}
-Bis hierhin haben wir die SVD benutzt. Jetzt klären wir, wie man aus einer gegebenen Matrix $A$ die drei Teile findet:
+Beim Einstein-Bild haben wir gesehen: Schon wenige Rang-1-Beiträge liefern eine erkennbare Rekonstruktion.
 
-$$
-A =
-{\color{#1e88ff}{U}}
-{\color{#f2aa00}{\Sigma}}
-{\color{#ff3b35}{V^T}}.
-$$
-
-Die äquivalente Rang-Form ist:
+Damit das sinnvoll ist, müssen diese Beiträge nach Wichtigkeit sortiert sein:
 
 $$
 A_k =
 \sum_{i=1}^{k}
 {\color{#f2aa00}{\sigma_i}}\,
 {\color{#1e88ff}{u_i}}\,
-{\color{#ff3b35}{v_i^T}}.
+{\color{#16a34a}{v_i^T}}.
 $$
+
+Genau das leistet die SVD: Sie liefert geordnete Bildbausteine.
 :::
 
 ::: {.svd-question-right}
 ::: {.mini-example}
-Für ein Bild ist $A$ die Pixelmatrix:
-
-$$
-A =
-\begin{pmatrix}
-a_{11} & \dots & a_{1n}\\
-\vdots & \ddots & \vdots\\
-a_{m1} & \dots & a_{mn}
-\end{pmatrix}.
-$$
-
-Die SVD sucht darin geordnete Muster: erst die wichtigsten, dann immer feinere Details.
+Jetzt klären wir, warum diese Zerlegung für eine beliebige Bildmatrix existiert und wie ihre Bausteine entstehen.
 :::
 
 ::: {.big-question}
-Wie berechnet man
-${\color{#1e88ff}{U}}$,
-${\color{#f2aa00}{\Sigma}}$
-und
-${\color{#ff3b35}{V^T}}$
-aus $A$?
+Woher kommen
+${\color{#1e88ff}{u_i}}$,
+${\color{#f2aa00}{\sigma_i}}$ und
+${\color{#16a34a}{v_i}}$?
+
+Warum sind die ersten Beiträge die wichtigsten?
+
+Warum dürfen kleine Beiträge weggelassen werden?
+
+Warum funktioniert das bei einer beliebigen Bildmatrix?
 :::
 :::
 
+::: {.uebergang}
+Dazu schauen wir zuerst auf das Objekt selbst: Was ist an einer Bildmatrix schwierig?
 :::
 
-## Ziel: drei einfache Bausteine
+:::
 
-::: {.derivation-slide .derivation-start}
+## Das Problem: Eine Bildmatrix ist beliebig
 
-::: {.derivation-main}
-Für $A\in\mathbb{R}^{m\times n}$ suchen wir
+::: {.derivation-slide .two-column-derivation}
+
+::: {.derivation-left}
+Ein Graustufenbild ist eine Matrix
+
+$$
+A\in\mathbb{R}^{m\times n}.
+$$
+
+Aber im Allgemeinen gilt
+
+$$
+A^T\neq A
+\qquad\text{und oft auch}\qquad
+m\neq n.
+$$
+:::
+
+::: {.derivation-right}
+Eine Bildmatrix ist also im Allgemeinen **nicht symmetrisch**.
+
+Bei rechteckigen Bildern ist sie nicht einmal quadratisch.
+
+Deshalb können wir den Spektralsatz nicht direkt auf $A$ anwenden.
+:::
+
+::: {.uebergang}
+Trotzdem suchen wir genau das, was Eigenwertzerlegungen gut können: Richtungen und Gewichtungen.
+:::
+
+:::
+
+## Warum reichen bekannte Zerlegungen nicht direkt?
+
+::: {.compare-slide}
+
+::: {.compare-grid}
+::: {.compare-col}
+[Diagonalisierung]{.compare-name}
+
+$$
+A=PDP^{-1}
+$$
+
+Zerlegt in Basiswechsel, Skalierung, Rückwechsel.
+
+Aber: nur quadratisch, nicht immer diagonalisierbar, Eigenvektoren nicht immer orthogonal.
+:::
+
+::: {.compare-col}
+[Spektralsatz]{.compare-name}
+
+$$
+S=Q\Lambda Q^T
+$$
+
+Liefert orthogonale Richtungen und reelle Gewichtungen.
+
+Aber: nur für symmetrische Matrizen $S=S^T$.
+:::
+
+::: {.compare-col .is-svd}
+[Gesucht]{.compare-name}
+
+Eine Zerlegung für jede Bildmatrix.
+
+Sie soll orthogonale Richtungen liefern, Beiträge nach Wichtigkeit sortieren und Rang-$k$-Näherungen ermöglichen.
+:::
+:::
+
+::: {.compare-note}
+Der Spektralsatz wäre ideal, weil er orthogonale Richtungen und klare Gewichtungen liefert. Aber unsere Bildmatrix $A$ ist nicht symmetrisch. Also müssen wir eine symmetrische Matrix aus $A$ bauen, die trotzdem die Wirkung von $A$ beschreibt.
+:::
+
+:::
+
+## Was muss die gesuchte Zerlegung leisten?
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.leitfrage}
+Für Bildkompression brauchen wir geordnete Bausteine für **jede** Matrix $A\in\mathbb{R}^{m\times n}$.
+:::
+
+::: {.derivation-left}
+Die Zerlegung soll:
+
+- für jede Matrix funktionieren,
+- orthogonale Richtungen liefern,
+- Beiträge nach Wichtigkeit sortieren,
+- eine Rang-$k$-Näherung ermöglichen.
+:::
+
+::: {.derivation-right}
+Die Zielstruktur ist
 
 $$
 A =
-{\color{#1e88ff}{U}}
-{\color{#f2aa00}{\Sigma}}
-{\color{#ff3b35}{V^T}},
+{\color{#1e88ff}{U}}\,
+{\color{#f2aa00}{\Sigma}}\,
+{\color{#16a34a}{V^T}}.
 $$
 
-mit
+In Wirkungsreihenfolge:
 
 $$
-{\color{#1e88ff}{U^TU=I}},\qquad
-{\color{#ff3b35}{V^TV=I}},\qquad
-{\color{#f2aa00}{\Sigma}} =
-\begin{pmatrix}
-\sigma_1 & 0 & \dots\\
-0 & \sigma_2 & \dots\\
-\vdots & \vdots & \ddots
-\end{pmatrix}.
-$$
-:::
-
-::: {.derivation-cards}
-::: {.derivation-card .blue-card}
-$U$  
-orthogonale Richtungen im Zielraum
-:::
-
-::: {.derivation-card .yellow-card}
-$\Sigma$  
-Stärken der Richtungen
-:::
-
-::: {.derivation-card .red-card}
-$V^T$  
-orthogonale Richtungen im Eingaberaum
-:::
-:::
-
-::: {.derivation-note}
-Orthogonale Matrizen sind wie Rotationen oder Spiegelungen: Sie verändern Längen nicht. Die eigentliche Streckung steckt vollständig in den Singulärwerten.
-:::
-
-:::
-
-## Satz: Existenz und Dimensionen
-
-::: {.svd-theorem-slide}
-
-::: {.svd-shape-row}
-::: {.shape-unit}
-::: {.shape-box .box-A}
-[A]{}
-:::
-::: {.shape-label}
-$m\times n$
-:::
-:::
-
-::: {.shape-op}
-$=$
-:::
-
-::: {.shape-unit}
-::: {.shape-box .box-U}
-[U]{}
-:::
-::: {.shape-label}
-$m\times m$
-:::
-:::
-
-::: {.shape-unit}
-::: {.shape-box .box-S}
-[Σ]{}
-:::
-::: {.shape-label}
-$m\times n$
-:::
-:::
-
-::: {.shape-unit}
-::: {.shape-box .box-V}
-[Vᵀ]{}
-:::
-::: {.shape-label}
-$n\times n$
-:::
-:::
-:::
-
-::: {.svd-theorem-text}
-::: {.theorem-left}
-**Satz (Singulärwertzerlegung).** Jede Matrix $A\in\mathbb{R}^{m\times n}$ besitzt eine Zerlegung
-
-$$
-A = U\Sigma V^T
+{\color{#16a34a}{\text{Eingaberichtungen}}}
+\rightarrow
+{\color{#f2aa00}{\text{Streckung}}}
+\rightarrow
+{\color{#1e88ff}{\text{Zielrichtungen}}}.
 $$
 
-mit **orthogonalen** $U,V$ und einer Diagonalmatrix $\Sigma$ mit
-
-$$
-\sigma_1\ge\sigma_2\ge\dots\ge 0.
-$$
-
-Die Singulärwerte $\sigma_i$ sind dabei eindeutig bestimmt.
+$V$: rechte Singulärvektoren  
+$\Sigma$: Singulärwerte  
+$U$: linke Singulärvektoren
 :::
 
-::: {.theorem-right}
-Nur die ersten $r=\operatorname{rang}(A)$ Singulärwerte sind positiv. Die übrigen Beiträge sind null.
-
-Die **reduzierte (Thin-)SVD** behält genau diese $r$ Richtungen:
-
-$$
-U_r\,(m\times r),\quad
-\Sigma_r\,(r\times r),\quad
-V_r^T\,(r\times n).
-$$
-
-Bildkompression heißt: nur die stärksten $k\le r$ behalten.
-:::
+::: {.uebergang}
+Damit bleibt die eigentliche Frage: Welche Eingaberichtung trägt am meisten Struktur?
 :::
 
 :::
 
-## Werkzeuge: orthogonale Matrizen und Eigenwerte
+## Leitfrage: Welche Richtung streckt $A$ am stärksten?
 
 ::: {.derivation-slide .two-column-derivation}
 
 ::: {.derivation-left}
-**Orthogonale Matrix.** $Q$ heißt orthogonal, wenn
+Wenn ein Bildbaustein wichtig ist, wirkt $A$ in seiner Richtung besonders stark.
+
+Für einen normierten Vektor $v$ messen wir deshalb die Länge
 
 $$
-Q^TQ = I
-\quad\Longleftrightarrow\quad
-Q^{-1}=Q^T.
+\|Av\|.
 $$
 
-Ihre Spalten sind orthonormal. Geometrisch sind das **Drehungen und Spiegelungen**: Längen und Winkel bleiben erhalten,
-
-$$
-\|Qx\| = \|x\|.
-$$
-
-Deshalb steckt in ${\color{#1e88ff}{U}}$ und ${\color{#ff3b35}{V}}$ keine Streckung, nur Richtung.
+Große Länge heißt: Diese Richtung trägt viel Energie oder Struktur im Bild.
 :::
 
 ::: {.derivation-right}
-**Eigenwert und Eigenvektor.**
+Die zentrale Herleitungsfrage lautet:
 
-$$
-A v = \lambda v,\qquad v\neq 0.
-$$
+**Welche Eingaberichtung $v$ wird durch $A$ am stärksten gestreckt?**
 
-$v$ wird durch $A$ nur gestreckt, nicht gedreht.
+Statt Eigenvektoren von $A$ zu suchen, suchen wir Richtungen, die die Streckwirkung von $A$ maximal machen.
+:::
 
-**Spektralsatz.** Eine symmetrische Matrix $S=S^T$ hat reelle Eigenwerte und eine **orthonormale** Eigenvektorbasis:
-
-$$
-S = Q\Lambda Q^T,\qquad Q\ \text{orthogonal}.
-$$
-
-Genau das wenden wir gleich auf $S=A^TA$ an.
+::: {.uebergang}
+Um diese Streckung zu berechnen, quadrieren wir die Länge. Genau dabei entsteht $A^TA$.
 :::
 
 :::
 
-## Schritt 1: Warum $A^TA$?
+## Streckung messen: Warum $A^TA$?
 
 ::: {.derivation-slide .two-column-derivation}
 
+::: {.leitfrage}
+$A^TA$ ist kein Trick — es entsteht automatisch aus der Länge von $Av$.
+:::
+
 ::: {.derivation-left}
-Wir suchen Eingaberichtungen $v_i$, die durch $A$ besonders stark oder schwach gestreckt werden.
-
-Die Länge nach der Abbildung ist
+Für einen normierten Vektor $v$ messen wir
 
 $$
-\|Av\|^2.
+\|Av\|.
 $$
 
-Das lässt sich umformen:
+Zum Rechnen quadrieren wir:
 
 $$
 \|Av\|^2
-= (Av)^T(Av)
-= v^T A^T A v.
+=(Av)^T(Av)
+=v^T{\color{#f2aa00}{A^TA}}v.
 $$
 :::
 
 ::: {.derivation-right}
-$A^TA$ ist kein Zufall: $A$ selbst ist beliebig — meist rechteckig, unsymmetrisch und nicht diagonalisierbar. Auf $A$ ist der Spektralsatz **nicht** anwendbar.
+Die Matrix $A^TA$ beschreibt also genau die Streckwirkung von $A$:
 
-$A^TA$ ist dagegen immer symmetrisch:
+$$
+v^TA^TAv=\|Av\|^2.
+$$
+
+Sie misst, wie stark eine Eingaberichtung nach der Abbildung durch $A$ wird.
+:::
+
+::: {.uebergang}
+Jetzt müssen wir prüfen: Ist $A^TA$ die symmetrische Matrix, die wir gesucht haben?
+:::
+
+:::
+
+## Warum ist $A^TA$ geeignet?
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.derivation-left}
+$A^TA$ ist symmetrisch:
 
 $$
 (A^TA)^T=A^TA.
 $$
 
-und positiv semidefinit:
+Außerdem ist $A^TA$ positiv semidefinit:
 
 $$
 v^TA^TAv=\|Av\|^2\ge 0.
 $$
 :::
 
-::: {.derivation-fullnote}
-Symmetrisch **und** positiv semidefinit heißt: der **Spektralsatz** greift auf $A^TA$ — mit reellen, nichtnegativen Eigenwerten und einer orthonormalen Eigenvektorbasis. Dieser Umweg über $A^TA$ macht die SVD für **jede** reelle $m\times n$-Matrix möglich, auch wenn $A$ selbst keine Eigenzerlegung besitzt.
+::: {.derivation-right}
+Damit greift der Spektralsatz:
+
+$$
+A^TA={\color{#16a34a}{V}}\Lambda{\color{#16a34a}{V^T}}.
+$$
+
+Die Eigenvektoren von $A^TA$ sind die rechten Singulärvektoren $v_i$.
+:::
+
+::: {.uebergang}
+Wir haben die Eingaberichtungen gefunden. Was sagen die Eigenwerte über ihre Stärke?
 :::
 
 :::
 
-## Schritt 2: Eigenzerlegung
+## Spektralsatz auf $A^TA$: rechte Singulärvektoren
 
 ::: {.derivation-slide .two-column-derivation}
 
+::: {.leitfrage}
+Die Richtungen $v_i$ kommen aus der Eigenzerlegung von $A^TA$.
+:::
+
 ::: {.derivation-left}
-Für symmetrische Matrizen gilt der **Spektralsatz**:
-
-Sie besitzen orthogonale Eigenvektoren und lassen sich diagonalisieren.
+Für jedes $v_i$ gilt
 
 $$
-A^TA =
-{\color{#ff3b35}{V}}
-\Lambda
-{\color{#ff3b35}{V^T}}.
+A^TA{\color{#16a34a}{v_i}}
+=\lambda_i{\color{#16a34a}{v_i}}.
 $$
 
-Die Spalten von $V$ sind Eigenvektoren:
+Da $A^TA$ symmetrisch ist, können die $v_i$ orthonormal gewählt werden.
+:::
+
+::: {.derivation-right}
+Diese $v_i$ sind genau die Eingaberichtungen der SVD.
+
+Sie beantworten: In welchen unabhängigen Richtungen analysieren wir die Bildmatrix?
+:::
+
+::: {.uebergang}
+Jetzt fehlt die Stärke jeder Richtung: Wie wird aus $\lambda_i$ ein Streckfaktor?
+:::
+
+:::
+
+## Eigenwerte werden Singulärwerte
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.leitfrage}
+Eigenwerte von $A^TA$ sind quadrierte Streckungen von $A$.
+:::
+
+::: {.derivation-left}
+Für normierte $v_i$ folgt
 
 $$
-A^TA{\color{#ff3b35}{v_i}}
-=
-\lambda_i{\color{#ff3b35}{v_i}}.
+\|Av_i\|^2
+=v_i^TA^TAv_i
+=v_i^T\lambda_i v_i
+=\lambda_i.
+$$
+
+Die Eigenwerte $\lambda_i$ messen also die **quadrierte** Streckung.
+:::
+
+::: {.derivation-right}
+Der Singulärwert soll der tatsächliche Streckfaktor sein. Deshalb ziehen wir die Wurzel:
+
+$$
+{\color{#f2aa00}{\sigma_i}}=\sqrt{\lambda_i}=\|Av_i\|.
+$$
+
+Sortiert wird absteigend: $\sigma_1\ge\sigma_2\ge\dots\ge0$.
+:::
+
+::: {.uebergang}
+Wir kennen Eingaberichtungen und Streckfaktoren. Es fehlen die Zielrichtungen im Bildraum.
+:::
+
+:::
+
+## Zielrichtungen $u_i$
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.leitfrage}
+Wohin zeigt die gestreckte Richtung $Av_i$?
+:::
+
+::: {.derivation-left}
+$Av_i$ liegt im Zielraum und hat Länge $\sigma_i$. Für $\sigma_i>0$ normieren wir:
+
+$$
+{\color{#1e88ff}{u_i}}
+=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}.
+$$
+
+Damit gilt die Kernbeziehung der SVD:
+
+$$
+A{\color{#16a34a}{v_i}}
+={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}.
 $$
 :::
 
 ::: {.derivation-right}
-Diese Eigenvektoren sind die Eingaberichtungen der SVD.
+Für alle $\sigma_i>0$ entstehen orthonormale Zielrichtungen $u_i$. Sie spannen den Bildraum von $A$ auf.
 
-Warum ist das nützlich?
-
-$$
-\|A v_i\|^2
-= v_i^TA^TA v_i
-= \lambda_i.
-$$
-
-Die Eigenwerte $\lambda_i$ sagen also, wie stark $A$ die Richtung $v_i$ streckt.
-:::
+Falls im Zielraum noch Richtungen fehlen, ergänzt man sie zu einer vollständigen orthonormalen Basis von $\mathbb{R}^m$.
 :::
 
-## Schritt 3: Singulärwerte
+::: {.uebergang}
+Aus diesen Einzelgleichungen entsteht jetzt die Matrixform.
+:::
+
+:::
+
+## Von Einzelgleichungen zur SVD
 
 ::: {.derivation-slide .two-column-derivation}
 
+::: {.leitfrage}
+Die SVD fällt nicht vom Himmel: Sie bündelt die Gleichungen $Av_i=\sigma_i u_i$.
+:::
+
 ::: {.derivation-left}
-Aus den Eigenwerten von $A^TA$ werden die Singulärwerte:
+Für alle Richtungen zusammen:
 
 $$
-{\color{#f2aa00}{\sigma_i}}=\sqrt{\lambda_i}.
+A{\color{#16a34a}{V}}
+=
+{\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}.
 $$
 
-Da $A^TA$ positiv semidefinit ist, gilt
-
-$$
-\lambda_i\ge 0.
-$$
-
-Also sind die Singulärwerte reell und nichtnegativ.
+$V$ ist orthogonal, also $V^{-1}=V^T$.
 :::
 
 ::: {.derivation-right}
-Sortiert wird absteigend:
-
-$$
-\sigma_1\ge\sigma_2\ge\dots\ge\sigma_r>0.
-$$
-
-Dadurch stehen die wichtigsten Muster zuerst:
-
-$$
-\Sigma =
-\begin{pmatrix}
-\sigma_1 & 0 & \dots\\
-0 & \sigma_2 & \dots\\
-\vdots & \vdots & \ddots
-\end{pmatrix}.
-$$
-:::
-
-:::
-
-## Schritt 4: Zielrichtungen $u_i$
-
-::: {.derivation-slide .two-column-derivation}
-
-::: {.derivation-left}
-Wenn $v_i$ bekannt ist, zeigt $Av_i$ in den Zielraum.
-
-Die Länge kennen wir schon:
-
-$$
-\|A v_i\| = \sigma_i.
-$$
-
-Also normieren wir:
-
-$$
-{\color{#1e88ff}{u_i}} =
-\frac{1}{\sigma_i} A{\color{#ff3b35}{v_i}}.
-$$
-:::
-
-::: {.derivation-right}
-Damit gilt
-
-$$
-A{\color{#ff3b35}{v_i}}
-=
-{\color{#f2aa00}{\sigma_i}}
-{\color{#1e88ff}{u_i}}.
-$$
-
-Alle Richtungen zusammen:
-
-$$
-A{\color{#ff3b35}{V}}
-=
-{\color{#1e88ff}{U}}
-{\color{#f2aa00}{\Sigma}}.
-$$
-
-Da $V$ orthogonal ist, gilt $V^{-1}=V^T$. Also:
+Multiplikation mit $V^T$ von rechts ergibt
 
 $$
 A =
 {\color{#1e88ff}{U}}
 {\color{#f2aa00}{\Sigma}}
-{\color{#ff3b35}{V^T}}.
+{\color{#16a34a}{V^T}}.
 $$
+
+Damit existiert die SVD für jede Matrix $A\in\mathbb{R}^{m\times n}$.
+
+Bei fehlenden Richtungen werden $U$ und $V$ zu vollständigen orthonormalen Basen ergänzt.
+:::
+
+::: {.uebergang}
+Jetzt zurück zum Einstein-Bild: Warum dürfen wir nach $k$ Beiträgen abschneiden?
+:::
+
+:::
+
+## Zurück zur Kompression: Warum abschneiden?
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.leitfrage}
+Die geordneten Singulärwerte erklären, warum wenige Beiträge oft reichen.
+:::
+
+::: {.derivation-left}
+Die Rang-$k$-Näherung behält die ersten $k$ SVD-Bausteine:
+
+$$
+A_k=\sum_{i=1}^{k}\sigma_i\,u_i\,v_i^T.
+$$
+
+Große Singulärwerte entsprechen starken Beiträgen zur Bildstruktur. Kleine Singulärwerte tragen weniger bei und können für Kompression weggelassen werden.
+:::
+
+::: {.derivation-right}
+Der Satz von **Eckart-Young-Mirsky** sagt: Dieses Abschneiden ist bezüglich der Frobenius-Norm optimal:
+
+$$
+\|A-A_k\|_F \le \|A-B\|_F
+\quad
+\text{für alle } \operatorname{rang}(B)\le k.
+$$
+
+Der Fehler ist die Energie der weggelassenen Singulärwerte:
+
+$$
+\|A-A_k\|_F^2
+=\sum_{i=k+1}^{r}\sigma_i^2.
+$$
+:::
+
+::: {.uebergang}
+Damit ist der Bogen geschlossen: Die Bildkompression funktioniert, weil die SVD die stärksten Richtungen zuerst sortiert.
 :::
 
 :::
@@ -827,7 +889,7 @@ $$
 :::
 
 ::: {.algorithm-step}
-**5.** Berechne $u_i=\frac{1}{\sigma_i}Av_i$ für $\sigma_i>0$.
+**5.** Berechne $u_i=\frac{1}{\sigma_i}Av_i$ für $\sigma_i>0$ und ergänze $U$ bei Bedarf zu einer orthonormalen Basis.
 :::
 :::
 
@@ -835,17 +897,11 @@ $$
 Für Bilder macht man das numerisch. Die Idee bleibt:
 
 $$
-\text{Richtungen finden}
+\text{Streckung messen}
 \rightarrow
-\text{Stärken sortieren}
+\text{Richtungen sortieren}
 \rightarrow
 \text{erste }k\text{ behalten}.
-$$
-
-So entsteht die Kompression:
-
-$$
-A_k=\sum_{i=1}^{k}\sigma_i u_i v_i^T.
 $$
 :::
 
@@ -907,7 +963,7 @@ $$
 A=
 \underset{\textstyle U}{\vphantom{\big|}{\color{#1e88ff}{\tfrac{1}{\sqrt5}\begin{pmatrix}2&-1\\1&2\end{pmatrix}}}}\;
 \underset{\textstyle \Sigma}{\vphantom{\big|}{\color{#f2aa00}{\begin{pmatrix}3&0\\0&2\end{pmatrix}}}}\;
-\underset{\textstyle V^T}{\vphantom{\big|}{\color{#ff3b35}{\tfrac{1}{\sqrt5}\begin{pmatrix}1&2\\-2&1\end{pmatrix}}}}
+\underset{\textstyle V^T}{\vphantom{\big|}{\color{#16a34a}{\tfrac{1}{\sqrt5}\begin{pmatrix}1&2\\-2&1\end{pmatrix}}}}
 $$
 :::
 
@@ -924,7 +980,7 @@ $$
 A=
 \underset{\textstyle U}{\color{#1e88ff}{R_{+26{,}6^\circ}}}\;
 \underset{\textstyle \Sigma}{\color{#f2aa00}{\begin{pmatrix}3&0\\0&2\end{pmatrix}}}\;
-\underset{\textstyle V^T}{\color{#ff3b35}{R_{-63{,}4^\circ}}}
+\underset{\textstyle V^T}{\color{#16a34a}{R_{-63{,}4^\circ}}}
 $$
 
 Die SVD zerlegt also jede Matrix in immer dasselbe Muster:
@@ -984,44 +1040,30 @@ Für große Bilder verwendet man meist direkte oder iterative SVD-Algorithmen, s
 
 :::
 
-## Warum Rang-$k$ optimal ist
+## Vor- und Nachteile der SVD
 
 ::: {.derivation-slide .two-column-derivation}
 
 ::: {.derivation-left}
-Wir können $A$ als Summe von Rang-1-Bausteinen schreiben und nach $k$ Termen **abschneiden**:
+**Vorteile**
 
-$$
-A_k=\sum_{i=1}^{k}\sigma_i\,u_i\,v_i^T .
-$$
-
-Aber ist dieses simple Abschneiden wirklich die *beste* Wahl? Der Satz von **Eckart-Young-Mirsky** sagt: ja. Unter **allen** Matrizen $B$ mit Rang höchstens $k$ macht $A_k$ den Fehler am kleinsten:
-
-$$
-\|A-A_k\|_F \;\le\; \|A-B\|_F
-\quad\text{für alle}\quad
-\operatorname{rang}(B)\le k.
-$$
-
-Das ist bemerkenswert: unter unendlich vielen Rang-$k$-Matrizen gewinnt ausgerechnet die abgeschnittene SVD.
+- Existiert für **jede** Matrix — auch rechteckig oder singulär.
+- **Orthonormale** Basen $U,V$ → numerisch stabil, gut konditioniert.
+- Liefert die **beste** Rang-$k$-Näherung (Eckart-Young-Mirsky).
+- Die $\sigma_i$ messen **Rang, Kondition und Wichtigkeit** der Richtungen.
 :::
 
 ::: {.derivation-right}
-Dabei misst die **Frobenius-Norm** $\|M\|_F=\sqrt{\sum_{i,j}m_{ij}^2}$ den Gesamtfehler — wie ein Abstand zwischen Matrizen.
+**Nachteile**
 
-Der Clou: der verbleibende Fehler ist **exakt** die „Energie" der weggelassenen Singulärwerte:
-
-$$
-\|A-A_k\|_F^2
-=
-\sigma_{k+1}^2+\sigma_{k+2}^2+\dots+\sigma_r^2 .
-$$
-
-Da $\sigma_1\ge\sigma_2\ge\dots\ge 0$ absteigend sortiert sind, stecken in den ersten $k$ Termen die größten Beiträge — der Rest ist nur Feinkorrektur.
+- **Teuer:** ca. $O(mn\cdot\min(m,n))$ Operationen — für sehr große Matrizen aufwändig.
+- Bei mehrfachen $\sigma_i$ **nicht eindeutig** (nur die Werte, nicht die Richtungen).
+- Zerstört **dünnbesetzte** Struktur — $U,V$ sind voll besetzt.
+- Der Weg über $A^TA$ ist **numerisch heikel**: Quadrieren verschlechtert die Kondition.
 :::
 
-::: {.derivation-fullnote}
-**Anschaulich (Ente / Einstein):** Die ersten Singulärwerte tragen die grobe Bildstruktur, die späteren nur feine Details. Sind die späteren $\sigma_i$ klein, sehen wir kaum einen Unterschied — speichern statt $m\cdot n$ Zahlen aber nur $k\,(m+n+1)$. Genau deshalb funktioniert SVD-Bildkompression.
+::: {.uebergang}
+Der letzte Punkt erklärt, warum $A^TA$ nur die **Herleitung** trägt — in der Praxis berechnet man die SVD direkt (vgl. QR-Folie).
 :::
 
 :::
