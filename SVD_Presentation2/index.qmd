@@ -134,12 +134,22 @@ $$
 ![](assets/generated/dimension_reduction.svg){.dimension-reduction fig-alt="Dimensionsreduktion: Kreis wird nach Rotation und Rang-1-Skalierung zu einer Linie"}
 :::
 
+::: {.dimension-example}
+$$
+\Sigma=\begin{pmatrix}3&0\\0&2\end{pmatrix}\binom{1}{1}=\binom{3}{2}
+\qquad\Longrightarrow\qquad
+\begin{pmatrix}3&0\\0&{\color{#ff3b35}0}\end{pmatrix}\binom{1}{1}=\binom{3}{{\color{#ff3b35}0}}
+$$
+
+Die Diagonale von $\Sigma$ enthält die **Singulärwerte** $\sigma_1=3,\ \sigma_2=2$. Den kleinsten auf ${\color{#ff3b35}0}$ setzen entfernt eine Richtung — jeder Punkt landet auf der Linie $y=0$.
+:::
+
 ::: {.dimension-text}
-Warum ist die Zerlegung nützlich, wenn eine einzige Matrix $A$ die Abbildung auch direkt beschreibt?
+In der SVD $A=U\Sigma V^T$ steckt die ganze Streckung in $\Sigma$: dort stehen die **Singulärwerte** $\sigma_1\ge\sigma_2\ge\dots\ge 0$.
 
-Der entscheidende Punkt liegt in $\Sigma$: Wenn ein Skalierungswert auf $0$ gesetzt wird, bleibt eine Richtung erhalten und die andere verschwindet.
+Sie bestimmen, wie stark jede Richtung gewichtet wird. Der **kleinste Singulärwert** $=0$ entfernt die unwichtigste Richtung — aus einer Fläche wird eine Linie.
 
-Aus einer Fläche wird eine Linie. Genau diese Idee steckt hinter Dimensionsreduktion und später hinter Bildkomprimierung.
+Genau das ist Dimensionsreduktion: kleine Singulärwerte weglassen. Dieselbe Idee trägt später die Bildkompression.
 :::
 
 :::
@@ -261,8 +271,18 @@ $=$ ein Rang-1-Beitrag
 
 ## SVD-Rang-1-Zerlegung {.rank-sum-reconstruction-slide}
 
+::: {.reconstruction-lead}
+Dieselbe Zerlegung in zwei Sichtweisen: oben als **Produkt** $A=U\Sigma V^T$, unten als **Summe** einzelner Rang-1-Beiträge $\sigma_i u_i v_i^T$.
+:::
+
 ::: {.rank-sum-reconstruction-wrap}
 ![](assets/generated/svd_rank_sum_reconstruction.svg){.rank-sum-reconstruction fig-alt="SVD als Produkt A gleich U Sigma V transponiert und als Summe von vier Rang-1-Beiträgen"}
+:::
+
+::: {.reconstruction-caption}
+${\color{#1e88ff}{u_i}}$ — Spalten von $U$ · ${\color{#f2aa00}{\sigma_i}}$ — Singulärwerte in $\Sigma$ · ${\color{#ff3b35}{v_i^T}}$ — Zeilen von $V^T$
+
+Jeder Block ${\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#ff3b35}{v_i^T}}$ unten ist eine **Rang-1-Matrix**; aufsummiert ergeben sie genau die Produktform oben.
 :::
 
 ## Bild als Matrix
@@ -296,74 +316,12 @@ Auf der nächsten Folie sieht man diese Beiträge einzeln.
 ![](assets/generated/duck_svd_first_component_layout.svg){.duck-svd-first fig-alt="Entenmatrix mit SVD-Matrizen U Sigma V transponiert und erstem Rang-1-Beitrag"}
 :::
 
-## Rang-1-Beiträge der Ente: Konzept A
+## Rang-1-Beiträge der Ente
 
 ::: {.duck-rank-terms-slide}
 
 ::: {.duck-rank-terms-visual}
-![](assets/generated/duck_rank_terms_v1.svg){.duck-rank-terms fig-alt="Drei einzelne Rang-1-Beiträge der Ente mit erklärendem Textfeld"}
-:::
-
-:::
-
-## Rang-1-Beiträge der Ente: Konzept B
-
-::: {.duck-rank-terms-slide}
-
-::: {.duck-rank-terms-visual}
-![](assets/generated/duck_rank_terms_v2.svg){.duck-rank-terms fig-alt="Drei Rang-1-Beiträge als Produkt aus Spaltenvektor, Singulärwert und Zeilenvektor"}
-:::
-
-::: {.duck-rank-terms-text}
-::: {.duck-rank-note}
-Jeder Term
-
-$$
-\sigma_i u_i v_i^T
-$$
-
-ist eine Matrix vom Rang $1$.
-:::
-
-::: {.duck-rank-note}
-Der Singulärwert $\sigma_i$ gewichtet den Beitrag. Die Vektoren $u_i$ und $v_i^T$ bestimmen das konkrete Muster.
-:::
-
-::: {.duck-rank-note}
-$$
-A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T
-$$
-
-Die Bildmatrix entsteht durch Addition dieser Rang-1-Beiträge.
-:::
-:::
-
-:::
-
-## Rang-1-Beiträge der Ente: Konzept C
-
-::: {.duck-rank-terms-slide}
-
-::: {.duck-rank-terms-visual}
-![](assets/generated/duck_rank_terms_v3.svg){.duck-rank-terms fig-alt="Einzelne Rang-1-Beiträge der Ente werden zur Rang-3-Rekonstruktion aufsummiert"}
-:::
-
-::: {.duck-rank-terms-text}
-::: {.duck-rank-note}
-Links sind die ersten drei Beiträge einzeln dargestellt. Jeder einzelne Beitrag hat Rang $1$.
-:::
-
-::: {.duck-rank-note}
-Erst durch Addition entsteht eine bessere Näherung:
-
-$$
-A_3 = \sigma_1u_1v_1^T+\sigma_2u_2v_2^T+\sigma_3u_3v_3^T.
-$$
-:::
-
-::: {.duck-rank-note}
-Diese Variante macht den Unterschied zwischen **einzelnem Beitrag** und **aufsummierter Rekonstruktion** sichtbar.
-:::
+![](assets/generated/duck_rank_terms_v3.svg){.duck-rank-terms fig-alt="Oben werden die ersten drei Rang-1-Beiträge der Ente zur Rekonstruktion A3 aufsummiert; darunter ist jeder Beitrag in Spaltenvektor u, Singulärwert sigma und Zeilenvektor v transponiert zerlegt"}
 :::
 
 :::
@@ -548,6 +506,128 @@ Orthogonale Matrizen sind wie Rotationen oder Spiegelungen: Sie verändern Läng
 
 :::
 
+## Satz: Existenz und Dimensionen
+
+::: {.svd-theorem-slide}
+
+::: {.svd-shape-row}
+::: {.shape-unit}
+::: {.shape-box .box-A}
+[A]{}
+:::
+::: {.shape-label}
+$m\times n$
+:::
+:::
+
+::: {.shape-op}
+$=$
+:::
+
+::: {.shape-unit}
+::: {.shape-box .box-U}
+[U]{}
+:::
+::: {.shape-label}
+$m\times m$
+:::
+:::
+
+::: {.shape-unit}
+::: {.shape-box .box-S}
+[Σ]{}
+:::
+::: {.shape-label}
+$m\times n$
+:::
+:::
+
+::: {.shape-unit}
+::: {.shape-box .box-V}
+[Vᵀ]{}
+:::
+::: {.shape-label}
+$n\times n$
+:::
+:::
+:::
+
+::: {.svd-theorem-text}
+::: {.theorem-left}
+**Satz (Singulärwertzerlegung).** Jede Matrix $A\in\mathbb{R}^{m\times n}$ besitzt eine Zerlegung
+
+$$
+A = U\Sigma V^T
+$$
+
+mit **orthogonalen** $U,V$ und einer Diagonalmatrix $\Sigma$ mit
+
+$$
+\sigma_1\ge\sigma_2\ge\dots\ge 0.
+$$
+
+Die Singulärwerte $\sigma_i$ sind dabei eindeutig bestimmt.
+:::
+
+::: {.theorem-right}
+Nur die ersten $r=\operatorname{rang}(A)$ Singulärwerte sind positiv. Die übrigen Beiträge sind null.
+
+Die **reduzierte (Thin-)SVD** behält genau diese $r$ Richtungen:
+
+$$
+U_r\,(m\times r),\quad
+\Sigma_r\,(r\times r),\quad
+V_r^T\,(r\times n).
+$$
+
+Bildkompression heißt: nur die stärksten $k\le r$ behalten.
+:::
+:::
+
+:::
+
+## Werkzeuge: orthogonale Matrizen und Eigenwerte
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.derivation-left}
+**Orthogonale Matrix.** $Q$ heißt orthogonal, wenn
+
+$$
+Q^TQ = I
+\quad\Longleftrightarrow\quad
+Q^{-1}=Q^T.
+$$
+
+Ihre Spalten sind orthonormal. Geometrisch sind das **Drehungen und Spiegelungen**: Längen und Winkel bleiben erhalten,
+
+$$
+\|Qx\| = \|x\|.
+$$
+
+Deshalb steckt in ${\color{#1e88ff}{U}}$ und ${\color{#ff3b35}{V}}$ keine Streckung, nur Richtung.
+:::
+
+::: {.derivation-right}
+**Eigenwert und Eigenvektor.**
+
+$$
+A v = \lambda v,\qquad v\neq 0.
+$$
+
+$v$ wird durch $A$ nur gestreckt, nicht gedreht.
+
+**Spektralsatz.** Eine symmetrische Matrix $S=S^T$ hat reelle Eigenwerte und eine **orthonormale** Eigenvektorbasis:
+
+$$
+S = Q\Lambda Q^T,\qquad Q\ \text{orthogonal}.
+$$
+
+Genau das wenden wir gleich auf $S=A^TA$ an.
+:::
+
+:::
+
 ## Schritt 1: Warum $A^TA$?
 
 ::: {.derivation-slide .two-column-derivation}
@@ -571,23 +651,23 @@ $$
 :::
 
 ::: {.derivation-right}
-Deshalb betrachten wir
+$A^TA$ ist kein Zufall: $A$ selbst ist beliebig — meist rechteckig, unsymmetrisch und nicht diagonalisierbar. Auf $A$ ist der Spektralsatz **nicht** anwendbar.
 
-$$
-A^T A.
-$$
-
-Diese Matrix ist symmetrisch:
+$A^TA$ ist dagegen immer symmetrisch:
 
 $$
 (A^TA)^T=A^TA.
 $$
 
-Außerdem ist sie positiv semidefinit:
+und positiv semidefinit:
 
 $$
 v^TA^TAv=\|Av\|^2\ge 0.
 $$
+:::
+
+::: {.derivation-fullnote}
+Symmetrisch **und** positiv semidefinit heißt: der **Spektralsatz** greift auf $A^TA$ — mit reellen, nichtnegativen Eigenwerten und einer orthonormalen Eigenvektorbasis. Dieser Umweg über $A^TA$ macht die SVD für **jede** reelle $m\times n$-Matrix möglich, auch wenn $A$ selbst keine Eigenzerlegung besitzt.
 :::
 
 :::
@@ -771,6 +851,107 @@ $$
 
 :::
 
+## Mini-Beispiel: SVD Schritt für Schritt
+
+::: {.derivation-slide .two-column-derivation}
+
+::: {.derivation-left}
+Gegeben $A=\begin{pmatrix}2&2\\-1&2\end{pmatrix}$ — hier werden $U,V$ echte Rotationen.
+
+**1.** $A^TA$ berechnen:
+
+$$
+A^TA=\begin{pmatrix}2&-1\\2&2\end{pmatrix}\!\begin{pmatrix}2&2\\-1&2\end{pmatrix}=\begin{pmatrix}5&2\\2&8\end{pmatrix}
+$$
+
+**2.** Eigenwerte aus $\det(A^TA-\lambda I)=0$:
+
+$$
+\lambda^2-13\lambda+36=0\ \Rightarrow\ \lambda_1=9,\ \lambda_2=4
+$$
+
+Eigenvektoren lösen, dann normieren:
+
+$$
+v_1=\tfrac{1}{\sqrt5}\binom{1}{2},\qquad
+v_2=\tfrac{1}{\sqrt5}\binom{-2}{1}
+$$
+
+**3.** $\sigma_i=\sqrt{\lambda_i}$: $\ \sigma_1=3,\ \sigma_2=2$.
+:::
+
+::: {.derivation-right}
+**4.** Spalten von $V$ einsetzen, $\Sigma$ diagonal:
+
+$$
+V^T=\tfrac{1}{\sqrt5}\begin{pmatrix}1&2\\-2&1\end{pmatrix},\quad
+\Sigma=\begin{pmatrix}3&0\\0&2\end{pmatrix}
+$$
+
+**5.** $u_i=\tfrac{1}{\sigma_i}Av_i$, z. B.
+
+$$
+u_1=\tfrac{1}{3}\cdot\tfrac{1}{\sqrt5}\binom{6}{3}=\tfrac{1}{\sqrt5}\binom{2}{1},\quad
+u_2=\tfrac{1}{\sqrt5}\binom{-1}{2}
+$$
+
+$$
+U=\tfrac{1}{\sqrt5}\begin{pmatrix}2&-1\\1&2\end{pmatrix}
+$$
+:::
+
+::: {.derivation-fullnote}
+**Ergebnis** — die einzelnen Matrizen der SVD:
+
+$$
+A=
+\underset{\textstyle U}{\vphantom{\big|}{\color{#1e88ff}{\tfrac{1}{\sqrt5}\begin{pmatrix}2&-1\\1&2\end{pmatrix}}}}\;
+\underset{\textstyle \Sigma}{\vphantom{\big|}{\color{#f2aa00}{\begin{pmatrix}3&0\\0&2\end{pmatrix}}}}\;
+\underset{\textstyle V^T}{\vphantom{\big|}{\color{#ff3b35}{\tfrac{1}{\sqrt5}\begin{pmatrix}1&2\\-2&1\end{pmatrix}}}}
+$$
+:::
+
+:::
+
+## Mini-Beispiel: geometrische Deutung
+
+::: {.derivation-slide .example-slide}
+
+::: {.example-left}
+Die gerade berechneten Faktoren haben eine **geometrische Bedeutung**: $U$ und $V^T$ sind beide reine **Drehungen** ($\det=1$), $\Sigma$ ist eine **Streckung** entlang der Achsen.
+
+$$
+A=
+\underset{\textstyle U}{\color{#1e88ff}{R_{+26{,}6^\circ}}}\;
+\underset{\textstyle \Sigma}{\color{#f2aa00}{\begin{pmatrix}3&0\\0&2\end{pmatrix}}}\;
+\underset{\textstyle V^T}{\color{#ff3b35}{R_{-63{,}4^\circ}}}
+$$
+
+Die SVD zerlegt also jede Matrix in immer dasselbe Muster:
+
+$$
+\text{Rotation}
+\rightarrow
+\text{Skalierung}
+\rightarrow
+\text{Rotation}.
+$$
+:::
+
+::: {.example-right}
+Mit jedem Vektor $x$ passiert nacheinander:
+
+- **$V^T$** dreht ihn um $-63{,}4^\circ$ in das Achsensystem der Singulärrichtungen.
+- **$\Sigma$** streckt entlang dieser Achsen um $\sigma_1=3$ und $\sigma_2=2$.
+- **$U$** dreht das Ergebnis um $+26{,}6^\circ$ in die endgültige Lage.
+
+Die Singulärwerte $\sigma_1=3,\ \sigma_2=2$ sind also die reinen Streckfaktoren; $U$ und $V$ liefern nur die Richtungen.
+
+Das verbindet die geometrischen Folien am Anfang mit der Bildkompression am Ende.
+:::
+
+:::
+
 ## Numerischer Bezug: QR
 
 ::: {.derivation-slide .two-column-derivation}
@@ -808,138 +989,70 @@ Für große Bilder verwendet man meist direkte oder iterative SVD-Algorithmen, s
 ::: {.derivation-slide .two-column-derivation}
 
 ::: {.derivation-left}
-Die SVD liefert nicht irgendeine Kürzung, sondern die beste Rang-$k$-Approximation.
-
-Der Satz dahinter heißt **Eckart-Young-Mirsky**:
+Wir können $A$ als Summe von Rang-1-Bausteinen schreiben und nach $k$ Termen **abschneiden**:
 
 $$
-A_k =
-\sum_{i=1}^{k}\sigma_i u_i v_i^T
+A_k=\sum_{i=1}^{k}\sigma_i\,u_i\,v_i^T .
 $$
 
-minimiert den Fehler unter allen Matrizen mit Rang höchstens $k$:
+Aber ist dieses simple Abschneiden wirklich die *beste* Wahl? Der Satz von **Eckart-Young-Mirsky** sagt: ja. Unter **allen** Matrizen $B$ mit Rang höchstens $k$ macht $A_k$ den Fehler am kleinsten:
 
 $$
-\|A-B\|_F
-\quad\text{für}\quad
+\|A-A_k\|_F \;\le\; \|A-B\|_F
+\quad\text{für alle}\quad
 \operatorname{rang}(B)\le k.
 $$
+
+Das ist bemerkenswert: unter unendlich vielen Rang-$k$-Matrizen gewinnt ausgerechnet die abgeschnittene SVD.
 :::
 
 ::: {.derivation-right}
-Der Fehler hängt direkt an den weggelassenen Singulärwerten:
+Dabei misst die **Frobenius-Norm** $\|M\|_F=\sqrt{\sum_{i,j}m_{ij}^2}$ den Gesamtfehler — wie ein Abstand zwischen Matrizen.
+
+Der Clou: der verbleibende Fehler ist **exakt** die „Energie" der weggelassenen Singulärwerte:
 
 $$
 \|A-A_k\|_F^2
 =
-\sigma_{k+1}^2+\sigma_{k+2}^2+\dots
+\sigma_{k+1}^2+\sigma_{k+2}^2+\dots+\sigma_r^2 .
 $$
 
-Deshalb funktioniert Bildkompression gut, wenn viele spätere Singulärwerte klein sind: Wir verlieren wenig sichtbare Information, sparen aber viele Daten.
+Da $\sigma_1\ge\sigma_2\ge\dots\ge 0$ absteigend sortiert sind, stecken in den ersten $k$ Termen die größten Beiträge — der Rest ist nur Feinkorrektur.
+:::
+
+::: {.derivation-fullnote}
+**Anschaulich (Ente / Einstein):** Die ersten Singulärwerte tragen die grobe Bildstruktur, die späteren nur feine Details. Sind die späteren $\sigma_i$ klein, sehen wir kaum einen Unterschied — speichern statt $m\cdot n$ Zahlen aber nur $k\,(m+n+1)$. Genau deshalb funktioniert SVD-Bildkompression.
 :::
 
 :::
 
-## Mini-Beispiel: reine Skalierung
+## Quellen {.sources-slide}
 
-::: {.derivation-slide .example-slide}
-
-::: {.example-left}
-Nehmen wir
-
-$$
-A =
-\begin{pmatrix}
-3 & 0\\
-0 & 1
-\end{pmatrix}.
-$$
-
-Dann ist
-
-$$
-A^TA =
-\begin{pmatrix}
-9 & 0\\
-0 & 1
-\end{pmatrix}.
-$$
-
-Die Eigenwerte sind $\lambda_1=9$ und $\lambda_2=1$.
+::: {.sources-list}
+- **[Bae16]** Bärwolff, G. *Numerik für Ingenieure, Physiker und Informatiker.* Springer, 2. Aufl., 2016 (Kap. 3).
+- **[Bas20]** Bashier, E. *Practical Numerical and Scientific Computing with MATLAB and Python.* CRC Press, 2020 (Kap. 1).
+- **[Kar15]** Karpfinger, C. *Höhere Mathematik in Rezepten.* Springer, 2. Aufl., 2015 (Kap. 42.3–42.4).
+- **[Kel21]** Keller, A. *Aufgaben und Lösungen zur Mathematik für den Studienstart.* Springer, 2021 (Kap. 25.8–25.9).
+- **[Kel24]** Keller, A. *Handout Eigenwerte, Spektralsatz, Singular Value Decomposition und Least-Squares.* THWS, 2024.
+- **[Mol04]** Moler, C. B. *Numerical Computing with MATLAB.* SIAM, 2004 (Kap. 10.1–10.4 und 10.11).
+- **[TB22]** Trefethen, L. und Bau, D. *Numerical Linear Algebra.* SIAM, 2022.
+- **[Str10]** Strang, G. *Wissenschaftliches Rechnen.* Springer, 2010 (Kap. 1).
 :::
 
-::: {.example-right}
-Also sind die Singulärwerte
+## Eigenständigkeitserklärung {.ai-declaration-slide}
 
-$$
-\sigma_1=3,\qquad \sigma_2=1.
-$$
-
-Die Eigenvektoren sind
-
-$$
-v_1=\begin{pmatrix}1\\0\end{pmatrix},
-\qquad
-v_2=\begin{pmatrix}0\\1\end{pmatrix}.
-$$
-
-Damit ist
-
-$$
-U=I,\qquad
-\Sigma=
-\begin{pmatrix}3&0\\0&1\end{pmatrix},
-\qquad
-V^T=I.
-$$
+::: {.ai-decl-intro}
+Bei der Erstellung dieser Themenausarbeitung wurden KI-gestützte Werkzeuge gemäß der KI-Leitlinie Hochschullehre Bayern wie folgt eingesetzt:
 :::
 
+::: {.ai-decl-table}
+| KI-Werkzeug | Einsatzzweck |
+|---|---|
+| Claude (Anthropic) | Strukturierung und sprachliche Überarbeitung der Folien |
+| Claude (Anthropic) | Erzeugung der Python-Skripte für die generierten Visualisierungen |
+| Claude (Anthropic) | Unterstützung bei der Python-Implementierung der SVD-Bildkompression |
 :::
 
-## Mini-Beispiel mit Rotation
-
-::: {.derivation-slide .example-slide}
-
-::: {.example-left}
-Wenn wir vor und nach der Skalierung drehen, wirkt die Matrix komplizierter:
-
-$$
-A =
-{\color{#1e88ff}{R_{-45^\circ}}}
-\begin{pmatrix}
-3&0\\
-0&1
-\end{pmatrix}
-{\color{#ff3b35}{R_{-90^\circ}}}.
-$$
-
-Die SVD erkennt trotzdem:
-
-$$
-\text{Rotation}
-\rightarrow
-\text{Skalierung}
-\rightarrow
-\text{Rotation}.
-$$
-:::
-
-::: {.example-right}
-Die Singulärwerte bleiben
-
-$$
-\sigma_1=3,\qquad \sigma_2=1.
-$$
-
-Was sich ändert, sind die Richtungen:
-
-$$
-V^T=R_{-90^\circ},
-\qquad
-U=R_{-45^\circ}.
-$$
-
-Das verbindet die geometrischen Folien am Anfang mit der Bildkompression am Ende.
-:::
-
+::: {.ai-decl-statement}
+Die durch die KI-Werkzeuge erzeugten Inhalte wurden von uns kritisch geprüft, überarbeitet und auf fachliche Richtigkeit kontrolliert. Die Verantwortung für sämtliche Inhalte dieser Arbeit liegt vollständig bei den Autorinnen und Autoren.
 :::

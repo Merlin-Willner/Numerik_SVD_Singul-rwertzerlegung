@@ -355,6 +355,24 @@ def save_step_actions():
     plt.close(fig)
 
 
+def draw_small_matrix(ax, cx, cy, entries, color=INK, fontsize=11):
+    """Zeichnet eine 2x2-Matrix mit eckigen Klammern (mathtext kann keine pmatrix)."""
+    (a, b), (c, d) = entries
+    colx, rowy = 0.30, 0.20
+    for (ex, ey, txt) in (
+        (cx - colx, cy + rowy, a),
+        (cx + colx, cy + rowy, b),
+        (cx - colx, cy - rowy, c),
+        (cx + colx, cy - rowy, d),
+    ):
+        ax.text(ex, ey, txt, ha="center", va="center", fontsize=fontsize, color=color)
+    bx, by, tick, lw = colx + 0.26, rowy + 0.16, 0.07, 1.4
+    for sx, tdir in ((cx - bx, 1), (cx + bx, -1)):
+        ax.plot([sx, sx], [cy - by, cy + by], color=color, lw=lw, solid_capstyle="round")
+        ax.plot([sx, sx + tdir * tick], [cy + by, cy + by], color=color, lw=lw, solid_capstyle="round")
+        ax.plot([sx, sx + tdir * tick], [cy - by, cy - by], color=color, lw=lw, solid_capstyle="round")
+
+
 def save_svd_bridge():
     matrices = [
         np.eye(2),
@@ -373,13 +391,14 @@ def save_svd_bridge():
         sub = ax.inset_axes([x / 7.2, 0.51, 0.19, 0.37])
         draw_shape(sub, matrix=matrix)
 
+    # (Farbe, Pfeil-Label = SVD-Faktor, Box-Notation, Matrix-Eintraege, Schriftgroesse der Matrix)
     actions = [
-        (SVDRED, r"$V^T$", r"$R_{-90^\circ}$"),
-        (YELLOW, r"$\Sigma$", r"$\mathrm{diag}(0.45,1)$"),
-        (SVDBLUE, r"$U$", r"$R_{-45^\circ}$"),
+        (SVDRED, r"$V^T$", r"$R_{-90^\circ}$", ((r"$0$", r"$1$"), (r"$-1$", r"$0$")), 11),
+        (YELLOW, r"$\Sigma$", r"$\Sigma$", ((r"$0.45$", r"$0$"), (r"$0$", r"$1$")), 11),
+        (SVDBLUE, r"$U$", r"$R_{-45^\circ}$", ((r"$0.71$", r"$0.71$"), (r"$-0.71$", r"$0.71$")), 9.5),
     ]
 
-    for i, (color, label, matrix_label) in enumerate(actions):
+    for i, (color, arrow_label, box_label, entries, mfs) in enumerate(actions):
         ax.add_patch(
             FancyArrowPatch(
                 (xs[i] + 1.32, 3.05),
@@ -391,20 +410,20 @@ def save_svd_bridge():
             )
         )
         mid = (xs[i] + xs[i + 1] + 1.24) / 2
-        ax.text(mid, 3.42, label, ha="center", va="center", fontsize=17, color=color)
+        ax.text(mid, 3.42, arrow_label, ha="center", va="center", fontsize=17, color=color)
 
         box = FancyBboxPatch(
-            (mid - 0.72, 0.30),
-            1.44,
-            0.92,
+            (mid - 0.74, 0.05),
+            1.48,
+            1.30,
             boxstyle="round,pad=0.035,rounding_size=0.045",
             linewidth=1.6,
             edgecolor=color,
             facecolor="none",
         )
         ax.add_patch(box)
-        ax.text(mid, 0.96, label, ha="center", va="center", fontsize=16, color=color)
-        ax.text(mid, 0.58, matrix_label, ha="center", va="center", fontsize=13, color=INK)
+        ax.text(mid, 1.06, box_label, ha="center", va="center", fontsize=15, color=color)
+        draw_small_matrix(ax, mid, 0.46, entries, color=INK, fontsize=mfs)
 
     fig.savefig(OUT_DIR / "svd_bridge.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
@@ -691,31 +710,54 @@ def save_duck_rank_terms():
     fig.savefig(OUT_DIR / "duck_rank_terms_v2.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
 
-    # Variante C: einzelne Beiträge gegen aufsummierte Rekonstruktion.
-    fig, ax = plt.subplots(figsize=(12.0, 4.55))
+    # Variante C: je Beitrag das Bild und direkt darunter die Zerlegung sigma * u(Spalte) * v^T(Zeile).
+    fig, ax = plt.subplots(figsize=(12.0, 5.0))
     ax.set_xlim(0, 12.0)
-    ax.set_ylim(0, 4.55)
+    ax.set_ylim(0, 5.0)
     ax.axis("off")
 
-    ax.text(0.45, 4.12, "Einzeln sind es Rang-1-Muster; durch Addition entsteht die Rekonstruktion", ha="left", va="center", fontsize=17, color=INK)
-    for idx, x in enumerate([0.58, 2.58, 4.58]):
-        draw_component(ax, idx, x, 3.30, cell=0.063, label=False)
-        ax.text(x + 0.42, 1.88, rf"$\sigma_{idx + 1}u_{idx + 1}v_{idx + 1}^T$", ha="center", va="center", fontsize=12, color=INK)
-        ax.text(x + 0.42, 1.62, "Rang 1", ha="center", va="center", fontsize=12, color=MUTED)
-        if idx < 2:
-            ax.text(x + 1.42, 2.52, "+", ha="center", va="center", fontsize=24, color=MUTED)
+    contrib_x = [0.50, 2.65, 4.80]
 
-    ax.text(6.55, 2.52, r"$\longrightarrow$", ha="center", va="center", fontsize=30, color=INK)
+    ax.text(0.45, 4.80, r"Jeder Rang-1-Beitrag: das Bild und direkt darunter die Zerlegung $\sigma_i\, u_i\, v_i^{T}$", ha="left", va="center", fontsize=15, color=INK)
+
+    for idx, x in enumerate(contrib_x):
+        color = accents[idx]
+        ax.add_patch(FancyBboxPatch((x - 0.05, 1.45), 1.95, 3.02, boxstyle="round,pad=0.03,rounding_size=0.05", linewidth=1.6, edgecolor=color, facecolor="none"))
+        # Name des Beitrags (oben)
+        ax.text(x + 0.90, 4.28, rf"$\sigma_{idx + 1}u_{idx + 1}v_{idx + 1}^T$", ha="center", va="center", fontsize=13, color=INK)
+        # Bild (Rang-1-Matrix)
+        draw_component(ax, idx, x + 0.60, 4.05, cell=0.046, label=False)
+        # Zerlegung darunter: Reihenfolge u(Spalte) * sigma * v^T(Zeile) -- wie A = U Sigma V^T
+        ymid = 2.45
+        # Spalte u_i (senkrecht, um ymid zentriert)
+        draw_vector(ax, u[:, idx], x + 0.14, ymid + 0.60, 0.10, 0.092, True, SVDBLUE)
+        ax.text(x + 0.19, ymid - 0.78, rf"$u_{idx + 1}$", ha="center", va="center", fontsize=11, color=SVDBLUE)
+        ax.text(x + 0.43, ymid, r"$\cdot$", ha="center", va="center", fontsize=15, color=MUTED)
+        # Singulaerwert sigma_i (Mitte)
+        ax.text(x + 0.66, ymid + 0.13, rf"$\sigma_{idx + 1}$", ha="center", va="center", fontsize=14, color=YELLOW)
+        ax.text(x + 0.66, ymid - 0.23, f"{singular_values[idx]:.0f}", ha="center", va="center", fontsize=10, color=MUTED)
+        ax.text(x + 0.92, ymid, r"$\cdot$", ha="center", va="center", fontsize=15, color=MUTED)
+        # Zeile v_i^T (waagerecht, um ymid zentriert)
+        draw_vector(ax, vt[idx, :], x + 1.02, ymid + 0.045, 0.055, 0.088, False, SVDRED)
+        ax.text(x + 1.38, ymid - 0.30, rf"$v_{idx + 1}^{{T}}$", ha="center", va="center", fontsize=11, color=SVDRED)
+
+    # Summation rechts (auf Hoehe der Bilder)
+    ax.text(2.47, 4.02, "+", ha="center", va="center", fontsize=18, color=MUTED)
+    ax.text(4.62, 4.02, "+", ha="center", va="center", fontsize=18, color=MUTED)
+    ax.text(6.95, 4.02, r"$\longrightarrow$", ha="center", va="center", fontsize=24, color=INK)
     cumulative = np.zeros_like(values)
     for idx in range(3):
         cumulative += singular_values[idx] * np.outer(u[:, idx], vt[idx, :])
-    draw_pixel_grid(cumulative, 7.20, 3.38, 0.073, stroke="#444", normalize=False)
-    ax.text(8.16, 1.58, r"$A_3=\sum_{i=1}^{3}\sigma_i u_i v_i^T$", ha="center", va="center", fontsize=14, color=INK)
-    ax.text(8.16, 1.08, "Summe der ersten 3", ha="center", va="center", fontsize=12, color=MUTED)
+    draw_pixel_grid(cumulative, 7.40, 4.35, 0.052, stroke="#444", normalize=False)
+    ax.text(7.74, 3.50, r"$A_3=\sum_{i=1}^{3}\sigma_i u_i v_i^T$", ha="center", va="center", fontsize=11, color=INK)
+    draw_pixel_grid(values, 9.55, 4.35, 0.052, stroke="#444", normalize=False)
+    ax.text(9.89, 3.50, "Original", ha="center", va="center", fontsize=12, color=INK)
 
-    draw_pixel_grid(values, 10.15, 3.38, 0.073, stroke="#444", normalize=False)
-    ax.text(11.11, 1.58, "Original", ha="center", va="center", fontsize=15, color=INK)
-    ax.text(11.11, 1.08, "volle Matrix", ha="center", va="center", fontsize=12, color=MUTED)
+    # Erklaerung rechts unten
+    ax.text(7.05, 2.95, r"Der Singulärwert $\sigma_i$ gewichtet den", ha="left", va="top", fontsize=11.5, color=INK)
+    ax.text(7.05, 2.62, r"Beitrag; $u_i$ und $v_i^{T}$ geben das Muster.", ha="left", va="top", fontsize=11.5, color=INK)
+    ax.text(7.05, 2.12, r"Je größer $\sigma_i$, desto stärker prägt", ha="left", va="top", fontsize=11, color=MUTED)
+    ax.text(7.05, 1.84, r"der Beitrag das Bild.", ha="left", va="top", fontsize=11, color=MUTED)
     fig.savefig(OUT_DIR / "duck_rank_terms_v3.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
 
@@ -880,9 +922,9 @@ def save_svd_rank_sum_reconstruction():
     ax.set_ylim(0, 7.3)
     ax.axis("off")
 
-    blue = "#1495e8"
-    sigma_red = "#ff341b"
-    green = "#49c52b"
+    blue = SVDBLUE      # U   – Deck-Farbschema
+    sigma_red = YELLOW  # Σ   – Deck-Farbschema
+    green = SVDRED      # V^T – Deck-Farbschema
     grid = "#666666"
 
     def rect(x, y, w, h, fill="none", edge=INK, lw=1.6):
@@ -957,8 +999,9 @@ def save_svd_rank_sum_reconstruction():
 
 def save_intro_symbols():
     fig, ax = plt.subplots(figsize=(4.3, 4.0))
-    ax.set_xlim(0, 4.3)
+    ax.set_xlim(-1.15, 4.3)
     ax.set_ylim(0, 4.0)
+    ax.set_aspect("equal")
     ax.axis("off")
 
     ax.add_patch(Arc((1.72, 2.42), 1.72, 1.72, theta1=28, theta2=318, linewidth=4.6, color=INK))
@@ -974,8 +1017,8 @@ def save_intro_symbols():
     )
     ax.add_patch(FancyArrowPatch((0.55, 0.72), (3.55, 0.72), arrowstyle="<|-|>", mutation_scale=22, linewidth=4.8, color=INK))
     ax.add_patch(FancyArrowPatch((3.70, 0.95), (3.70, 3.35), arrowstyle="<|-|>", mutation_scale=22, linewidth=4.8, color=INK))
-    ax.text(0.78, 0.18, "Rotieren", fontsize=15, color=MUTED)
-    ax.text(2.35, 0.18, "Skalieren", fontsize=15, color=MUTED)
+    ax.text(-1.05, 2.42, "Rotieren", fontsize=15, color=MUTED, ha="left", va="center")
+    ax.text(2.05, 0.18, "Skalieren", fontsize=15, color=MUTED, ha="center")
 
     fig.savefig(OUT_DIR / "intro_transform_symbols.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
