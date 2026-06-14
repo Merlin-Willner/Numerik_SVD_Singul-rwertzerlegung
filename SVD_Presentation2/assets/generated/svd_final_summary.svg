@@ -36,7 +36,7 @@
   </g>
 
   <path class="arrow" d="M216 151 L262 151"/>
-  <text class="serif muted" x="207" y="125" font-size="13">Muster suchen</text>
+  <text class="serif muted" x="224" y="128" font-size="11">suchen</text>
 
   <!-- Block 2 -->
   <g transform="translate(276 72)">
@@ -53,7 +53,7 @@
   </g>
 
   <path class="arrow" d="M468 151 L514 151"/>
-  <text class="serif muted" x="461" y="125" font-size="13">vᵢ, σᵢ, uᵢ</text>
+  <text class="serif muted" x="476" y="128" font-size="11">vᵢ, σᵢ, uᵢ</text>
 
   <!-- Block 3 -->
   <g transform="translate(528 72)">
@@ -66,7 +66,7 @@
   </g>
 
   <path class="arrow" d="M738 151 L784 151"/>
-  <text class="serif muted" x="746" y="125" font-size="13">addieren</text>
+  <text class="serif muted" x="743" y="128" font-size="11">addieren</text>
 
   <!-- Block 4 -->
   <g transform="translate(798 72)">
@@ -83,7 +83,8 @@
   </g>
 
   <path class="arrow" d="M996 151 L1042 151"/>
-  <text class="serif muted" x="992" y="125" font-size="13">bei k abschneiden</text>
+  <text class="serif muted" x="1005" y="122" font-size="10">bei k</text>
+  <text class="serif muted" x="994" y="136" font-size="10">schneiden</text>
 
   <!-- Block 5 -->
   <g transform="translate(1050 72)">
