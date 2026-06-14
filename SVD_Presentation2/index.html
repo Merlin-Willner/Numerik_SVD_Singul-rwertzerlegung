@@ -448,504 +448,610 @@ A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 </div>
 </div>
 </section>
-<section id="was-haben-wir-gerade-benutzt" class="slide level2">
-<h2>Was haben wir gerade benutzt?</h2>
-<div class="svd-question-slide">
-<div class="svd-question-left">
-<p>Beim Einstein-Bild haben wir gesehen: Schon wenige Rang-1-Beiträge liefern eine erkennbare Rekonstruktion.</p>
-<p>Damit das sinnvoll ist, müssen diese Beiträge nach Wichtigkeit sortiert sein:</p>
-<p><span class="math display">\[
-A_k =
-\sum_{i=1}^{k}
-{\color{#f2aa00}{\sigma_i}}\,
-{\color{#1e88ff}{u_i}}\,
-{\color{#16a34a}{v_i^T}}.
-\]</span></p>
-<p>Genau das leistet die SVD: Sie liefert geordnete Bildbausteine.</p>
-</div>
-<div class="svd-question-right">
-<div class="mini-example">
-<p>Jetzt klären wir, warum diese Zerlegung für eine beliebige Bildmatrix existiert und wie ihre Bausteine entstehen.</p>
-</div>
-<div class="big-question">
-<p>Woher kommen <span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>, <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> und <span class="math inline">\({\color{#16a34a}{v_i}}\)</span>?</p>
-<p>Warum sind die ersten Beiträge die wichtigsten?</p>
-<p>Warum dürfen kleine Beiträge weggelassen werden?</p>
-<p>Warum funktioniert das bei einer beliebigen Bildmatrix?</p>
-</div>
-</div>
-<div class="uebergang">
-<p>Dazu schauen wir zuerst auf das Objekt selbst: Was ist an einer Bildmatrix schwierig?</p>
-</div>
-</div>
-</section>
-<section id="das-problem-eine-bildmatrix-ist-beliebig" class="slide level2">
-<h2>Das Problem: Eine Bildmatrix ist beliebig</h2>
+<section id="was-war-beim-einstein-bild-überraschend" class="slide level2">
+<h2>Was war beim Einstein-Bild überraschend?</h2>
 <div class="derivation-slide two-column-derivation">
 <div class="derivation-left">
-<p>Ein Graustufenbild ist eine Matrix</p>
-<p><span class="math display">\[
-A\in\mathbb{R}^{m\times n}.
-\]</span></p>
-<p>Aber im Allgemeinen gilt</p>
-<p><span class="math display">\[
-A^T\neq A
-\qquad\text{und oft auch}\qquad
-m\neq n.
-\]</span></p>
-</div>
-<div class="derivation-right">
-<p>Eine Bildmatrix ist also im Allgemeinen <strong>nicht symmetrisch</strong>.</p>
-<p>Bei rechteckigen Bildern ist sie nicht einmal quadratisch.</p>
-<p>Deshalb können wir den Spektralsatz nicht direkt auf <span class="math inline">\(A\)</span> anwenden.</p>
-</div>
-<div class="uebergang">
-<p>Trotzdem suchen wir genau das, was Eigenwertzerlegungen gut können: Richtungen und Gewichtungen.</p>
-</div>
-</div>
-</section>
-<section id="warum-reichen-bekannte-zerlegungen-nicht-direkt" class="slide level2">
-<h2>Warum reichen bekannte Zerlegungen nicht direkt?</h2>
-<div class="compare-slide">
-<div class="compare-grid">
-<div class="compare-col">
-<p><span class="compare-name">Diagonalisierung</span></p>
-<p><span class="math display">\[
-A=PDP^{-1}
-\]</span></p>
-<p>Zerlegt in Basiswechsel, Skalierung, Rückwechsel.</p>
-<p>Aber: nur quadratisch, nicht immer diagonalisierbar, Eigenvektoren nicht immer orthogonal.</p>
-</div>
-<div class="compare-col">
-<p><span class="compare-name">Spektralsatz</span></p>
-<p><span class="math display">\[
-S=Q\Lambda Q^T
-\]</span></p>
-<p>Liefert orthogonale Richtungen und reelle Gewichtungen.</p>
-<p>Aber: nur für symmetrische Matrizen <span class="math inline">\(S=S^T\)</span>.</p>
-</div>
-<div class="compare-col is-svd">
-<p><span class="compare-name">Gesucht</span></p>
-<p>Eine Zerlegung für jede Bildmatrix.</p>
-<p>Sie soll orthogonale Richtungen liefern, Beiträge nach Wichtigkeit sortieren und Rang-<span class="math inline">\(k\)</span>-Näherungen ermöglichen.</p>
-</div>
-</div>
-<div class="compare-note">
-<p>Der Spektralsatz wäre ideal, weil er orthogonale Richtungen und klare Gewichtungen liefert. Aber unsere Bildmatrix <span class="math inline">\(A\)</span> ist nicht symmetrisch. Also müssen wir eine symmetrische Matrix aus <span class="math inline">\(A\)</span> bauen, die trotzdem die Wirkung von <span class="math inline">\(A\)</span> beschreibt.</p>
-</div>
-</div>
-</section>
-<section id="was-muss-die-gesuchte-zerlegung-leisten" class="slide level2">
-<h2>Was muss die gesuchte Zerlegung leisten?</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="leitfrage">
-<p>Für Bildkompression brauchen wir geordnete Bausteine für <strong>jede</strong> Matrix <span class="math inline">\(A\in\mathbb{R}^{m\times n}\)</span>.</p>
-</div>
-<div class="derivation-left">
-<p>Die Zerlegung soll:</p>
+<p>Beim Einstein-Bild haben wir gesehen:</p>
 <ul>
-<li>für jede Matrix funktionieren,</li>
-<li>orthogonale Richtungen liefern,</li>
-<li>Beiträge nach Wichtigkeit sortieren,</li>
-<li>eine Rang-<span class="math inline">\(k\)</span>-Näherung ermöglichen.</li>
+<li>Schon wenige Terme liefern eine erkennbare Rekonstruktion.</li>
+<li>Viele Bildinformationen können weggelassen werden.</li>
+<li>Trotzdem bleibt die grobe Struktur des Bildes erhalten.</li>
 </ul>
-</div>
-<div class="derivation-right">
-<p>Die Zielstruktur ist</p>
 <p><span class="math display">\[
-A =
-{\color{#1e88ff}{U}}\,
-{\color{#f2aa00}{\Sigma}}\,
-{\color{#16a34a}{V^T}}.
-\]</span></p>
-<p>In Wirkungsreihenfolge:</p>
-<p><span class="math display">\[
-{\color{#16a34a}{\text{Eingaberichtungen}}}
-\rightarrow
-{\color{#f2aa00}{\text{Streckung}}}
-\rightarrow
-{\color{#1e88ff}{\text{Zielrichtungen}}}.
-\]</span></p>
-<p><span class="math inline">\(V\)</span>: rechte Singulärvektoren<br>
-<span class="math inline">\(\Sigma\)</span>: Singulärwerte<br>
-<span class="math inline">\(U\)</span>: linke Singulärvektoren</p>
-</div>
-<div class="uebergang">
-<p>Damit bleibt die eigentliche Frage: Welche Eingaberichtung trägt am meisten Struktur?</p>
-</div>
-</div>
-</section>
-<section id="leitfrage-welche-richtung-streckt-a-am-stärksten" class="slide level2">
-<h2>Leitfrage: Welche Richtung streckt <span class="math inline">\(A\)</span> am stärksten?</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="derivation-left">
-<p>Wenn ein Bildbaustein wichtig ist, wirkt <span class="math inline">\(A\)</span> in seiner Richtung besonders stark.</p>
-<p>Für einen normierten Vektor <span class="math inline">\(v\)</span> messen wir deshalb die Länge</p>
-<p><span class="math display">\[
-\|Av\|.
-\]</span></p>
-<p>Große Länge heißt: Diese Richtung trägt viel Energie oder Struktur im Bild.</p>
-</div>
-<div class="derivation-right">
-<p>Die zentrale Herleitungsfrage lautet:</p>
-<p><strong>Welche Eingaberichtung <span class="math inline">\(v\)</span> wird durch <span class="math inline">\(A\)</span> am stärksten gestreckt?</strong></p>
-<p>Statt Eigenvektoren von <span class="math inline">\(A\)</span> zu suchen, suchen wir Richtungen, die die Streckwirkung von <span class="math inline">\(A\)</span> maximal machen.</p>
-</div>
-<div class="uebergang">
-<p>Um diese Streckung zu berechnen, quadrieren wir die Länge. Genau dabei entsteht <span class="math inline">\(A^TA\)</span>.</p>
-</div>
-</div>
-</section>
-<section id="streckung-messen-warum-ata" class="slide level2">
-<h2>Streckung messen: Warum <span class="math inline">\(A^TA\)</span>?</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="leitfrage">
-<p><span class="math inline">\(A^TA\)</span> ist kein Trick — es entsteht automatisch aus der Länge von <span class="math inline">\(Av\)</span>.</p>
-</div>
-<div class="derivation-left">
-<p>Für einen normierten Vektor <span class="math inline">\(v\)</span> messen wir</p>
-<p><span class="math display">\[
-\|Av\|.
-\]</span></p>
-<p>Zum Rechnen quadrieren wir:</p>
-<p><span class="math display">\[
-\|Av\|^2
-=(Av)^T(Av)
-=v^T{\color{#f2aa00}{A^TA}}v.
+A_k=\sum_{i=1}^{k}{\color{#f2aa00}{\sigma_i}}\,{\color{#1e88ff}{u_i}}\,{\color{#16a34a}{v_i^T}}
 \]</span></p>
 </div>
 <div class="derivation-right">
-<p>Die Matrix <span class="math inline">\(A^TA\)</span> beschreibt also genau die Streckwirkung von <span class="math inline">\(A\)</span>:</p>
-<p><span class="math display">\[
-v^TA^TAv=\|Av\|^2.
-\]</span></p>
-<p>Sie misst, wie stark eine Eingaberichtung nach der Abbildung durch <span class="math inline">\(A\)</span> wird.</p>
-</div>
-<div class="uebergang">
-<p>Jetzt müssen wir prüfen: Ist <span class="math inline">\(A^TA\)</span> die symmetrische Matrix, die wir gesucht haben?</p>
+<p>Dabei behalten wir nur die ersten <span class="math inline">\(k\)</span> Bildbausteine.</p>
+<p>Das funktioniert nur, wenn die Bausteine vorher nach Wichtigkeit geordnet wurden: Die ersten Bausteine müssen die stärksten Bildanteile enthalten.</p>
+<p><strong>Wie findet die SVD solche wichtigen Bausteine?</strong></p>
 </div>
 </div>
 </section>
-<section id="warum-ist-ata-geeignet" class="slide level2">
-<h2>Warum ist <span class="math inline">\(A^TA\)</span> geeignet?</h2>
+<section id="ein-bild-als-summe-einfacher-bausteine" class="slide level2">
+<h2>Ein Bild als Summe einfacher Bausteine</h2>
 <div class="derivation-slide two-column-derivation">
 <div class="derivation-left">
-<p><span class="math inline">\(A^TA\)</span> ist symmetrisch:</p>
+<p>Ein Bild als Matrix <span class="math inline">\(A\in\mathbb{R}^{m\times n}\)</span> enthält <span class="math inline">\(m\cdot n\)</span> Pixelwerte.</p>
+<p>Für Kompression wollen wir das Bild nicht als einzelne Pixelwerte betrachten, sondern als Summe einfacher Bildanteile:</p>
+<p><span class="math display">\[
+A\approx B_1+B_2+\dots+B_k.
+\]</span></p>
+</div>
+<div class="derivation-right">
+<p>Dabei soll gelten:</p>
+<ul>
+<li><span class="math inline">\(B_1\)</span>: wichtigster grober Bildanteil</li>
+<li><span class="math inline">\(B_2\)</span>: nächster wichtiger Anteil</li>
+<li><span class="math inline">\(\dots\)</span></li>
+<li>nach <span class="math inline">\(k\)</span> Anteilen stoppen wir</li>
+</ul>
+<p>Jeder Baustein soll also eine einfache Struktur erklären: zuerst grobe, starke Anteile, später feinere Details.</p>
+<p><strong>Was steckt in einem einzelnen solchen Baustein?</strong></p>
+</div>
+<p><img data-src="assets/generated/svd_building_block_example.svg" class="svd-block-example" alt="Grafisches Beispiel fuer mehrere SVD-Bildbausteine und ihre ueberlagerte Summe"></p>
+</div>
+</section>
+<section id="was-steckt-in-einem-einzelnen-svd-baustein" class="slide level2">
+<h2>Was steckt in einem einzelnen SVD-Baustein?</h2>
+<div class="svd-single-block-slide">
+<div class="svd-single-intro">
+<p>Wir greifen den wichtigsten Baustein aus der vorherigen Folie heraus: den vertikalen Anteil.</p>
+</div>
+<div class="svd-single-meta">
+<p>Für das Prinzip verwenden wir hier den kleinen Baustein aus Folie 17. Beim echten Bild hätten <span class="math inline">\(u_i\)</span> und <span class="math inline">\(v_i\)</span> entsprechend viele Einträge wie Bildzeilen und Bildspalten.</p>
+</div>
+<p><img data-src="assets/generated/svd_single_block_decomposition.svg" class="svd-single-block" alt="Zerlegung eines einzelnen SVD-Bildbausteins in u1, v1 transponiert und sigma1"></p>
+<div class="svd-single-hint">
+<p>Zur Veranschaulichung verwenden wir hier 0/1-Werte. In der echten SVD sind <span class="math inline">\(u_i\)</span> und <span class="math inline">\(v_i\)</span> normierte Vektoren.</p>
+</div>
+<div class="svd-single-note">
+<p><span class="math inline">\(u_1v_1^T\)</span> legt die <strong>Form</strong> fest. <span class="math inline">\(\sigma_1\)</span> legt die <strong>Stärke</strong> fest.</p>
+<p>Die nächste Frage ist: Welche dieser Bausteine sind stark genug, um zuerst gespeichert zu werden?</p>
+</div>
+</div>
+</section>
+<section id="wie-vermeiden-wir-doppelte-muster" class="slide level2">
+<h2>Wie vermeiden wir doppelte Muster?</h2>
+<div class="derivation-slide two-column-derivation">
+<div class="derivation-left">
+<p>Jede Schicht soll einen eigenen Anteil des Bildes erklären. Wenn zwei Schichten fast dasselbe Muster enthalten, wäre die Zerlegung redundant: dieselbe Struktur würde mehrfach gespeichert.</p>
+<p><img data-src="assets/generated/orthogonal_layers_example.svg" class="orthogonal-layers-example" alt="Zwei fast gleiche Bildbausteine werden vermieden; unterschiedliche Muster bringen neue Information"></p>
+<p>Für Kompression wollen wir aber, dass jeder gespeicherte Baustein wirklich neue Information bringt.</p>
+</div>
+<div class="derivation-right">
+<p>Mathematisch heißt das:</p>
+<p><span class="math display">\[
+{\color{#16a34a}{v_i^Tv_j}}=0
+\quad\text{für } i\neq j,
+\]</span></p>
+<p>Die Muster über die Spalten haben keinen gemeinsamen Anteil im Sinne des Skalarprodukts.</p>
+<p><span class="math display">\[
+{\color{#1e88ff}{u_i^Tu_j}}=0
+\quad\text{für } i\neq j.
+\]</span></p>
+<p>Die Höhenverteilungen haben keinen gemeinsamen Anteil.</p>
+</div>
+<div class="uebergang">
+<p>Orthogonal heißt hier nicht räumlich getrennt. Die Schichten können an denselben Bildstellen wirken. Orthogonal heißt: Als normierte Vektoren enthalten sie keine gemeinsame Richtung, deshalb zählt man dieselbe Struktur nicht doppelt. <strong>Jeder Baustein bringt eine neue unabhängige Bildschicht.</strong></p>
+<p><strong>Wie finden wir nun starke Muster, die gleichzeitig unabhängig sind?</strong></p>
+</div>
+</div>
+</section>
+<section id="wie-finden-wir-starke-und-unabhängige-muster" class="slide level2">
+<h2>Wie finden wir starke und unabhängige Muster?</h2>
+<div class="derivation-slide two-column-derivation">
+<div class="derivation-left">
+<p>Aus den letzten Folien wissen wir: Ein guter SVD-Baustein soll zwei Bedingungen erfüllen:</p>
+<ol type="1">
+<li><strong>stark:</strong><br>
+Er soll viel sichtbare Bildinformation erklären.</li>
+<li><strong>unabhängig:</strong><br>
+Er soll nicht dasselbe Muster speichern wie ein anderer Baustein.</li>
+</ol>
+</div>
+<div class="derivation-right">
+<p>Ein kompletter Baustein hat die Form</p>
+<p><span class="math display">\[
+{\color{#f2aa00}{B_i}}
+=
+{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
+\]</span></p>
+<p>Um ihn zu finden, starten wir mit einem Teil davon:</p>
+<p><span class="math display">\[
+{\color{#16a34a}{v}}\in\mathbb{R}^n
+\]</span></p>
+<p><span class="math inline">\({\color{#16a34a}{v}}\)</span> ist ein mögliches <strong>Muster über die Spalten</strong>.</p>
+<p>Die nächste Frage lautet:</p>
+<p><strong>Wie messen wir, wie stark dieses Spaltenmuster (v) im Bild (A) vorkommt?</strong></p>
+</div>
+<div class="svd-search-start-wrap">
+<p><img data-src="assets/generated/svd_search_start.svg" class="svd-search-start" alt="Start der Suche nach einem SVD-Baustein über das Spaltenmuster v"></p>
+</div>
+</div>
+</section>
+<section id="was-bedeutet-av" class="slide level2">
+<h2>Was bedeutet (Av)?</h2>
+<div class="derivation-slide two-column-derivation av-slide">
+<div class="derivation-left">
+<p>Um zu messen, wie stark ein Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span> im Bild vorkommt, wenden wir <span class="math inline">\(A\)</span> auf dieses Muster an:</p>
+<p><span class="math display">\[
+A{\color{#16a34a}{v}}
+\]</span></p>
+<p>Dabei gilt:</p>
+<p><span class="math display">\[
+{\color{#16a34a}{v}}\in\mathbb{R}^n
+\qquad
+A{\color{#16a34a}{v}}\in\mathbb{R}^m.
+\]</span></p>
+<p>Also: <span class="math inline">\({\color{#16a34a}{v}}\)</span> hat einen Wert pro Bildspalte, <span class="math inline">\(A{\color{#16a34a}{v}}\)</span> einen Wert pro Bildzeile.</p>
+</div>
+<div class="derivation-right">
+<p>Für die <span class="math inline">\(j\)</span>-te Bildzeile gilt:</p>
+<p><span class="math display">\[
+(A{\color{#16a34a}{v}})_j
+=
+\mathrm{Zeile}_j(A)\cdot{\color{#16a34a}{v}}
+\]</span></p>
+<p>Jede Bildzeile wird also per Skalarprodukt mit dem Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span> verglichen.</p>
+<p>Passt das Muster gut zu einer Zeile, wird der Wert groß. Passt es kaum, wird der Wert klein.</p>
+<p>Damit ist <span class="math inline">\(A{\color{#16a34a}{v}}\)</span> die <strong>Höhenantwort</strong> des Bildes auf das Spaltenmuster.</p>
+</div>
+<div class="av-height-response-wrap">
+<p><img data-src="assets/generated/av_height_response.svg" class="av-height-response" alt="Matrixmultiplikation Av als Höhenantwort des Bildes auf ein Spaltenmuster"></p>
+</div>
+<div class="derivation-fullnote">
+<p>Die Höhenantwort <span class="math inline">\(A{\color{#16a34a}{v}}\)</span> zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge macht daraus eine Gesamtstärke:</p>
+<p><span class="math display">\[
+\|A{\color{#16a34a}{v}}\|
+=\sqrt{2^2+2^2+2^2+2^2+0^2+0^2}
+=4.
+\]</span></p>
+<p>Je größer <span class="math inline">\(\|A{\color{#16a34a}{v}}\|\)</span>, desto stärker ist die Antwort des Bildes auf das Muster <span class="math inline">\({\color{#16a34a}{v}}\)</span>. Damit wird unsere Suche konkret:</p>
+<p><span class="math display">\[
+\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|.
+\]</span></p>
+<p>Wir suchen das normierte Spaltenmuster, das die stärkste Höhenantwort erzeugt. Im Beispiel verwenden wir 0/1-Werte. Für die eigentliche Suche normieren wir <span class="math inline">\(v\)</span> auf <span class="math inline">\(\|v\|=1\)</span>, damit alle Spaltenmuster gleich lang sind und <span class="math inline">\(\|Av\|\)</span> nur die Stärke des Musters im Bild misst – nicht eine künstliche Skalierung von <span class="math inline">\(v\)</span>.</p>
+<p><span class="math display">\[
+A{\color{#16a34a}{v}}=\text{Höhenantwort},
+\qquad
+\|A{\color{#16a34a}{v}}\|=\text{Gesamtstärke}.
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="warum-können-wir-a-nicht-direkt-verwenden" class="slide level2">
+<h2>Warum können wir <span class="math inline">\(A\)</span> nicht direkt verwenden?</h2>
+<div class="derivation-slide two-column-derivation space-problem-slide">
+<div class="derivation-left">
+<p>Wir haben jetzt eine Suchfrage:</p>
+<p><span class="math display">\[
+\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|.
+\]</span></p>
+<p>Dafür wäre der Spektralsatz hilfreich, weil er orthogonale Richtungen liefert.</p>
+<p>Für eine symmetrische Matrix <span class="math inline">\(S\)</span> gilt:</p>
+<p><span class="math display">\[
+S=Q\Lambda Q^T,
+\qquad
+S q_i=\lambda_i q_i.
+\]</span></p>
+<p>Die Spalten von <span class="math inline">\(Q\)</span> sind orthogonale Richtungen. Die zugehörigen Eigenwerte <span class="math inline">\(\lambda_i\)</span> können wir später als Stärken interpretieren.</p>
+<p>Aber der Spektralsatz gilt für symmetrische quadratische Matrizen.</p>
+</div>
+<div class="derivation-right">
+<p>Unsere Bildmatrix ist im Allgemeinen</p>
+<p><span class="math display">\[
+A\in\mathbb{R}^{m\times n}
+\]</span></p>
+<p>und damit oft rechteckig. Außerdem ist sie meist nicht symmetrisch:</p>
+<p><span class="math display">\[
+A^T\neq A.
+\]</span></p>
+<p>Anschaulich passiert bei <span class="math inline">\(A\)</span>:</p>
+<p><span class="math display">\[
+A:\mathbb{R}^n\to\mathbb{R}^m.
+\]</span></p>
+<p>Ein Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span> wird zu einer Höhenantwort <span class="math inline">\(A{\color{#16a34a}{v}}\)</span>.</p>
+<p>Der Spektralsatz braucht dagegen eine symmetrische quadratische Matrix, die einen Vektor wieder in denselben Raum abbildet.</p>
+</div>
+<div class="space-problem-graphic">
+<p><img data-src="assets/generated/spectral_theorem_space_problem.svg" class="spectral-space-problem" alt="A bildet ein Spaltenmuster in eine Höhenantwort ab, während der Spektralsatz eine Abbildung im selben Raum benötigt"></p>
+</div>
+<div class="uebergang">
+<p><strong>Können wir aus (A) eine symmetrische Matrix bauen, die dieselbe Stärkefrage für Spaltenmuster beantwortet?</strong></p>
+</div>
+</div>
+</section>
+<section id="warum-führt-die-stärkemessung-zu-ata" class="slide level2">
+<h2>Warum führt die Stärkemessung zu <span class="math inline">\(A^TA\)</span>?</h2>
+<div class="derivation-slide two-column-derivation ata-strength-slide">
+<div class="derivation-left">
+<p>Unsere Suchfrage war:</p>
+<p><span class="math display">\[
+\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|.
+\]</span></p>
+<p>Da <span class="math inline">\(\|A{\color{#16a34a}{v}}\|\ge0\)</span>, dürfen wir stattdessen die quadrierte Stärke maximieren:</p>
+<p><span class="math display">\[
+\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|^2.
+\]</span></p>
+<p>Das ändert nicht, welches Muster gewinnt. Beispiel: Aus <span class="math inline">\(4&gt;2\)</span> wird <span class="math inline">\(16&gt;4\)</span>. Die Reihenfolge bleibt gleich.</p>
+</div>
+<div class="derivation-right">
+<p>Der Vorteil: Die quadrierte Länge kann als Skalarprodukt geschrieben werden:</p>
+<p><span class="math display">\[
+\|A{\color{#16a34a}{v}}\|^2
+\]</span></p>
+<p><span class="math display">\[
+=
+(A{\color{#16a34a}{v}})^T(A{\color{#16a34a}{v}})
+\]</span></p>
+<p><span class="math display">\[
+=
+{\color{#16a34a}{v^T}}A^TA{\color{#16a34a}{v}}.
+\]</span></p>
+<p>Der entscheidende Schritt ist:</p>
+<p><span class="math display">\[
+(A{\color{#16a34a}{v}})^T={\color{#16a34a}{v^T}}A^T.
+\]</span></p>
+<p>Dadurch erscheint zwischen den beiden <span class="math inline">\({\color{#16a34a}{v}}\)</span>-Termen automatisch <span class="math inline">\(A^TA\)</span>.</p>
+</div>
+<div class="ata-strength-graphic">
+<p><img data-src="assets/generated/ata_strength_derivation.svg" class="ata-strength-derivation" alt="Die quadrierte Stärke eines Spaltenmusters führt zur Bewertungsmatrix A transponiert A"></p>
+</div>
+<div class="uebergang">
+<p>Für ein festes Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span> ist <span class="math inline">\({\color{#16a34a}{v^T}}A^TA{\color{#16a34a}{v}}\)</span> genau dieselbe Zahl wie <span class="math inline">\(\|A{\color{#16a34a}{v}}\|^2\)</span>: die quadrierte Stärke dieses Musters im Originalbild.</p>
+<p><span class="math inline">\(A^TA\)</span> ist die Bewertungsmatrix. Die äußeren <span class="math inline">\({\color{#16a34a}{v}}\)</span>-Terme markieren den Kandidaten, der gerade getestet wird.</p>
+</div>
+</div>
+</section>
+<section id="warum-löst-ata-unser-suchproblem" class="slide level2">
+<h2>Warum löst <span class="math inline">\(A^TA\)</span> unser Suchproblem?</h2>
+<div class="derivation-slide two-column-derivation">
+<div class="derivation-left">
+<p>Aus der letzten Folie wurde unsere Suche:</p>
+<p><span class="math display">\[
+\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|^2
+=
+\max_{\|{\color{#16a34a}{v}}\|=1}{\color{#16a34a}{v^T}}A^TA{\color{#16a34a}{v}}.
+\]</span></p>
+<p>Damit suchen wir nicht mehr direkt in der Höhenantwort <span class="math inline">\(A{\color{#16a34a}{v}}\)</span>, sondern bewerten jedes Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span> mit <span class="math inline">\(A^TA\)</span>.</p>
+<p>Wichtig: <span class="math inline">\(A^TA\)</span> ersetzt nicht das Bild <span class="math inline">\(A\)</span>. Es ist die Bewertungsmatrix für die Spaltenmuster.</p>
+</div>
+<div class="derivation-right">
+<p>Jetzt passt <span class="math inline">\(A^TA\)</span> zum Spektralsatz:</p>
+<p><span class="math display">\[
+A^TA\in\mathbb{R}^{n\times n}
+\]</span></p>
+<p>Start und Ziel liegen wieder im Spaltenmuster-Raum.</p>
+<p>Außerdem ist <span class="math inline">\(A^TA\)</span> symmetrisch:</p>
 <p><span class="math display">\[
 (A^TA)^T=A^TA.
 \]</span></p>
-<p>Außerdem ist <span class="math inline">\(A^TA\)</span> positiv semidefinit:</p>
-<p><span class="math display">\[
-v^TA^TAv=\|Av\|^2\ge 0.
-\]</span></p>
+<p>Für solche Matrizen liefert der Spektralsatz orthogonale Richtungen.</p>
 </div>
-<div class="derivation-right">
-<p>Damit greift der Spektralsatz:</p>
-<p><span class="math display">\[
-A^TA={\color{#16a34a}{V}}\Lambda{\color{#16a34a}{V^T}}.
-\]</span></p>
-<p>Die Eigenvektoren von <span class="math inline">\(A^TA\)</span> sind die rechten Singulärvektoren <span class="math inline">\(v_i\)</span>.</p>
-</div>
+<p><img data-src="assets/generated/ata_to_spectral_bridge.svg" class="ata-spectral-bridge" alt="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern"></p>
 <div class="uebergang">
-<p>Wir haben die Eingaberichtungen gefunden. Was sagen die Eigenwerte über ihre Stärke?</p>
+<p><strong>Nächste Frage: Welche normierten Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> maximieren diese Bewertung? Dafür wenden wir jetzt den Spektralsatz auf <span class="math inline">\(A^TA\)</span> an.</strong></p>
 </div>
 </div>
 </section>
-<section id="spektralsatz-auf-ata-rechte-singulärvektoren" class="slide level2">
-<h2>Spektralsatz auf <span class="math inline">\(A^TA\)</span>: rechte Singulärvektoren</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="leitfrage">
-<p>Die Richtungen <span class="math inline">\(v_i\)</span> kommen aus der Eigenzerlegung von <span class="math inline">\(A^TA\)</span>.</p>
-</div>
+<section id="der-spektralsatz-liefert-die-gesuchten-muster" class="slide level2">
+<h2>Der Spektralsatz liefert die gesuchten Muster</h2>
+<div class="derivation-slide two-column-derivation spectral-output-slide">
 <div class="derivation-left">
-<p>Für jedes <span class="math inline">\(v_i\)</span> gilt</p>
+<p>Unsere Suche lautet jetzt:</p>
+<p><span class="math display">\[
+\max_{\|{\color{#16a34a}{v}}\|=1}{\color{#16a34a}{v^T}}A^TA{\color{#16a34a}{v}}.
+\]</span></p>
+<p>Wir suchen also normierte Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span>, die von <span class="math inline">\(A^TA\)</span> möglichst stark bewertet werden.</p>
+<p>Da <span class="math inline">\(A^TA\)</span> symmetrisch ist, dürfen wir den Spektralsatz anwenden.</p>
+<p>Er liefert Eigenvektoren:</p>
 <p><span class="math display">\[
 A^TA{\color{#16a34a}{v_i}}
-=\lambda_i{\color{#16a34a}{v_i}}.
+=
+\lambda_i{\color{#16a34a}{v_i}}.
 \]</span></p>
-<p>Da <span class="math inline">\(A^TA\)</span> symmetrisch ist, können die <span class="math inline">\(v_i\)</span> orthonormal gewählt werden.</p>
+<p>Die Eigenvektoren <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> sind die gesuchten <strong>Spaltenmuster</strong>.</p>
+<p>Das bedeutet: <span class="math inline">\(A^TA\)</span> verändert die Richtung <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> nicht, sondern skaliert sie nur mit <span class="math inline">\(\lambda_i\)</span>. Solche Richtungen sind stabile Muster der Bewertungsmatrix.</p>
 </div>
 <div class="derivation-right">
-<p>Diese <span class="math inline">\(v_i\)</span> sind genau die Eingaberichtungen der SVD.</p>
-<p>Sie beantworten: In welchen unabhängigen Richtungen analysieren wir die Bildmatrix?</p>
+<p>Der Spektralsatz liefert genau das, was wir brauchen:</p>
+<ol type="1">
+<li><strong>Unabhängige Spaltenmuster</strong></li>
+</ol>
+<p><span class="math display">\[
+{\color{#16a34a}{v_i^Tv_j}}=0
+\qquad (i\ne j)
+\]</span></p>
+<p>Die Muster speichern keine doppelte Richtung.</p>
+<ol start="2" type="1">
+<li><strong>Sortierbare Bewertungen</strong></li>
+</ol>
+<p><span class="math display">\[
+\lambda_1\ge\lambda_2\ge\dots\ge0
+\]</span></p>
+<p>Die ersten <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> gehören zu den größten Bewertungen.</p>
 </div>
+<p><img data-src="assets/generated/spectral_theorem_outputs.svg" class="spectral-theorem-outputs" alt="Der Spektralsatz auf A transponiert A liefert orthogonale Spaltenmuster und sortierte Eigenwerte"></p>
 <div class="uebergang">
-<p>Jetzt fehlt die Stärke jeder Richtung: Wie wird aus <span class="math inline">\(\lambda_i\)</span> ein Streckfaktor?</p>
+<p><strong>Wir haben jetzt unabhängige Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> und zugehörige Bewertungen <span class="math inline">\(\lambda_i\)</span>. Nächste Frage: Warum ist <span class="math inline">\(\lambda_i\)</span> die quadrierte Stärke des Musters <span class="math inline">\({\color{#16a34a}{v_i}}\)</span>?</strong></p>
 </div>
 </div>
 </section>
-<section id="eigenwerte-werden-singulärwerte" class="slide level2">
-<h2>Eigenwerte werden Singulärwerte</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="leitfrage">
-<p>Eigenwerte von <span class="math inline">\(A^TA\)</span> sind quadrierte Streckungen von <span class="math inline">\(A\)</span>.</p>
-</div>
+<section id="warum-sind-die-eigenwerte-die-quadrierte-stärke" class="slide level2">
+<h2>Warum sind die Eigenwerte die quadrierte Stärke?</h2>
+<div class="derivation-slide two-column-derivation eigen-strength-slide">
 <div class="derivation-left">
-<p>Für normierte <span class="math inline">\(v_i\)</span> folgt</p>
+<p>Aus dem Spektralsatz kennen wir jetzt die Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span>:</p>
 <p><span class="math display">\[
-\|Av_i\|^2
-=v_i^TA^TAv_i
-=v_i^T\lambda_i v_i
-=\lambda_i.
+A^TA{\color{#16a34a}{v_i}}
+=
+\lambda_i{\color{#16a34a}{v_i}}.
 \]</span></p>
-<p>Die Eigenwerte <span class="math inline">\(\lambda_i\)</span> messen also die <strong>quadrierte</strong> Streckung.</p>
+<p>Jetzt prüfen wir, wie stark so ein gefundenes Muster im Originalbild <span class="math inline">\(A\)</span> vorkommt.</p>
+<p>Für ein gefundenes Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> messen wir wieder die Stärke der Höhenantwort:</p>
+<p><span class="math display">\[
+\|A{\color{#16a34a}{v_i}}\|^2.
+\]</span></p>
+<p>Aus der vorherigen Umformung wissen wir:</p>
+<p><span class="math display">\[
+\|A{\color{#16a34a}{v_i}}\|^2
+=
+{\color{#16a34a}{v_i^T}}A^TA{\color{#16a34a}{v_i}}.
+\]</span></p>
 </div>
 <div class="derivation-right">
-<p>Der Singulärwert soll der tatsächliche Streckfaktor sein. Deshalb ziehen wir die Wurzel:</p>
+<p>Jetzt setzen wir die Eigenvektorgleichung ein:</p>
 <p><span class="math display">\[
-{\color{#f2aa00}{\sigma_i}}=\sqrt{\lambda_i}=\|Av_i\|.
+\|A{\color{#16a34a}{v_i}}\|^2
+=
+{\color{#16a34a}{v_i^T}}(\lambda_i{\color{#16a34a}{v_i}})
+=
+\lambda_i({\color{#16a34a}{v_i^T}}{\color{#16a34a}{v_i}}).
 \]</span></p>
-<p>Sortiert wird absteigend: <span class="math inline">\(\sigma_1\ge\sigma_2\ge\dots\ge0\)</span>.</p>
+<p>Da <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> normiert ist, gilt:</p>
+<p><span class="math display">\[
+{\color{#16a34a}{v_i^T}}{\color{#16a34a}{v_i}}=1,
+\qquad
+\|A{\color{#16a34a}{v_i}}\|^2=\lambda_i.
+\]</span></p>
+<p>Damit ist <span class="math inline">\(\lambda_i\)</span> die <strong>quadrierte Stärke</strong> des Musters im Originalbild.</p>
+<p><span class="math display">\[
+\lambda_i=\|A{\color{#16a34a}{v_i}}\|^2,
+\qquad
+{\color{#f2aa00}{\sigma_i}}=\|A{\color{#16a34a}{v_i}}\|=\sqrt{\lambda_i}.
+\]</span></p>
+</div>
+<div class="eigenvalue-graphic">
+<p><img data-src="assets/generated/eigenvalue_to_singular_value.svg" class="eigenvalue-singularvalue" alt="Eigenwert als quadrierte Stärke und Singulärwert als tatsächliche Stärke eines Spaltenmusters"></p>
 </div>
 <div class="uebergang">
-<p>Wir kennen Eingaberichtungen und Streckfaktoren. Es fehlen die Zielrichtungen im Bildraum.</p>
+<p><strong>Merke: Eigenwert = quadrierte Stärke, Singulärwert = tatsächliche Stärke. Als Nächstes fehlt noch die Höhenverteilung <span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>.</strong></p>
 </div>
 </div>
 </section>
-<section id="zielrichtungen-u_i" class="slide level2">
-<h2>Zielrichtungen <span class="math inline">\(u_i\)</span></h2>
-<div class="derivation-slide two-column-derivation">
-<div class="leitfrage">
-<p>Wohin zeigt die gestreckte Richtung <span class="math inline">\(Av_i\)</span>?</p>
-</div>
+<section id="vom-spaltenmuster-zur-höhenverteilung" class="slide level2">
+<h2>Vom Spaltenmuster zur Höhenverteilung</h2>
+<div class="derivation-slide two-column-derivation from-v-to-u-slide">
 <div class="derivation-left">
-<p><span class="math inline">\(Av_i\)</span> liegt im Zielraum und hat Länge <span class="math inline">\(\sigma_i\)</span>. Für <span class="math inline">\(\sigma_i&gt;0\)</span> normieren wir:</p>
+<p>Aus der letzten Folie kennen wir:</p>
+<ul>
+<li><span class="math inline">\({\color{#16a34a}{v_i}}\)</span>: Muster über die Spalten</li>
+<li><span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>: Stärke dieses Musters</li>
+</ul>
+<p>Für den vollständigen Baustein fehlt:</p>
+<ul>
+<li><span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>: Verteilung über die Bildzeilen</li>
+</ul>
+<p><span class="math display">\[
+{\color{#f2aa00}{B_i}}
+=
+{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
+\]</span></p>
+<p>Leitfrage: <strong>In welchen Bildzeilen kommt <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> vor?</strong></p>
+</div>
+<div class="derivation-right">
+<p>Dazu benutzen wir wieder das Originalbild <span class="math inline">\(A\)</span>:</p>
+<p><span class="math display">\[
+A{\color{#16a34a}{v_i}}.
+\]</span></p>
+<p>Das ist die <strong>Höhenantwort</strong>: ein Wert pro Bildzeile.</p>
+<p><span class="math display">\[
+\|A{\color{#16a34a}{v_i}}\|={\color{#f2aa00}{\sigma_i}}.
+\]</span></p>
+<p>Also enthält <span class="math inline">\(A{\color{#16a34a}{v_i}}\)</span> Form und Stärke. Für die SVD trennen wir beides:</p>
+<p><span class="math display">\[
+A{\color{#16a34a}{v_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}},
+\qquad
+{\color{#1e88ff}{u_i}}=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}
+\quad(\sigma_i&gt;0).
+\]</span></p>
+<p>Durch das Teilen durch <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> bleibt die Form über die Höhe erhalten; die Stärke wird entfernt.</p>
+</div>
+<div class="from-v-to-u-wrap">
+<p><img data-src="assets/generated/from_v_to_u_height_distribution.svg" class="from-v-to-u" alt="Vom Spaltenmuster über die Höhenantwort zur normierten Höhenverteilung"></p>
+</div>
+<div class="uebergang">
+<p><strong>Merke: <span class="math inline">\(A{\color{#16a34a}{v_i}}\)</span> enthält Form und Stärke. Durch <span class="math inline">\({\color{#1e88ff}{u_i}}=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}\)</span> erhalten wir die normierte Höhenverteilung.</strong></p>
+</div>
+</div>
+</section>
+<section id="aus-drei-teilen-wird-ein-bildbaustein" class="slide level2">
+<h2>Aus drei Teilen wird ein Bildbaustein</h2>
+<div class="derivation-slide two-column-derivation block-from-parts-slide">
+<div class="derivation-left">
+<p>Letzte Folie:</p>
 <p><span class="math display">\[
 {\color{#1e88ff}{u_i}}
-=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}.
+=
+\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}.
 \]</span></p>
-<p>Damit gilt die Kernbeziehung der SVD:</p>
+<p>Umgestellt:</p>
 <p><span class="math display">\[
 A{\color{#16a34a}{v_i}}
-={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}.
-\]</span></p>
-</div>
-<div class="derivation-right">
-<p>Für alle <span class="math inline">\(\sigma_i&gt;0\)</span> entstehen orthonormale Zielrichtungen <span class="math inline">\(u_i\)</span>. Sie spannen den Bildraum von <span class="math inline">\(A\)</span> auf.</p>
-<p>Falls im Zielraum noch Richtungen fehlen, ergänzt man sie zu einer vollständigen orthonormalen Basis von <span class="math inline">\(\mathbb{R}^m\)</span>.</p>
-</div>
-<div class="uebergang">
-<p>Aus diesen Einzelgleichungen entsteht jetzt die Matrixform.</p>
-</div>
-</div>
-</section>
-<section id="von-einzelgleichungen-zur-svd" class="slide level2">
-<h2>Von Einzelgleichungen zur SVD</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="leitfrage">
-<p>Die SVD fällt nicht vom Himmel: Sie bündelt die Gleichungen <span class="math inline">\(Av_i=\sigma_i u_i\)</span>.</p>
-</div>
-<div class="derivation-left">
-<p>Für alle Richtungen zusammen:</p>
-<p><span class="math display">\[
-A{\color{#16a34a}{V}}
 =
-{\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}.
+{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}.
 \]</span></p>
-<p><span class="math inline">\(V\)</span> ist orthogonal, also <span class="math inline">\(V^{-1}=V^T\)</span>.</p>
+<p>Das heißt: Die Höhenantwort des Spaltenmusters besteht aus <strong>Stärke</strong> mal <strong>normierter Höhenverteilung</strong>.</p>
 </div>
 <div class="derivation-right">
-<p>Multiplikation mit <span class="math inline">\(V^T\)</span> von rechts ergibt</p>
+<p>Damit kennen wir alle drei Teile:</p>
 <p><span class="math display">\[
-A =
-{\color{#1e88ff}{U}}
-{\color{#f2aa00}{\Sigma}}
-{\color{#16a34a}{V^T}}.
+{\color{#f2aa00}{B_i}}
+=
+{\color{#f2aa00}{\sigma_i}}
+{\color{#1e88ff}{u_i}}
+{\color{#16a34a}{v_i^T}}.
 \]</span></p>
-<p>Damit existiert die SVD für jede Matrix <span class="math inline">\(A\in\mathbb{R}^{m\times n}\)</span>.</p>
-<p>Bei fehlenden Richtungen werden <span class="math inline">\(U\)</span> und <span class="math inline">\(V\)</span> zu vollständigen orthonormalen Basen ergänzt.</p>
+<ul>
+<li><span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span>: Muster über die Spalten</li>
+<li><span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>: Verteilung über die Bildzeilen</li>
+<li><span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>: Stärke des Bausteins</li>
+</ul>
+<p>Das äußere Produkt <span class="math inline">\({\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}\)</span> macht daraus eine 2D-Bildschicht.</p>
+</div>
+<div class="svd-block-from-parts-wrap">
+<p><img data-src="assets/generated/svd_block_from_parts.svg" class="svd-block-from-parts" alt="Aus Spaltenmuster, Höhenverteilung und Stärke entsteht ein SVD-Bildbaustein"></p>
+</div>
+<div class="derivation-fullnote block-from-parts-note">
+<p>Aus der Kernbeziehung <span class="math inline">\(A{\color{#16a34a}{v_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}\)</span> wird mit <span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span> der Matrixbaustein <span class="math inline">\({\color{#f2aa00}{B_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}\)</span>.</p>
 </div>
 <div class="uebergang">
-<p>Jetzt zurück zum Einstein-Bild: Warum dürfen wir nach <span class="math inline">\(k\)</span> Beiträgen abschneiden?</p>
+<p><strong>Merke: Höhenantwort plus Spaltenmuster ergibt die vollständige Bildschicht. Damit kennen wir wieder die Bausteinform aus dem Anfang der Herleitung.</strong></p>
 </div>
 </div>
 </section>
-<section id="zurück-zur-kompression-warum-abschneiden" class="slide level2">
-<h2>Zurück zur Kompression: Warum abschneiden?</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="leitfrage">
-<p>Die geordneten Singulärwerte erklären, warum wenige Beiträge oft reichen.</p>
-</div>
+<section id="alle-bildbausteine-zusammen-ergeben-das-bild" class="slide level2">
+<h2>Alle Bildbausteine zusammen ergeben das Bild</h2>
+<div class="derivation-slide two-column-derivation sum-to-matrix-slide">
 <div class="derivation-left">
-<p>Die Rang-<span class="math inline">\(k\)</span>-Näherung behält die ersten <span class="math inline">\(k\)</span> SVD-Bausteine:</p>
+<p>Auf der letzten Folie hatten wir einen einzelnen Bildbaustein:</p>
 <p><span class="math display">\[
-A_k=\sum_{i=1}^{k}\sigma_i\,u_i\,v_i^T.
+{\color{#f2aa00}{B_i}}
+=
+{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
 \]</span></p>
-<p>Große Singulärwerte entsprechen starken Beiträgen zur Bildstruktur. Kleine Singulärwerte tragen weniger bei und können für Kompression weggelassen werden.</p>
+<p>Das ganze Bild entsteht, wenn wir alle nichtverschwindenden Bausteine addieren:</p>
+<p><span class="math display">\[
+A=B_1+B_2+\dots+B_r
+\]</span></p>
+<p>also:</p>
+<p><span class="math display">\[
+A=\sum_{i=1}^{r}{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
+\]</span></p>
+<p><span class="math inline">\(r\)</span> ist die Anzahl der positiven Singulärwerte:</p>
+<p><span class="math display">\[
+r=\operatorname{rang}(A).
+\]</span></p>
+<p>Wenn <span class="math inline">\(\sigma_i=0\)</span>, dann ist <span class="math inline">\({\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}=0\)</span>. Dieser Baustein trägt nichts zum Bild bei.</p>
 </div>
 <div class="derivation-right">
-<p>Der Satz von <strong>Eckart-Young-Mirsky</strong> sagt: Dieses Abschneiden ist bezüglich der Frobenius-Norm optimal:</p>
+<p>Die Summe lässt sich kompakt als Matrixprodukt schreiben:</p>
+<p><span class="math display">\[
+{\color{#1e88ff}{U_r}}=(u_1,\dots,u_r),
+\qquad
+{\color{#16a34a}{V_r}}=(v_1,\dots,v_r).
+\]</span></p>
+<p><span class="math display">\[
+{\color{#f2aa00}{\Sigma_r}}=
+\begin{pmatrix}
+\sigma_1 &amp;        &amp; 0\\
+         &amp; \ddots &amp;  \\
+0        &amp;        &amp; \sigma_r
+\end{pmatrix}
+\]</span></p>
+<p><span class="math display">\[
+A={\color{#1e88ff}{U_r}}{\color{#f2aa00}{\Sigma_r}}{\color{#16a34a}{V_r^T}}.
+\]</span></p>
+<ul>
+<li><span class="math inline">\({\color{#1e88ff}{U_r}}\)</span>: Höhenverteilungen</li>
+<li><span class="math inline">\({\color{#f2aa00}{\Sigma_r}}\)</span>: Stärken</li>
+<li><span class="math inline">\({\color{#16a34a}{V_r^T}}\)</span>: Spaltenmuster</li>
+</ul>
+</div>
+<div class="svd-sum-to-matrix-wrap">
+<p><img data-src="assets/generated/svd_sum_to_matrix_form.svg" class="svd-sum-to-matrix" alt="Die Summe einzelner SVD-Bildbausteine ergibt die Bildmatrix und entspricht der Matrixform A gleich U Sigma V transponiert"></p>
+</div>
+<div class="derivation-fullnote">
+<p><strong>Merke: Die SVD ist die kompakte Schreibweise für die Summe aller Bildbausteine. Reduziert heißt hier noch nicht komprimiert, sondern nur: Null-Bausteine wurden weggelassen. Kompression beginnt erst, wenn wir zusätzlich kleine, aber nicht-null Bausteine weglassen.</strong></p>
+</div>
+</div>
+</section>
+<section id="warum-können-wir-kleine-bausteine-weglassen" class="slide level2">
+<h2>Warum können wir kleine Bausteine weglassen?</h2>
+<div class="derivation-slide two-column-derivation truncation-slide">
+<div class="derivation-left">
+<p>Aus der letzten Folie wissen wir:</p>
+<p><span class="math display">\[
+A=\sum_{i=1}^{r}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
+\]</span></p>
+<p>Das Bild ist also eine Summe sortierter Bildbausteine.</p>
+<p>Für Kompression behalten wir nur die ersten <span class="math inline">\(k\)</span> Bausteine:</p>
+<p><span class="math display">\[
+A_k=\sum_{i=1}^{k}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
+\]</span></p>
+<p>Die weggelassenen Bausteine bilden den Fehler:</p>
+<p><span class="math display">\[
+A-A_k=\sum_{i=k+1}^{r}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
+\]</span></p>
+<p>Weil die Singulärwerte absteigend sortiert sind, lassen wir genau die schwächsten Bildschichten weg.</p>
+</div>
+<div class="derivation-right">
+<p>Die Stärke eines Bausteins steckt in <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>.</p>
+<p>Weil die SVD-Bausteine orthogonal zueinander sind, addieren sich ihre quadratischen Stärken sauber:</p>
+<p><span class="math display">\[
+\|A-A_k\|_F^2
+=
+\sum_{i=k+1}^{r}{\color{#f2aa00}{\sigma_i^2}}.
+\]</span></p>
+<p>Der Fehler besteht genau aus der Energie der weggelassenen Bildschichten.</p>
+<p>Wenn die weggelassenen <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> klein sind, ist auch der Rekonstruktionsfehler klein.</p>
+<p>Eckart-Young-Mirsky sagt zusätzlich:</p>
 <p><span class="math display">\[
 \|A-A_k\|_F \le \|A-B\|_F
 \quad
 \text{für alle } \operatorname{rang}(B)\le k.
 \]</span></p>
-<p>Der Fehler ist die Energie der weggelassenen Singulärwerte:</p>
-<p><span class="math display">\[
-\|A-A_k\|_F^2
-=\sum_{i=k+1}^{r}\sigma_i^2.
-\]</span></p>
+<p>Also ist <span class="math inline">\(A_k\)</span> die beste Rang-<span class="math inline">\(k\)</span>-Näherung im Frobeniusfehler.</p>
 </div>
-<div class="uebergang">
-<p>Damit ist der Bogen geschlossen: Die Bildkompression funktioniert, weil die SVD die stärksten Richtungen zuerst sortiert.</p>
-</div>
-</div>
-</section>
-<section id="algorithmus-für-eine-matrix" class="slide level2">
-<h2>Algorithmus für eine Matrix</h2>
-<div class="derivation-slide algorithm-slide">
-<div class="algorithm-steps">
-<div class="algorithm-step">
-<p><strong>1.</strong> Berechne <span class="math inline">\(A^TA\)</span>.</p>
-</div>
-<div class="algorithm-step">
-<p><strong>2.</strong> Löse <span class="math inline">\(A^TA v_i=\lambda_i v_i\)</span>.</p>
-</div>
-<div class="algorithm-step">
-<p><strong>3.</strong> Setze <span class="math inline">\(\sigma_i=\sqrt{\lambda_i}\)</span> und sortiere absteigend.</p>
-</div>
-<div class="algorithm-step">
-<p><strong>4.</strong> Baue <span class="math inline">\(V=(v_1,\dots,v_n)\)</span> und <span class="math inline">\(\Sigma\)</span>.</p>
-</div>
-<div class="algorithm-step">
-<p><strong>5.</strong> Berechne <span class="math inline">\(u_i=\frac{1}{\sigma_i}Av_i\)</span> für <span class="math inline">\(\sigma_i&gt;0\)</span> und ergänze <span class="math inline">\(U\)</span> bei Bedarf zu einer orthonormalen Basis.</p>
-</div>
-</div>
-<div class="algorithm-summary">
-<p>Für Bilder macht man das numerisch. Die Idee bleibt:</p>
-<p><span class="math display">\[
-\text{Streckung messen}
-\rightarrow
-\text{Richtungen sortieren}
-\rightarrow
-\text{erste }k\text{ behalten}.
-\]</span></p>
-</div>
-</div>
-</section>
-<section id="mini-beispiel-svd-schritt-für-schritt" class="slide level2">
-<h2>Mini-Beispiel: SVD Schritt für Schritt</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="derivation-left">
-<p>Gegeben <span class="math inline">\(A=\begin{pmatrix}2&amp;2\\-1&amp;2\end{pmatrix}\)</span> — hier werden <span class="math inline">\(U,V\)</span> echte Rotationen.</p>
-<p><strong>1.</strong> <span class="math inline">\(A^TA\)</span> berechnen:</p>
-<p><span class="math display">\[
-A^TA=\begin{pmatrix}2&amp;-1\\2&amp;2\end{pmatrix}\!\begin{pmatrix}2&amp;2\\-1&amp;2\end{pmatrix}=\begin{pmatrix}5&amp;2\\2&amp;8\end{pmatrix}
-\]</span></p>
-<p><strong>2.</strong> Eigenwerte aus <span class="math inline">\(\det(A^TA-\lambda I)=0\)</span>:</p>
-<p><span class="math display">\[
-\lambda^2-13\lambda+36=0\ \Rightarrow\ \lambda_1=9,\ \lambda_2=4
-\]</span></p>
-<p>Eigenvektoren lösen, dann normieren:</p>
-<p><span class="math display">\[
-v_1=\tfrac{1}{\sqrt5}\binom{1}{2},\qquad
-v_2=\tfrac{1}{\sqrt5}\binom{-2}{1}
-\]</span></p>
-<p><strong>3.</strong> <span class="math inline">\(\sigma_i=\sqrt{\lambda_i}\)</span>: <span class="math inline">\(\ \sigma_1=3,\ \sigma_2=2\)</span>.</p>
-</div>
-<div class="derivation-right">
-<p><strong>4.</strong> Spalten von <span class="math inline">\(V\)</span> einsetzen, <span class="math inline">\(\Sigma\)</span> diagonal:</p>
-<p><span class="math display">\[
-V^T=\tfrac{1}{\sqrt5}\begin{pmatrix}1&amp;2\\-2&amp;1\end{pmatrix},\quad
-\Sigma=\begin{pmatrix}3&amp;0\\0&amp;2\end{pmatrix}
-\]</span></p>
-<p><strong>5.</strong> <span class="math inline">\(u_i=\tfrac{1}{\sigma_i}Av_i\)</span>, z. B.</p>
-<p><span class="math display">\[
-u_1=\tfrac{1}{3}\cdot\tfrac{1}{\sqrt5}\binom{6}{3}=\tfrac{1}{\sqrt5}\binom{2}{1},\quad
-u_2=\tfrac{1}{\sqrt5}\binom{-1}{2}
-\]</span></p>
-<p><span class="math display">\[
-U=\tfrac{1}{\sqrt5}\begin{pmatrix}2&amp;-1\\1&amp;2\end{pmatrix}
-\]</span></p>
+<div class="svd-truncation-k-wrap">
+<p><img data-src="assets/generated/svd_truncation_k.svg" class="svd-truncation-k" alt="Abschneiden der SVD nach den ersten k stärksten Bildbausteinen"></p>
 </div>
 <div class="derivation-fullnote">
-<p><strong>Ergebnis</strong> — die einzelnen Matrizen der SVD:</p>
-<p><span class="math display">\[
-A=
-\underset{\textstyle U}{\vphantom{\big|}{\color{#1e88ff}{\tfrac{1}{\sqrt5}\begin{pmatrix}2&amp;-1\\1&amp;2\end{pmatrix}}}}\;
-\underset{\textstyle \Sigma}{\vphantom{\big|}{\color{#f2aa00}{\begin{pmatrix}3&amp;0\\0&amp;2\end{pmatrix}}}}\;
-\underset{\textstyle V^T}{\vphantom{\big|}{\color{#16a34a}{\tfrac{1}{\sqrt5}\begin{pmatrix}1&amp;2\\-2&amp;1\end{pmatrix}}}}
-\]</span></p>
+<p><strong>Merke: <span class="math inline">\(A_k\)</span> behält die <span class="math inline">\(k\)</span> stärksten Bildbausteine. Der Fehler besteht aus den weggelassenen schwachen Bausteinen. Weil die <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> absteigend sortiert sind, ist das Abschneiden bei <span class="math inline">\(k\)</span> die beste Rang-<span class="math inline">\(k\)</span>-Näherung.</strong></p>
 </div>
 </div>
 </section>
-<section id="mini-beispiel-geometrische-deutung" class="slide level2">
-<h2>Mini-Beispiel: geometrische Deutung</h2>
-<div class="derivation-slide example-slide">
-<div class="example-left">
-<p>Die gerade berechneten Faktoren haben eine <strong>geometrische Bedeutung</strong>: <span class="math inline">\(U\)</span> und <span class="math inline">\(V^T\)</span> sind beide reine <strong>Drehungen</strong> (<span class="math inline">\(\det=1\)</span>), <span class="math inline">\(\Sigma\)</span> ist eine <strong>Streckung</strong> entlang der Achsen.</p>
+<section id="was-bleibt-von-der-svd-hängen" class="slide level2">
+<h2>Was bleibt von der SVD hängen?</h2>
+<div class="svd-final-slide">
+<p><img data-src="assets/generated/svd_final_summary.svg" class="svd-final-summary" alt="Zusammenfassung der SVD als Weg von der Bildmatrix über Bildbausteine zur komprimierten Rekonstruktion"></p>
+<div class="svd-summary-cards">
+<div class="svd-summary-card">
+<p><strong>Baustein</strong></p>
 <p><span class="math display">\[
-A=
-\underset{\textstyle U}{\color{#1e88ff}{R_{+26{,}6^\circ}}}\;
-\underset{\textstyle \Sigma}{\color{#f2aa00}{\begin{pmatrix}3&amp;0\\0&amp;2\end{pmatrix}}}\;
-\underset{\textstyle V^T}{\color{#16a34a}{R_{-63{,}4^\circ}}}
+{\color{#f2aa00}{B_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}
 \]</span></p>
-<p>Die SVD zerlegt also jede Matrix in immer dasselbe Muster:</p>
+<p>Stärke × Höhenverteilung × Spaltenmuster</p>
+</div>
+<div class="svd-summary-card">
+<p><strong>Sortierung</strong></p>
 <p><span class="math display">\[
-\text{Rotation}
-\rightarrow
-\text{Skalierung}
-\rightarrow
-\text{Rotation}.
+{\color{#f2aa00}{\sigma_1}}\ge{\color{#f2aa00}{\sigma_2}}\ge\dots
 \]</span></p>
+<p>Große <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> bedeuten wichtige Bildanteile.</p>
 </div>
-<div class="example-right">
-<p>Mit jedem Vektor <span class="math inline">\(x\)</span> passiert nacheinander:</p>
-<ul>
-<li><strong><span class="math inline">\(V^T\)</span></strong> dreht ihn um <span class="math inline">\(-63{,}4^\circ\)</span> in das Achsensystem der Singulärrichtungen.</li>
-<li><strong><span class="math inline">\(\Sigma\)</span></strong> streckt entlang dieser Achsen um <span class="math inline">\(\sigma_1=3\)</span> und <span class="math inline">\(\sigma_2=2\)</span>.</li>
-<li><strong><span class="math inline">\(U\)</span></strong> dreht das Ergebnis um <span class="math inline">\(+26{,}6^\circ\)</span> in die endgültige Lage.</li>
-</ul>
-<p>Die Singulärwerte <span class="math inline">\(\sigma_1=3,\ \sigma_2=2\)</span> sind also die reinen Streckfaktoren; <span class="math inline">\(U\)</span> und <span class="math inline">\(V\)</span> liefern nur die Richtungen.</p>
-<p>Das verbindet die geometrischen Folien am Anfang mit der Bildkompression am Ende.</p>
-</div>
-</div>
-</section>
-<section id="numerischer-bezug-qr" class="slide level2">
-<h2>Numerischer Bezug: QR</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="derivation-left">
-<p>Die Herleitung nutzt die Eigenzerlegung von <span class="math inline">\(A^TA\)</span>:</p>
+<div class="svd-summary-card">
+<p><strong>Kompression</strong></p>
 <p><span class="math display">\[
-A^TA=V\Lambda V^T.
+A_k=\sum_{i=1}^{k}{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}
 \]</span></p>
-<p>In der Numerik berechnet man Eigenwerte oft iterativ. Ein wichtiger Baustein ist die <strong>QR-Zerlegung</strong>:</p>
-<p><span class="math display">\[
-B=QR,
-\]</span></p>
-<p>wobei <span class="math inline">\(Q\)</span> orthogonal und <span class="math inline">\(R\)</span> eine obere Dreiecksmatrix ist.</p>
-</div>
-<div class="derivation-right">
-<p>Wichtig:</p>
-<p>QR ist <strong>nicht</strong> die SVD.</p>
-<p>Aber QR ist verwandt über orthogonale Matrizen. QR-Verfahren können Eigenwerte stabil approximieren, und daraus kann man wiederum Singulärwerte gewinnen.</p>
-<p>Für große Bilder verwendet man meist direkte oder iterative SVD-Algorithmen, statt <span class="math inline">\(A^TA\)</span> naiv per Hand auszurechnen.</p>
+<p>Wir behalten die stärksten Bausteine.</p>
 </div>
 </div>
-</section>
-<section id="vor--und-nachteile-der-svd" class="slide level2">
-<h2>Vor- und Nachteile der SVD</h2>
-<div class="derivation-slide two-column-derivation">
-<div class="derivation-left">
-<p><strong>Vorteile</strong></p>
-<ul>
-<li>Existiert für <strong>jede</strong> Matrix — auch rechteckig oder singulär.</li>
-<li><strong>Orthonormale</strong> Basen <span class="math inline">\(U,V\)</span> → numerisch stabil, gut konditioniert.</li>
-<li>Liefert die <strong>beste</strong> Rang-<span class="math inline">\(k\)</span>-Näherung (Eckart-Young-Mirsky).</li>
-<li>Die <span class="math inline">\(\sigma_i\)</span> messen <strong>Rang, Kondition und Wichtigkeit</strong> der Richtungen.</li>
-</ul>
-</div>
-<div class="derivation-right">
-<p><strong>Nachteile</strong></p>
-<ul>
-<li><strong>Teuer:</strong> ca. <span class="math inline">\(O(mn\cdot\min(m,n))\)</span> Operationen — für sehr große Matrizen aufwändig.</li>
-<li>Bei mehrfachen <span class="math inline">\(\sigma_i\)</span> <strong>nicht eindeutig</strong> (nur die Werte, nicht die Richtungen).</li>
-<li>Zerstört <strong>dünnbesetzte</strong> Struktur — <span class="math inline">\(U,V\)</span> sind voll besetzt.</li>
-<li>Der Weg über <span class="math inline">\(A^TA\)</span> ist <strong>numerisch heikel</strong>: Quadrieren verschlechtert die Kondition.</li>
-</ul>
-</div>
-<div class="uebergang">
-<p>Der letzte Punkt erklärt, warum <span class="math inline">\(A^TA\)</span> nur die <strong>Herleitung</strong> trägt — in der Praxis berechnet man die SVD direkt (vgl. QR-Folie).</p>
+<div class="svd-final-note">
+<p>Die SVD macht sichtbar, welche Bildstrukturen wichtig sind, und erlaubt dadurch eine kontrollierte Kompression.</p>
 </div>
 </div>
 </section>

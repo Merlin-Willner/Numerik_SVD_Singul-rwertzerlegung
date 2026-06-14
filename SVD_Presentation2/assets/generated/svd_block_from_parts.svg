@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 270" role="img" aria-label="Aus Spaltenmuster, Hoehenverteilung und Staerke entsteht ein SVD-Bildbaustein">
+  <rect width="980" height="270" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .v { fill: #16a34a; }
+      .u { fill: #1e88ff; }
+      .sigma { fill: #f2aa00; }
+      .arrow { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .cell-green { fill: #d9f2df; stroke: #16a34a; stroke-width: 1.15; }
+      .cell-blue { fill: #e8f2ff; stroke: #1e88ff; stroke-width: 1.15; }
+      .cell-light { fill: #f8f8f8; stroke: #d8d8d8; stroke-width: 1.05; }
+      .dot-empty { fill: #f4f4f4; stroke: #d2d2d2; stroke-width: 1; }
+      .dot-dark { fill: #222222; stroke: #111111; stroke-width: 1; }
+      .dot-mid { fill: #9a9a9a; stroke: #777777; stroke-width: 1; }
+      .box { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.4; }
+      .soft-orange { fill: #fff6d9; stroke: #f2aa00; stroke-width: 1.3; }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <text class="serif ink" x="42" y="40" font-size="20">σᵢ × uᵢ × vᵢᵀ = Bᵢ</text>
+  <text class="serif muted" x="42" y="64" font-size="13">Stärke × Höhenverteilung × Spaltenmuster</text>
+
+  <g transform="translate(44 104)">
+    <rect class="box" x="0" y="0" width="160" height="104" rx="4"/>
+    <text class="serif sigma" x="18" y="28" font-size="21">σᵢ = 4</text>
+    <text class="serif muted" x="18" y="54" font-size="14">Stärke</text>
+    <rect class="soft-orange" x="18" y="70" width="108" height="14" rx="3"/>
+    <rect fill="#f2aa00" x="18" y="70" width="82" height="14" rx="3"/>
+  </g>
+
+  <text class="serif ink" x="228" y="164" font-size="26">×</text>
+
+  <g transform="translate(266 96)">
+    <text class="serif u" x="12" y="18" font-size="18">uᵢ</text>
+    <text class="serif muted" x="0" y="39" font-size="13">normierte Höhenverteilung</text>
+    <g transform="translate(52 52)">
+      <rect class="cell-blue" x="0" y="0" width="38" height="18"/><text class="serif ink" x="9" y="14" font-size="11">0,5</text>
+      <rect class="cell-blue" x="0" y="18" width="38" height="18"/><text class="serif ink" x="9" y="32" font-size="11">0,5</text>
+      <rect class="cell-blue" x="0" y="36" width="38" height="18"/><text class="serif ink" x="9" y="50" font-size="11">0,5</text>
+      <rect class="cell-blue" x="0" y="54" width="38" height="18"/><text class="serif ink" x="9" y="68" font-size="11">0,5</text>
+      <rect class="cell-light" x="0" y="72" width="38" height="18"/><text class="serif ink" x="16" y="86" font-size="11">0</text>
+      <rect class="cell-light" x="0" y="90" width="38" height="18"/><text class="serif ink" x="16" y="104" font-size="11">0</text>
+    </g>
+  </g>
+
+  <text class="serif ink" x="420" y="164" font-size="26">×</text>
+
+  <g transform="translate(466 96)">
+    <text class="serif v" x="38" y="18" font-size="18">vᵢᵀ</text>
+    <text class="serif muted" x="0" y="39" font-size="13">Spaltenmuster</text>
+    <g transform="translate(0 73)">
+      <rect class="cell-light" x="0" y="0" width="27" height="27"/><text class="serif ink" x="10" y="18" font-size="11">0</text>
+      <rect class="cell-light" x="27" y="0" width="27" height="27"/><text class="serif ink" x="37" y="18" font-size="11">0</text>
+      <rect class="cell-green" x="54" y="0" width="27" height="27"/><text class="serif ink" x="64" y="18" font-size="11">1</text>
+      <rect class="cell-green" x="81" y="0" width="27" height="27"/><text class="serif ink" x="91" y="18" font-size="11">1</text>
+      <rect class="cell-light" x="108" y="0" width="27" height="27"/><text class="serif ink" x="118" y="18" font-size="11">0</text>
+      <rect class="cell-light" x="135" y="0" width="27" height="27"/><text class="serif ink" x="145" y="18" font-size="11">0</text>
+    </g>
+  </g>
+
+  <path class="arrow" d="M650 154 L720 154"/>
+  <text class="serif muted" x="660" y="130" font-size="13">ergibt</text>
+
+  <g transform="translate(750 34)">
+    <text class="serif ink" x="34" y="24" font-size="20">Bᵢ = σᵢuᵢvᵢᵀ</text>
+    <text class="serif muted" x="62" y="46" font-size="13">Bildbaustein</text>
+    <g transform="translate(15 64)">
+      <circle class="dot-empty" cx="10" cy="10" r="7"/><circle class="dot-empty" cx="34" cy="10" r="7"/><circle class="dot-dark" cx="58" cy="10" r="7"/><circle class="dot-dark" cx="82" cy="10" r="7"/><circle class="dot-empty" cx="106" cy="10" r="7"/><circle class="dot-empty" cx="130" cy="10" r="7"/>
+      <circle class="dot-empty" cx="10" cy="34" r="7"/><circle class="dot-empty" cx="34" cy="34" r="7"/><circle class="dot-dark" cx="58" cy="34" r="7"/><circle class="dot-dark" cx="82" cy="34" r="7"/><circle class="dot-empty" cx="106" cy="34" r="7"/><circle class="dot-empty" cx="130" cy="34" r="7"/>
+      <circle class="dot-empty" cx="10" cy="58" r="7"/><circle class="dot-empty" cx="34" cy="58" r="7"/><circle class="dot-dark" cx="58" cy="58" r="7"/><circle class="dot-dark" cx="82" cy="58" r="7"/><circle class="dot-empty" cx="106" cy="58" r="7"/><circle class="dot-empty" cx="130" cy="58" r="7"/>
+      <circle class="dot-empty" cx="10" cy="82" r="7"/><circle class="dot-empty" cx="34" cy="82" r="7"/><circle class="dot-dark" cx="58" cy="82" r="7"/><circle class="dot-dark" cx="82" cy="82" r="7"/><circle class="dot-empty" cx="106" cy="82" r="7"/><circle class="dot-empty" cx="130" cy="82" r="7"/>
+      <circle class="dot-empty" cx="10" cy="106" r="7"/><circle class="dot-empty" cx="34" cy="106" r="7"/><circle class="dot-empty" cx="58" cy="106" r="7"/><circle class="dot-empty" cx="82" cy="106" r="7"/><circle class="dot-empty" cx="106" cy="106" r="7"/><circle class="dot-empty" cx="130" cy="106" r="7"/>
+      <circle class="dot-empty" cx="10" cy="130" r="7"/><circle class="dot-empty" cx="34" cy="130" r="7"/><circle class="dot-empty" cx="58" cy="130" r="7"/><circle class="dot-empty" cx="82" cy="130" r="7"/><circle class="dot-empty" cx="106" cy="130" r="7"/><circle class="dot-empty" cx="130" cy="130" r="7"/>
+    </g>
+    <text class="serif muted" x="35" y="224" font-size="12">vertikaler Bildanteil</text>
+  </g>
+
+  <text class="serif muted" x="44" y="250" font-size="13">σᵢ skaliert die Form uᵢvᵢᵀ zum sichtbaren Bildbaustein.</text>
+</svg>

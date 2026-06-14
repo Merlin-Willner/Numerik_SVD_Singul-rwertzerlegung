@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 175" role="img" aria-label="Start der Suche nach einem SVD-Baustein ueber das Spaltenmuster v">
+  <rect width="760" height="175" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .u { fill: #1e88ff; }
+      .v { fill: #16a34a; }
+      .sigma { fill: #f2aa00; }
+      .line { stroke: #d8d8d8; }
+      .arrow { stroke: #111111; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); }
+      .cell { stroke: #ffffff; stroke-width: 1; }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <text class="serif ink" x="34" y="28" font-size="17">Bildbaustein</text>
+  <g transform="translate(34 44)">
+    <rect x="0" y="0" width="108" height="108" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.3"/>
+    <circle class="cell" cx="13" cy="13" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="13" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="13" r="7" fill="#111111"/><circle class="cell" cx="61" cy="13" r="7" fill="#111111"/><circle class="cell" cx="77" cy="13" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="13" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="29" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="29" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="29" r="7" fill="#111111"/><circle class="cell" cx="61" cy="29" r="7" fill="#111111"/><circle class="cell" cx="77" cy="29" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="29" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="45" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="45" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="45" r="7" fill="#111111"/><circle class="cell" cx="61" cy="45" r="7" fill="#111111"/><circle class="cell" cx="77" cy="45" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="45" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="61" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="61" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="61" r="7" fill="#111111"/><circle class="cell" cx="61" cy="61" r="7" fill="#111111"/><circle class="cell" cx="77" cy="61" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="61" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="61" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="77" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="77" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="61" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="77" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="93" r="7" fill="#eeeeee"/>
+  </g>
+
+  <text class="serif ink" x="190" y="72" font-size="25">B<tspan baseline-shift="sub" font-size="16">i</tspan> = </text>
+  <text class="serif sigma" x="260" y="72" font-size="25">σ<tspan baseline-shift="sub" font-size="15">i</tspan></text>
+  <text class="serif u" x="292" y="72" font-size="25">u<tspan baseline-shift="sub" font-size="15">i</tspan></text>
+  <text class="serif v" x="326" y="72" font-size="25">v<tspan baseline-shift="sub" font-size="15">i</tspan><tspan baseline-shift="super" font-size="15">T</tspan></text>
+  <text class="serif muted" x="236" y="105" font-size="15">später folgen Stärke und Höhenverteilung</text>
+
+  <path class="arrow" d="M455 72 C500 72, 512 111, 556 111"/>
+
+  <text class="serif v" x="560" y="56" font-size="17">Suche starten bei v</text>
+  <g transform="translate(558 72)">
+    <rect x="0" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="12" y="21" font-size="15">0</text>
+    <rect x="31" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="43" y="21" font-size="15">0</text>
+    <rect x="62" y="0" width="31" height="31" fill="#d9f2df" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="74" y="21" font-size="15">1</text>
+    <rect x="93" y="0" width="31" height="31" fill="#d9f2df" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="105" y="21" font-size="15">1</text>
+    <rect x="124" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="136" y="21" font-size="15">0</text>
+    <rect x="155" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="167" y="21" font-size="15">0</text>
+  </g>
+  <text class="serif muted" x="558" y="126" font-size="14">Muster über die Spalten</text>
+  <text class="serif muted" x="558" y="146" font-size="12">vereinfachtes 0/1-Beispiel</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 230" role="img" aria-label="Eigenwert als quadrierte Staerke und Singulaerwert als tatsaechliche Staerke eines Spaltenmusters">
+  <rect width="980" height="230" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .v { fill: #16a34a; }
+      .u { fill: #1e88ff; }
+      .sigma { fill: #f2aa00; }
+      .lambda { fill: #4a4a4a; }
+      .arrow { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .cell-green { fill: #d9f2df; stroke: #16a34a; stroke-width: 1.2; }
+      .cell-blue { fill: #e8f2ff; stroke: #1e88ff; stroke-width: 1.2; }
+      .cell-light { fill: #f7f7f7; stroke: #d8d8d8; stroke-width: 1.1; }
+      .box { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.4; }
+      .lambda-box { fill: #f7f7f7; stroke: #4a4a4a; stroke-width: 1.5; }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <text class="serif v" x="36" y="35" font-size="17">vᵢ</text>
+  <text class="serif muted" x="28" y="58" font-size="13">Spaltenmuster</text>
+  <g transform="translate(28 78)">
+    <rect class="cell-light" x="0" y="0" width="24" height="24"/><rect class="cell-light" x="24" y="0" width="24" height="24"/>
+    <rect class="cell-green" x="48" y="0" width="24" height="24"/><rect class="cell-green" x="72" y="0" width="24" height="24"/>
+    <rect class="cell-light" x="96" y="0" width="24" height="24"/><rect class="cell-light" x="120" y="0" width="24" height="24"/>
+  </g>
+
+  <path class="arrow" d="M195 90 L275 90"/>
+  <text class="serif muted" x="205" y="68" font-size="13">A anwenden</text>
+
+  <text class="serif u" x="305" y="35" font-size="17">Avᵢ</text>
+  <text class="serif muted" x="282" y="58" font-size="13">Höhenantwort</text>
+  <g transform="translate(322 72)">
+    <rect class="cell-blue" x="0" y="0" width="26" height="18"/>
+    <rect class="cell-blue" x="0" y="18" width="26" height="18"/>
+    <rect class="cell-blue" x="0" y="36" width="26" height="18"/>
+    <rect class="cell-blue" x="0" y="54" width="26" height="18"/>
+    <rect class="cell-blue" x="0" y="72" width="26" height="18"/>
+  </g>
+
+  <path class="arrow" d="M385 90 L465 90"/>
+  <text class="serif muted" x="393" y="68" font-size="13">Länge messen</text>
+
+  <g transform="translate(500 70)">
+    <text class="serif sigma" x="0" y="-14" font-size="17">σᵢ = ||Avᵢ||</text>
+    <rect class="box" x="0" y="0" width="126" height="22"/>
+    <rect x="0" y="0" width="92" height="22" fill="#f2aa00"/>
+    <circle cx="92" cy="11" r="8" fill="#111111"/>
+    <text class="serif muted" x="32" y="48" font-size="13">Stärke</text>
+  </g>
+
+  <path class="arrow" d="M660 90 L740 90"/>
+  <text class="serif muted" x="677" y="68" font-size="13">quadrieren</text>
+
+  <g transform="translate(770 58)">
+    <rect class="lambda-box" x="0" y="0" width="170" height="74" rx="4"/>
+    <text class="serif lambda" x="28" y="30" font-size="21">λᵢ = σᵢ²</text>
+    <text class="serif muted" x="29" y="55" font-size="14">quadrierte Stärke</text>
+  </g>
+
+  <g transform="translate(330 170)">
+    <rect class="box" x="0" y="0" width="330" height="42" rx="3"/>
+    <text class="serif ink" x="18" y="27" font-size="15">Beispiel: λᵢ = 16  ⇒  σᵢ = √16 = 4</text>
+  </g>
+</svg>

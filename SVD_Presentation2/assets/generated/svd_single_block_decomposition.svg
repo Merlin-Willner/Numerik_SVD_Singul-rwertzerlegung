@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-label="Zerlegung eines einzelnen SVD Bildbausteins in u1, v1 transponiert und sigma1">
+  <rect width="1200" height="430" fill="#ffffff"/>
+  <defs>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#111111" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .muted { fill: #666666; }
+      .ink { fill: #111111; }
+      .blue { fill: #1e88ff; }
+      .green { fill: #16a34a; }
+      .orange { fill: #f2aa00; }
+      .panel { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.5; }
+      .strong-panel { fill: #ffffff; stroke: #111111; stroke-width: 1.8; }
+      .cell { stroke: #ffffff; stroke-width: 1; }
+      .box { fill: #ffffff; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <g class="serif">
+    <text x="20" y="28" font-size="19" class="ink">1. Baustein aus Folie 17</text>
+    <text x="292" y="28" font-size="19" class="ink">2. Zerlegung in Vektoren</text>
+    <text x="602" y="28" font-size="19" class="ink">3. Aeusseres Produkt</text>
+    <text x="886" y="28" font-size="19" class="ink">4. Wirkung von σ₁</text>
+  </g>
+
+  <!-- Bereich 1 -->
+  <g transform="translate(20 48)" filter="url(#shadow)">
+    <rect class="panel" x="0" y="0" width="240" height="335" rx="6"/>
+    <text class="serif ink" x="20" y="30" font-size="22">Baustein 1</text>
+    <text class="serif" x="35" y="64" font-size="25">
+      <tspan class="orange">𝜎₁</tspan><tspan class="blue">𝑢₁</tspan><tspan class="green">𝑣₁ᵀ</tspan>
+    </text>
+    <g transform="translate(55 82)">
+      <rect x="-8" y="-8" width="156" height="156" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <g>
+        <circle class="cell" cx="10" cy="10" r="8" fill="#eeeeee"/><circle class="cell" cx="34" cy="10" r="8" fill="#eeeeee"/><circle class="cell" cx="58" cy="10" r="8" fill="#111111"/><circle class="cell" cx="82" cy="10" r="8" fill="#111111"/><circle class="cell" cx="106" cy="10" r="8" fill="#eeeeee"/><circle class="cell" cx="130" cy="10" r="8" fill="#eeeeee"/>
+        <circle class="cell" cx="10" cy="34" r="8" fill="#eeeeee"/><circle class="cell" cx="34" cy="34" r="8" fill="#eeeeee"/><circle class="cell" cx="58" cy="34" r="8" fill="#111111"/><circle class="cell" cx="82" cy="34" r="8" fill="#111111"/><circle class="cell" cx="106" cy="34" r="8" fill="#eeeeee"/><circle class="cell" cx="130" cy="34" r="8" fill="#eeeeee"/>
+        <circle class="cell" cx="10" cy="58" r="8" fill="#eeeeee"/><circle class="cell" cx="34" cy="58" r="8" fill="#eeeeee"/><circle class="cell" cx="58" cy="58" r="8" fill="#111111"/><circle class="cell" cx="82" cy="58" r="8" fill="#111111"/><circle class="cell" cx="106" cy="58" r="8" fill="#eeeeee"/><circle class="cell" cx="130" cy="58" r="8" fill="#eeeeee"/>
+        <circle class="cell" cx="10" cy="82" r="8" fill="#eeeeee"/><circle class="cell" cx="34" cy="82" r="8" fill="#eeeeee"/><circle class="cell" cx="58" cy="82" r="8" fill="#111111"/><circle class="cell" cx="82" cy="82" r="8" fill="#111111"/><circle class="cell" cx="106" cy="82" r="8" fill="#eeeeee"/><circle class="cell" cx="130" cy="82" r="8" fill="#eeeeee"/>
+        <circle class="cell" cx="10" cy="106" r="8" fill="#eeeeee"/><circle class="cell" cx="34" cy="106" r="8" fill="#eeeeee"/><circle class="cell" cx="58" cy="106" r="8" fill="#eeeeee"/><circle class="cell" cx="82" cy="106" r="8" fill="#eeeeee"/><circle class="cell" cx="106" cy="106" r="8" fill="#eeeeee"/><circle class="cell" cx="130" cy="106" r="8" fill="#eeeeee"/>
+        <circle class="cell" cx="10" cy="130" r="8" fill="#eeeeee"/><circle class="cell" cx="34" cy="130" r="8" fill="#eeeeee"/><circle class="cell" cx="58" cy="130" r="8" fill="#eeeeee"/><circle class="cell" cx="82" cy="130" r="8" fill="#eeeeee"/><circle class="cell" cx="106" cy="130" r="8" fill="#eeeeee"/><circle class="cell" cx="130" cy="130" r="8" fill="#eeeeee"/>
+      </g>
+    </g>
+    <text class="serif muted" x="66" y="248" font-size="16">vertikaler Anteil</text>
+    <text class="serif muted" x="20" y="285" font-size="15">Die Form ist schon sichtbar:</text>
+    <text class="serif muted" x="20" y="305" font-size="15">außen hell, Mitte dunkel.</text>
+  </g>
+
+  <text class="serif ink" x="272" y="218" font-size="26">wird zerlegt in</text>
+
+  <!-- Bereich 2 -->
+  <g transform="translate(300 48)" filter="url(#shadow)">
+    <rect class="panel" x="0" y="0" width="305" height="335" rx="6"/>
+    <text class="serif blue" x="28" y="33" font-size="24">𝑢₁</text>
+    <text class="serif muted" x="64" y="31" font-size="15">Höhenverteilung</text>
+    <g transform="translate(31 48)">
+      <rect class="box" x="0" y="0" width="34" height="30" stroke="#1e88ff"/><text class="serif ink" x="13" y="21" font-size="17">1</text>
+      <rect class="box" x="0" y="31" width="34" height="30" stroke="#1e88ff"/><text class="serif ink" x="13" y="52" font-size="17">1</text>
+      <rect class="box" x="0" y="62" width="34" height="30" stroke="#1e88ff"/><text class="serif ink" x="13" y="83" font-size="17">1</text>
+      <rect class="box" x="0" y="93" width="34" height="30" stroke="#1e88ff"/><text class="serif ink" x="13" y="114" font-size="17">1</text>
+      <rect class="box" x="0" y="124" width="34" height="30" stroke="#1e88ff"/><text class="serif ink" x="13" y="145" font-size="17">0</text>
+      <rect class="box" x="0" y="155" width="34" height="30" stroke="#1e88ff"/><text class="serif ink" x="13" y="176" font-size="17">0</text>
+    </g>
+    <text class="serif ink" x="92" y="139" font-size="30">×</text>
+    <text class="serif green" x="128" y="91" font-size="24">𝑣₁ᵀ</text>
+    <text class="serif muted" x="170" y="89" font-size="15">Spaltenmuster</text>
+    <g transform="translate(128 112)">
+      <rect class="box" x="0" y="0" width="26" height="30" stroke="#16a34a"/><text class="serif ink" x="8" y="21" font-size="16">0</text>
+      <rect class="box" x="27" y="0" width="26" height="30" stroke="#16a34a"/><text class="serif ink" x="35" y="21" font-size="16">0</text>
+      <rect class="box" x="54" y="0" width="26" height="30" stroke="#16a34a" fill="#eeeeee"/><text class="serif ink" x="62" y="21" font-size="16">1</text>
+      <rect class="box" x="81" y="0" width="26" height="30" stroke="#16a34a" fill="#eeeeee"/><text class="serif ink" x="89" y="21" font-size="16">1</text>
+      <rect class="box" x="108" y="0" width="26" height="30" stroke="#16a34a"/><text class="serif ink" x="116" y="21" font-size="16">0</text>
+      <rect class="box" x="135" y="0" width="26" height="30" stroke="#16a34a"/><text class="serif ink" x="143" y="21" font-size="16">0</text>
+    </g>
+    <text class="serif muted" x="24" y="247" font-size="15">𝑣₁ᵀ sagt: außen 0, Mitte 1.</text>
+    <text class="serif muted" x="24" y="268" font-size="15">𝑢₁ sagt: nur in den oberen Zeilen.</text>
+  </g>
+
+  <text class="serif ink" x="615" y="218" font-size="32">=</text>
+
+  <!-- Bereich 3 -->
+  <g transform="translate(650 48)" filter="url(#shadow)">
+    <rect class="panel" x="0" y="0" width="205" height="335" rx="6"/>
+    <text class="serif ink" x="34" y="33" font-size="23"><tspan class="blue">𝑢₁</tspan><tspan class="green">𝑣₁ᵀ</tspan></text>
+    <text class="serif muted" x="25" y="58" font-size="15">legt die Form fest</text>
+    <g transform="translate(22 72)">
+      <rect x="-6" y="-6" width="171" height="162" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <g class="serif" font-size="16" text-anchor="middle">
+        <g>
+          <rect class="box" x="0" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="13" y="17">0</text>
+          <rect class="box" x="27" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="40" y="17">0</text>
+          <rect class="box" x="54" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="67" y="17">1</text>
+          <rect class="box" x="81" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="94" y="17">1</text>
+          <rect class="box" x="108" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="121" y="17">0</text>
+          <rect class="box" x="135" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="148" y="17">0</text>
+        </g>
+        <g transform="translate(0 25)">
+          <rect class="box" x="0" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="13" y="17">0</text><rect class="box" x="27" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="40" y="17">0</text><rect class="box" x="54" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="67" y="17">1</text><rect class="box" x="81" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="94" y="17">1</text><rect class="box" x="108" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="121" y="17">0</text><rect class="box" x="135" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="148" y="17">0</text>
+        </g>
+        <g transform="translate(0 50)">
+          <rect class="box" x="0" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="13" y="17">0</text><rect class="box" x="27" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="40" y="17">0</text><rect class="box" x="54" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="67" y="17">1</text><rect class="box" x="81" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="94" y="17">1</text><rect class="box" x="108" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="121" y="17">0</text><rect class="box" x="135" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="148" y="17">0</text>
+        </g>
+        <g transform="translate(0 75)">
+          <rect class="box" x="0" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="13" y="17">0</text><rect class="box" x="27" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="40" y="17">0</text><rect class="box" x="54" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="67" y="17">1</text><rect class="box" x="81" y="0" width="26" height="24" stroke="#d8d8d8" fill="#eeeeee"/><text class="ink" x="94" y="17">1</text><rect class="box" x="108" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="121" y="17">0</text><rect class="box" x="135" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="148" y="17">0</text>
+        </g>
+        <g transform="translate(0 100)">
+          <rect class="box" x="0" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="13" y="17">0</text><rect class="box" x="27" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="40" y="17">0</text><rect class="box" x="54" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="67" y="17">0</text><rect class="box" x="81" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="94" y="17">0</text><rect class="box" x="108" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="121" y="17">0</text><rect class="box" x="135" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="148" y="17">0</text>
+        </g>
+        <g transform="translate(0 125)">
+          <rect class="box" x="0" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="13" y="17">0</text><rect class="box" x="27" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="40" y="17">0</text><rect class="box" x="54" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="67" y="17">0</text><rect class="box" x="81" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="94" y="17">0</text><rect class="box" x="108" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="121" y="17">0</text><rect class="box" x="135" y="0" width="26" height="24" stroke="#d8d8d8"/><text class="ink" x="148" y="17">0</text>
+        </g>
+      </g>
+    </g>
+    <text class="serif muted" x="20" y="247" font-size="15">Jede Zeile enthält dasselbe</text>
+    <text class="serif muted" x="20" y="267" font-size="15">Muster über die Spalten.</text>
+    <text class="serif muted" x="20" y="300" font-size="15">Das äußere Produkt macht</text>
+    <text class="serif muted" x="20" y="320" font-size="15">wieder eine 2D-Matrix.</text>
+  </g>
+
+  <text class="serif ink" x="872" y="218" font-size="30">×</text>
+
+  <!-- Bereich 4 -->
+  <g transform="translate(900 48)" filter="url(#shadow)">
+    <rect class="strong-panel" x="0" y="0" width="285" height="335" rx="6"/>
+    <text class="serif" x="28" y="33" font-size="23"><tspan class="orange">𝜎₁</tspan><tspan class="ink"> verändert die Stärke</tspan></text>
+    <text class="serif muted" x="34" y="60" font-size="15">gleiche Form, andere Sichtbarkeit</text>
+
+    <g transform="translate(15 86)">
+      <text class="serif muted" x="0" y="-12" font-size="14">klein</text>
+      <g>
+        <circle class="cell" cx="7" cy="7" r="5" fill="#f2f2f2"/><circle class="cell" cx="21" cy="7" r="5" fill="#f2f2f2"/><circle class="cell" cx="35" cy="7" r="5" fill="#cfcfcf"/><circle class="cell" cx="49" cy="7" r="5" fill="#cfcfcf"/><circle class="cell" cx="63" cy="7" r="5" fill="#f2f2f2"/><circle class="cell" cx="77" cy="7" r="5" fill="#f2f2f2"/>
+        <circle class="cell" cx="7" cy="21" r="5" fill="#f2f2f2"/><circle class="cell" cx="21" cy="21" r="5" fill="#f2f2f2"/><circle class="cell" cx="35" cy="21" r="5" fill="#cfcfcf"/><circle class="cell" cx="49" cy="21" r="5" fill="#cfcfcf"/><circle class="cell" cx="63" cy="21" r="5" fill="#f2f2f2"/><circle class="cell" cx="77" cy="21" r="5" fill="#f2f2f2"/>
+        <circle class="cell" cx="7" cy="35" r="5" fill="#f2f2f2"/><circle class="cell" cx="21" cy="35" r="5" fill="#f2f2f2"/><circle class="cell" cx="35" cy="35" r="5" fill="#cfcfcf"/><circle class="cell" cx="49" cy="35" r="5" fill="#cfcfcf"/><circle class="cell" cx="63" cy="35" r="5" fill="#f2f2f2"/><circle class="cell" cx="77" cy="35" r="5" fill="#f2f2f2"/>
+      </g>
+      <text class="serif muted" x="14" y="63" font-size="13">schwach</text>
+    </g>
+
+    <g transform="translate(100 86)">
+      <text class="serif muted" x="0" y="-12" font-size="14">mittel</text>
+      <g>
+        <circle class="cell" cx="7" cy="7" r="5" fill="#eeeeee"/><circle class="cell" cx="21" cy="7" r="5" fill="#eeeeee"/><circle class="cell" cx="35" cy="7" r="5" fill="#777777"/><circle class="cell" cx="49" cy="7" r="5" fill="#777777"/><circle class="cell" cx="63" cy="7" r="5" fill="#eeeeee"/><circle class="cell" cx="77" cy="7" r="5" fill="#eeeeee"/>
+        <circle class="cell" cx="7" cy="21" r="5" fill="#eeeeee"/><circle class="cell" cx="21" cy="21" r="5" fill="#eeeeee"/><circle class="cell" cx="35" cy="21" r="5" fill="#777777"/><circle class="cell" cx="49" cy="21" r="5" fill="#777777"/><circle class="cell" cx="63" cy="21" r="5" fill="#eeeeee"/><circle class="cell" cx="77" cy="21" r="5" fill="#eeeeee"/>
+        <circle class="cell" cx="7" cy="35" r="5" fill="#eeeeee"/><circle class="cell" cx="21" cy="35" r="5" fill="#eeeeee"/><circle class="cell" cx="35" cy="35" r="5" fill="#777777"/><circle class="cell" cx="49" cy="35" r="5" fill="#777777"/><circle class="cell" cx="63" cy="35" r="5" fill="#eeeeee"/><circle class="cell" cx="77" cy="35" r="5" fill="#eeeeee"/>
+      </g>
+      <text class="serif muted" x="15" y="63" font-size="13">sichtbar</text>
+    </g>
+
+    <g transform="translate(185 86)">
+      <text class="serif muted" x="0" y="-12" font-size="14">groß</text>
+      <g>
+        <circle class="cell" cx="7" cy="7" r="5" fill="#eeeeee"/><circle class="cell" cx="21" cy="7" r="5" fill="#eeeeee"/><circle class="cell" cx="35" cy="7" r="5" fill="#111111"/><circle class="cell" cx="49" cy="7" r="5" fill="#111111"/><circle class="cell" cx="63" cy="7" r="5" fill="#eeeeee"/><circle class="cell" cx="77" cy="7" r="5" fill="#eeeeee"/>
+        <circle class="cell" cx="7" cy="21" r="5" fill="#eeeeee"/><circle class="cell" cx="21" cy="21" r="5" fill="#eeeeee"/><circle class="cell" cx="35" cy="21" r="5" fill="#111111"/><circle class="cell" cx="49" cy="21" r="5" fill="#111111"/><circle class="cell" cx="63" cy="21" r="5" fill="#eeeeee"/><circle class="cell" cx="77" cy="21" r="5" fill="#eeeeee"/>
+        <circle class="cell" cx="7" cy="35" r="5" fill="#eeeeee"/><circle class="cell" cx="21" cy="35" r="5" fill="#eeeeee"/><circle class="cell" cx="35" cy="35" r="5" fill="#111111"/><circle class="cell" cx="49" cy="35" r="5" fill="#111111"/><circle class="cell" cx="63" cy="35" r="5" fill="#eeeeee"/><circle class="cell" cx="77" cy="35" r="5" fill="#eeeeee"/>
+      </g>
+      <text class="serif muted" x="12" y="63" font-size="13">dominant</text>
+    </g>
+
+    <text class="serif ink" x="30" y="214" font-size="22">𝐵₁ = <tspan class="orange">𝜎₁</tspan> · (<tspan class="blue">𝑢₁</tspan><tspan class="green">𝑣₁ᵀ</tspan>)</text>
+    <text class="serif muted" x="31" y="245" font-size="16">σ₁ verändert nicht die Form,</text>
+    <text class="serif muted" x="31" y="266" font-size="16">sondern die Stärke des Bausteins.</text>
+    <rect x="18" y="288" width="254" height="30" rx="4" fill="#f6f6f3" stroke="#d8d8d8"/>
+    <text class="serif ink" x="44" y="309" font-size="16">Stärke × Form = Bildbaustein</text>
+  </g>
+</svg>

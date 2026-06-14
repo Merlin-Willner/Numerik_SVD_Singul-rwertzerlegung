@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="Zusammenfassung der SVD als Weg von der Bildmatrix ueber Bildbausteine zur Kompression">
+  <rect width="1200" height="360" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .u { fill: #1e88ff; }
+      .v { fill: #16a34a; }
+      .sigma { fill: #f2aa00; }
+      .card { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.5; }
+      .soft { fill: #fbfbfb; stroke: #cfcfcf; stroke-width: 1.2; }
+      .cell0 { fill: #f5f5f5; stroke: #d4d4d4; stroke-width: 0.75; }
+      .cell1 { fill: #d6d6d6; stroke: #aaaaaa; stroke-width: 0.75; }
+      .cell2 { fill: #858585; stroke: #666666; stroke-width: 0.75; }
+      .cell3 { fill: #222222; stroke: #111111; stroke-width: 0.75; }
+      .arrow { stroke: #111111; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <!-- Block 1 -->
+  <g transform="translate(24 72)">
+    <rect class="card" x="0" y="0" width="178" height="172" rx="7"/>
+    <text class="serif ink" x="82" y="29" font-size="22">A</text>
+    <text class="serif muted" x="56" y="52" font-size="14">Bildmatrix</text>
+    <text class="serif muted" x="38" y="72" font-size="12">z. B. Graustufenbild</text>
+    <g transform="translate(43 91)">
+      <rect class="cell1" x="0" y="0" width="14" height="14"/><rect class="cell0" x="17" y="0" width="14" height="14"/><rect class="cell3" x="34" y="0" width="14" height="14"/><rect class="cell3" x="51" y="0" width="14" height="14"/><rect class="cell0" x="68" y="0" width="14" height="14"/><rect class="cell0" x="85" y="0" width="14" height="14"/>
+      <rect class="cell2" x="0" y="17" width="14" height="14"/><rect class="cell2" x="17" y="17" width="14" height="14"/><rect class="cell3" x="34" y="17" width="14" height="14"/><rect class="cell3" x="51" y="17" width="14" height="14"/><rect class="cell2" x="68" y="17" width="14" height="14"/><rect class="cell2" x="85" y="17" width="14" height="14"/>
+      <rect class="cell2" x="0" y="34" width="14" height="14"/><rect class="cell2" x="17" y="34" width="14" height="14"/><rect class="cell3" x="34" y="34" width="14" height="14"/><rect class="cell2" x="51" y="34" width="14" height="14"/><rect class="cell2" x="68" y="34" width="14" height="14"/><rect class="cell2" x="85" y="34" width="14" height="14"/>
+      <rect class="cell0" x="0" y="51" width="14" height="14"/><rect class="cell0" x="17" y="51" width="14" height="14"/><rect class="cell3" x="34" y="51" width="14" height="14"/><rect class="cell3" x="51" y="51" width="14" height="14"/><rect class="cell0" x="68" y="51" width="14" height="14"/><rect class="cell0" x="85" y="51" width="14" height="14"/>
+    </g>
+  </g>
+
+  <path class="arrow" d="M216 151 L262 151"/>
+  <text class="serif muted" x="207" y="125" font-size="13">Muster suchen</text>
+
+  <!-- Block 2 -->
+  <g transform="translate(276 72)">
+    <rect class="card" x="0" y="0" width="178" height="172" rx="7"/>
+    <text class="serif ink" x="62" y="31" font-size="21">AᵀA</text>
+    <text class="serif muted" x="39" y="54" font-size="14">Bewertungsmatrix</text>
+    <text class="serif v" x="38" y="83" font-size="13">findet vᵢ</text>
+    <text class="serif sigma" x="102" y="83" font-size="13">und σᵢ</text>
+    <g transform="translate(54 104)">
+      <rect class="soft" x="0" y="0" width="70" height="45" rx="3"/>
+      <path d="M0 15 H70 M0 30 H70 M23 0 V45 M46 0 V45" stroke="#d0d0d0" stroke-width="1"/>
+      <text class="serif ink" x="16" y="29" font-size="14">n×n</text>
+    </g>
+  </g>
+
+  <path class="arrow" d="M468 151 L514 151"/>
+  <text class="serif muted" x="461" y="125" font-size="13">vᵢ, σᵢ, uᵢ</text>
+
+  <!-- Block 3 -->
+  <g transform="translate(528 72)">
+    <rect class="card" x="0" y="0" width="196" height="172" rx="7"/>
+    <text class="serif ink" x="23" y="31" font-size="18">Bᵢ = <tspan class="sigma">σᵢ</tspan><tspan class="u">uᵢ</tspan><tspan class="v">vᵢᵀ</tspan></text>
+    <text class="serif muted" x="58" y="54" font-size="14">Bildbaustein</text>
+    <text class="serif v" x="30" y="86" font-size="13">vᵢᵀ: Spaltenmuster</text>
+    <text class="serif u" x="30" y="109" font-size="13">uᵢ: Höhenverteilung</text>
+    <text class="serif sigma" x="30" y="132" font-size="13">σᵢ: Stärke</text>
+  </g>
+
+  <path class="arrow" d="M738 151 L784 151"/>
+  <text class="serif muted" x="746" y="125" font-size="13">addieren</text>
+
+  <!-- Block 4 -->
+  <g transform="translate(798 72)">
+    <rect class="card" x="0" y="0" width="184" height="172" rx="7"/>
+    <text class="serif ink" x="20" y="31" font-size="17">A = Σ σᵢuᵢvᵢᵀ</text>
+    <text class="serif muted" x="48" y="54" font-size="14">alle Bausteine</text>
+    <text class="serif muted" x="32" y="78" font-size="13">exakte Rekonstruktion</text>
+    <g transform="translate(38 103)">
+      <rect class="cell3" x="0" y="0" width="18" height="18"/><rect class="cell0" x="21" y="0" width="18" height="18"/><rect class="cell2" x="42" y="0" width="18" height="18"/>
+      <text class="serif ink" x="67" y="15" font-size="18">+</text>
+      <rect class="cell1" x="91" y="0" width="18" height="18"/><rect class="cell0" x="112" y="0" width="18" height="18"/>
+      <text class="serif ink" x="50" y="49" font-size="18">= A</text>
+    </g>
+  </g>
+
+  <path class="arrow" d="M996 151 L1042 151"/>
+  <text class="serif muted" x="992" y="125" font-size="13">bei k abschneiden</text>
+
+  <!-- Block 5 -->
+  <g transform="translate(1050 72)">
+    <rect class="card" x="0" y="0" width="126" height="172" rx="7"/>
+    <text class="serif ink" x="18" y="31" font-size="17">Aₖ</text>
+    <text class="serif muted" x="20" y="54" font-size="13">erste k</text>
+    <g transform="translate(18 79)">
+      <rect class="cell3" x="0" y="0" width="16" height="16"/><rect class="cell2" x="20" y="0" width="16" height="16"/><rect class="cell1" x="40" y="0" width="16" height="16"/><rect class="cell0" x="60" y="0" width="16" height="16" opacity="0.45"/>
+      <rect class="cell3" x="0" y="22" width="16" height="16"/><rect class="cell2" x="20" y="22" width="16" height="16"/><rect class="cell1" x="40" y="22" width="16" height="16"/><rect class="cell0" x="60" y="22" width="16" height="16" opacity="0.45"/>
+    </g>
+    <text class="serif muted" x="14" y="139" font-size="12">schwache</text>
+    <text class="serif muted" x="14" y="155" font-size="12">weglassen</text>
+  </g>
+
+  <text class="serif sigma" x="365" y="306" font-size="17">Kleine σᵢ → schwache Bausteine. Für Kompression behalten wir die ersten k.</text>
+</svg>

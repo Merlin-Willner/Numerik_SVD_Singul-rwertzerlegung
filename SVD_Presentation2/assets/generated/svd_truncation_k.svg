@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 330" role="img" aria-label="Abschneiden der SVD nach den ersten k staerksten 6 mal 6 Bildbausteinen">
+  <rect width="1200" height="330" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .sigma { fill: #f2aa00; }
+      .keep { fill: #111111; }
+      .drop { fill: #8a8a8a; }
+      .card { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.4; }
+      .cut { stroke: #f2aa00; stroke-width: 2.6; stroke-dasharray: 7 6; }
+      .arrow { stroke: #111111; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); }
+      .cell0 { fill: #f5f5f5; stroke: #d5d5d5; stroke-width: 0.75; }
+      .cell1 { fill: #d4d4d4; stroke: #aaaaaa; stroke-width: 0.75; }
+      .cell2 { fill: #858585; stroke: #666666; stroke-width: 0.75; }
+      .cell3 { fill: #222222; stroke: #111111; stroke-width: 0.75; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <text class="serif ink" x="28" y="30" font-size="20">Bausteine sind nach Stärke sortiert</text>
+  <text class="serif sigma" x="28" y="53" font-size="14">σ₁ ≥ σ₂ ≥ σ₃ ≥ σ₄ ≥ σ₅ ≥ ...</text>
+
+  <!-- B1 -->
+  <g transform="translate(24 78)">
+    <rect class="card" x="0" y="0" width="122" height="148" rx="6"/>
+    <text class="serif keep" x="50" y="22" font-size="15">B₁</text>
+    <g transform="translate(18 39)">
+      <rect class="cell0" x="0" y="0" width="12" height="12"/><rect class="cell0" x="15" y="0" width="12" height="12"/><rect class="cell3" x="30" y="0" width="12" height="12"/><rect class="cell3" x="45" y="0" width="12" height="12"/><rect class="cell0" x="60" y="0" width="12" height="12"/><rect class="cell0" x="75" y="0" width="12" height="12"/>
+      <rect class="cell0" x="0" y="15" width="12" height="12"/><rect class="cell0" x="15" y="15" width="12" height="12"/><rect class="cell3" x="30" y="15" width="12" height="12"/><rect class="cell3" x="45" y="15" width="12" height="12"/><rect class="cell0" x="60" y="15" width="12" height="12"/><rect class="cell0" x="75" y="15" width="12" height="12"/>
+      <rect class="cell0" x="0" y="30" width="12" height="12"/><rect class="cell0" x="15" y="30" width="12" height="12"/><rect class="cell3" x="30" y="30" width="12" height="12"/><rect class="cell3" x="45" y="30" width="12" height="12"/><rect class="cell0" x="60" y="30" width="12" height="12"/><rect class="cell0" x="75" y="30" width="12" height="12"/>
+      <rect class="cell0" x="0" y="45" width="12" height="12"/><rect class="cell0" x="15" y="45" width="12" height="12"/><rect class="cell3" x="30" y="45" width="12" height="12"/><rect class="cell3" x="45" y="45" width="12" height="12"/><rect class="cell0" x="60" y="45" width="12" height="12"/><rect class="cell0" x="75" y="45" width="12" height="12"/>
+      <rect class="cell0" x="0" y="60" width="12" height="12"/><rect class="cell0" x="15" y="60" width="12" height="12"/><rect class="cell0" x="30" y="60" width="12" height="12"/><rect class="cell0" x="45" y="60" width="12" height="12"/><rect class="cell0" x="60" y="60" width="12" height="12"/><rect class="cell0" x="75" y="60" width="12" height="12"/>
+      <rect class="cell0" x="0" y="75" width="12" height="12"/><rect class="cell0" x="15" y="75" width="12" height="12"/><rect class="cell0" x="30" y="75" width="12" height="12"/><rect class="cell0" x="45" y="75" width="12" height="12"/><rect class="cell0" x="60" y="75" width="12" height="12"/><rect class="cell0" x="75" y="75" width="12" height="12"/>
+    </g>
+    <text class="serif sigma" x="34" y="135" font-size="12">σ₁ groß</text>
+  </g>
+
+  <text class="serif ink" x="154" y="158" font-size="25">+</text>
+
+  <!-- B2 -->
+  <g transform="translate(180 78)">
+    <rect class="card" x="0" y="0" width="122" height="148" rx="6"/>
+    <text class="serif keep" x="50" y="22" font-size="15">B₂</text>
+    <g transform="translate(18 39)">
+      <rect class="cell0" x="0" y="0" width="12" height="12"/><rect class="cell0" x="15" y="0" width="12" height="12"/><rect class="cell0" x="30" y="0" width="12" height="12"/><rect class="cell0" x="45" y="0" width="12" height="12"/><rect class="cell0" x="60" y="0" width="12" height="12"/><rect class="cell0" x="75" y="0" width="12" height="12"/>
+      <rect class="cell2" x="0" y="15" width="12" height="12"/><rect class="cell2" x="15" y="15" width="12" height="12"/><rect class="cell2" x="30" y="15" width="12" height="12"/><rect class="cell2" x="45" y="15" width="12" height="12"/><rect class="cell2" x="60" y="15" width="12" height="12"/><rect class="cell2" x="75" y="15" width="12" height="12"/>
+      <rect class="cell2" x="0" y="30" width="12" height="12"/><rect class="cell2" x="15" y="30" width="12" height="12"/><rect class="cell2" x="30" y="30" width="12" height="12"/><rect class="cell2" x="45" y="30" width="12" height="12"/><rect class="cell2" x="60" y="30" width="12" height="12"/><rect class="cell2" x="75" y="30" width="12" height="12"/>
+      <rect class="cell0" x="0" y="45" width="12" height="12"/><rect class="cell0" x="15" y="45" width="12" height="12"/><rect class="cell0" x="30" y="45" width="12" height="12"/><rect class="cell0" x="45" y="45" width="12" height="12"/><rect class="cell0" x="60" y="45" width="12" height="12"/><rect class="cell0" x="75" y="45" width="12" height="12"/>
+      <rect class="cell0" x="0" y="60" width="12" height="12"/><rect class="cell0" x="15" y="60" width="12" height="12"/><rect class="cell0" x="30" y="60" width="12" height="12"/><rect class="cell0" x="45" y="60" width="12" height="12"/><rect class="cell0" x="60" y="60" width="12" height="12"/><rect class="cell0" x="75" y="60" width="12" height="12"/>
+      <rect class="cell0" x="0" y="75" width="12" height="12"/><rect class="cell0" x="15" y="75" width="12" height="12"/><rect class="cell0" x="30" y="75" width="12" height="12"/><rect class="cell0" x="45" y="75" width="12" height="12"/><rect class="cell0" x="60" y="75" width="12" height="12"/><rect class="cell0" x="75" y="75" width="12" height="12"/>
+    </g>
+    <text class="serif sigma" x="27" y="135" font-size="12">σ₂ mittel</text>
+  </g>
+
+  <text class="serif ink" x="310" y="158" font-size="25">+</text>
+
+  <!-- B3 -->
+  <g transform="translate(336 78)">
+    <rect class="card" x="0" y="0" width="122" height="148" rx="6"/>
+    <text class="serif keep" x="50" y="22" font-size="15">B₃</text>
+    <g transform="translate(18 39)">
+      <rect class="cell1" x="0" y="0" width="12" height="12"/><rect class="cell0" x="15" y="0" width="12" height="12"/><rect class="cell0" x="30" y="0" width="12" height="12"/><rect class="cell0" x="45" y="0" width="12" height="12"/><rect class="cell0" x="60" y="0" width="12" height="12"/><rect class="cell0" x="75" y="0" width="12" height="12"/>
+      <rect class="cell0" x="0" y="15" width="12" height="12"/><rect class="cell1" x="15" y="15" width="12" height="12"/><rect class="cell0" x="30" y="15" width="12" height="12"/><rect class="cell0" x="45" y="15" width="12" height="12"/><rect class="cell0" x="60" y="15" width="12" height="12"/><rect class="cell0" x="75" y="15" width="12" height="12"/>
+      <rect class="cell0" x="0" y="30" width="12" height="12"/><rect class="cell0" x="15" y="30" width="12" height="12"/><rect class="cell1" x="30" y="30" width="12" height="12"/><rect class="cell0" x="45" y="30" width="12" height="12"/><rect class="cell0" x="60" y="30" width="12" height="12"/><rect class="cell0" x="75" y="30" width="12" height="12"/>
+      <rect class="cell0" x="0" y="45" width="12" height="12"/><rect class="cell0" x="15" y="45" width="12" height="12"/><rect class="cell0" x="30" y="45" width="12" height="12"/><rect class="cell1" x="45" y="45" width="12" height="12"/><rect class="cell0" x="60" y="45" width="12" height="12"/><rect class="cell0" x="75" y="45" width="12" height="12"/>
+      <rect class="cell0" x="0" y="60" width="12" height="12"/><rect class="cell0" x="15" y="60" width="12" height="12"/><rect class="cell0" x="30" y="60" width="12" height="12"/><rect class="cell0" x="45" y="60" width="12" height="12"/><rect class="cell1" x="60" y="60" width="12" height="12"/><rect class="cell0" x="75" y="60" width="12" height="12"/>
+      <rect class="cell0" x="0" y="75" width="12" height="12"/><rect class="cell0" x="15" y="75" width="12" height="12"/><rect class="cell0" x="30" y="75" width="12" height="12"/><rect class="cell0" x="45" y="75" width="12" height="12"/><rect class="cell0" x="60" y="75" width="12" height="12"/><rect class="cell1" x="75" y="75" width="12" height="12"/>
+    </g>
+    <text class="serif sigma" x="21" y="135" font-size="12">σ₃ kleiner</text>
+  </g>
+
+  <line class="cut" x1="485" y1="60" x2="485" y2="240"/>
+  <text class="serif sigma" x="455" y="258" font-size="14">Schnitt bei k</text>
+  <text class="serif keep" x="170" y="258" font-size="14">behalten</text>
+  <text class="serif drop" x="542" y="258" font-size="14">weglassen</text>
+
+  <text class="serif ink" x="502" y="158" font-size="24" opacity="0.55">+</text>
+
+  <!-- weak omitted blocks -->
+  <g transform="translate(528 78)" opacity="0.48">
+    <rect class="card" x="0" y="0" width="122" height="148" rx="6"/>
+    <text class="serif drop" x="50" y="22" font-size="15">B₄</text>
+    <g transform="translate(18 39)">
+      <rect class="cell1" x="0" y="0" width="12" height="12"/><rect class="cell0" x="15" y="0" width="12" height="12"/><rect class="cell0" x="30" y="0" width="12" height="12"/><rect class="cell0" x="45" y="0" width="12" height="12"/><rect class="cell0" x="60" y="0" width="12" height="12"/><rect class="cell0" x="75" y="0" width="12" height="12"/>
+      <rect class="cell0" x="0" y="15" width="12" height="12"/><rect class="cell1" x="15" y="15" width="12" height="12"/><rect class="cell0" x="30" y="15" width="12" height="12"/><rect class="cell0" x="45" y="15" width="12" height="12"/><rect class="cell0" x="60" y="15" width="12" height="12"/><rect class="cell0" x="75" y="15" width="12" height="12"/>
+      <rect class="cell0" x="0" y="30" width="12" height="12"/><rect class="cell0" x="15" y="30" width="12" height="12"/><rect class="cell0" x="30" y="30" width="12" height="12"/><rect class="cell0" x="45" y="30" width="12" height="12"/><rect class="cell0" x="60" y="30" width="12" height="12"/><rect class="cell0" x="75" y="30" width="12" height="12"/>
+      <rect class="cell0" x="0" y="45" width="12" height="12"/><rect class="cell0" x="15" y="45" width="12" height="12"/><rect class="cell0" x="30" y="45" width="12" height="12"/><rect class="cell0" x="45" y="45" width="12" height="12"/><rect class="cell0" x="60" y="45" width="12" height="12"/><rect class="cell0" x="75" y="45" width="12" height="12"/>
+      <rect class="cell0" x="0" y="60" width="12" height="12"/><rect class="cell0" x="15" y="60" width="12" height="12"/><rect class="cell0" x="30" y="60" width="12" height="12"/><rect class="cell0" x="45" y="60" width="12" height="12"/><rect class="cell0" x="60" y="60" width="12" height="12"/><rect class="cell0" x="75" y="60" width="12" height="12"/>
+      <rect class="cell0" x="0" y="75" width="12" height="12"/><rect class="cell0" x="15" y="75" width="12" height="12"/><rect class="cell0" x="30" y="75" width="12" height="12"/><rect class="cell0" x="45" y="75" width="12" height="12"/><rect class="cell0" x="60" y="75" width="12" height="12"/><rect class="cell0" x="75" y="75" width="12" height="12"/>
+    </g>
+    <text class="serif sigma" x="35" y="135" font-size="12">σ₄ klein</text>
+  </g>
+
+  <path class="arrow" d="M675 151 L735 151"/>
+
+  <!-- Reconstruction and error -->
+  <g transform="translate(752 58)">
+    <rect class="card" x="0" y="0" width="176" height="178" rx="7"/>
+    <text class="serif ink" x="42" y="28" font-size="18">Aₖ = B₁+...+Bₖ</text>
+    <text class="serif muted" x="50" y="49" font-size="13">Rekonstruktion</text>
+    <g transform="translate(39 66)">
+      <rect class="cell1" x="0" y="0" width="13" height="13"/><rect class="cell0" x="16" y="0" width="13" height="13"/><rect class="cell3" x="32" y="0" width="13" height="13"/><rect class="cell3" x="48" y="0" width="13" height="13"/><rect class="cell0" x="64" y="0" width="13" height="13"/><rect class="cell0" x="80" y="0" width="13" height="13"/>
+      <rect class="cell2" x="0" y="16" width="13" height="13"/><rect class="cell2" x="16" y="16" width="13" height="13"/><rect class="cell3" x="32" y="16" width="13" height="13"/><rect class="cell3" x="48" y="16" width="13" height="13"/><rect class="cell2" x="64" y="16" width="13" height="13"/><rect class="cell2" x="80" y="16" width="13" height="13"/>
+      <rect class="cell2" x="0" y="32" width="13" height="13"/><rect class="cell2" x="16" y="32" width="13" height="13"/><rect class="cell3" x="32" y="32" width="13" height="13"/><rect class="cell2" x="48" y="32" width="13" height="13"/><rect class="cell2" x="64" y="32" width="13" height="13"/><rect class="cell2" x="80" y="32" width="13" height="13"/>
+      <rect class="cell0" x="0" y="48" width="13" height="13"/><rect class="cell0" x="16" y="48" width="13" height="13"/><rect class="cell3" x="32" y="48" width="13" height="13"/><rect class="cell3" x="48" y="48" width="13" height="13"/><rect class="cell0" x="64" y="48" width="13" height="13"/><rect class="cell0" x="80" y="48" width="13" height="13"/>
+      <rect class="cell0" x="0" y="64" width="13" height="13"/><rect class="cell0" x="16" y="64" width="13" height="13"/><rect class="cell0" x="32" y="64" width="13" height="13"/><rect class="cell0" x="48" y="64" width="13" height="13"/><rect class="cell1" x="64" y="64" width="13" height="13"/><rect class="cell0" x="80" y="64" width="13" height="13"/>
+      <rect class="cell0" x="0" y="80" width="13" height="13"/><rect class="cell0" x="16" y="80" width="13" height="13"/><rect class="cell0" x="32" y="80" width="13" height="13"/><rect class="cell0" x="48" y="80" width="13" height="13"/><rect class="cell0" x="64" y="80" width="13" height="13"/><rect class="cell1" x="80" y="80" width="13" height="13"/>
+    </g>
+    <text class="serif keep" x="41" y="160" font-size="13">starke Bausteine</text>
+  </g>
+
+  <g transform="translate(960 58)">
+    <rect class="card" x="0" y="0" width="176" height="178" rx="7"/>
+    <text class="serif ink" x="18" y="28" font-size="18">A - Aₖ = Bₖ₊₁+...</text>
+    <text class="serif muted" x="67" y="49" font-size="13">Fehler</text>
+    <g transform="translate(39 66)" opacity="0.55">
+      <rect class="cell1" x="0" y="0" width="13" height="13"/><rect class="cell0" x="16" y="0" width="13" height="13"/><rect class="cell0" x="32" y="0" width="13" height="13"/><rect class="cell0" x="48" y="0" width="13" height="13"/><rect class="cell0" x="64" y="0" width="13" height="13"/><rect class="cell0" x="80" y="0" width="13" height="13"/>
+      <rect class="cell0" x="0" y="16" width="13" height="13"/><rect class="cell1" x="16" y="16" width="13" height="13"/><rect class="cell0" x="32" y="16" width="13" height="13"/><rect class="cell0" x="48" y="16" width="13" height="13"/><rect class="cell0" x="64" y="16" width="13" height="13"/><rect class="cell0" x="80" y="16" width="13" height="13"/>
+      <rect class="cell0" x="0" y="32" width="13" height="13"/><rect class="cell0" x="16" y="32" width="13" height="13"/><rect class="cell0" x="32" y="32" width="13" height="13"/><rect class="cell0" x="48" y="32" width="13" height="13"/><rect class="cell0" x="64" y="32" width="13" height="13"/><rect class="cell0" x="80" y="32" width="13" height="13"/>
+      <rect class="cell0" x="0" y="48" width="13" height="13"/><rect class="cell0" x="16" y="48" width="13" height="13"/><rect class="cell0" x="32" y="48" width="13" height="13"/><rect class="cell0" x="48" y="48" width="13" height="13"/><rect class="cell0" x="64" y="48" width="13" height="13"/><rect class="cell0" x="80" y="48" width="13" height="13"/>
+      <rect class="cell0" x="0" y="64" width="13" height="13"/><rect class="cell0" x="16" y="64" width="13" height="13"/><rect class="cell0" x="32" y="64" width="13" height="13"/><rect class="cell0" x="48" y="64" width="13" height="13"/><rect class="cell0" x="64" y="64" width="13" height="13"/><rect class="cell0" x="80" y="64" width="13" height="13"/>
+      <rect class="cell0" x="0" y="80" width="13" height="13"/><rect class="cell0" x="16" y="80" width="13" height="13"/><rect class="cell0" x="32" y="80" width="13" height="13"/><rect class="cell0" x="48" y="80" width="13" height="13"/><rect class="cell0" x="64" y="80" width="13" height="13"/><rect class="cell0" x="80" y="80" width="13" height="13"/>
+    </g>
+    <text class="serif drop" x="38" y="160" font-size="13">schwache Bausteine</text>
+  </g>
+
+  <text class="serif sigma" x="360" y="295" font-size="17">Kleine σᵢ → schwache Bildschichten → kleiner Fehler</text>
+</svg>

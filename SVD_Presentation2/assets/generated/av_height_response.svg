@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 220" role="img" aria-label="Bildbaustein als Matrix A, multipliziert mit einem Spaltenmuster v, ergibt die Hoehenantwort Av">
+  <rect width="980" height="220" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .v { fill: #16a34a; }
+      .u { fill: #1e88ff; }
+      .sigma { fill: #f2aa00; }
+      .arrow { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .cell { stroke: #ffffff; stroke-width: 1; }
+      .mcell { stroke: #d8d8d8; stroke-width: 1.1; }
+      .hi { fill: #d9f2df; }
+      .lo { fill: #f7f7f7; }
+      .bluecell { fill: #e8f2ff; stroke: #1e88ff; stroke-width: 1.2; }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <text class="serif ink" x="24" y="27" font-size="16">Bildbaustein aus Folie 20</text>
+  <g transform="translate(35 45)">
+    <rect x="0" y="0" width="108" height="108" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.2"/>
+    <circle class="cell" cx="13" cy="13" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="13" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="13" r="7" fill="#111111"/><circle class="cell" cx="61" cy="13" r="7" fill="#111111"/><circle class="cell" cx="77" cy="13" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="13" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="29" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="29" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="29" r="7" fill="#111111"/><circle class="cell" cx="61" cy="29" r="7" fill="#111111"/><circle class="cell" cx="77" cy="29" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="29" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="45" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="45" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="45" r="7" fill="#111111"/><circle class="cell" cx="61" cy="45" r="7" fill="#111111"/><circle class="cell" cx="77" cy="45" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="45" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="61" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="61" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="61" r="7" fill="#111111"/><circle class="cell" cx="61" cy="61" r="7" fill="#111111"/><circle class="cell" cx="77" cy="61" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="61" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="61" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="77" cy="77" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="77" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="13" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="29" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="45" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="61" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="77" cy="93" r="7" fill="#eeeeee"/><circle class="cell" cx="93" cy="93" r="7" fill="#eeeeee"/>
+  </g>
+  <text class="serif muted" x="45" y="178" font-size="13">vereinfachtes 0/1-Beispiel</text>
+
+  <path class="arrow" d="M165 96 L205 96"/>
+
+  <text class="serif ink" x="220" y="27" font-size="16">als Matrix A</text>
+  <g transform="translate(220 45)">
+    <rect class="mcell lo" x="0" y="0" width="22" height="22"/><text class="serif ink" x="7" y="16" font-size="12">0</text>
+    <rect class="mcell lo" x="22" y="0" width="22" height="22"/><text class="serif ink" x="29" y="16" font-size="12">0</text>
+    <rect class="mcell hi" x="44" y="0" width="22" height="22"/><text class="serif ink" x="51" y="16" font-size="12">1</text>
+    <rect class="mcell hi" x="66" y="0" width="22" height="22"/><text class="serif ink" x="73" y="16" font-size="12">1</text>
+    <rect class="mcell lo" x="88" y="0" width="22" height="22"/><text class="serif ink" x="95" y="16" font-size="12">0</text>
+    <rect class="mcell lo" x="110" y="0" width="22" height="22"/><text class="serif ink" x="117" y="16" font-size="12">0</text>
+
+    <rect class="mcell lo" x="0" y="22" width="22" height="22"/><text class="serif ink" x="7" y="38" font-size="12">0</text>
+    <rect class="mcell lo" x="22" y="22" width="22" height="22"/><text class="serif ink" x="29" y="38" font-size="12">0</text>
+    <rect class="mcell hi" x="44" y="22" width="22" height="22"/><text class="serif ink" x="51" y="38" font-size="12">1</text>
+    <rect class="mcell hi" x="66" y="22" width="22" height="22"/><text class="serif ink" x="73" y="38" font-size="12">1</text>
+    <rect class="mcell lo" x="88" y="22" width="22" height="22"/><text class="serif ink" x="95" y="38" font-size="12">0</text>
+    <rect class="mcell lo" x="110" y="22" width="22" height="22"/><text class="serif ink" x="117" y="38" font-size="12">0</text>
+
+    <rect class="mcell lo" x="0" y="44" width="22" height="22"/><text class="serif ink" x="7" y="60" font-size="12">0</text>
+    <rect class="mcell lo" x="22" y="44" width="22" height="22"/><text class="serif ink" x="29" y="60" font-size="12">0</text>
+    <rect class="mcell hi" x="44" y="44" width="22" height="22"/><text class="serif ink" x="51" y="60" font-size="12">1</text>
+    <rect class="mcell hi" x="66" y="44" width="22" height="22"/><text class="serif ink" x="73" y="60" font-size="12">1</text>
+    <rect class="mcell lo" x="88" y="44" width="22" height="22"/><text class="serif ink" x="95" y="60" font-size="12">0</text>
+    <rect class="mcell lo" x="110" y="44" width="22" height="22"/><text class="serif ink" x="117" y="60" font-size="12">0</text>
+
+    <rect class="mcell lo" x="0" y="66" width="22" height="22"/><text class="serif ink" x="7" y="82" font-size="12">0</text>
+    <rect class="mcell lo" x="22" y="66" width="22" height="22"/><text class="serif ink" x="29" y="82" font-size="12">0</text>
+    <rect class="mcell hi" x="44" y="66" width="22" height="22"/><text class="serif ink" x="51" y="82" font-size="12">1</text>
+    <rect class="mcell hi" x="66" y="66" width="22" height="22"/><text class="serif ink" x="73" y="82" font-size="12">1</text>
+    <rect class="mcell lo" x="88" y="66" width="22" height="22"/><text class="serif ink" x="95" y="82" font-size="12">0</text>
+    <rect class="mcell lo" x="110" y="66" width="22" height="22"/><text class="serif ink" x="117" y="82" font-size="12">0</text>
+
+    <rect class="mcell lo" x="0" y="88" width="22" height="22"/><text class="serif ink" x="7" y="104" font-size="12">0</text>
+    <rect class="mcell lo" x="22" y="88" width="22" height="22"/><text class="serif ink" x="29" y="104" font-size="12">0</text>
+    <rect class="mcell lo" x="44" y="88" width="22" height="22"/><text class="serif ink" x="51" y="104" font-size="12">0</text>
+    <rect class="mcell lo" x="66" y="88" width="22" height="22"/><text class="serif ink" x="73" y="104" font-size="12">0</text>
+    <rect class="mcell lo" x="88" y="88" width="22" height="22"/><text class="serif ink" x="95" y="104" font-size="12">0</text>
+    <rect class="mcell lo" x="110" y="88" width="22" height="22"/><text class="serif ink" x="117" y="104" font-size="12">0</text>
+
+    <rect class="mcell lo" x="0" y="110" width="22" height="22"/><text class="serif ink" x="7" y="126" font-size="12">0</text>
+    <rect class="mcell lo" x="22" y="110" width="22" height="22"/><text class="serif ink" x="29" y="126" font-size="12">0</text>
+    <rect class="mcell lo" x="44" y="110" width="22" height="22"/><text class="serif ink" x="51" y="126" font-size="12">0</text>
+    <rect class="mcell lo" x="66" y="110" width="22" height="22"/><text class="serif ink" x="73" y="126" font-size="12">0</text>
+    <rect class="mcell lo" x="88" y="110" width="22" height="22"/><text class="serif ink" x="95" y="126" font-size="12">0</text>
+    <rect class="mcell lo" x="110" y="110" width="22" height="22"/><text class="serif ink" x="117" y="126" font-size="12">0</text>
+  </g>
+
+  <text class="serif ink" x="375" y="108" font-size="22">·</text>
+
+  <text class="serif v" x="405" y="27" font-size="16">Spaltenmuster v</text>
+  <g transform="translate(426 45)">
+    <rect class="mcell lo" x="0" y="0" width="28" height="22" stroke="#16a34a"/><text class="serif ink" x="10" y="16" font-size="12">0</text>
+    <rect class="mcell lo" x="0" y="22" width="28" height="22" stroke="#16a34a"/><text class="serif ink" x="10" y="38" font-size="12">0</text>
+    <rect class="mcell hi" x="0" y="44" width="28" height="22" stroke="#16a34a"/><text class="serif ink" x="10" y="60" font-size="12">1</text>
+    <rect class="mcell hi" x="0" y="66" width="28" height="22" stroke="#16a34a"/><text class="serif ink" x="10" y="82" font-size="12">1</text>
+    <rect class="mcell lo" x="0" y="88" width="28" height="22" stroke="#16a34a"/><text class="serif ink" x="10" y="104" font-size="12">0</text>
+    <rect class="mcell lo" x="0" y="110" width="28" height="22" stroke="#16a34a"/><text class="serif ink" x="10" y="126" font-size="12">0</text>
+  </g>
+
+  <path class="arrow" d="M480 108 L525 108"/>
+
+  <text class="serif ink" x="545" y="27" font-size="16">zeilenweise Rechnung</text>
+  <g transform="translate(545 49)">
+    <text class="serif ink" x="0" y="0" font-size="13">001100 · v = 2</text>
+    <text class="serif ink" x="0" y="22" font-size="13">001100 · v = 2</text>
+    <text class="serif ink" x="0" y="44" font-size="13">001100 · v = 2</text>
+    <text class="serif ink" x="0" y="66" font-size="13">001100 · v = 2</text>
+    <text class="serif ink" x="0" y="88" font-size="13">000000 · v = 0</text>
+    <text class="serif ink" x="0" y="110" font-size="13">000000 · v = 0</text>
+  </g>
+
+  <path class="arrow" d="M705 108 L750 108"/>
+
+  <text class="serif u" x="770" y="27" font-size="16">Höhenantwort Av</text>
+  <g transform="translate(805 45)">
+    <rect class="bluecell" x="0" y="0" width="42" height="22"/><text class="serif ink" x="17" y="16" font-size="13">2</text>
+    <rect class="bluecell" x="0" y="22" width="42" height="22"/><text class="serif ink" x="17" y="38" font-size="13">2</text>
+    <rect class="bluecell" x="0" y="44" width="42" height="22"/><text class="serif ink" x="17" y="60" font-size="13">2</text>
+    <rect class="bluecell" x="0" y="66" width="42" height="22"/><text class="serif ink" x="17" y="82" font-size="13">2</text>
+    <rect class="bluecell" x="0" y="88" width="42" height="22"/><text class="serif ink" x="17" y="104" font-size="13">0</text>
+    <rect class="bluecell" x="0" y="110" width="42" height="22"/><text class="serif ink" x="17" y="126" font-size="13">0</text>
+  </g>
+  <text class="serif muted" x="758" y="190" font-size="13">zeigt die Stärke je Bildzeile</text>
+</svg>

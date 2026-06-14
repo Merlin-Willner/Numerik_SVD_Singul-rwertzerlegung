@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 290" role="img" aria-label="Vom Spaltenmuster ueber die Hoehenantwort zur normierten Hoehenverteilung">
+  <rect width="1120" height="290" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .v { fill: #16a34a; }
+      .u { fill: #1e88ff; }
+      .sigma { fill: #f2aa00; }
+      .card { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.5; }
+      .cell-green { fill: #d9f2df; stroke: #16a34a; stroke-width: 1.2; }
+      .cell-blue { fill: #e8f2ff; stroke: #1e88ff; stroke-width: 1.2; }
+      .cell-light { fill: #f7f7f7; stroke: #d8d8d8; stroke-width: 1.1; }
+      .arrow { stroke: #111111; stroke-width: 2.1; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <!-- v_i -->
+  <g transform="translate(24 48)">
+    <rect class="card" x="0" y="0" width="178" height="152" rx="6"/>
+    <text class="serif v" x="69" y="29" font-size="19">vᵢ</text>
+    <text class="serif muted" x="39" y="51" font-size="13">Spaltenmuster</text>
+    <g transform="translate(15 78)">
+      <rect class="cell-light" x="0" y="0" width="24" height="24"/><text class="serif ink" x="9" y="16" font-size="11">0</text>
+      <rect class="cell-light" x="24" y="0" width="24" height="24"/><text class="serif ink" x="33" y="16" font-size="11">0</text>
+      <rect class="cell-green" x="48" y="0" width="24" height="24"/><text class="serif ink" x="57" y="16" font-size="11">1</text>
+      <rect class="cell-green" x="72" y="0" width="24" height="24"/><text class="serif ink" x="81" y="16" font-size="11">1</text>
+      <rect class="cell-light" x="96" y="0" width="24" height="24"/><text class="serif ink" x="105" y="16" font-size="11">0</text>
+      <rect class="cell-light" x="120" y="0" width="24" height="24"/><text class="serif ink" x="129" y="16" font-size="11">0</text>
+    </g>
+  </g>
+
+  <path class="arrow" d="M218 124 L278 124"/>
+  <text class="serif muted" x="224" y="103" font-size="13">A anwenden</text>
+
+  <!-- Av_i -->
+  <g transform="translate(292 36)">
+    <rect class="card" x="0" y="0" width="152" height="178" rx="6"/>
+    <text class="serif u" x="56" y="29" font-size="19">Avᵢ</text>
+    <text class="serif muted" x="35" y="51" font-size="13">Höhenantwort</text>
+    <g transform="translate(59 65)">
+      <rect class="cell-blue" x="0" y="0" width="34" height="18"/><text class="serif ink" x="13" y="14" font-size="11">2</text>
+      <rect class="cell-blue" x="0" y="18" width="34" height="18"/><text class="serif ink" x="13" y="32" font-size="11">2</text>
+      <rect class="cell-blue" x="0" y="36" width="34" height="18"/><text class="serif ink" x="13" y="50" font-size="11">2</text>
+      <rect class="cell-blue" x="0" y="54" width="34" height="18"/><text class="serif ink" x="13" y="68" font-size="11">2</text>
+      <rect class="cell-light" x="0" y="72" width="34" height="18"/><text class="serif ink" x="13" y="86" font-size="11">0</text>
+      <rect class="cell-light" x="0" y="90" width="34" height="18"/><text class="serif ink" x="13" y="104" font-size="11">0</text>
+    </g>
+    <text class="serif sigma" x="31" y="160" font-size="13">Form + Stärke</text>
+  </g>
+
+  <path class="arrow" d="M460 124 L520 124"/>
+  <text class="serif muted" x="473" y="103" font-size="13">Länge</text>
+
+  <!-- sigma -->
+  <g transform="translate(536 48)">
+    <rect class="card" x="0" y="0" width="178" height="152" rx="6"/>
+    <text class="serif sigma" x="50" y="29" font-size="19">σᵢ = 4</text>
+    <text class="serif muted" x="42" y="52" font-size="13">Stärke von Avᵢ</text>
+    <text class="serif ink" x="26" y="85" font-size="13">||Avᵢ|| = √(2²+2²+2²+2²)</text>
+    <text class="serif ink" x="74" y="111" font-size="17">= 4</text>
+  </g>
+
+  <path class="arrow" d="M730 124 L790 124"/>
+  <text class="serif muted" x="735" y="103" font-size="13">durch σᵢ teilen</text>
+
+  <!-- u_i -->
+  <g transform="translate(806 36)">
+    <rect class="card" x="0" y="0" width="152" height="178" rx="6"/>
+    <text class="serif u" x="64" y="29" font-size="19">uᵢ</text>
+    <text class="serif muted" x="22" y="51" font-size="13">normierte Höhenverteilung</text>
+    <g transform="translate(54 65)">
+      <rect class="cell-blue" x="0" y="0" width="44" height="18"/><text class="serif ink" x="10" y="14" font-size="11">0,5</text>
+      <rect class="cell-blue" x="0" y="18" width="44" height="18"/><text class="serif ink" x="10" y="32" font-size="11">0,5</text>
+      <rect class="cell-blue" x="0" y="36" width="44" height="18"/><text class="serif ink" x="10" y="50" font-size="11">0,5</text>
+      <rect class="cell-blue" x="0" y="54" width="44" height="18"/><text class="serif ink" x="10" y="68" font-size="11">0,5</text>
+      <rect class="cell-light" x="0" y="72" width="44" height="18"/><text class="serif ink" x="19" y="86" font-size="11">0</text>
+      <rect class="cell-light" x="0" y="90" width="44" height="18"/><text class="serif ink" x="19" y="104" font-size="11">0</text>
+    </g>
+    <text class="serif u" x="49" y="160" font-size="13">||uᵢ|| = 1</text>
+  </g>
+
+  <!-- Rechnung -->
+  <g transform="translate(976 48)">
+    <rect class="card" x="0" y="0" width="124" height="152" rx="6"/>
+    <text class="serif ink" x="18" y="28" font-size="15">uᵢ = Avᵢ / σᵢ</text>
+    <text class="serif ink" x="20" y="61" font-size="13">= 1/4 · Avᵢ</text>
+    <text class="serif ink" x="20" y="94" font-size="13">2/4 = 0,5</text>
+    <text class="serif ink" x="20" y="120" font-size="13">0/4 = 0</text>
+  </g>
+
+  <text class="serif muted" x="24" y="252" font-size="14">Die Zahlen dienen nur zur Veranschaulichung. In der echten SVD sind vᵢ und uᵢ normierte Vektoren.</text>
+</svg>

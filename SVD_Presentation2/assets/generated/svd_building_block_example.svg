@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 300" role="img" aria-label="Drei SVD Bildbausteine und ihre erkennbare Summe">
+  <rect width="980" height="300" fill="#ffffff"/>
+
+  <defs>
+    <filter id="panelShadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#111111" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <g font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" fill="#111111">
+    <text x="24" y="30" font-size="19">einzelne Bildbausteine</text>
+    <text x="772" y="30" font-size="19">ueberlagerte Summe</text>
+  </g>
+
+  <line x1="720" y1="48" x2="720" y2="272" stroke="#d8d8d8" stroke-width="1.5"/>
+
+  <!-- Baustein 1: vertikales Muster -->
+  <g transform="translate(28 58)" filter="url(#panelShadow)">
+    <rect x="0" y="0" width="198" height="214" rx="6" fill="#ffffff" stroke="#f2aa00" stroke-width="2.4"/>
+    <text x="34" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">
+      <tspan fill="#f2aa00">𝜎₁</tspan><tspan fill="#1e88ff">𝑢₁</tspan><tspan fill="#16a34a">𝑣₁ᵀ</tspan>
+    </text>
+    <g transform="translate(34 55)">
+      <rect x="-7" y="-7" width="140" height="140" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <g stroke="#ffffff" stroke-width="0.8">
+        <circle cx="10" cy="10" r="8" fill="#f4f4f4"/><circle cx="31" cy="10" r="8" fill="#f4f4f4"/><circle cx="52" cy="10" r="8" fill="#151515"/><circle cx="73" cy="10" r="8" fill="#050505"/><circle cx="94" cy="10" r="8" fill="#f4f4f4"/><circle cx="115" cy="10" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="31" r="8" fill="#f4f4f4"/><circle cx="31" cy="31" r="8" fill="#f4f4f4"/><circle cx="52" cy="31" r="8" fill="#151515"/><circle cx="73" cy="31" r="8" fill="#050505"/><circle cx="94" cy="31" r="8" fill="#f4f4f4"/><circle cx="115" cy="31" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="52" r="8" fill="#f4f4f4"/><circle cx="31" cy="52" r="8" fill="#f4f4f4"/><circle cx="52" cy="52" r="8" fill="#151515"/><circle cx="73" cy="52" r="8" fill="#050505"/><circle cx="94" cy="52" r="8" fill="#f4f4f4"/><circle cx="115" cy="52" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="73" r="8" fill="#f4f4f4"/><circle cx="31" cy="73" r="8" fill="#f4f4f4"/><circle cx="52" cy="73" r="8" fill="#151515"/><circle cx="73" cy="73" r="8" fill="#050505"/><circle cx="94" cy="73" r="8" fill="#f4f4f4"/><circle cx="115" cy="73" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="94" r="8" fill="#f4f4f4"/><circle cx="31" cy="94" r="8" fill="#f4f4f4"/><circle cx="52" cy="94" r="8" fill="#f4f4f4"/><circle cx="73" cy="94" r="8" fill="#f4f4f4"/><circle cx="94" cy="94" r="8" fill="#f4f4f4"/><circle cx="115" cy="94" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="115" r="8" fill="#f4f4f4"/><circle cx="31" cy="115" r="8" fill="#f4f4f4"/><circle cx="52" cy="115" r="8" fill="#f4f4f4"/><circle cx="73" cy="115" r="8" fill="#f4f4f4"/><circle cx="94" cy="115" r="8" fill="#f4f4f4"/><circle cx="115" cy="115" r="8" fill="#f4f4f4"/>
+      </g>
+    </g>
+    <text x="42" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">wichtigster Anteil</text>
+  </g>
+
+  <text x="242" y="172" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="34" fill="#111111">+</text>
+
+  <!-- Baustein 2: horizontales Muster -->
+  <g transform="translate(280 58)" filter="url(#panelShadow)">
+    <rect x="0" y="0" width="198" height="214" rx="6" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.5"/>
+    <text x="34" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">
+      <tspan fill="#f2aa00">𝜎₂</tspan><tspan fill="#1e88ff">𝑢₂</tspan><tspan fill="#16a34a">𝑣₂ᵀ</tspan>
+    </text>
+    <g transform="translate(34 55)">
+      <rect x="-7" y="-7" width="140" height="140" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <g stroke="#ffffff" stroke-width="0.8">
+        <circle cx="10" cy="10" r="8" fill="#eeeeee"/><circle cx="31" cy="10" r="8" fill="#eeeeee"/><circle cx="52" cy="10" r="8" fill="#eeeeee"/><circle cx="73" cy="10" r="8" fill="#eeeeee"/><circle cx="94" cy="10" r="8" fill="#eeeeee"/><circle cx="115" cy="10" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="31" r="8" fill="#eeeeee"/><circle cx="31" cy="31" r="8" fill="#eeeeee"/><circle cx="52" cy="31" r="8" fill="#eeeeee"/><circle cx="73" cy="31" r="8" fill="#eeeeee"/><circle cx="94" cy="31" r="8" fill="#eeeeee"/><circle cx="115" cy="31" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="52" r="8" fill="#a8a8a8"/><circle cx="31" cy="52" r="8" fill="#a8a8a8"/><circle cx="52" cy="52" r="8" fill="#a8a8a8"/><circle cx="73" cy="52" r="8" fill="#a8a8a8"/><circle cx="94" cy="52" r="8" fill="#a8a8a8"/><circle cx="115" cy="52" r="8" fill="#a8a8a8"/>
+        <circle cx="10" cy="73" r="8" fill="#8e8e8e"/><circle cx="31" cy="73" r="8" fill="#8e8e8e"/><circle cx="52" cy="73" r="8" fill="#8e8e8e"/><circle cx="73" cy="73" r="8" fill="#8e8e8e"/><circle cx="94" cy="73" r="8" fill="#8e8e8e"/><circle cx="115" cy="73" r="8" fill="#8e8e8e"/>
+        <circle cx="10" cy="94" r="8" fill="#eeeeee"/><circle cx="31" cy="94" r="8" fill="#eeeeee"/><circle cx="52" cy="94" r="8" fill="#eeeeee"/><circle cx="73" cy="94" r="8" fill="#eeeeee"/><circle cx="94" cy="94" r="8" fill="#eeeeee"/><circle cx="115" cy="94" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="115" r="8" fill="#eeeeee"/><circle cx="31" cy="115" r="8" fill="#eeeeee"/><circle cx="52" cy="115" r="8" fill="#eeeeee"/><circle cx="73" cy="115" r="8" fill="#eeeeee"/><circle cx="94" cy="115" r="8" fill="#eeeeee"/><circle cx="115" cy="115" r="8" fill="#eeeeee"/>
+      </g>
+    </g>
+    <text x="46" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">horizontaler Anteil</text>
+  </g>
+
+  <text x="494" y="172" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="34" fill="#111111">+</text>
+
+  <!-- Baustein 3: diagonales Muster -->
+  <g transform="translate(532 58)" filter="url(#panelShadow)">
+    <rect x="0" y="0" width="168" height="214" rx="6" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.5"/>
+    <text x="20" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">
+      <tspan fill="#f2aa00">𝜎₃</tspan><tspan fill="#1e88ff">𝑢₃</tspan><tspan fill="#16a34a">𝑣₃ᵀ</tspan>
+    </text>
+    <g transform="translate(21 55)">
+      <rect x="-7" y="-7" width="140" height="140" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <g stroke="#ffffff" stroke-width="0.8">
+        <circle cx="10" cy="10" r="8" fill="#b8b8b8"/><circle cx="31" cy="10" r="8" fill="#eeeeee"/><circle cx="52" cy="10" r="8" fill="#eeeeee"/><circle cx="73" cy="10" r="8" fill="#eeeeee"/><circle cx="94" cy="10" r="8" fill="#eeeeee"/><circle cx="115" cy="10" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="31" r="8" fill="#eeeeee"/><circle cx="31" cy="31" r="8" fill="#b8b8b8"/><circle cx="52" cy="31" r="8" fill="#eeeeee"/><circle cx="73" cy="31" r="8" fill="#eeeeee"/><circle cx="94" cy="31" r="8" fill="#eeeeee"/><circle cx="115" cy="31" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="52" r="8" fill="#eeeeee"/><circle cx="31" cy="52" r="8" fill="#eeeeee"/><circle cx="52" cy="52" r="8" fill="#b8b8b8"/><circle cx="73" cy="52" r="8" fill="#eeeeee"/><circle cx="94" cy="52" r="8" fill="#eeeeee"/><circle cx="115" cy="52" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="73" r="8" fill="#eeeeee"/><circle cx="31" cy="73" r="8" fill="#eeeeee"/><circle cx="52" cy="73" r="8" fill="#eeeeee"/><circle cx="73" cy="73" r="8" fill="#b8b8b8"/><circle cx="94" cy="73" r="8" fill="#eeeeee"/><circle cx="115" cy="73" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="94" r="8" fill="#eeeeee"/><circle cx="31" cy="94" r="8" fill="#eeeeee"/><circle cx="52" cy="94" r="8" fill="#eeeeee"/><circle cx="73" cy="94" r="8" fill="#eeeeee"/><circle cx="94" cy="94" r="8" fill="#b8b8b8"/><circle cx="115" cy="94" r="8" fill="#eeeeee"/>
+        <circle cx="10" cy="115" r="8" fill="#eeeeee"/><circle cx="31" cy="115" r="8" fill="#eeeeee"/><circle cx="52" cy="115" r="8" fill="#eeeeee"/><circle cx="73" cy="115" r="8" fill="#eeeeee"/><circle cx="94" cy="115" r="8" fill="#eeeeee"/><circle cx="115" cy="115" r="8" fill="#b8b8b8"/>
+      </g>
+    </g>
+    <text x="35" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">diagonaler Anteil</text>
+  </g>
+
+  <text x="728" y="172" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="34" fill="#111111">=</text>
+
+  <!-- Summe: alle drei Muster sichtbar ueberlagert -->
+  <g transform="translate(770 58)" filter="url(#panelShadow)">
+    <rect x="0" y="0" width="184" height="214" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+    <text x="26" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">𝐴₃</text>
+    <g transform="translate(29 55)">
+      <rect x="-7" y="-7" width="140" height="140" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <g stroke="#ffffff" stroke-width="0.8">
+        <circle cx="10" cy="10" r="8" fill="#d4d4d4"/><circle cx="31" cy="10" r="8" fill="#f4f4f4"/><circle cx="52" cy="10" r="8" fill="#242424"/><circle cx="73" cy="10" r="8" fill="#111111"/><circle cx="94" cy="10" r="8" fill="#f4f4f4"/><circle cx="115" cy="10" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="31" r="8" fill="#f4f4f4"/><circle cx="31" cy="31" r="8" fill="#d4d4d4"/><circle cx="52" cy="31" r="8" fill="#242424"/><circle cx="73" cy="31" r="8" fill="#111111"/><circle cx="94" cy="31" r="8" fill="#f4f4f4"/><circle cx="115" cy="31" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="52" r="8" fill="#b6b6b6"/><circle cx="31" cy="52" r="8" fill="#b6b6b6"/><circle cx="52" cy="52" r="8" fill="#030303"/><circle cx="73" cy="52" r="8" fill="#171717"/><circle cx="94" cy="52" r="8" fill="#b6b6b6"/><circle cx="115" cy="52" r="8" fill="#b6b6b6"/>
+        <circle cx="10" cy="73" r="8" fill="#a4a4a4"/><circle cx="31" cy="73" r="8" fill="#a4a4a4"/><circle cx="52" cy="73" r="8" fill="#202020"/><circle cx="73" cy="73" r="8" fill="#000000"/><circle cx="94" cy="73" r="8" fill="#a4a4a4"/><circle cx="115" cy="73" r="8" fill="#a4a4a4"/>
+        <circle cx="10" cy="94" r="8" fill="#f4f4f4"/><circle cx="31" cy="94" r="8" fill="#f4f4f4"/><circle cx="52" cy="94" r="8" fill="#f4f4f4"/><circle cx="73" cy="94" r="8" fill="#f4f4f4"/><circle cx="94" cy="94" r="8" fill="#d4d4d4"/><circle cx="115" cy="94" r="8" fill="#f4f4f4"/>
+        <circle cx="10" cy="115" r="8" fill="#f4f4f4"/><circle cx="31" cy="115" r="8" fill="#f4f4f4"/><circle cx="52" cy="115" r="8" fill="#f4f4f4"/><circle cx="73" cy="115" r="8" fill="#f4f4f4"/><circle cx="94" cy="115" r="8" fill="#f4f4f4"/><circle cx="115" cy="115" r="8" fill="#d4d4d4"/>
+      </g>
+    </g>
+    <text x="25" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">vertikal + horizontal + diagonal</text>
+  </g>
+</svg>

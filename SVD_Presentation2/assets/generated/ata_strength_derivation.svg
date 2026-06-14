@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 240" role="img" aria-label="Umformung der quadrierten Staerke zur Bewertungszahl v transponiert A transponiert A v">
+  <rect width="980" height="240" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .v { fill: #16a34a; }
+      .u { fill: #1e88ff; }
+      .sigma { fill: #f2aa00; }
+      .arrow { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .panel { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.4; }
+      .ata { fill: #f7f7f7; stroke: #111111; stroke-width: 1.4; }
+      .soft { fill: #f7f7f7; stroke: #d8d8d8; stroke-width: 1.2; }
+      .blue { fill: #e8f2ff; stroke: #1e88ff; stroke-width: 1.2; }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <text class="serif u" x="34" y="32" font-size="17">Höhenantwort Av</text>
+  <g transform="translate(88 50)">
+    <rect class="blue" x="0" y="0" width="28" height="18"/>
+    <rect class="blue" x="0" y="18" width="28" height="18"/>
+    <rect class="blue" x="0" y="36" width="28" height="18"/>
+    <rect class="blue" x="0" y="54" width="28" height="18"/>
+    <rect class="blue" x="0" y="72" width="28" height="18"/>
+  </g>
+
+  <path class="arrow" d="M160 80 L235 80"/>
+  <text class="serif muted" x="174" y="59" font-size="13">Länge²</text>
+
+  <text class="serif sigma" x="255" y="86" font-size="24">||Av||²</text>
+
+  <path class="arrow" d="M360 80 L435 80"/>
+  <text class="serif muted" x="374" y="59" font-size="13">als Skalarprodukt</text>
+
+  <text class="serif ink" x="455" y="86" font-size="24">(Av)ᵀ(Av)</text>
+
+  <path class="arrow" d="M610 80 L685 80"/>
+  <text class="serif muted" x="614" y="53" font-size="13">(Av)ᵀ = vᵀAᵀ</text>
+
+  <g transform="translate(705 55)">
+    <text class="serif v" x="0" y="31" font-size="25">vᵀ</text>
+    <rect class="ata" x="36" y="7" width="64" height="32" rx="2"/>
+    <text class="serif ink" x="46" y="31" font-size="25">AᵀA</text>
+    <text class="serif v" x="108" y="31" font-size="25">v</text>
+    <text class="serif muted" x="0" y="66" font-size="13">Bewertungszahl für genau dieses v</text>
+  </g>
+
+  <g transform="translate(42 142)">
+    <rect class="panel" x="0" y="0" width="625" height="70" rx="3"/>
+    <text class="serif ink" x="18" y="24" font-size="15">Aha-Schritt</text>
+    <text class="serif ink" x="128" y="24" font-size="15">(Av)ᵀ(Av) = </text>
+    <text class="serif v" x="238" y="24" font-size="15">vᵀ</text>
+    <text class="serif ink" x="260" y="24" font-size="15">Aᵀ A</text>
+    <text class="serif v" x="306" y="24" font-size="15">v</text>
+    <text class="serif muted" x="18" y="51" font-size="14">v bleibt der getestete Kandidat; AᵀA ist die feste Bewertungsmatrix.</text>
+  </g>
+
+  <g transform="translate(705 142)">
+    <rect class="panel" x="0" y="0" width="235" height="70" rx="3"/>
+    <text class="serif muted" x="14" y="20" font-size="13">Ausblick: Kandidaten bewerten</text>
+    <text class="serif v" x="18" y="43" font-size="13">v₁</text><text class="serif ink" x="42" y="43" font-size="13">→ 16</text>
+    <text class="serif v" x="92" y="43" font-size="13">v₂</text><text class="serif ink" x="116" y="43" font-size="13">→ 4</text>
+    <text class="serif v" x="162" y="43" font-size="13">v₃</text><text class="serif ink" x="186" y="43" font-size="13">→ 1</text>
+    <text class="serif sigma" x="18" y="61" font-size="12">größter Wert gewinnt</text>
+  </g>
+</svg>

@@ -1011,6 +1011,508 @@
   margin: 0.25rem 0 0.45rem 1.1rem;
 }
 
+.svd-block-example {
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  max-width: 930px;
+  margin: 0.05rem auto 0;
+}
+
+.svd-single-block-slide {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  gap: 0.16rem;
+  min-height: 500px;
+}
+
+.svd-single-intro {
+  text-align: center;
+}
+
+.svd-single-intro p {
+  color: var(--muted);
+  font-size: 0.46em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.svd-single-meta p {
+  color: var(--muted);
+  font-size: 0.34em;
+  line-height: 1.1;
+  margin: 0;
+  text-align: center;
+}
+
+.svd-single-block {
+  display: block;
+  width: auto;
+  max-width: 1080px;
+  max-height: 330px;
+  margin: 0.02rem auto;
+  object-fit: contain;
+}
+
+.svd-single-hint p {
+  color: var(--muted);
+  font-size: 0.36em;
+  line-height: 1.12;
+  margin: 0;
+  text-align: center;
+}
+
+.svd-single-note {
+  border: 1.5px solid var(--line);
+  border-left: 4px solid #111111;
+  padding: 0.2rem 0.42rem;
+}
+
+.svd-single-note p {
+  font-size: 0.38em;
+  line-height: 1.14;
+  margin: 0;
+}
+
+.orthogonal-layers-example {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin: 0.24rem auto 0.32rem;
+}
+
+.svd-search-start-wrap,
+.av-height-response-wrap {
+  grid-column: 1 / -1;
+}
+
+.svd-search-start-wrap p,
+.av-height-response-wrap p {
+  margin: 0;
+}
+
+.svd-search-start {
+  display: block;
+  width: 85%;
+  max-height: 28vh;
+  margin: 0.05rem auto 0;
+  object-fit: contain;
+}
+
+.av-height-response {
+  display: block;
+  width: 96%;
+  max-height: 17vh;
+  margin: 0.05rem auto 0;
+  object-fit: contain;
+}
+
+.av-slide {
+  gap: 0.38rem 0.85rem;
+}
+
+.av-slide p {
+  font-size: 0.44em;
+  line-height: 1.14;
+}
+
+.av-slide mjx-container {
+  font-size: 0.68em !important;
+  margin: 0.08rem 0 !important;
+}
+
+.av-slide .derivation-fullnote {
+  padding-top: 0.18rem;
+  margin-top: 0;
+}
+
+.av-slide .derivation-fullnote p {
+  font-size: 0.36em;
+  line-height: 1.08;
+}
+
+.av-slide ul {
+  font-size: 0.43em;
+  line-height: 1.16;
+  margin-top: 0.12rem;
+  margin-bottom: 0.12rem;
+}
+
+.space-problem-slide {
+  gap: 0.48rem 0.9rem;
+  align-items: start;
+}
+
+.space-problem-slide p {
+  font-size: 0.45em;
+  line-height: 1.13;
+}
+
+.space-problem-slide mjx-container {
+  font-size: 0.66em !important;
+  margin: 0.07rem 0 !important;
+}
+
+.space-problem-graphic {
+  grid-column: 1 / -1;
+}
+
+.space-problem-graphic p {
+  margin: 0;
+}
+
+.spectral-space-problem {
+  display: block;
+  width: 92%;
+  max-height: 25vh;
+  margin: 0.02rem auto 0;
+  object-fit: contain;
+}
+
+.ata-strength-graphic {
+  grid-column: 1 / -1;
+}
+
+.ata-strength-graphic p {
+  margin: 0;
+}
+
+.ata-strength-derivation {
+  display: block;
+  width: 100%;
+  max-width: 1120px;
+  max-height: 32vh;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.ata-strength-slide {
+  gap: 0.28rem 0.95rem;
+  align-items: start;
+}
+
+.ata-strength-slide p {
+  font-size: 0.4em;
+  line-height: 1.1;
+}
+
+.ata-strength-slide mjx-container {
+  font-size: 0.62em !important;
+  margin: 0.045rem 0 !important;
+}
+
+.ata-strength-slide .uebergang p {
+  font-size: 0.34em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.ata-spectral-bridge {
+  grid-column: 1 / -1;
+  display: block;
+  width: 88%;
+  max-height: 28vh;
+  margin: 0.18rem auto 0;
+  object-fit: contain;
+}
+
+.spectral-theorem-outputs {
+  grid-column: 1 / -1;
+  display: block;
+  width: 92%;
+  max-height: 30vh;
+  margin: 0.08rem auto 0;
+  object-fit: contain;
+}
+
+.spectral-output-slide {
+  gap: 0.34rem 0.95rem;
+}
+
+.spectral-output-slide p {
+  font-size: 0.4em;
+  line-height: 1.1;
+}
+
+.spectral-output-slide mjx-container {
+  font-size: 0.62em !important;
+  margin: 0.05rem 0 !important;
+}
+
+.eigenvalue-graphic {
+  grid-column: 1 / -1;
+}
+
+.eigenvalue-graphic p {
+  margin: 0;
+}
+
+.eigenvalue-singularvalue {
+  display: block;
+  width: 100%;
+  max-width: 1120px;
+  max-height: 33vh;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.eigen-strength-slide {
+  gap: 0.24rem 0.95rem;
+  align-items: start;
+}
+
+.eigen-strength-slide p {
+  font-size: 0.39em;
+  line-height: 1.08;
+}
+
+.eigen-strength-slide mjx-container {
+  font-size: 0.61em !important;
+  margin: 0.045rem 0 !important;
+}
+
+.eigen-strength-slide .uebergang p {
+  font-size: 0.35em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.from-v-to-u-wrap {
+  grid-column: 1 / -1;
+}
+
+.from-v-to-u-wrap p {
+  margin: 0;
+}
+
+.from-v-to-u {
+  display: block;
+  width: 100%;
+  max-width: 1120px;
+  max-height: 34vh;
+  margin: 0.02rem auto 0;
+  object-fit: contain;
+}
+
+.from-v-to-u-slide {
+  gap: 0.14rem 0.9rem;
+  align-items: start;
+}
+
+.from-v-to-u-slide p {
+  font-size: 0.35em;
+  line-height: 1.05;
+}
+
+.from-v-to-u-slide ul {
+  font-size: 0.35em;
+  line-height: 1.05;
+  margin-top: 0.04rem;
+  margin-bottom: 0.04rem;
+}
+
+.from-v-to-u-slide mjx-container {
+  font-size: 0.54em !important;
+  margin: 0.02rem 0 !important;
+}
+
+.from-v-to-u-wrap + .uebergang p {
+  font-size: 0.29em;
+  line-height: 1.05;
+}
+
+.svd-block-from-parts-wrap {
+  grid-column: 1 / -1;
+}
+
+.svd-block-from-parts-wrap p {
+  margin: 0;
+}
+
+.svd-block-from-parts {
+  display: block;
+  width: 100%;
+  max-width: 1120px;
+  max-height: 27vh;
+  margin: 0.02rem auto 0;
+  object-fit: contain;
+}
+
+.block-from-parts-slide {
+  gap: 0.16rem 0.9rem;
+  align-items: start;
+}
+
+.block-from-parts-slide p {
+  font-size: 0.36em;
+  line-height: 1.06;
+}
+
+.block-from-parts-slide ul {
+  font-size: 0.35em;
+  line-height: 1.06;
+  margin-top: 0.04rem;
+  margin-bottom: 0.04rem;
+}
+
+.block-from-parts-slide mjx-container {
+  font-size: 0.56em !important;
+  margin: 0.025rem 0 !important;
+}
+
+.block-from-parts-note {
+  padding-top: 0.14rem !important;
+  margin-top: 0 !important;
+}
+
+.block-from-parts-note p {
+  font-size: 0.3em;
+  line-height: 1.05;
+}
+
+.svd-block-from-parts-wrap + .uebergang p {
+  font-size: 0.29em;
+  line-height: 1.05;
+}
+
+.svd-sum-to-matrix-wrap {
+  grid-column: 1 / -1;
+}
+
+.svd-sum-to-matrix-wrap p {
+  margin: 0;
+}
+
+.svd-sum-to-matrix {
+  display: block;
+  width: 100%;
+  max-width: 1120px;
+  max-height: 34vh;
+  margin: 0.02rem auto 0;
+  object-fit: contain;
+}
+
+.sum-to-matrix-slide {
+  gap: 0.18rem 0.9rem;
+  align-items: start;
+}
+
+.sum-to-matrix-slide p {
+  font-size: 0.36em;
+  line-height: 1.06;
+}
+
+.sum-to-matrix-slide ul {
+  font-size: 0.35em;
+  line-height: 1.06;
+  margin-top: 0.04rem;
+  margin-bottom: 0.04rem;
+}
+
+.sum-to-matrix-slide mjx-container {
+  font-size: 0.56em !important;
+  margin: 0.025rem 0 !important;
+}
+
+.sum-to-matrix-slide .derivation-fullnote {
+  padding-top: 0.14rem;
+  margin-top: 0;
+}
+
+.sum-to-matrix-slide .derivation-fullnote p {
+  font-size: 0.3em;
+  line-height: 1.05;
+}
+
+.svd-truncation-k-wrap {
+  grid-column: 1 / -1;
+}
+
+.svd-truncation-k-wrap p {
+  margin: 0;
+}
+
+.svd-truncation-k {
+  display: block;
+  width: 100%;
+  max-width: 1120px;
+  max-height: 34vh;
+  margin: 0.02rem auto 0;
+  object-fit: contain;
+}
+
+.truncation-slide {
+  gap: 0.18rem 0.9rem;
+  align-items: start;
+}
+
+.truncation-slide p {
+  font-size: 0.36em;
+  line-height: 1.06;
+}
+
+.truncation-slide mjx-container {
+  font-size: 0.55em !important;
+  margin: 0.025rem 0 !important;
+}
+
+.truncation-slide .derivation-fullnote {
+  padding-top: 0.14rem;
+  margin-top: 0;
+}
+
+.truncation-slide .derivation-fullnote p {
+  font-size: 0.3em;
+  line-height: 1.05;
+}
+
+.svd-final-slide {
+  display: grid;
+  gap: 0.34rem;
+  align-content: start;
+}
+
+.svd-final-summary {
+  display: block;
+  width: 96%;
+  max-height: 36vh;
+  margin: 0.02rem auto 0;
+  object-fit: contain;
+}
+
+.svd-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  margin-top: 0.05rem;
+}
+
+.svd-summary-card {
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 0.34rem 0.42rem;
+  background: #fafafa;
+}
+
+.svd-summary-card p {
+  font-size: 0.34em;
+  line-height: 1.08;
+  margin: 0.02rem 0;
+}
+
+.svd-summary-card mjx-container {
+  font-size: 0.58em !important;
+  margin: 0.02rem 0 !important;
+}
+
+.svd-final-note p {
+  font-size: 0.34em;
+  line-height: 1.08;
+  color: var(--muted);
+  margin: 0.02rem 0 0;
+  text-align: center;
+}
+
 .algorithm-slide {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;

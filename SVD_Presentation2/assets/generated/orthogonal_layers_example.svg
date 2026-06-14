@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 190" role="img" aria-label="Beispiel fuer redundante und unabhaengige Bildbausteine">
+  <rect width="560" height="190" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .muted { fill: #666666; }
+      .ink { fill: #111111; }
+      .bad { stroke: #c62828; }
+      .good { stroke: #2e7d32; }
+      .cell { stroke: #ffffff; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <text class="serif ink" x="24" y="24" font-size="16">redundant</text>
+  <text class="serif ink" x="320" y="24" font-size="16">neue Information</text>
+
+  <g transform="translate(22 42)">
+    <rect x="0" y="0" width="96" height="96" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.4"/>
+    <circle class="cell" cx="12" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="12" r="7" fill="#111111"/><circle class="cell" cx="48" cy="12" r="7" fill="#111111"/><circle class="cell" cx="66" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="12" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="30" r="7" fill="#777777"/><circle class="cell" cx="48" cy="30" r="7" fill="#777777"/><circle class="cell" cx="66" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="30" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="48" r="7" fill="#777777"/><circle class="cell" cx="48" cy="48" r="7" fill="#777777"/><circle class="cell" cx="66" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="48" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="66" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="84" r="7" fill="#eeeeee"/>
+  </g>
+  <text class="serif ink" x="132" y="94" font-size="22">≈</text>
+  <g transform="translate(166 42)">
+    <rect x="0" y="0" width="96" height="96" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.4"/>
+    <circle class="cell" cx="12" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="12" r="7" fill="#111111"/><circle class="cell" cx="48" cy="12" r="7" fill="#111111"/><circle class="cell" cx="66" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="12" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="30" r="7" fill="#111111"/><circle class="cell" cx="48" cy="30" r="7" fill="#111111"/><circle class="cell" cx="66" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="30" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="48" r="7" fill="#111111"/><circle class="cell" cx="48" cy="48" r="7" fill="#111111"/><circle class="cell" cx="66" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="48" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="66" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="84" r="7" fill="#eeeeee"/>
+  </g>
+  <line x1="18" y1="148" x2="270" y2="36" class="bad" stroke-width="2.4" stroke-linecap="round"/>
+  <text class="serif muted" x="28" y="168" font-size="14">zweimal fast dasselbe Muster speichern</text>
+
+  <g transform="translate(320 42)">
+    <rect x="0" y="0" width="96" height="96" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.4"/>
+    <circle class="cell" cx="12" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="12" r="7" fill="#111111"/><circle class="cell" cx="48" cy="12" r="7" fill="#111111"/><circle class="cell" cx="66" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="12" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="30" r="7" fill="#111111"/><circle class="cell" cx="48" cy="30" r="7" fill="#111111"/><circle class="cell" cx="66" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="30" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="48" r="7" fill="#111111"/><circle class="cell" cx="48" cy="48" r="7" fill="#111111"/><circle class="cell" cx="66" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="48" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="66" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="66" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="84" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="84" r="7" fill="#eeeeee"/>
+  </g>
+  <text class="serif ink" x="430" y="94" font-size="22">+</text>
+  <g transform="translate(462 42)">
+    <rect x="0" y="0" width="96" height="96" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.4"/>
+    <circle class="cell" cx="12" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="12" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="12" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="30" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="30" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="30" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="48" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="66" cy="48" r="7" fill="#eeeeee"/><circle class="cell" cx="84" cy="48" r="7" fill="#eeeeee"/>
+    <circle class="cell" cx="12" cy="66" r="7" fill="#111111"/><circle class="cell" cx="30" cy="66" r="7" fill="#111111"/><circle class="cell" cx="48" cy="66" r="7" fill="#111111"/><circle class="cell" cx="66" cy="66" r="7" fill="#111111"/><circle class="cell" cx="84" cy="66" r="7" fill="#111111"/>
+    <circle class="cell" cx="12" cy="84" r="7" fill="#111111"/><circle class="cell" cx="30" cy="84" r="7" fill="#111111"/><circle class="cell" cx="48" cy="84" r="7" fill="#111111"/><circle class="cell" cx="66" cy="84" r="7" fill="#111111"/><circle class="cell" cx="84" cy="84" r="7" fill="#111111"/>
+  </g>
+  <text class="serif muted" x="318" y="168" font-size="14">unterschiedliche Bereiche: neue Information</text>
+</svg>

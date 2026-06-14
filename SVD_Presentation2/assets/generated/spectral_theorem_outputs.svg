@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 250" role="img" aria-label="Der Spektralsatz auf A transponiert A liefert orthogonale Spaltenmuster und sortierte Eigenwerte">
+  <rect width="1040" height="250" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .v { fill: #16a34a; }
+      .lambda { fill: #4a4a4a; }
+      .box { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.4; }
+      .ata { fill: #f7f7f7; stroke: #111111; stroke-width: 1.5; }
+      .cell-green { fill: #d9f2df; stroke: #16a34a; stroke-width: 1.2; }
+      .cell-light { fill: #f7f7f7; stroke: #d8d8d8; stroke-width: 1.1; }
+      .arrow { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <g transform="translate(30 70)">
+    <rect class="ata" x="0" y="0" width="175" height="88" rx="4"/>
+    <text class="serif ink" x="62" y="30" font-size="22">AᵀA</text>
+    <text class="serif muted" x="31" y="55" font-size="14">Bewertungsmatrix</text>
+    <text class="serif muted" x="54" y="75" font-size="13">symmetrisch</text>
+    <text class="serif muted" x="15" y="111" font-size="13">bewertet v mit vᵀAᵀAv</text>
+  </g>
+
+  <path class="arrow" d="M230 114 L310 114"/>
+
+  <g transform="translate(330 70)">
+    <rect class="box" x="0" y="0" width="155" height="88" rx="4"/>
+    <text class="serif ink" x="31" y="47" font-size="18">Spektralsatz</text>
+    <text class="serif muted" x="18" y="70" font-size="13">für symmetrische Matrizen</text>
+  </g>
+
+  <path class="arrow" d="M510 114 L590 114"/>
+
+  <g transform="translate(610 38)">
+    <text class="serif v" x="0" y="0" font-size="15">v₁</text>
+    <rect class="cell-green" x="38" y="-15" width="23" height="23"/><rect class="cell-green" x="61" y="-15" width="23" height="23"/>
+    <rect class="cell-light" x="84" y="-15" width="23" height="23"/><rect class="cell-light" x="107" y="-15" width="23" height="23"/><rect class="cell-light" x="130" y="-15" width="23" height="23"/><rect class="cell-light" x="153" y="-15" width="23" height="23"/>
+
+    <text class="serif v" x="0" y="48" font-size="15">v₂</text>
+    <rect class="cell-light" x="38" y="33" width="23" height="23"/><rect class="cell-light" x="61" y="33" width="23" height="23"/>
+    <rect class="cell-green" x="84" y="33" width="23" height="23"/><rect class="cell-green" x="107" y="33" width="23" height="23"/><rect class="cell-light" x="130" y="33" width="23" height="23"/><rect class="cell-light" x="153" y="33" width="23" height="23"/>
+
+    <text class="serif v" x="0" y="96" font-size="15">v₃</text>
+    <rect class="cell-light" x="38" y="81" width="23" height="23"/><rect class="cell-light" x="61" y="81" width="23" height="23"/><rect class="cell-light" x="84" y="81" width="23" height="23"/><rect class="cell-light" x="107" y="81" width="23" height="23"/>
+    <rect class="cell-green" x="130" y="81" width="23" height="23"/><rect class="cell-green" x="153" y="81" width="23" height="23"/>
+    <text class="serif muted" x="0" y="139" font-size="14">orthogonale Spaltenmuster</text>
+  </g>
+
+  <path class="arrow" d="M806 114 L858 114"/>
+
+  <g transform="translate(875 58)">
+    <text class="serif lambda" x="0" y="0" font-size="15">λ₁</text><rect x="34" y="-12" width="82" height="14" fill="#4a4a4a"/>
+    <text class="serif lambda" x="0" y="37" font-size="15">λ₂</text><rect x="34" y="25" width="54" height="14" fill="#777777"/>
+    <text class="serif lambda" x="0" y="74" font-size="15">λ₃</text><rect x="34" y="62" width="28" height="14" fill="#aaaaaa"/>
+    <text class="serif ink" x="0" y="116" font-size="16">λ₁ ≥ λ₂ ≥ λ₃ ≥ ...</text>
+    <text class="serif muted" x="0" y="137" font-size="13">sortierte Bewertungen</text>
+  </g>
+</svg>

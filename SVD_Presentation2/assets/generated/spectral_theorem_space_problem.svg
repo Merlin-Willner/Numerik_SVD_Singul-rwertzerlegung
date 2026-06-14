@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 210" role="img" aria-label="A bildet ein Spaltenmuster in eine Hoehenantwort ab, der Spektralsatz braucht eine Abbildung im selben Raum">
+  <rect width="980" height="210" fill="#ffffff"/>
+  <defs>
+    <style>
+      .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
+      .ink { fill: #111111; }
+      .muted { fill: #666666; }
+      .v { fill: #16a34a; }
+      .u { fill: #1e88ff; }
+      .bad { fill: #c62828; }
+      .line { stroke: #d8d8d8; }
+      .arrow { stroke: #111111; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); }
+      .cell-green { fill: #d9f2df; stroke: #16a34a; stroke-width: 1.2; }
+      .cell-blue { fill: #e8f2ff; stroke: #1e88ff; stroke-width: 1.2; }
+      .cell-light { fill: #f7f7f7; stroke: #d8d8d8; stroke-width: 1.1; }
+    </style>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <line class="line" x1="24" y1="104" x2="956" y2="104" stroke-width="1.4"/>
+
+  <text class="serif ink" x="30" y="28" font-size="17">Bildmatrix A</text>
+  <text class="serif muted" x="30" y="50" font-size="14">A: Rⁿ → Rᵐ</text>
+  <g transform="translate(190 35)">
+    <text class="serif v" x="0" y="-8" font-size="13">Spaltenmuster v</text>
+    <rect class="cell-light" x="0" y="0" width="25" height="24"/><rect class="cell-light" x="25" y="0" width="25" height="24"/>
+    <rect class="cell-green" x="50" y="0" width="25" height="24"/><rect class="cell-green" x="75" y="0" width="25" height="24"/>
+    <rect class="cell-light" x="100" y="0" width="25" height="24"/><rect class="cell-light" x="125" y="0" width="25" height="24"/>
+  </g>
+  <path class="arrow" d="M380 47 L485 47"/>
+  <text class="serif ink" x="426" y="37" font-size="16">A</text>
+  <g transform="translate(540 18)">
+    <text class="serif u" x="-32" y="-4" font-size="13">Höhenantwort Av</text>
+    <rect class="cell-blue" x="28" y="0" width="25" height="18"/>
+    <rect class="cell-blue" x="28" y="18" width="25" height="18"/>
+    <rect class="cell-blue" x="28" y="36" width="25" height="18"/>
+    <rect class="cell-blue" x="28" y="54" width="25" height="18"/>
+  </g>
+  <text class="serif bad" x="685" y="38" font-size="14">anderer Raum</text>
+  <text class="serif muted" x="685" y="58" font-size="13">kein direktes Eigenwertproblem</text>
+
+  <text class="serif ink" x="30" y="135" font-size="17">Spektralsatz S</text>
+  <text class="serif muted" x="30" y="157" font-size="14">S: Rⁿ → Rⁿ</text>
+  <g transform="translate(190 142)">
+    <text class="serif v" x="0" y="-8" font-size="13">Muster v</text>
+    <rect class="cell-light" x="0" y="0" width="25" height="24"/><rect class="cell-light" x="25" y="0" width="25" height="24"/>
+    <rect class="cell-green" x="50" y="0" width="25" height="24"/><rect class="cell-green" x="75" y="0" width="25" height="24"/>
+    <rect class="cell-light" x="100" y="0" width="25" height="24"/><rect class="cell-light" x="125" y="0" width="25" height="24"/>
+  </g>
+  <path class="arrow" d="M380 154 L485 154"/>
+  <text class="serif ink" x="426" y="144" font-size="16">S</text>
+  <g transform="translate(535 142)">
+    <text class="serif v" x="0" y="-8" font-size="13">gleicher Raum</text>
+    <rect class="cell-light" x="0" y="0" width="25" height="24"/><rect class="cell-light" x="25" y="0" width="25" height="24"/>
+    <rect class="cell-green" x="50" y="0" width="25" height="24"/><rect class="cell-green" x="75" y="0" width="25" height="24"/>
+    <rect class="cell-light" x="100" y="0" width="25" height="24"/><rect class="cell-light" x="125" y="0" width="25" height="24"/>
+  </g>
+  <text class="serif ink" x="735" y="149" font-size="16">Sv = λv</text>
+  <text class="serif muted" x="735" y="171" font-size="13">gleiche Richtung, nur skaliert</text>
+</svg>
