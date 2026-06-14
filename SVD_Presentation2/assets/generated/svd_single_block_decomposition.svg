@@ -124,7 +124,7 @@
   <!-- Bereich 4 -->
   <g transform="translate(900 48)" filter="url(#shadow)">
     <rect class="strong-panel" x="0" y="0" width="285" height="335" rx="6"/>
-    <text class="serif" x="28" y="33" font-size="23"><tspan class="orange">𝜎₁</tspan><tspan class="ink"> verändert die Stärke</tspan></text>
+    <text class="serif" x="28" y="33" font-size="23"><tspan class="orange">𝜎₁</tspan><tspan class="ink"> skaliert den Baustein</tspan></text>
     <text class="serif muted" x="34" y="60" font-size="15">gleiche Form, andere Sichtbarkeit</text>
 
     <g transform="translate(15 86)">
@@ -159,8 +159,8 @@
 
     <text class="serif ink" x="30" y="214" font-size="22">𝐵₁ = <tspan class="orange">𝜎₁</tspan> · (<tspan class="blue">𝑢₁</tspan><tspan class="green">𝑣₁ᵀ</tspan>)</text>
     <text class="serif muted" x="31" y="245" font-size="16">σ₁ verändert nicht die Form,</text>
-    <text class="serif muted" x="31" y="266" font-size="16">sondern die Stärke des Bausteins.</text>
+    <text class="serif muted" x="31" y="266" font-size="16">sondern skaliert den Baustein.</text>
     <rect x="18" y="288" width="254" height="30" rx="4" fill="#f6f6f3" stroke="#d8d8d8"/>
-    <text class="serif ink" x="44" y="309" font-size="16">Stärke × Form = Bildbaustein</text>
+    <text class="serif ink" x="28" y="309" font-size="16">Singulärwert × Form = Bildbaustein</text>
   </g>
 </svg>

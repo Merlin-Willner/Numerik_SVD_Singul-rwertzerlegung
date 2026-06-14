@@ -24,12 +24,12 @@
   </defs>
 
   <text class="serif ink" x="42" y="40" font-size="20">σᵢ × uᵢ × vᵢᵀ = Bᵢ</text>
-  <text class="serif muted" x="42" y="64" font-size="13">Stärke × Höhenverteilung × Spaltenmuster</text>
+  <text class="serif muted" x="42" y="64" font-size="13">Singulärwert × Höhenverteilung × Spaltenmuster</text>
 
   <g transform="translate(44 104)">
     <rect class="box" x="0" y="0" width="160" height="104" rx="4"/>
     <text class="serif sigma" x="18" y="28" font-size="21">σᵢ = 4</text>
-    <text class="serif muted" x="18" y="54" font-size="14">Stärke</text>
+    <text class="serif muted" x="18" y="54" font-size="14">Singulärwert</text>
     <rect class="soft-orange" x="18" y="70" width="108" height="14" rx="3"/>
     <rect fill="#f2aa00" x="18" y="70" width="82" height="14" rx="3"/>
   </g>

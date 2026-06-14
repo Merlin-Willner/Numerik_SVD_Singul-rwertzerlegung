@@ -62,7 +62,7 @@
     <text class="serif muted" x="58" y="54" font-size="14">Bildbaustein</text>
     <text class="serif v" x="30" y="86" font-size="13">vᵢᵀ: Spaltenmuster</text>
     <text class="serif u" x="30" y="109" font-size="13">uᵢ: Höhenverteilung</text>
-    <text class="serif sigma" x="30" y="132" font-size="13">σᵢ: Stärke</text>
+    <text class="serif sigma" x="30" y="132" font-size="13">σᵢ: Singulärwert</text>
   </g>
 
   <path class="arrow" d="M738 151 L784 151"/>

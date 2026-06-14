@@ -21,7 +21,7 @@
     </marker>
   </defs>
 
-  <text class="serif ink" x="28" y="30" font-size="20">Bausteine sind nach Stärke sortiert</text>
+  <text class="serif ink" x="28" y="30" font-size="20">Bausteine sind nach Singulärwerten sortiert</text>
   <text class="serif sigma" x="28" y="53" font-size="14">σ₁ ≥ σ₂ ≥ σ₃ ≥ σ₄ ≥ σ₅ ≥ ...</text>
 
   <!-- B1 -->

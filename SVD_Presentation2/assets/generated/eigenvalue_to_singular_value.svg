@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 230" role="img" aria-label="Eigenwert als quadrierte Staerke und Singulaerwert als tatsaechliche Staerke eines Spaltenmusters">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 230" role="img" aria-label="Eigenwert als Quadrat des Singulaerwerts eines Spaltenmusters">
   <rect width="980" height="230" fill="#ffffff"/>
   <defs>
     <style>
@@ -50,7 +50,7 @@
     <rect class="box" x="0" y="0" width="126" height="22"/>
     <rect x="0" y="0" width="92" height="22" fill="#f2aa00"/>
     <circle cx="92" cy="11" r="8" fill="#111111"/>
-    <text class="serif muted" x="32" y="48" font-size="13">Stärke</text>
+    <text class="serif muted" x="16" y="48" font-size="13">Singulärwert</text>
   </g>
 
   <path class="arrow" d="M660 90 L740 90"/>
@@ -59,7 +59,7 @@
   <g transform="translate(770 58)">
     <rect class="lambda-box" x="0" y="0" width="170" height="74" rx="4"/>
     <text class="serif lambda" x="28" y="30" font-size="21">λᵢ = σᵢ²</text>
-    <text class="serif muted" x="29" y="55" font-size="14">quadrierte Stärke</text>
+    <text class="serif muted" x="35" y="55" font-size="14">Eigenwert</text>
   </g>
 
   <g transform="translate(330 170)">

@@ -507,7 +507,7 @@ A\approx B_1+B_2+\dots+B_k.
 <p>Zur Veranschaulichung verwenden wir hier 0/1-Werte. In der echten SVD sind <span class="math inline">\(u_i\)</span> und <span class="math inline">\(v_i\)</span> normierte Vektoren.</p>
 </div>
 <div class="svd-single-note">
-<p><span class="math inline">\(u_1v_1^T\)</span> legt die <strong>Form</strong> fest. <span class="math inline">\(\sigma_1\)</span> legt die <strong>Stärke</strong> fest.</p>
+<p><span class="math inline">\(u_1v_1^T\)</span> legt die <strong>Form</strong> fest. <span class="math inline">\(\sigma_1\)</span> ist der <strong>Singulärwert</strong> dieses Bausteins; anschaulich bestimmt er seine Stärke.</p>
 <p>Die nächste Frage ist: Welche dieser Bausteine sind stark genug, um zuerst gespeichert zu werden?</p>
 </div>
 </div>
@@ -612,7 +612,7 @@ A{\color{#16a34a}{v}}\in\mathbb{R}^m.
 <p><span class="math display">\[
 \max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|.
 \]</span></p>
-<p>Wir suchen das normierte Spaltenmuster, das die stärkste Höhenantwort erzeugt. Im Beispiel verwenden wir 0/1-Werte. Für die eigentliche Suche normieren wir <span class="math inline">\(v\)</span> auf <span class="math inline">\(\|v\|=1\)</span>, damit alle Spaltenmuster gleich lang sind und <span class="math inline">\(\|Av\|\)</span> nur die Stärke des Musters im Bild misst – nicht eine künstliche Skalierung von <span class="math inline">\(v\)</span>.</p>
+<p>Wir suchen das normierte Spaltenmuster, das die stärkste Höhenantwort erzeugt. Im Beispiel verwenden wir 0/1-Werte. Für die eigentliche Suche normieren wir <span class="math inline">\(v\)</span> auf <span class="math inline">\(\|v\|=1\)</span>, damit alle Spaltenmuster gleich lang sind und <span class="math inline">\(\|Av\|\)</span> nur die Antwort des Bildes auf dieses Muster misst – nicht eine künstliche Skalierung von <span class="math inline">\(v\)</span>.</p>
 <p><span class="math display">\[
 A{\color{#16a34a}{v}}=\text{Höhenantwort},
 \qquad
@@ -636,7 +636,7 @@ S=Q\Lambda Q^T,
 \qquad
 S q_i=\lambda_i q_i.
 \]</span></p>
-<p>Die Spalten von <span class="math inline">\(Q\)</span> sind orthogonale Richtungen. Die zugehörigen Eigenwerte <span class="math inline">\(\lambda_i\)</span> können wir später als Stärken interpretieren.</p>
+<p>Die Spalten von <span class="math inline">\(Q\)</span> sind orthogonale Richtungen. In unserer SVD-Herleitung werden die zugehörigen Eigenwerte später zu Quadraten der Singulärwerte.</p>
 <p>Aber der Spektralsatz gilt für symmetrische quadratische Matrizen.</p>
 </div>
 <div class="derivation-right">
@@ -659,19 +659,19 @@ A:\mathbb{R}^n\to\mathbb{R}^m.
 <p><img data-src="assets/generated/spectral_theorem_space_problem.svg" class="spectral-space-problem" alt="A bildet ein Spaltenmuster in eine Höhenantwort ab, während der Spektralsatz eine Abbildung im selben Raum benötigt"></p>
 </div>
 <div class="uebergang">
-<p><strong>Können wir aus (A) eine symmetrische Matrix bauen, die dieselbe Stärkefrage für Spaltenmuster beantwortet?</strong></p>
+<p><strong>Können wir aus (A) eine symmetrische Matrix bauen, die dieselbe Bewertungsfrage für Spaltenmuster beantwortet?</strong></p>
 </div>
 </div>
 </section>
-<section id="warum-führt-die-stärkemessung-zu-ata" class="slide level2">
-<h2>Warum führt die Stärkemessung zu <span class="math inline">\(A^TA\)</span>?</h2>
+<section id="warum-führt-die-normmessung-zu-ata" class="slide level2">
+<h2>Warum führt die Normmessung zu <span class="math inline">\(A^TA\)</span>?</h2>
 <div class="derivation-slide two-column-derivation ata-strength-slide">
 <div class="derivation-left">
 <p>Unsere Suchfrage war:</p>
 <p><span class="math display">\[
 \max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|.
 \]</span></p>
-<p>Da <span class="math inline">\(\|A{\color{#16a34a}{v}}\|\ge0\)</span>, dürfen wir stattdessen die quadrierte Stärke maximieren:</p>
+<p>Da <span class="math inline">\(\|A{\color{#16a34a}{v}}\|\ge0\)</span>, dürfen wir stattdessen die quadrierte Norm maximieren:</p>
 <p><span class="math display">\[
 \max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|^2.
 \]</span></p>
@@ -697,10 +697,10 @@ A:\mathbb{R}^n\to\mathbb{R}^m.
 <p>Dadurch erscheint zwischen den beiden <span class="math inline">\({\color{#16a34a}{v}}\)</span>-Termen automatisch <span class="math inline">\(A^TA\)</span>.</p>
 </div>
 <div class="ata-strength-graphic">
-<p><img data-src="assets/generated/ata_strength_derivation.svg" class="ata-strength-derivation" alt="Die quadrierte Stärke eines Spaltenmusters führt zur Bewertungsmatrix A transponiert A"></p>
+<p><img data-src="assets/generated/ata_strength_derivation.svg" class="ata-strength-derivation" alt="Die quadrierte Norm einer Höhenantwort führt zur Bewertungsmatrix A transponiert A"></p>
 </div>
 <div class="uebergang">
-<p>Für ein festes Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span> ist <span class="math inline">\({\color{#16a34a}{v^T}}A^TA{\color{#16a34a}{v}}\)</span> genau dieselbe Zahl wie <span class="math inline">\(\|A{\color{#16a34a}{v}}\|^2\)</span>: die quadrierte Stärke dieses Musters im Originalbild.</p>
+<p>Für ein festes Spaltenmuster <span class="math inline">\({\color{#16a34a}{v}}\)</span> ist <span class="math inline">\({\color{#16a34a}{v^T}}A^TA{\color{#16a34a}{v}}\)</span> genau dieselbe Zahl wie <span class="math inline">\(\|A{\color{#16a34a}{v}}\|^2\)</span>: die quadrierte Norm der Höhenantwort im Originalbild.</p>
 <p><span class="math inline">\(A^TA\)</span> ist die Bewertungsmatrix. Die äußeren <span class="math inline">\({\color{#16a34a}{v}}\)</span>-Terme markieren den Kandidaten, der gerade getestet wird.</p>
 </div>
 </div>
@@ -766,21 +766,21 @@ A^TA{\color{#16a34a}{v_i}}
 \]</span></p>
 <p>Die Muster speichern keine doppelte Richtung.</p>
 <ol start="2" type="1">
-<li><strong>Sortierbare Bewertungen</strong></li>
+<li><strong>Sortierbare Eigenwerte</strong></li>
 </ol>
 <p><span class="math display">\[
 \lambda_1\ge\lambda_2\ge\dots\ge0
 \]</span></p>
-<p>Die ersten <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> gehören zu den größten Bewertungen.</p>
+<p>Die ersten <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> gehören zu den größten Eigenwerten.</p>
 </div>
 <p><img data-src="assets/generated/spectral_theorem_outputs.svg" class="spectral-theorem-outputs" alt="Der Spektralsatz auf A transponiert A liefert orthogonale Spaltenmuster und sortierte Eigenwerte"></p>
 <div class="uebergang">
-<p><strong>Wir haben jetzt unabhängige Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> und zugehörige Bewertungen <span class="math inline">\(\lambda_i\)</span>. Nächste Frage: Warum ist <span class="math inline">\(\lambda_i\)</span> die quadrierte Stärke des Musters <span class="math inline">\({\color{#16a34a}{v_i}}\)</span>?</strong></p>
+<p><strong>Wir haben jetzt unabhängige Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> und zugehörige Eigenwerte <span class="math inline">\(\lambda_i\)</span>. Nächste Frage: Warum gilt <span class="math inline">\(\lambda_i={\color{#f2aa00}{\sigma_i^2}}\)</span>?</strong></p>
 </div>
 </div>
 </section>
-<section id="warum-sind-die-eigenwerte-die-quadrierte-stärke" class="slide level2">
-<h2>Warum sind die Eigenwerte die quadrierte Stärke?</h2>
+<section id="warum-gilt-lambda_isigma_i2" class="slide level2">
+<h2>Warum gilt <span class="math inline">\(\lambda_i=\sigma_i^2\)</span>?</h2>
 <div class="derivation-slide two-column-derivation eigen-strength-slide">
 <div class="derivation-left">
 <p>Aus dem Spektralsatz kennen wir jetzt die Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span>:</p>
@@ -789,8 +789,8 @@ A^TA{\color{#16a34a}{v_i}}
 =
 \lambda_i{\color{#16a34a}{v_i}}.
 \]</span></p>
-<p>Jetzt prüfen wir, wie stark so ein gefundenes Muster im Originalbild <span class="math inline">\(A\)</span> vorkommt.</p>
-<p>Für ein gefundenes Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> messen wir wieder die Stärke der Höhenantwort:</p>
+<p>Jetzt prüfen wir die Norm der Höhenantwort dieses gefundenen Musters im Originalbild <span class="math inline">\(A\)</span>.</p>
+<p>Für ein gefundenes Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> messen wir:</p>
 <p><span class="math display">\[
 \|A{\color{#16a34a}{v_i}}\|^2.
 \]</span></p>
@@ -816,7 +816,7 @@ A^TA{\color{#16a34a}{v_i}}
 \qquad
 \|A{\color{#16a34a}{v_i}}\|^2=\lambda_i.
 \]</span></p>
-<p>Damit ist <span class="math inline">\(\lambda_i\)</span> die <strong>quadrierte Stärke</strong> des Musters im Originalbild.</p>
+<p>Damit ist der Eigenwert <span class="math inline">\(\lambda_i\)</span> das <strong>Quadrat des zugehörigen Singulärwerts</strong>.</p>
 <p><span class="math display">\[
 \lambda_i=\|A{\color{#16a34a}{v_i}}\|^2,
 \qquad
@@ -824,10 +824,10 @@ A^TA{\color{#16a34a}{v_i}}
 \]</span></p>
 </div>
 <div class="eigenvalue-graphic">
-<p><img data-src="assets/generated/eigenvalue_to_singular_value.svg" class="eigenvalue-singularvalue" alt="Eigenwert als quadrierte Stärke und Singulärwert als tatsächliche Stärke eines Spaltenmusters"></p>
+<p><img data-src="assets/generated/eigenvalue_to_singular_value.svg" class="eigenvalue-singularvalue" alt="Eigenwert als Quadrat des Singulärwerts eines Spaltenmusters"></p>
 </div>
 <div class="uebergang">
-<p><strong>Merke: Eigenwert = quadrierte Stärke, Singulärwert = tatsächliche Stärke. Als Nächstes fehlt noch die Höhenverteilung <span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>.</strong></p>
+<p><strong>Merke: <span class="math inline">\(\lambda_i={\color{#f2aa00}{\sigma_i^2}}\)</span> und <span class="math inline">\({\color{#f2aa00}{\sigma_i}}=\|A{\color{#16a34a}{v_i}}\|\)</span>. Als Nächstes fehlt noch die Höhenverteilung <span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>.</strong></p>
 </div>
 </div>
 </section>
@@ -838,7 +838,7 @@ A^TA{\color{#16a34a}{v_i}}
 <p>Aus der letzten Folie kennen wir:</p>
 <ul>
 <li><span class="math inline">\({\color{#16a34a}{v_i}}\)</span>: Muster über die Spalten</li>
-<li><span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>: Stärke dieses Musters</li>
+<li><span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>: Singulärwert des Musters</li>
 </ul>
 <p>Für den vollständigen Baustein fehlt:</p>
 <ul>
@@ -860,20 +860,20 @@ A{\color{#16a34a}{v_i}}.
 <p><span class="math display">\[
 \|A{\color{#16a34a}{v_i}}\|={\color{#f2aa00}{\sigma_i}}.
 \]</span></p>
-<p>Also enthält <span class="math inline">\(A{\color{#16a34a}{v_i}}\)</span> Form und Stärke. Für die SVD trennen wir beides:</p>
+<p>Also enthält <span class="math inline">\(A{\color{#16a34a}{v_i}}\)</span> die Höhenform und den Singulärwert als Skalierung. Für die SVD trennen wir beides:</p>
 <p><span class="math display">\[
 A{\color{#16a34a}{v_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}},
 \qquad
 {\color{#1e88ff}{u_i}}=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}
 \quad(\sigma_i&gt;0).
 \]</span></p>
-<p>Durch das Teilen durch <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> bleibt die Form über die Höhe erhalten; die Stärke wird entfernt.</p>
+<p>Durch das Teilen durch <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> bleibt die Form über die Höhe erhalten; die Skalierung durch den Singulärwert wird entfernt.</p>
 </div>
 <div class="from-v-to-u-wrap">
 <p><img data-src="assets/generated/from_v_to_u_height_distribution.svg" class="from-v-to-u" alt="Vom Spaltenmuster über die Höhenantwort zur normierten Höhenverteilung"></p>
 </div>
 <div class="uebergang">
-<p><strong>Merke: <span class="math inline">\(A{\color{#16a34a}{v_i}}\)</span> enthält Form und Stärke. Durch <span class="math inline">\({\color{#1e88ff}{u_i}}=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}\)</span> erhalten wir die normierte Höhenverteilung.</strong></p>
+<p><strong>Merke: <span class="math inline">\(A{\color{#16a34a}{v_i}}\)</span> enthält Höhenform und Singulärwert-Skalierung. Durch <span class="math inline">\({\color{#1e88ff}{u_i}}=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}\)</span> erhalten wir die normierte Höhenverteilung.</strong></p>
 </div>
 </div>
 </section>
@@ -893,7 +893,7 @@ A{\color{#16a34a}{v_i}}
 =
 {\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}.
 \]</span></p>
-<p>Das heißt: Die Höhenantwort des Spaltenmusters besteht aus <strong>Stärke</strong> mal <strong>normierter Höhenverteilung</strong>.</p>
+<p>Das heißt: Die Höhenantwort des Spaltenmusters besteht aus <strong>Singulärwert</strong> mal <strong>normierter Höhenverteilung</strong>.</p>
 </div>
 <div class="derivation-right">
 <p>Damit kennen wir alle drei Teile:</p>
@@ -907,12 +907,12 @@ A{\color{#16a34a}{v_i}}
 <ul>
 <li><span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span>: Muster über die Spalten</li>
 <li><span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>: Verteilung über die Bildzeilen</li>
-<li><span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>: Stärke des Bausteins</li>
+<li><span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>: Singulärwert des Bausteins</li>
 </ul>
 <p>Das äußere Produkt <span class="math inline">\({\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}\)</span> macht daraus eine 2D-Bildschicht.</p>
 </div>
 <div class="svd-block-from-parts-wrap">
-<p><img data-src="assets/generated/svd_block_from_parts.svg" class="svd-block-from-parts" alt="Aus Spaltenmuster, Höhenverteilung und Stärke entsteht ein SVD-Bildbaustein"></p>
+<p><img data-src="assets/generated/svd_block_from_parts.svg" class="svd-block-from-parts" alt="Aus Spaltenmuster, Höhenverteilung und Singulärwert entsteht ein SVD-Bildbaustein"></p>
 </div>
 <div class="derivation-fullnote block-from-parts-note">
 <p>Aus der Kernbeziehung <span class="math inline">\(A{\color{#16a34a}{v_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}\)</span> wird mit <span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span> der Matrixbaustein <span class="math inline">\({\color{#f2aa00}{B_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}\)</span>.</p>
@@ -966,7 +966,7 @@ A={\color{#1e88ff}{U_r}}{\color{#f2aa00}{\Sigma_r}}{\color{#16a34a}{V_r^T}}.
 \]</span></p>
 <ul>
 <li><span class="math inline">\({\color{#1e88ff}{U_r}}\)</span>: Höhenverteilungen</li>
-<li><span class="math inline">\({\color{#f2aa00}{\Sigma_r}}\)</span>: Stärken</li>
+<li><span class="math inline">\({\color{#f2aa00}{\Sigma_r}}\)</span>: Singulärwerte</li>
 <li><span class="math inline">\({\color{#16a34a}{V_r^T}}\)</span>: Spaltenmuster</li>
 </ul>
 </div>
@@ -998,8 +998,8 @@ A-A_k=\sum_{i=k+1}^{r}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
 <p>Weil die Singulärwerte absteigend sortiert sind, lassen wir genau die schwächsten Bildschichten weg.</p>
 </div>
 <div class="derivation-right">
-<p>Die Stärke eines Bausteins steckt in <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>.</p>
-<p>Weil die SVD-Bausteine orthogonal zueinander sind, addieren sich ihre quadratischen Stärken sauber:</p>
+<p>Der Singulärwert eines Bausteins ist <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>.</p>
+<p>Weil die SVD-Bausteine orthogonal zueinander sind, addieren sich die Quadrate ihrer Singulärwerte sauber:</p>
 <p><span class="math display">\[
 \|A-A_k\|_F^2
 =
@@ -1033,7 +1033,7 @@ A-A_k=\sum_{i=k+1}^{r}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
 <p><span class="math display">\[
 {\color{#f2aa00}{B_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}
 \]</span></p>
-<p>Stärke × Höhenverteilung × Spaltenmuster</p>
+<p>Singulärwert × Höhenverteilung × Spaltenmuster</p>
 </div>
 <div class="svd-summary-card">
 <p><strong>Sortierung</strong></p>

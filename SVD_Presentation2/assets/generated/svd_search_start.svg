@@ -32,7 +32,7 @@
   <text class="serif sigma" x="260" y="72" font-size="25">σ<tspan baseline-shift="sub" font-size="15">i</tspan></text>
   <text class="serif u" x="292" y="72" font-size="25">u<tspan baseline-shift="sub" font-size="15">i</tspan></text>
   <text class="serif v" x="326" y="72" font-size="25">v<tspan baseline-shift="sub" font-size="15">i</tspan><tspan baseline-shift="super" font-size="15">T</tspan></text>
-  <text class="serif muted" x="236" y="105" font-size="15">später folgen Stärke und Höhenverteilung</text>
+  <text class="serif muted" x="236" y="105" font-size="15">später folgen σᵢ und Höhenverteilung</text>
 
   <path class="arrow" d="M455 72 C500 72, 512 111, 556 111"/>
 

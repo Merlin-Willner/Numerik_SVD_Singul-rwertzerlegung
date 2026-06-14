@@ -58,6 +58,6 @@
     <text class="serif lambda" x="0" y="37" font-size="15">λ₂</text><rect x="34" y="25" width="54" height="14" fill="#777777"/>
     <text class="serif lambda" x="0" y="74" font-size="15">λ₃</text><rect x="34" y="62" width="28" height="14" fill="#aaaaaa"/>
     <text class="serif ink" x="0" y="116" font-size="16">λ₁ ≥ λ₂ ≥ λ₃ ≥ ...</text>
-    <text class="serif muted" x="0" y="137" font-size="13">sortierte Bewertungen</text>
+    <text class="serif muted" x="0" y="137" font-size="13">sortierte Eigenwerte</text>
   </g>
 </svg>
