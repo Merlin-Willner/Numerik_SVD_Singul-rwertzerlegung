@@ -1094,7 +1094,7 @@
 .svd-search-start {
   display: block;
   width: 85%;
-  max-height: 28vh;
+  max-height: 202px;
   margin: 0.05rem auto 0;
   object-fit: contain;
 }
@@ -1102,33 +1102,33 @@
 .av-height-response {
   display: block;
   width: 96%;
-  max-height: 17vh;
+  max-height: 78px;
   margin: 0.05rem auto 0;
   object-fit: contain;
 }
 
 .av-slide {
-  gap: 0.38rem 0.85rem;
+  gap: 0.16rem 0.75rem;
 }
 
 .av-slide p {
-  font-size: 0.44em;
-  line-height: 1.14;
+  font-size: 0.38em;
+  line-height: 1.07;
 }
 
 .av-slide mjx-container {
-  font-size: 0.68em !important;
-  margin: 0.08rem 0 !important;
+  font-size: 0.54em !important;
+  margin: 0.025rem 0 !important;
 }
 
 .av-slide .derivation-fullnote {
-  padding-top: 0.18rem;
+  padding-top: 0.07rem;
   margin-top: 0;
 }
 
 .av-slide .derivation-fullnote p {
-  font-size: 0.36em;
-  line-height: 1.08;
+  font-size: 0.28em;
+  line-height: 1.03;
 }
 
 .av-slide ul {
@@ -1164,7 +1164,7 @@
 .spectral-space-problem {
   display: block;
   width: 92%;
-  max-height: 25vh;
+  max-height: 180px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
@@ -1181,7 +1181,7 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 32vh;
+  max-height: 230px;
   margin: 0 auto;
   object-fit: contain;
 }
@@ -1207,12 +1207,17 @@
   margin: 0;
 }
 
-.ata-spectral-bridge {
+.ata-spectral-bridge-wrap {
   grid-column: 1 / -1;
+  width: 100%;
+  margin: 0.02rem auto 0;
+}
+
+.ata-spectral-bridge {
   display: block;
-  width: 88%;
-  max-height: 28vh;
-  margin: 0.18rem auto 0;
+  width: 100%;
+  max-height: 288px;
+  margin: 0 auto;
   object-fit: contain;
 }
 
@@ -1220,7 +1225,7 @@
   grid-column: 1 / -1;
   display: block;
   width: 92%;
-  max-height: 30vh;
+  max-height: 216px;
   margin: 0.08rem auto 0;
   object-fit: contain;
 }
@@ -1251,7 +1256,7 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 33vh;
+  max-height: 238px;
   margin: 0 auto;
   object-fit: contain;
 }
@@ -1289,7 +1294,7 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 34vh;
+  max-height: 223px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
@@ -1300,13 +1305,13 @@
 }
 
 .from-v-to-u-slide p {
-  font-size: 0.35em;
-  line-height: 1.05;
+  font-size: 0.39em;
+  line-height: 1.1;
 }
 
 .from-v-to-u-slide ul {
-  font-size: 0.35em;
-  line-height: 1.05;
+  font-size: 0.39em;
+  line-height: 1.1;
   margin-top: 0.04rem;
   margin-bottom: 0.04rem;
 }
@@ -1317,8 +1322,8 @@
 }
 
 .from-v-to-u-wrap + .uebergang p {
-  font-size: 0.29em;
-  line-height: 1.05;
+  font-size: 0.33em;
+  line-height: 1.08;
 }
 
 .svd-block-from-parts-wrap {
@@ -1333,7 +1338,7 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 27vh;
+  max-height: 180px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
@@ -1344,13 +1349,13 @@
 }
 
 .block-from-parts-slide p {
-  font-size: 0.36em;
-  line-height: 1.06;
+  font-size: 0.39em;
+  line-height: 1.1;
 }
 
 .block-from-parts-slide ul {
-  font-size: 0.35em;
-  line-height: 1.06;
+  font-size: 0.39em;
+  line-height: 1.1;
   margin-top: 0.04rem;
   margin-bottom: 0.04rem;
 }
@@ -1366,13 +1371,13 @@
 }
 
 .block-from-parts-note p {
-  font-size: 0.3em;
-  line-height: 1.05;
+  font-size: 0.33em;
+  line-height: 1.08;
 }
 
 .svd-block-from-parts-wrap + .uebergang p {
-  font-size: 0.29em;
-  line-height: 1.05;
+  font-size: 0.33em;
+  line-height: 1.08;
 }
 
 .svd-sum-to-matrix-wrap {
@@ -1387,31 +1392,31 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 34vh;
+  max-height: 128px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
 
 .sum-to-matrix-slide {
-  gap: 0.18rem 0.9rem;
+  gap: 0.06rem 0.75rem;
   align-items: start;
 }
 
 .sum-to-matrix-slide p {
-  font-size: 0.36em;
-  line-height: 1.06;
+  font-size: 0.3em;
+  line-height: 1.03;
 }
 
 .sum-to-matrix-slide ul {
-  font-size: 0.35em;
-  line-height: 1.06;
+  font-size: 0.3em;
+  line-height: 1.03;
   margin-top: 0.04rem;
   margin-bottom: 0.04rem;
 }
 
 .sum-to-matrix-slide mjx-container {
-  font-size: 0.56em !important;
-  margin: 0.025rem 0 !important;
+  font-size: 0.42em !important;
+  margin: 0.008rem 0 !important;
 }
 
 .sum-to-matrix-slide .derivation-fullnote {
@@ -1420,8 +1425,8 @@
 }
 
 .sum-to-matrix-slide .derivation-fullnote p {
-  font-size: 0.3em;
-  line-height: 1.05;
+  font-size: 0.34em;
+  line-height: 1.1;
 }
 
 .svd-truncation-k-wrap {
@@ -1436,24 +1441,24 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 34vh;
+  max-height: 112px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
 
 .truncation-slide {
-  gap: 0.18rem 0.9rem;
+  gap: 0.06rem 0.75rem;
   align-items: start;
 }
 
 .truncation-slide p {
-  font-size: 0.36em;
-  line-height: 1.06;
+  font-size: 0.28em;
+  line-height: 1.025;
 }
 
 .truncation-slide mjx-container {
-  font-size: 0.55em !important;
-  margin: 0.025rem 0 !important;
+  font-size: 0.38em !important;
+  margin: 0.006rem 0 !important;
 }
 
 .truncation-slide .derivation-fullnote {
@@ -1475,7 +1480,7 @@
 .svd-final-summary {
   display: block;
   width: 96%;
-  max-height: 36vh;
+  max-height: 259px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
@@ -1872,7 +1877,7 @@
   margin: 0;
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .sources-list {
     columns: 1;
   }
@@ -1906,3 +1911,23 @@
     text-align: left;
   }
 }
+
+/* ============================================================
+   PDF-/Druck-Export: jede Folie auf genau eine Seite bringen.
+   RevealJS setzt bei ?print-pdf die Klasse .print-pdf auf <html>
+   und berechnet die Seitenanzahl per JS aus der Inhaltshöhe.
+   Diese Regeln müssen daher an .print-pdf hängen (nicht @media
+   print) – sonst greifen sie erst nach der Seitenberechnung.
+   Am Bildschirm (ohne ?print-pdf) ist nichts davon aktiv.
+   ============================================================ */
+.print-pdf .svd-grid-svg,
+.print-pdf .svd-image-canvas {
+  /* Interaktive Slider-Demos (Ente/Einstein): feste Höhe statt
+     width:100%/height:auto, sonst rendern Grid/Canvas in voller
+     Naturgröße und sprengen mehrere Seiten. */
+  width: auto !important;
+  height: 300px !important;
+  max-width: 100% !important;
+  margin: 0 auto;
+}
+

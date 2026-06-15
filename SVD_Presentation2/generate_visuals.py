@@ -27,7 +27,7 @@ INK = "#111111"
 MUTED = "#666666"
 YELLOW = "#f2aa00"
 SVDBLUE = "#1e88ff"
-SVDRED = "#ff3b35"
+SVDGREEN = "#16a34a"      # V^T – Deck-Farbschema (gruen)
 
 
 def rotation_clockwise(degrees: float) -> np.ndarray:
@@ -393,7 +393,7 @@ def save_svd_bridge():
 
     # (Farbe, Pfeil-Label = SVD-Faktor, Box-Notation, Matrix-Eintraege, Schriftgroesse der Matrix)
     actions = [
-        (SVDRED, r"$V^T$", r"$R_{-90^\circ}$", ((r"$0$", r"$1$"), (r"$-1$", r"$0$")), 11),
+        (SVDGREEN, r"$V^T$", r"$R_{-90^\circ}$", ((r"$0$", r"$1$"), (r"$-1$", r"$0$")), 11),
         (YELLOW, r"$\Sigma$", r"$\Sigma$", ((r"$0.45$", r"$0$"), (r"$0$", r"$1$")), 11),
         (SVDBLUE, r"$U$", r"$R_{-45^\circ}$", ((r"$0.71$", r"$0.71$"), (r"$-0.71$", r"$0.71$")), 9.5),
     ]
@@ -438,7 +438,7 @@ def save_dimension_reduction():
         R45 @ sigma_rank1 @ R90,
     ]
     labels = ["Start", "Vᵀ: drehen", "Σ₁: eine Richtung", "U: zurück drehen"]
-    action_labels = [("Vᵀ", SVDRED), ("Σ₁", YELLOW), ("U", SVDBLUE)]
+    action_labels = [("Vᵀ", SVDGREEN), ("Σ₁", YELLOW), ("U", SVDBLUE)]
 
     fig, ax = plt.subplots(figsize=(12.0, 3.9))
     ax.set_xlim(0, 12.0)
@@ -504,7 +504,7 @@ def save_rank1_matrix():
     ax.text(3.65, 1.93, "=", ha="center", va="center", fontsize=24, color=MUTED)
 
     vx = 4.40
-    blue = "#19a7ff"
+    blue = SVDBLUE
     for row, value in enumerate(left_vec):
         cell(vx, y0 - row * cell_h, cell_w, cell_h, value, fill=blue)
 
@@ -512,7 +512,7 @@ def save_rank1_matrix():
 
     hx = 5.75
     hy = 1.72
-    green = "#55c63a"
+    green = SVDGREEN
     for col, value in enumerate(right_vec):
         cell(hx + col * cell_w, hy, cell_w, cell_h, value, fill=green)
     ax.text(hx + 2 * cell_w, 0.72, "8 Zahlen", ha="center", va="center", fontsize=18, color=MUTED)
@@ -582,8 +582,8 @@ def save_rank_approximation():
         v_x = x + 1.12
         v_y = 1.96
         for col in range(4):
-            cell(v_x + col * small_w, v_y, small_w, small_h, "", fill="none", edge=SVDRED)
-        ax.text(v_x + 2 * small_w, 1.35, rf"$v_{idx}^T$", ha="center", va="center", fontsize=15, color=SVDRED)
+            cell(v_x + col * small_w, v_y, small_w, small_h, "", fill="none", edge=SVDGREEN)
+        ax.text(v_x + 2 * small_w, 1.35, rf"$v_{idx}^T$", ha="center", va="center", fontsize=15, color=SVDGREEN)
 
         ax.text(x + 1.08, 3.00, rf"$\sigma_{idx} u_{idx} v_{idx}^T$", ha="center", va="center", fontsize=15, color=INK)
 
@@ -610,7 +610,7 @@ def save_rank_approximation():
 def save_duck_rank_terms():
     values = duck_matrix().astype(float)
     u, singular_values, vt = np.linalg.svd(values, full_matrices=True)
-    accents = [SVDBLUE, YELLOW, SVDRED]
+    accents = [SVDBLUE, YELLOW, SVDGREEN]
 
     def draw_pixel_grid(matrix, x0, y0, cell, stroke="#111", show_values=False, normalize=False):
         display = matrix.copy().astype(float)
@@ -704,8 +704,8 @@ def save_duck_rank_terms():
         ax.text(x + 0.45, 1.12, rf"$u_{idx + 1}$", ha="center", va="center", fontsize=14, color=SVDBLUE)
         ax.text(x + 1.25, 2.15, rf"$\sigma_{idx + 1}$", ha="center", va="center", fontsize=16, color=YELLOW)
         ax.text(x + 1.25, 1.74, f"{singular_values[idx]:.0f}", ha="center", va="center", fontsize=12, color=MUTED)
-        draw_vector(ax, vt[idx, :], x + 1.70, 2.22, 0.075, 0.10, False, SVDRED)
-        ax.text(x + 2.18, 1.72, rf"$v_{idx + 1}^T$", ha="center", va="center", fontsize=14, color=SVDRED)
+        draw_vector(ax, vt[idx, :], x + 1.70, 2.22, 0.075, 0.10, False, SVDGREEN)
+        ax.text(x + 2.18, 1.72, rf"$v_{idx + 1}^T$", ha="center", va="center", fontsize=14, color=SVDGREEN)
         ax.text(x + 1.52, 0.92, "ergibt eine Rang-1-Matrix", ha="center", va="center", fontsize=12, color=MUTED)
     fig.savefig(OUT_DIR / "duck_rank_terms_v2.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
@@ -738,8 +738,8 @@ def save_duck_rank_terms():
         ax.text(x + 0.66, ymid - 0.23, f"{singular_values[idx]:.0f}", ha="center", va="center", fontsize=10, color=MUTED)
         ax.text(x + 0.92, ymid, r"$\cdot$", ha="center", va="center", fontsize=15, color=MUTED)
         # Zeile v_i^T (waagerecht, um ymid zentriert)
-        draw_vector(ax, vt[idx, :], x + 1.02, ymid + 0.045, 0.055, 0.088, False, SVDRED)
-        ax.text(x + 1.38, ymid - 0.30, rf"$v_{idx + 1}^{{T}}$", ha="center", va="center", fontsize=11, color=SVDRED)
+        draw_vector(ax, vt[idx, :], x + 1.02, ymid + 0.045, 0.055, 0.088, False, SVDGREEN)
+        ax.text(x + 1.38, ymid - 0.30, rf"$v_{idx + 1}^{{T}}$", ha="center", va="center", fontsize=11, color=SVDGREEN)
 
     # Summation rechts (auf Hoehe der Bilder)
     ax.text(2.47, 4.02, "+", ha="center", va="center", fontsize=18, color=MUTED)
@@ -889,8 +889,8 @@ def save_duck_svd_first_component_layout():
     ax.text(4.70, 3.32, r"$\times$", ha="center", va="center", fontsize=18, color=MUTED)
     draw_sigma_matrix(5.05, 3.85)
     ax.text(7.36, 3.32, r"$\times$", ha="center", va="center", fontsize=18, color=MUTED)
-    ax.text(7.75, 4.04, r"$V^T$", ha="left", va="center", fontsize=16, color=SVDRED)
-    draw_numeric_matrix(vt, 7.75, 3.85, 4.55, 1.90, highlight="row", color=SVDRED)
+    ax.text(7.75, 4.04, r"$V^T$", ha="left", va="center", fontsize=16, color=SVDGREEN)
+    draw_numeric_matrix(vt, 7.75, 3.85, 4.55, 1.90, highlight="row", color=SVDGREEN)
 
     component = singular_values[0] * np.outer(u[:, 0], vt[0, :])
     ax.text(1.95, 1.92, rf"$\sigma_1={singular_values[0]:.0f}$", ha="center", va="center", fontsize=22, color=INK)
@@ -924,7 +924,7 @@ def save_svd_rank_sum_reconstruction():
 
     blue = SVDBLUE      # U   – Deck-Farbschema
     sigma_red = YELLOW  # Σ   – Deck-Farbschema
-    green = SVDRED      # V^T – Deck-Farbschema
+    green = SVDGREEN      # V^T – Deck-Farbschema
     grid = "#666666"
 
     def rect(x, y, w, h, fill="none", edge=INK, lw=1.6):

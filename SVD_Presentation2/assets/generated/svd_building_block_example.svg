@@ -9,7 +9,7 @@
 
   <g font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" fill="#111111">
     <text x="24" y="30" font-size="19">einzelne Bildbausteine</text>
-    <text x="772" y="30" font-size="19">ueberlagerte Summe</text>
+    <text x="772" y="30" font-size="19">überlagerte Summe</text>
   </g>
 
   <line x1="720" y1="48" x2="720" y2="272" stroke="#d8d8d8" stroke-width="1.5"/>
@@ -80,7 +80,7 @@
 
   <text x="728" y="172" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="34" fill="#111111">=</text>
 
-  <!-- Summe: alle drei Muster sichtbar ueberlagert -->
+  <!-- Summe: alle drei Muster sichtbar überlagert -->
   <g transform="translate(770 58)" filter="url(#panelShadow)">
     <rect x="0" y="0" width="184" height="214" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
     <text x="26" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">𝐴₃</text>
@@ -95,6 +95,6 @@
         <circle cx="10" cy="115" r="8" fill="#f4f4f4"/><circle cx="31" cy="115" r="8" fill="#f4f4f4"/><circle cx="52" cy="115" r="8" fill="#f4f4f4"/><circle cx="73" cy="115" r="8" fill="#f4f4f4"/><circle cx="94" cy="115" r="8" fill="#f4f4f4"/><circle cx="115" cy="115" r="8" fill="#d4d4d4"/>
       </g>
     </g>
-    <text x="25" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">vertikal + horizontal + diagonal</text>
+    <text x="28" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">überlagerte Anteile</text>
   </g>
 </svg>

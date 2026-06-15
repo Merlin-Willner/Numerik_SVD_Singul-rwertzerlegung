@@ -1,5 +1,5 @@
 ---
-pagetitle: "Singulaerwertzerlegung (SVD)"
+pagetitle: "Singulärwertzerlegung (SVD)"
 format:
   revealjs:
     theme: simple
@@ -12,6 +12,7 @@ format:
     transition: fade
     chalkboard: false
     preview-links: false
+    pdf-max-pages-per-slide: 1
 execute:
   echo: false
 ---
@@ -65,19 +66,19 @@ Bevor wir Bilder komprimieren, betrachten wir ein Rätsel: Wie kommt man nur dur
 
 ::: {.step-action-matrices}
 $$
-R_{-90^\circ} =
+{\color{#16a34a}{R_{-90^\circ}}} =
 \begin{pmatrix}
 0 & 1 \\
 -1 & 0
 \end{pmatrix}
 \qquad
-\Sigma =
+{\color{#f2aa00}{\Sigma}} =
 \begin{pmatrix}
 0.45 & 0 \\
 0 & 1
 \end{pmatrix}
 \qquad
-R_{-45^\circ} =
+{\color{#1e88ff}{R_{-45^\circ}}} =
 \begin{pmatrix}
 \frac{\sqrt2}{2} & \frac{\sqrt2}{2} \\
 -\frac{\sqrt2}{2} & \frac{\sqrt2}{2}
@@ -149,7 +150,7 @@ Links hat ${\color{#f2aa00}\Sigma}$ die **Singulärwerte** $\sigma_1=3,\ \sigma_
 :::
 
 ::: {.dimension-text}
-In der SVD $A=U\Sigma V^T$ steckt die ganze Streckung in $\Sigma$: dort stehen die **Singulärwerte** $\sigma_1\ge\sigma_2\ge\dots\ge 0$.
+In der SVD $A={\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}}$ steckt die ganze Streckung in ${\color{#f2aa00}{\Sigma}}$: dort stehen die **Singulärwerte** ${\color{#f2aa00}{\sigma_1}}\ge{\color{#f2aa00}{\sigma_2}}\ge\dots\ge 0$.
 
 Sie bestimmen die Streckung jeder Richtung. Der **kleinste Singulärwert** $=0$ entfernt die unwichtigste Richtung.
 
@@ -180,7 +181,7 @@ Die Matrix hat also vier Zeilen und vier Spalten, aber nur **eine unabhängige R
 Statt 16 Zahlen speichern wir nur zwei Vektoren mit insgesamt 8 Zahlen:
 
 $$
-A = u v^T.
+A = {\color{#1e88ff}{u}}\,{\color{#16a34a}{v^T}}.
 $$
 :::
 
@@ -200,7 +201,7 @@ Bei einer Matrix mit Rang $4$ sind die Zeilen nicht mehr alle Vielfache voneinan
 Das Grundprinzip bleibt aber gleich: Wir beschreiben die Matrix als Summe mehrerer Rang-1-Matrizen.
 
 $$
-A_k = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \dots + \sigma_k u_k v_k^T
+A_k = {\color{#f2aa00}{\sigma_1}}{\color{#1e88ff}{u_1}}{\color{#16a34a}{v_1^T}} + {\color{#f2aa00}{\sigma_2}}{\color{#1e88ff}{u_2}}{\color{#16a34a}{v_2^T}} + \dots + {\color{#f2aa00}{\sigma_k}}{\color{#1e88ff}{u_k}}{\color{#16a34a}{v_k^T}}
 $$
 
 Für $k=r$ ist das die vollständige Zerlegung. Für $k<r$ entsteht eine Näherung: Je mehr Bausteine wir addieren, desto genauer wird sie. Für Kompression speichern wir nur die wichtigsten Bausteine und lassen kleine Beiträge weg.
@@ -302,7 +303,7 @@ Bis hierhin haben wir Matrizen als Summen von Rang-1-Beiträgen betrachtet. Jetz
 Ein Graustufenbild ist nichts anderes als eine Matrix $A$: Jeder Eintrag ist ein Pixelwert zwischen $0$ und $255$.
 
 $$
-A = U\Sigma V^T,
+A = {\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}},
 $$
 
 zerlegt diese Pixelmatrix in geordnete Bildbausteine.
@@ -338,7 +339,7 @@ Auf der nächsten Folie sieht man diese Beiträge einzeln.
 Bei einem Bild ist $A$ die Matrix der Pixelwerte.
 
 $$
-A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
+A_k = \sum_{i=1}^{k} {\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
 $$
 
 Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, verlieren aber Details; größere Ränge nähern sich der Originalmatrix an.
@@ -459,7 +460,7 @@ Jeder Baustein soll also eine einfache Struktur erklären: zuerst grobe, starke 
 **Was steckt in einem einzelnen solchen Baustein?**
 :::
 
-![](assets/generated/svd_building_block_example.svg){.svd-block-example fig-alt="Grafisches Beispiel fuer mehrere SVD-Bildbausteine und ihre ueberlagerte Summe"}
+![](assets/generated/svd_building_block_example.svg){.svd-block-example fig-alt="Grafisches Beispiel für mehrere SVD-Bildbausteine und ihre überlagerte Summe"}
 
 :::
 
@@ -612,7 +613,7 @@ Damit ist $A{\color{#16a34a}{v}}$ die **Höhenantwort** des Bildes auf das Spalt
 :::
 
 ::: {.derivation-fullnote}
-Die Höhenantwort $A{\color{#16a34a}{v}}$ zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge macht daraus eine Gesamtstärke:
+Die Höhenantwort $A{\color{#16a34a}{v}}$ zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge misst die Gesamtstärke:
 
 $$
 \|A{\color{#16a34a}{v}}\|
@@ -689,10 +690,6 @@ Der Spektralsatz braucht dagegen eine symmetrische quadratische Matrix, die eine
 
 ::: {.space-problem-graphic}
 ![](assets/generated/spectral_theorem_space_problem.svg){.spectral-space-problem fig-alt="A bildet ein Spaltenmuster in eine Höhenantwort ab, während der Spektralsatz eine Abbildung im selben Raum benötigt"}
-:::
-
-::: {.uebergang}
-**Können wir aus \(A\) eine symmetrische Matrix bauen, die dieselbe Bewertungsfrage für Spaltenmuster beantwortet?**
 :::
 
 :::
@@ -788,13 +785,11 @@ $$
 (A^TA)^T=A^TA.
 $$
 
-Für solche Matrizen liefert der Spektralsatz orthogonale Richtungen.
+Für solche Matrizen liefert der Spektralsatz orthogonale Eigenrichtungen.
 :::
 
+::: {.ata-spectral-bridge-wrap}
 ![](assets/generated/ata_to_spectral_bridge.svg){.ata-spectral-bridge fig-alt="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern"}
-
-::: {.uebergang}
-**Nächste Frage: Welche normierten Spaltenmuster ${\color{#16a34a}{v_i}}$ maximieren diese Bewertung? Dafür wenden wir jetzt den Spektralsatz auf $A^TA$ an.**
 :::
 
 :::
@@ -976,10 +971,6 @@ Durch das Teilen durch ${\color{#f2aa00}{\sigma_i}}$ bleibt die Form über die H
 ![](assets/generated/from_v_to_u_height_distribution.svg){.from-v-to-u fig-alt="Vom Spaltenmuster über die Höhenantwort zur normierten Höhenverteilung"}
 :::
 
-::: {.uebergang}
-**Merke: $A{\color{#16a34a}{v_i}}$ enthält Höhenform und Singulärwert-Skalierung. Durch ${\color{#1e88ff}{u_i}}=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}$ erhalten wir die normierte Höhenverteilung.**
-:::
-
 :::
 
 ## Aus drei Teilen wird ein Bildbaustein
@@ -1103,10 +1094,6 @@ $$
 ![](assets/generated/svd_sum_to_matrix_form.svg){.svd-sum-to-matrix fig-alt="Die Summe einzelner SVD-Bildbausteine ergibt die Bildmatrix und entspricht der Matrixform A gleich U Sigma V transponiert"}
 :::
 
-::: {.derivation-fullnote}
-**Merke: Die SVD ist die kompakte Schreibweise für die Summe aller Bildbausteine. Reduziert heißt hier noch nicht komprimiert, sondern nur: Null-Bausteine wurden weggelassen. Kompression beginnt erst, wenn wir zusätzlich kleine, aber nicht-null Bausteine weglassen.**
-:::
-
 :::
 
 ## Warum können wir kleine Bausteine weglassen?
@@ -1165,10 +1152,6 @@ Also ist $A_k$ die beste Rang-$k$-Näherung im Frobeniusfehler.
 
 ::: {.svd-truncation-k-wrap}
 ![](assets/generated/svd_truncation_k.svg){.svd-truncation-k fig-alt="Abschneiden der SVD nach den ersten k stärksten Bildbausteinen"}
-:::
-
-::: {.derivation-fullnote}
-**Merke: $A_k$ behält die $k$ stärksten Bildbausteine. Der Fehler besteht aus den weggelassenen schwachen Bausteinen. Weil die ${\color{#f2aa00}{\sigma_i}}$ absteigend sortiert sind, ist das Abschneiden bei $k$ die beste Rang-$k$-Näherung.**
 :::
 
 :::
@@ -1245,5 +1228,5 @@ Bei der Erstellung dieser Themenausarbeitung wurden KI-gestützte Werkzeuge gem�
 :::
 
 ::: {.ai-decl-statement}
-Die durch die KI-Werkzeuge erzeugten Inhalte wurden von uns kritisch geprüft, überarbeitet und auf fachliche Richtigkeit kontrolliert. Die Verantwortung für sämtliche Inhalte dieser Arbeit liegt vollständig bei den Autorinnen und Autoren.
+Hiermit versichere ich, dass ich die vorliegende Arbeit eigenständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel verwendet habe. Alle übernommenen Inhalte sowie mit Unterstützung von KI generierten Inhalte wurden entsprechend den anerkannten wissenschaftlichen Grundsätzen oder entsprechend der Regelungen zur Kennzeichnung von KI-Inhalten kenntlich gemacht. Ausgenommen von der Kenntlichmachung sind orthografische oder grammatikalische Korrekturen, Übersetzungen sowie nicht-sinnverändernde Verbesserungen von Formulierungen. Ich bin mir bewusst, dass mit KI generierte Texte keine Garantie für die Qualität von Inhalten und Text bieten. Daher erkläre ich, dass ich KI-Werkzeuge lediglich als Hilfsmittel genutzt habe, die von KI generierten Inhalte kritisch überprüft habe und mein eigenständiger sowie kreativer Einfluss in dieser Arbeit überwiegt. Ich versichere, dass ich Inhalte meiner Arbeit vollständig verstanden habe und selbstständig vertreten kann. Ich versichere, dass ich ausschließlich KI-Werkzeuge verwendet habe, deren Nutzung vom Prüfer oder der Prüferin als Hilfsmittel zugelassen wurden.
 :::

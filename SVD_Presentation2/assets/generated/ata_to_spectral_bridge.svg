@@ -1,58 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 260" role="img" aria-label="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern">
-  <rect width="980" height="260" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 250" role="img" aria-label="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern">
+  <rect width="1040" height="250" fill="#ffffff"/>
   <defs>
     <style>
       .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
       .ink { fill: #111111; }
       .muted { fill: #666666; }
       .v { fill: #16a34a; }
-      .box { fill: #ffffff; stroke: #d8d8d8; stroke-width: 1.4; }
-      .ata { fill: #f7f7f7; stroke: #111111; stroke-width: 1.6; }
-      .arrow { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .box { fill: #ffffff; stroke: #d7d7d7; stroke-width: 1.8; }
+      .ata { fill: #f8f8f8; stroke: #222222; stroke-width: 2; }
+      .arrow { stroke: #111111; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
     </style>
-    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 Z" fill="#111111"/>
+    <marker id="arrowhead" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L11,4 L0,8 Z" fill="#111111"/>
     </marker>
   </defs>
 
-  <g transform="translate(48 28)">
-    <rect class="box" x="0" y="0" width="190" height="76" rx="4"/>
-    <text class="serif ink" x="22" y="25" font-size="15">Suchproblem</text>
-    <text class="serif ink" x="22" y="55" font-size="18">max </text>
-    <text class="serif v" x="62" y="55" font-size="18">vᵀ</text>
-    <text class="serif ink" x="90" y="55" font-size="18">AᵀA</text>
-    <text class="serif v" x="134" y="55" font-size="18">v</text>
+  <g transform="translate(18 48)">
+    <rect class="box" x="0" y="0" width="150" height="124" rx="7"/>
+    <text class="serif ink" x="18" y="34" font-size="18">Suchproblem</text>
+    <text class="serif ink" x="18" y="74" font-size="22">max</text>
+    <text class="serif v" x="70" y="74" font-size="22">vᵀ</text>
+    <text class="serif ink" x="100" y="74" font-size="22">AᵀA</text>
+    <text class="serif v" x="17" y="104" font-size="13">||v||=1</text>
   </g>
 
-  <path class="arrow" d="M252 66 L320 66"/>
+  <path class="arrow" d="M184 110 L226 110"/>
 
-  <g transform="translate(338 28)">
-    <rect class="ata" x="0" y="0" width="220" height="76" rx="4"/>
-    <text class="serif ink" x="26" y="31" font-size="20">Bewertungsmatrix AᵀA</text>
-    <text class="serif muted" x="34" y="57" font-size="14">bewertet Spaltenmuster</text>
+  <g transform="translate(242 48)">
+    <rect class="ata" x="0" y="0" width="170" height="124" rx="7"/>
+    <text class="serif ink" x="66" y="35" font-size="22">AᵀA</text>
+    <text class="serif ink" x="24" y="68" font-size="18">Bewertungsmatrix</text>
+    <text class="serif muted" x="22" y="98" font-size="14">bewertet Muster</text>
   </g>
 
-  <path class="arrow" d="M572 66 L640 66"/>
+  <path class="arrow" d="M428 110 L470 110"/>
 
-  <g transform="translate(658 28)">
-    <rect class="ata" x="0" y="0" width="250" height="76" rx="4"/>
-    <text class="serif ink" x="48" y="31" font-size="18">quadratisch + symmetrisch</text>
-    <text class="serif muted" x="63" y="57" font-size="14">passt zum Spektralsatz</text>
+  <g transform="translate(486 48)">
+    <rect class="ata" x="0" y="0" width="174" height="124" rx="7"/>
+    <text class="serif ink" x="36" y="42" font-size="19">quadratisch</text>
+    <text class="serif ink" x="48" y="72" font-size="19">symmetrisch</text>
+    <text class="serif muted" x="28" y="101" font-size="14">Spektralsatz passt</text>
   </g>
 
-  <path class="arrow" d="M785 116 L785 156"/>
+  <path class="arrow" d="M676 110 L718 110"/>
 
-  <g transform="translate(630 170)">
-    <rect class="box" x="0" y="0" width="310" height="58" rx="4"/>
-    <text class="serif ink" x="104" y="25" font-size="17">Spektralsatz</text>
-    <text class="serif muted" x="44" y="45" font-size="13">erst hier entstehen die orthogonalen Muster</text>
+  <g transform="translate(734 48)">
+    <rect class="box" x="0" y="0" width="150" height="124" rx="7"/>
+    <text class="serif ink" x="24" y="48" font-size="20">Spektralsatz</text>
+    <text class="serif muted" x="19" y="79" font-size="14">für symmetrische</text>
+    <text class="serif muted" x="39" y="100" font-size="14">Matrizen</text>
   </g>
 
-  <path class="arrow" d="M615 199 L535 199"/>
+  <path class="arrow" d="M900 110 L942 110"/>
 
-  <g transform="translate(214 170)">
-    <rect class="box" x="0" y="0" width="300" height="58" rx="4"/>
-    <text class="serif v" x="36" y="25" font-size="17">beste orthogonale Spaltenmuster vᵢ</text>
-    <text class="serif muted" x="72" y="45" font-size="13">nach der Bewertung geordnet</text>
+  <g transform="translate(958 48)">
+    <rect class="box" x="0" y="0" width="64" height="124" rx="7"/>
+    <text class="serif v" x="18" y="42" font-size="23">vᵢ</text>
+    <text class="serif muted" x="11" y="75" font-size="13">orth.</text>
+    <text class="serif muted" x="7" y="96" font-size="13">Muster</text>
   </g>
+
+  <text class="serif muted" x="20" y="220" font-size="17">Brücke: Aus der Bewertungsmatrix wird ein Spektralsatz-Problem. Erst danach erhalten wir die orthogonalen Spaltenmuster.</text>
 </svg>

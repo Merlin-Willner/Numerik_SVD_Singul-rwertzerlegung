@@ -9,7 +9,7 @@
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
-  <title>Singulaerwertzerlegung (SVD)</title>
+  <title>Singulärwertzerlegung (SVD)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -175,19 +175,19 @@
 <p><img data-src="assets/generated/transformation_step_actions.svg" class="step-actions" alt="Vier Zustände mit drei Aktionen: Rotation, Skalierung, Rotation"></p>
 <div class="step-action-matrices">
 <p><span class="math display">\[
-R_{-90^\circ} =
+{\color{#16a34a}{R_{-90^\circ}}} =
 \begin{pmatrix}
 0 &amp; 1 \\
 -1 &amp; 0
 \end{pmatrix}
 \qquad
-\Sigma =
+{\color{#f2aa00}{\Sigma}} =
 \begin{pmatrix}
 0.45 &amp; 0 \\
 0 &amp; 1
 \end{pmatrix}
 \qquad
-R_{-45^\circ} =
+{\color{#1e88ff}{R_{-45^\circ}}} =
 \begin{pmatrix}
 \frac{\sqrt2}{2} &amp; \frac{\sqrt2}{2} \\
 -\frac{\sqrt2}{2} &amp; \frac{\sqrt2}{2}
@@ -246,7 +246,7 @@ A =
 <p>Links hat <span class="math inline">\({\color{#f2aa00}\Sigma}\)</span> die <strong>Singulärwerte</strong> <span class="math inline">\(\sigma_1=3,\ \sigma_2=2\)</span> — die <strong>Punkte</strong> (je Spalte einer) bleiben in der Fläche. Rechts ist <span class="math inline">\(\sigma_2={\color{#16a34a}0}\)</span>: die ganze <span class="math inline">\(y\)</span>-Zeile wird <span class="math inline">\(0\)</span>, alle Punkte landen auf der Linie <span class="math inline">\(y=0\)</span>.</p>
 </div>
 <div class="dimension-text">
-<p>In der SVD <span class="math inline">\(A=U\Sigma V^T\)</span> steckt die ganze Streckung in <span class="math inline">\(\Sigma\)</span>: dort stehen die <strong>Singulärwerte</strong> <span class="math inline">\(\sigma_1\ge\sigma_2\ge\dots\ge 0\)</span>.</p>
+<p>In der SVD <span class="math inline">\(A={\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}}\)</span> steckt die ganze Streckung in <span class="math inline">\({\color{#f2aa00}{\Sigma}}\)</span>: dort stehen die <strong>Singulärwerte</strong> <span class="math inline">\({\color{#f2aa00}{\sigma_1}}\ge{\color{#f2aa00}{\sigma_2}}\ge\dots\ge 0\)</span>.</p>
 <p>Sie bestimmen die Streckung jeder Richtung. Der <strong>kleinste Singulärwert</strong> <span class="math inline">\(=0\)</span> entfernt die unwichtigste Richtung.</p>
 <p>Genau das ist Dimensionsreduktion: kleine Singulärwerte weglassen. Dieselbe Idee trägt später die Bildkompression.</p>
 </div>
@@ -267,7 +267,7 @@ A =
 <p>Die Matrix hat also vier Zeilen und vier Spalten, aber nur <strong>eine unabhängige Richtung</strong>. Deshalb ist ihr Rang gleich <span class="math inline">\(1\)</span>.</p>
 <p>Statt 16 Zahlen speichern wir nur zwei Vektoren mit insgesamt 8 Zahlen:</p>
 <p><span class="math display">\[
-A = u v^T.
+A = {\color{#1e88ff}{u}}\,{\color{#16a34a}{v^T}}.
 \]</span></p>
 </div>
 </div>
@@ -282,7 +282,7 @@ A = u v^T.
 <p>Bei einer Matrix mit Rang <span class="math inline">\(4\)</span> sind die Zeilen nicht mehr alle Vielfache voneinander. Die einfache Zerlegung aus der vorherigen Folie reicht dann nicht mehr aus.</p>
 <p>Das Grundprinzip bleibt aber gleich: Wir beschreiben die Matrix als Summe mehrerer Rang-1-Matrizen.</p>
 <p><span class="math display">\[
-A_k = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \dots + \sigma_k u_k v_k^T
+A_k = {\color{#f2aa00}{\sigma_1}}{\color{#1e88ff}{u_1}}{\color{#16a34a}{v_1^T}} + {\color{#f2aa00}{\sigma_2}}{\color{#1e88ff}{u_2}}{\color{#16a34a}{v_2^T}} + \dots + {\color{#f2aa00}{\sigma_k}}{\color{#1e88ff}{u_k}}{\color{#16a34a}{v_k^T}}
 \]</span></p>
 <p>Für <span class="math inline">\(k=r\)</span> ist das die vollständige Zerlegung. Für <span class="math inline">\(k&lt;r\)</span> entsteht eine Näherung: Je mehr Bausteine wir addieren, desto genauer wird sie. Für Kompression speichern wir nur die wichtigsten Bausteine und lassen kleine Beiträge weg.</p>
 </div>
@@ -365,7 +365,7 @@ Zeile aus <span class="math inline">\(V^T\)</span></p>
 <p>Bis hierhin haben wir Matrizen als Summen von Rang-1-Beiträgen betrachtet. Jetzt wenden wir genau diese Idee auf ein Bild an.</p>
 <p>Ein Graustufenbild ist nichts anderes als eine Matrix <span class="math inline">\(A\)</span>: Jeder Eintrag ist ein Pixelwert zwischen <span class="math inline">\(0\)</span> und <span class="math inline">\(255\)</span>.</p>
 <p><span class="math display">\[
-A = U\Sigma V^T,
+A = {\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}},
 \]</span></p>
 <p>zerlegt diese Pixelmatrix in geordnete Bildbausteine.</p>
 <p>Die größten Singulärwerte beschreiben die wichtigsten Strukturen der Ente. Für die Kompression speichern wir nur diese stärksten Beiträge und lassen kleinere Details weg.</p>
@@ -393,7 +393,7 @@ A = U\Sigma V^T,
 <div class="rank-explanation">
 <p>Bei einem Bild ist <span class="math inline">\(A\)</span> die Matrix der Pixelwerte.</p>
 <p><span class="math display">\[
-A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
+A_k = \sum_{i=1}^{k} {\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
 \]</span></p>
 <p>Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, verlieren aber Details; größere Ränge nähern sich der Originalmatrix an.</p>
 </div>
@@ -490,7 +490,7 @@ A\approx B_1+B_2+\dots+B_k.
 <p>Jeder Baustein soll also eine einfache Struktur erklären: zuerst grobe, starke Anteile, später feinere Details.</p>
 <p><strong>Was steckt in einem einzelnen solchen Baustein?</strong></p>
 </div>
-<p><img data-src="assets/generated/svd_building_block_example.svg" class="svd-block-example" alt="Grafisches Beispiel fuer mehrere SVD-Bildbausteine und ihre ueberlagerte Summe"></p>
+<p><img data-src="assets/generated/svd_building_block_example.svg" class="svd-block-example" alt="Grafisches Beispiel für mehrere SVD-Bildbausteine und ihre überlagerte Summe"></p>
 </div>
 </section>
 <section id="was-steckt-in-einem-einzelnen-svd-baustein" class="slide level2">
@@ -602,7 +602,7 @@ A{\color{#16a34a}{v}}\in\mathbb{R}^m.
 <p><img data-src="assets/generated/av_height_response.svg" class="av-height-response" alt="Matrixmultiplikation Av als Höhenantwort des Bildes auf ein Spaltenmuster"></p>
 </div>
 <div class="derivation-fullnote">
-<p>Die Höhenantwort <span class="math inline">\(A{\color{#16a34a}{v}}\)</span> zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge macht daraus eine Gesamtstärke:</p>
+<p>Die Höhenantwort <span class="math inline">\(A{\color{#16a34a}{v}}\)</span> zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge misst die Gesamtstärke:</p>
 <p><span class="math display">\[
 \|A{\color{#16a34a}{v}}\|
 =\sqrt{2^2+2^2+2^2+2^2+0^2+0^2}
@@ -657,9 +657,6 @@ A:\mathbb{R}^n\to\mathbb{R}^m.
 </div>
 <div class="space-problem-graphic">
 <p><img data-src="assets/generated/spectral_theorem_space_problem.svg" class="spectral-space-problem" alt="A bildet ein Spaltenmuster in eine Höhenantwort ab, während der Spektralsatz eine Abbildung im selben Raum benötigt"></p>
-</div>
-<div class="uebergang">
-<p><strong>Können wir aus (A) eine symmetrische Matrix bauen, die dieselbe Bewertungsfrage für Spaltenmuster beantwortet?</strong></p>
 </div>
 </div>
 </section>
@@ -728,11 +725,10 @@ A^TA\in\mathbb{R}^{n\times n}
 <p><span class="math display">\[
 (A^TA)^T=A^TA.
 \]</span></p>
-<p>Für solche Matrizen liefert der Spektralsatz orthogonale Richtungen.</p>
+<p>Für solche Matrizen liefert der Spektralsatz orthogonale Eigenrichtungen.</p>
 </div>
+<div class="ata-spectral-bridge-wrap">
 <p><img data-src="assets/generated/ata_to_spectral_bridge.svg" class="ata-spectral-bridge" alt="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern"></p>
-<div class="uebergang">
-<p><strong>Nächste Frage: Welche normierten Spaltenmuster <span class="math inline">\({\color{#16a34a}{v_i}}\)</span> maximieren diese Bewertung? Dafür wenden wir jetzt den Spektralsatz auf <span class="math inline">\(A^TA\)</span> an.</strong></p>
 </div>
 </div>
 </section>
@@ -872,9 +868,6 @@ A{\color{#16a34a}{v_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}},
 <div class="from-v-to-u-wrap">
 <p><img data-src="assets/generated/from_v_to_u_height_distribution.svg" class="from-v-to-u" alt="Vom Spaltenmuster über die Höhenantwort zur normierten Höhenverteilung"></p>
 </div>
-<div class="uebergang">
-<p><strong>Merke: <span class="math inline">\(A{\color{#16a34a}{v_i}}\)</span> enthält Höhenform und Singulärwert-Skalierung. Durch <span class="math inline">\({\color{#1e88ff}{u_i}}=\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}\)</span> erhalten wir die normierte Höhenverteilung.</strong></p>
-</div>
 </div>
 </section>
 <section id="aus-drei-teilen-wird-ein-bildbaustein" class="slide level2">
@@ -973,9 +966,6 @@ A={\color{#1e88ff}{U_r}}{\color{#f2aa00}{\Sigma_r}}{\color{#16a34a}{V_r^T}}.
 <div class="svd-sum-to-matrix-wrap">
 <p><img data-src="assets/generated/svd_sum_to_matrix_form.svg" class="svd-sum-to-matrix" alt="Die Summe einzelner SVD-Bildbausteine ergibt die Bildmatrix und entspricht der Matrixform A gleich U Sigma V transponiert"></p>
 </div>
-<div class="derivation-fullnote">
-<p><strong>Merke: Die SVD ist die kompakte Schreibweise für die Summe aller Bildbausteine. Reduziert heißt hier noch nicht komprimiert, sondern nur: Null-Bausteine wurden weggelassen. Kompression beginnt erst, wenn wir zusätzlich kleine, aber nicht-null Bausteine weglassen.</strong></p>
-</div>
 </div>
 </section>
 <section id="warum-können-wir-kleine-bausteine-weglassen" class="slide level2">
@@ -1017,9 +1007,6 @@ A-A_k=\sum_{i=k+1}^{r}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
 </div>
 <div class="svd-truncation-k-wrap">
 <p><img data-src="assets/generated/svd_truncation_k.svg" class="svd-truncation-k" alt="Abschneiden der SVD nach den ersten k stärksten Bildbausteinen"></p>
-</div>
-<div class="derivation-fullnote">
-<p><strong>Merke: <span class="math inline">\(A_k\)</span> behält die <span class="math inline">\(k\)</span> stärksten Bildbausteine. Der Fehler besteht aus den weggelassenen schwachen Bausteinen. Weil die <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> absteigend sortiert sind, ist das Abschneiden bei <span class="math inline">\(k\)</span> die beste Rang-<span class="math inline">\(k\)</span>-Näherung.</strong></p>
 </div>
 </div>
 </section>
@@ -1104,7 +1091,7 @@ A_k=\sum_{i=1}^{k}{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a3
 </table>
 </div>
 <div class="ai-decl-statement">
-<p>Die durch die KI-Werkzeuge erzeugten Inhalte wurden von uns kritisch geprüft, überarbeitet und auf fachliche Richtigkeit kontrolliert. Die Verantwortung für sämtliche Inhalte dieser Arbeit liegt vollständig bei den Autorinnen und Autoren.</p>
+<p>Hiermit versichere ich, dass ich die vorliegende Arbeit eigenständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel verwendet habe. Alle übernommenen Inhalte sowie mit Unterstützung von KI generierten Inhalte wurden entsprechend den anerkannten wissenschaftlichen Grundsätzen oder entsprechend der Regelungen zur Kennzeichnung von KI-Inhalten kenntlich gemacht. Ausgenommen von der Kenntlichmachung sind orthografische oder grammatikalische Korrekturen, Übersetzungen sowie nicht-sinnverändernde Verbesserungen von Formulierungen. Ich bin mir bewusst, dass mit KI generierte Texte keine Garantie für die Qualität von Inhalten und Text bieten. Daher erkläre ich, dass ich KI-Werkzeuge lediglich als Hilfsmittel genutzt habe, die von KI generierten Inhalte kritisch überprüft habe und mein eigenständiger sowie kreativer Einfluss in dieser Arbeit überwiegt. Ich versichere, dass ich Inhalte meiner Arbeit vollständig verstanden habe und selbstständig vertreten kann. Ich versichere, dass ich ausschließlich KI-Werkzeuge verwendet habe, deren Nutzung vom Prüfer oder der Prüferin als Hilfsmittel zugelassen wurden.</p>
 </div>
 
 </section>
@@ -1143,6 +1130,7 @@ A_k=\sum_{i=1}^{k}{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a3
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
+'pdfMaxPagesPerSlide': 1,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
