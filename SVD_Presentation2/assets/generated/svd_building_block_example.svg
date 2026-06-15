@@ -8,7 +8,7 @@
   </defs>
 
   <g font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" fill="#111111">
-    <text x="24" y="30" font-size="19">einzelne Bildbausteine</text>
+    <text x="24" y="30" font-size="19">einzelner Bildbaustein</text>
     <text x="772" y="30" font-size="19">überlagerte Summe</text>
   </g>
 
@@ -16,7 +16,7 @@
 
   <!-- Baustein 1: vertikales Muster -->
   <g transform="translate(28 58)" filter="url(#panelShadow)">
-    <rect x="0" y="0" width="198" height="214" rx="6" fill="#ffffff" stroke="#f2aa00" stroke-width="2.4"/>
+    <rect x="0" y="0" width="198" height="224" rx="6" fill="#ffffff" stroke="#f2aa00" stroke-width="2.4"/>
     <text x="34" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">
       <tspan fill="#f2aa00">𝜎₁</tspan><tspan fill="#1e88ff">𝑢₁</tspan><tspan fill="#16a34a">𝑣₁ᵀ</tspan>
     </text>
@@ -31,14 +31,14 @@
         <circle cx="10" cy="115" r="8" fill="#f4f4f4"/><circle cx="31" cy="115" r="8" fill="#f4f4f4"/><circle cx="52" cy="115" r="8" fill="#f4f4f4"/><circle cx="73" cy="115" r="8" fill="#f4f4f4"/><circle cx="94" cy="115" r="8" fill="#f4f4f4"/><circle cx="115" cy="115" r="8" fill="#f4f4f4"/>
       </g>
     </g>
-    <text x="42" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">wichtigster Anteil</text>
+    <text x="42" y="207" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">wichtigster Anteil</text>
   </g>
 
   <text x="242" y="172" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="34" fill="#111111">+</text>
 
   <!-- Baustein 2: horizontales Muster -->
   <g transform="translate(280 58)" filter="url(#panelShadow)">
-    <rect x="0" y="0" width="198" height="214" rx="6" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="198" height="224" rx="6" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.5"/>
     <text x="34" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">
       <tspan fill="#f2aa00">𝜎₂</tspan><tspan fill="#1e88ff">𝑢₂</tspan><tspan fill="#16a34a">𝑣₂ᵀ</tspan>
     </text>
@@ -53,14 +53,14 @@
         <circle cx="10" cy="115" r="8" fill="#eeeeee"/><circle cx="31" cy="115" r="8" fill="#eeeeee"/><circle cx="52" cy="115" r="8" fill="#eeeeee"/><circle cx="73" cy="115" r="8" fill="#eeeeee"/><circle cx="94" cy="115" r="8" fill="#eeeeee"/><circle cx="115" cy="115" r="8" fill="#eeeeee"/>
       </g>
     </g>
-    <text x="46" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">horizontaler Anteil</text>
+    <text x="46" y="207" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">horizontaler Anteil</text>
   </g>
 
   <text x="494" y="172" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="34" fill="#111111">+</text>
 
   <!-- Baustein 3: diagonales Muster -->
   <g transform="translate(532 58)" filter="url(#panelShadow)">
-    <rect x="0" y="0" width="168" height="214" rx="6" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="168" height="224" rx="6" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.5"/>
     <text x="20" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">
       <tspan fill="#f2aa00">𝜎₃</tspan><tspan fill="#1e88ff">𝑢₃</tspan><tspan fill="#16a34a">𝑣₃ᵀ</tspan>
     </text>
@@ -75,14 +75,14 @@
         <circle cx="10" cy="115" r="8" fill="#eeeeee"/><circle cx="31" cy="115" r="8" fill="#eeeeee"/><circle cx="52" cy="115" r="8" fill="#eeeeee"/><circle cx="73" cy="115" r="8" fill="#eeeeee"/><circle cx="94" cy="115" r="8" fill="#eeeeee"/><circle cx="115" cy="115" r="8" fill="#b8b8b8"/>
       </g>
     </g>
-    <text x="35" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">diagonaler Anteil</text>
+    <text x="35" y="207" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">diagonaler Anteil</text>
   </g>
 
   <text x="728" y="172" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="34" fill="#111111">=</text>
 
   <!-- Summe: alle drei Muster sichtbar überlagert -->
   <g transform="translate(770 58)" filter="url(#panelShadow)">
-    <rect x="0" y="0" width="184" height="214" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+    <rect x="0" y="0" width="184" height="224" rx="6" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
     <text x="26" y="32" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="24">𝐴₃</text>
     <g transform="translate(29 55)">
       <rect x="-7" y="-7" width="140" height="140" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
@@ -95,6 +95,6 @@
         <circle cx="10" cy="115" r="8" fill="#f4f4f4"/><circle cx="31" cy="115" r="8" fill="#f4f4f4"/><circle cx="52" cy="115" r="8" fill="#f4f4f4"/><circle cx="73" cy="115" r="8" fill="#f4f4f4"/><circle cx="94" cy="115" r="8" fill="#f4f4f4"/><circle cx="115" cy="115" r="8" fill="#d4d4d4"/>
       </g>
     </g>
-    <text x="28" y="198" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">überlagerte Anteile</text>
+    <text x="28" y="207" font-family="Computer Modern Serif, Latin Modern Roman, Georgia, serif" font-size="15" fill="#666666">überlagerte Anteile</text>
   </g>
 </svg>

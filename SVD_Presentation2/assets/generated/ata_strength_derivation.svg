@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 240" role="img" aria-label="Umformung der quadrierten Stärke zur Bewertungszahl v transponiert A transponiert A v">
-  <rect width="980" height="240" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 12 980 218" role="img" aria-label="Umformung der quadrierten Stärke zur Bewertungszahl v transponiert A transponiert A v">
+  <rect y="12" width="980" height="218" fill="#ffffff"/>
   <defs>
     <style>
       .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
@@ -49,8 +49,8 @@
     <text class="serif muted" x="0" y="66" font-size="13">Bewertungszahl für genau dieses v</text>
   </g>
 
-  <g transform="translate(42 142)">
-    <rect class="panel" x="0" y="0" width="625" height="70" rx="3"/>
+  <g transform="translate(42 154)">
+    <rect class="panel" x="0" y="0" width="625" height="64" rx="3"/>
     <text class="serif ink" x="18" y="24" font-size="15">Aha-Schritt</text>
     <text class="serif ink" x="128" y="24" font-size="15">(Av)ᵀ(Av) = </text>
     <text class="serif v" x="238" y="24" font-size="15">vᵀ</text>
@@ -59,8 +59,8 @@
     <text class="serif muted" x="18" y="51" font-size="14">v bleibt der getestete Kandidat; AᵀA ist die feste Bewertungsmatrix.</text>
   </g>
 
-  <g transform="translate(705 142)">
-    <rect class="panel" x="0" y="0" width="235" height="70" rx="3"/>
+  <g transform="translate(705 154)">
+    <rect class="panel" x="0" y="0" width="235" height="64" rx="3"/>
     <text class="serif muted" x="14" y="20" font-size="13">Ausblick: Kandidaten bewerten</text>
     <text class="serif v" x="18" y="43" font-size="13">v₁</text><text class="serif ink" x="42" y="43" font-size="13">→ 16</text>
     <text class="serif v" x="92" y="43" font-size="13">v₂</text><text class="serif ink" x="116" y="43" font-size="13">→ 4</text>

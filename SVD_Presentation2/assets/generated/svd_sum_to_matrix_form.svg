@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-label="Summe einzelner 6 mal 6 SVD-Bildbausteine und kompakte Matrixform">
-  <rect width="1200" height="320" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 1200 284" role="img" aria-label="Summe einzelner 6 mal 6 SVD-Bildbausteine und kompakte Matrixform">
+  <rect y="14" width="1200" height="284" fill="#ffffff"/>
   <defs>
     <style>
       .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
@@ -83,7 +83,7 @@
     <g transform="translate(31 64)">
       <rect class="cell1" x="0" y="0" width="14" height="14"/><rect class="cell0" x="17" y="0" width="14" height="14"/><rect class="cell3" x="34" y="0" width="14" height="14"/><rect class="cell3" x="51" y="0" width="14" height="14"/><rect class="cell0" x="68" y="0" width="14" height="14"/><rect class="cell0" x="85" y="0" width="14" height="14"/>
       <rect class="cell2" x="0" y="17" width="14" height="14"/><rect class="cell2" x="17" y="17" width="14" height="14"/><rect class="cell3" x="34" y="17" width="14" height="14"/><rect class="cell3" x="51" y="17" width="14" height="14"/><rect class="cell2" x="68" y="17" width="14" height="14"/><rect class="cell2" x="85" y="17" width="14" height="14"/>
-      <rect class="cell2" x="0" y="34" width="14" height="14"/><rect class="cell2" x="17" y="34" width="14" height="14"/><rect class="cell3" x="34" y="34" width="14" height="14"/><rect class="cell2" x="51" y="34" width="14" height="14"/><rect class="cell2" x="68" y="34" width="14" height="14"/><rect class="cell2" x="85" y="34" width="14" height="14"/>
+      <rect class="cell2" x="0" y="34" width="14" height="14"/><rect class="cell2" x="17" y="34" width="14" height="14"/><rect class="cell3" x="34" y="34" width="14" height="14"/><rect class="cell3" x="51" y="34" width="14" height="14"/><rect class="cell2" x="68" y="34" width="14" height="14"/><rect class="cell2" x="85" y="34" width="14" height="14"/>
       <rect class="cell0" x="0" y="51" width="14" height="14"/><rect class="cell0" x="17" y="51" width="14" height="14"/><rect class="cell3" x="34" y="51" width="14" height="14"/><rect class="cell3" x="51" y="51" width="14" height="14"/><rect class="cell0" x="68" y="51" width="14" height="14"/><rect class="cell0" x="85" y="51" width="14" height="14"/>
       <rect class="cell0" x="0" y="68" width="14" height="14"/><rect class="cell0" x="17" y="68" width="14" height="14"/><rect class="cell0" x="34" y="68" width="14" height="14"/><rect class="cell0" x="51" y="68" width="14" height="14"/><rect class="cell1" x="68" y="68" width="14" height="14"/><rect class="cell0" x="85" y="68" width="14" height="14"/>
       <rect class="cell0" x="0" y="85" width="14" height="14"/><rect class="cell0" x="17" y="85" width="14" height="14"/><rect class="cell0" x="34" y="85" width="14" height="14"/><rect class="cell0" x="51" y="85" width="14" height="14"/><rect class="cell0" x="68" y="85" width="14" height="14"/><rect class="cell1" x="85" y="85" width="14" height="14"/>

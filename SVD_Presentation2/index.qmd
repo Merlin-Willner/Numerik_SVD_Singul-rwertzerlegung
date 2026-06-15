@@ -431,7 +431,7 @@ Je höher wir $k$ wählen, desto mehr Details, Kanten und feine Kontraste kommen
 
 ## Was war beim Einstein-Bild überraschend?
 
-::: {.derivation-slide .two-column-derivation}
+::: {.derivation-slide .two-column-derivation .einstein-surprise-layout}
 
 ::: {.derivation-left}
 Beim Einstein-Bild haben wir gesehen:
@@ -448,7 +448,9 @@ $$
 ::: {.derivation-right}
 Dabei behalten wir nur die ersten $k$ Bildbausteine.
 
-Das funktioniert nur, wenn die Bausteine vorher nach Wichtigkeit geordnet wurden: Die ersten Bausteine müssen die stärksten Bildanteile enthalten.
+Das funktioniert nur, wenn die Bausteine vorher nach Wichtigkeit geordnet wurden.
+
+$\Rightarrow$ Die ersten Bausteine müssen die stärksten Bildanteile enthalten.
 
 **Wie findet die SVD solche wichtigen Bausteine?**
 :::
@@ -457,7 +459,7 @@ Das funktioniert nur, wenn die Bausteine vorher nach Wichtigkeit geordnet wurden
 
 ## Ein Bild als Summe einfacher Bausteine
 
-::: {.derivation-slide .two-column-derivation}
+::: {.derivation-slide .two-column-derivation .building-block-layout}
 
 ::: {.derivation-left}
 Ein Bild als Matrix $A\in\mathbb{R}^{m\times n}$ enthält $m\cdot n$ Pixelwerte.
@@ -476,13 +478,15 @@ Dabei soll gelten:
 - $B_2$: nächster wichtiger Anteil
 - $\dots$
 - nach $k$ Anteilen stoppen wir
+:::
 
+![](assets/generated/svd_building_block_example.svg){.svd-block-example fig-alt="Grafisches Beispiel für mehrere SVD-Bildbausteine und ihre überlagerte Summe"}
+
+::: {.building-block-question}
 Jeder Baustein soll also eine einfache Struktur erklären: zuerst grobe, starke Anteile, später feinere Details.
 
 **Was steckt in einem einzelnen solchen Baustein?**
 :::
-
-![](assets/generated/svd_building_block_example.svg){.svd-block-example fig-alt="Grafisches Beispiel für mehrere SVD-Bildbausteine und ihre überlagerte Summe"}
 
 :::
 
@@ -507,21 +511,23 @@ Zur Veranschaulichung verwenden wir hier 0/1-Werte. In der echten SVD sind $u_i$
 ::: {.svd-single-note}
 $u_1v_1^T$ legt die **Form** fest. $\sigma_1$ ist der **Singulärwert** dieses Bausteins; anschaulich bestimmt er seine Stärke.
 
-Die nächste Frage ist: Welche dieser Bausteine sind stark genug, um zuerst gespeichert zu werden?
+**Welche dieser Bausteine sind stark genug, um zuerst gespeichert zu werden?**
 :::
 
 :::
 
 ## Wie vermeiden wir doppelte Muster?
 
-::: {.derivation-slide .two-column-derivation}
+::: {.derivation-slide .two-column-derivation .orthogonal-layout}
 
 ::: {.derivation-left}
+::: {.orthogonal-intro}
 Jede Schicht soll einen eigenen Anteil des Bildes erklären. Wenn zwei Schichten fast dasselbe Muster enthalten, wäre die Zerlegung redundant: dieselbe Struktur würde mehrfach gespeichert.
+:::
 
 ![](assets/generated/orthogonal_layers_example.svg){.orthogonal-layers-example fig-alt="Zwei fast gleiche Bildbausteine werden vermieden; unterschiedliche Muster bringen neue Information"}
 
-Für Kompression wollen wir aber, dass jeder gespeicherte Baustein wirklich neue Information bringt.
+$\Rightarrow$ Für Kompression wollen wir aber, dass jeder gespeicherte Baustein wirklich neue Information bringt.
 :::
 
 ::: {.derivation-right}
@@ -543,7 +549,11 @@ Die Höhenverteilungen haben keinen gemeinsamen Anteil.
 :::
 
 ::: {.uebergang}
-Orthogonal heißt hier nicht räumlich getrennt. Die Schichten können an denselben Bildstellen wirken. Orthogonal heißt: Als normierte Vektoren enthalten sie keine gemeinsame Richtung, deshalb zählt man dieselbe Struktur nicht doppelt. **Jeder Baustein bringt eine neue unabhängige Bildschicht.**
+Orthogonal heißt hier nicht räumlich getrennt. Die Schichten können an denselben Bildstellen wirken. Orthogonal heißt: Als normierte Vektoren enthalten sie keine gemeinsame Richtung, deshalb zählt man dieselbe Struktur nicht doppelt.
+
+<br>
+
+**Jeder Baustein bringt eine neue unabhängige Bildschicht.**
 
 **Wie finden wir nun starke Muster, die gleichzeitig unabhängig sind?**
 :::
@@ -552,7 +562,7 @@ Orthogonal heißt hier nicht räumlich getrennt. Die Schichten können an densel
 
 ## Wie finden wir starke und unabhängige Muster?
 
-::: {.derivation-slide .two-column-derivation}
+::: {.derivation-slide .two-column-derivation .strong-pattern-layout}
 
 ::: {.derivation-left}
 Aus den letzten Folien wissen wir:
@@ -562,6 +572,8 @@ Ein guter SVD-Baustein soll zwei Bedingungen erfüllen:
    Er soll viel sichtbare Bildinformation erklären.
 2. **unabhängig:**  
    Er soll nicht dasselbe Muster speichern wie ein anderer Baustein.
+
+**Ziel:** das stärkste Muster, das von allen anderen unabhängig ist — und beides messbar.
 :::
 
 ::: {.derivation-right}
@@ -580,14 +592,14 @@ $$
 $$
 
 ${\color{#16a34a}{v}}$ ist ein mögliches **Muster über die Spalten**.
-
-Die nächste Frage lautet:
-
-**Wie messen wir, wie stark dieses Spaltenmuster \(v\) im Bild \(A\) vorkommt?**
 :::
 
 ::: {.svd-search-start-wrap}
 ![](assets/generated/svd_search_start.svg){.svd-search-start fig-alt="Start der Suche nach einem SVD-Baustein über das Spaltenmuster v"}
+:::
+
+::: {.uebergang}
+**Wie messen wir, wie stark dieses Spaltenmuster \(v\) im Bild \(A\) vorkommt?**
 :::
 
 :::
@@ -611,7 +623,7 @@ $$
 A{\color{#16a34a}{v}}\in\mathbb{R}^m.
 $$
 
-Also: ${\color{#16a34a}{v}}$ hat einen Wert pro Bildspalte, $A{\color{#16a34a}{v}}$ einen Wert pro Bildzeile.
+Also: ${\color{#16a34a}{v}}$ hat einen Wert pro **Bildspalte**, $A{\color{#16a34a}{v}}$ einen Wert pro **Bildzeile**.
 :::
 
 ::: {.derivation-right}
@@ -635,32 +647,18 @@ Damit ist $A{\color{#16a34a}{v}}$ die **Höhenantwort** des Bildes auf das Spalt
 :::
 
 ::: {.derivation-fullnote}
-Die Höhenantwort $A{\color{#16a34a}{v}}$ zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge misst die Gesamtstärke:
+Die Höhenantwort $A{\color{#16a34a}{v}}$ zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge misst die Gesamtstärke: $\|A{\color{#16a34a}{v}}\|=(2^2+2^2+2^2+2^2+0^2+0^2)^{1/2}=4$.
 
-$$
-\|A{\color{#16a34a}{v}}\|
-=\sqrt{2^2+2^2+2^2+2^2+0^2+0^2}
-=4.
-$$
+Je größer $\|A{\color{#16a34a}{v}}\|$, desto stärker ist die Antwort auf das Muster ${\color{#16a34a}{v}}$. Damit wird unsere Suche konkret: $\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|$.
 
-Je größer $\|A{\color{#16a34a}{v}}\|$, desto stärker ist die Antwort des Bildes auf das Muster ${\color{#16a34a}{v}}$. Damit wird unsere Suche konkret:
+Wir suchen das normierte Spaltenmuster mit der stärksten Höhenantwort. Im Beispiel verwenden wir 0/1-Werte; für die eigentliche Suche normieren wir $v$ auf $\|v\|=1$, damit $\|Av\|$ die Antwort des Bildes misst und nicht nur die Skalierung von $v$.
 
-$$
-\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|.
-$$
-
-Wir suchen das normierte Spaltenmuster, das die stärkste Höhenantwort erzeugt. Im Beispiel verwenden wir 0/1-Werte. Für die eigentliche Suche normieren wir $v$ auf $\|v\|=1$, damit alle Spaltenmuster gleich lang sind und $\|Av\|$ nur die Antwort des Bildes auf dieses Muster misst -- nicht eine künstliche Skalierung von $v$.
-
-$$
-A{\color{#16a34a}{v}}=\text{Höhenantwort},
-\qquad
-\|A{\color{#16a34a}{v}}\|=\text{Gesamtstärke}.
-$$
+$A{\color{#16a34a}{v}}=\text{Höhenantwort}$ und $\|A{\color{#16a34a}{v}}\|=\text{Gesamtstärke}$.
 :::
 
 :::
 
-## Warum können wir $A$ nicht direkt verwenden?
+## Der Spektralsatz liefert genau das — passt aber nicht auf $A$
 
 ::: {.derivation-slide .two-column-derivation .space-problem-slide}
 
@@ -776,7 +774,7 @@ $A^TA$ ist die Bewertungsmatrix. Die äußeren ${\color{#16a34a}{v}}$-Terme mark
 
 ## Warum löst $A^TA$ unser Suchproblem?
 
-::: {.derivation-slide .two-column-derivation}
+::: {.derivation-slide .two-column-derivation .ata-solution-layout}
 
 ::: {.derivation-left}
 Aus der letzten Folie wurde unsere Suche:
@@ -789,7 +787,11 @@ $$
 
 Damit suchen wir nicht mehr direkt in der Höhenantwort $A{\color{#16a34a}{v}}$, sondern bewerten jedes Spaltenmuster ${\color{#16a34a}{v}}$ mit $A^TA$.
 
+<br>
+
+::: {.ata-important}
 Wichtig: $A^TA$ ersetzt nicht das Bild $A$. Es ist die Bewertungsmatrix für die Spaltenmuster.
+:::
 :::
 
 ::: {.derivation-right}
@@ -807,11 +809,15 @@ $$
 (A^TA)^T=A^TA.
 $$
 
-Für solche Matrizen liefert der Spektralsatz orthogonale Eigenrichtungen.
+$\Rightarrow$ Für solche Matrizen liefert der Spektralsatz orthogonale Eigenrichtungen.
 :::
 
 ::: {.ata-spectral-bridge-wrap}
 ![](assets/generated/ata_to_spectral_bridge.svg){.ata-spectral-bridge fig-alt="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern"}
+:::
+
+::: {.uebergang}
+Damit liefert der Spektralsatz auf $A^TA$ **genau die zwei Eigenschaften von Folie 19/20**: orthogonale, also **unabhängige** Muster, die sich nach Eigenwert **sortieren** lassen — die stärksten zuerst.
 :::
 
 :::

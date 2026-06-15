@@ -12,7 +12,7 @@
   </defs>
 
   <text class="serif ink" x="24" y="24" font-size="16">redundant</text>
-  <text class="serif ink" x="320" y="24" font-size="16">neue Information</text>
+  <text class="serif ink" x="320" y="24" font-size="16">unterschiedliche Bereiche</text>
 
   <g transform="translate(22 42)">
     <rect x="0" y="0" width="96" height="96" fill="#ffffff" stroke="#d8d8d8" stroke-width="1.4"/>
@@ -51,5 +51,5 @@
     <circle class="cell" cx="12" cy="66" r="7" fill="#111111"/><circle class="cell" cx="30" cy="66" r="7" fill="#111111"/><circle class="cell" cx="48" cy="66" r="7" fill="#111111"/><circle class="cell" cx="66" cy="66" r="7" fill="#111111"/><circle class="cell" cx="84" cy="66" r="7" fill="#111111"/>
     <circle class="cell" cx="12" cy="84" r="7" fill="#111111"/><circle class="cell" cx="30" cy="84" r="7" fill="#111111"/><circle class="cell" cx="48" cy="84" r="7" fill="#111111"/><circle class="cell" cx="66" cy="84" r="7" fill="#111111"/><circle class="cell" cx="84" cy="84" r="7" fill="#111111"/>
   </g>
-  <text class="serif muted" x="318" y="168" font-size="14">unterschiedliche Bereiche: neue Information</text>
+  <text class="serif muted" x="360" y="168" font-size="14">unterschiedliche Muster</text>
 </svg>

@@ -28,36 +28,36 @@
 
   <g transform="translate(242 48)">
     <rect class="ata" x="0" y="0" width="170" height="124" rx="7"/>
-    <text class="serif ink" x="66" y="35" font-size="22">AᵀA</text>
-    <text class="serif ink" x="24" y="68" font-size="18">Bewertungsmatrix</text>
-    <text class="serif muted" x="22" y="98" font-size="14">bewertet Muster</text>
+    <text class="serif ink" x="85" y="35" font-size="22" text-anchor="middle">AᵀA</text>
+    <text class="serif ink" x="85" y="68" font-size="18" text-anchor="middle">Bewertungsmatrix</text>
+    <text class="serif muted" x="85" y="98" font-size="14" text-anchor="middle">bewertet Muster</text>
   </g>
 
   <path class="arrow" d="M428 110 L470 110"/>
 
   <g transform="translate(486 48)">
     <rect class="ata" x="0" y="0" width="174" height="124" rx="7"/>
-    <text class="serif ink" x="36" y="42" font-size="19">quadratisch</text>
-    <text class="serif ink" x="48" y="72" font-size="19">symmetrisch</text>
-    <text class="serif muted" x="28" y="101" font-size="14">Spektralsatz passt</text>
+    <text class="serif ink" x="87" y="42" font-size="19" text-anchor="middle">quadratisch</text>
+    <text class="serif ink" x="87" y="72" font-size="19" text-anchor="middle">symmetrisch</text>
+    <text class="serif muted" x="87" y="101" font-size="14" text-anchor="middle">Spektralsatz passt</text>
   </g>
 
   <path class="arrow" d="M676 110 L718 110"/>
 
   <g transform="translate(734 48)">
     <rect class="box" x="0" y="0" width="150" height="124" rx="7"/>
-    <text class="serif ink" x="24" y="48" font-size="20">Spektralsatz</text>
-    <text class="serif muted" x="19" y="79" font-size="14">für symmetrische</text>
-    <text class="serif muted" x="39" y="100" font-size="14">Matrizen</text>
+    <text class="serif ink" x="75" y="48" font-size="20" text-anchor="middle">Spektralsatz</text>
+    <text class="serif muted" x="75" y="79" font-size="14" text-anchor="middle">für symmetrische</text>
+    <text class="serif muted" x="75" y="100" font-size="14" text-anchor="middle">Matrizen</text>
   </g>
 
   <path class="arrow" d="M900 110 L942 110"/>
 
   <g transform="translate(958 48)">
     <rect class="box" x="0" y="0" width="64" height="124" rx="7"/>
-    <text class="serif v" x="18" y="42" font-size="23">vᵢ</text>
-    <text class="serif muted" x="11" y="75" font-size="13">orth.</text>
-    <text class="serif muted" x="7" y="96" font-size="13">Muster</text>
+    <text class="serif v" x="32" y="42" font-size="23" text-anchor="middle">vᵢ</text>
+    <text class="serif muted" x="32" y="75" font-size="13" text-anchor="middle">orth.</text>
+    <text class="serif muted" x="32" y="96" font-size="13" text-anchor="middle">Muster</text>
   </g>
 
   <text class="serif muted" x="20" y="220" font-size="17">Brücke: Aus der Bewertungsmatrix wird ein Spektralsatz-Problem. Erst danach erhalten wir die orthogonalen Spaltenmuster.</text>

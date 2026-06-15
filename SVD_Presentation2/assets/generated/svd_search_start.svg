@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 175" role="img" aria-label="Start der Suche nach einem SVD-Baustein über das Spaltenmuster v">
-  <rect width="760" height="175" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 815 175" role="img" aria-label="Start der Suche nach einem SVD-Baustein über das Spaltenmuster v">
+  <rect width="815" height="175" fill="#ffffff"/>
   <defs>
     <style>
       .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
@@ -34,10 +34,10 @@
   <text class="serif v" x="326" y="72" font-size="25">v<tspan baseline-shift="sub" font-size="15">i</tspan><tspan baseline-shift="super" font-size="15">T</tspan></text>
   <text class="serif muted" x="236" y="105" font-size="15">später folgen σᵢ und Höhenverteilung</text>
 
-  <path class="arrow" d="M455 72 C500 72, 512 111, 556 111"/>
+  <line class="arrow" x1="500" y1="88" x2="593" y2="88"/>
 
-  <text class="serif v" x="560" y="56" font-size="17">Suche starten bei v</text>
-  <g transform="translate(558 72)">
+  <text class="serif v" x="607" y="56" font-size="17">Suche starten bei v</text>
+  <g transform="translate(607 72)">
     <rect x="0" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="12" y="21" font-size="15">0</text>
     <rect x="31" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="43" y="21" font-size="15">0</text>
     <rect x="62" y="0" width="31" height="31" fill="#d9f2df" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="74" y="21" font-size="15">1</text>
@@ -45,6 +45,6 @@
     <rect x="124" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="136" y="21" font-size="15">0</text>
     <rect x="155" y="0" width="31" height="31" fill="#f1f8f3" stroke="#16a34a" stroke-width="1.4"/><text class="serif ink" x="167" y="21" font-size="15">0</text>
   </g>
-  <text class="serif muted" x="558" y="126" font-size="14">Muster über die Spalten</text>
-  <text class="serif muted" x="558" y="146" font-size="12">vereinfachtes 0/1-Beispiel</text>
+  <text class="serif muted" x="607" y="126" font-size="14">Muster über die Spalten</text>
+  <text class="serif muted" x="607" y="146" font-size="12">vereinfachtes 0/1-Beispiel</text>
 </svg>

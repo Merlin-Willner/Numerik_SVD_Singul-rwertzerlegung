@@ -1172,12 +1172,88 @@
   margin: 0.25rem 0 0.45rem 1.1rem;
 }
 
+.einstein-surprise-layout {
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 1.35rem;
+  align-items: center;
+  min-height: 505px;
+}
+
+.einstein-surprise-layout .derivation-left,
+.einstein-surprise-layout .derivation-right {
+  align-self: center;
+}
+
+.einstein-surprise-layout p {
+  font-size: 0.62em;
+  line-height: 1.28;
+}
+
+.einstein-surprise-layout ul {
+  font-size: 0.72em;
+  line-height: 1.32;
+  margin-top: 0.35rem;
+  margin-bottom: 0.7rem;
+}
+
+.einstein-surprise-layout mjx-container {
+  font-size: 1.52em !important;
+  margin: 0.45rem 0 !important;
+}
+
+.einstein-surprise-layout .derivation-left .MathJax_Display,
+.einstein-surprise-layout .derivation-left .MathJax {
+  font-size: 1.52em !important;
+}
+
+.einstein-surprise-layout .derivation-left .MathJax_Display {
+  margin: 0.75rem 0 0.35rem !important;
+}
+
 .svd-block-example {
   grid-column: 1 / -1;
   display: block;
   width: 100%;
   max-width: 930px;
   margin: 0.05rem auto 0;
+}
+
+.building-block-layout {
+  grid-template-rows: auto 1fr auto;
+  gap: 0.48rem 1.1rem;
+  align-items: start;
+}
+
+.building-block-layout .derivation-right ul {
+  font-size: 0.62em;
+  line-height: 1.35;
+  margin-top: 0.28rem;
+  margin-bottom: 0.58rem;
+}
+
+.building-block-question {
+  grid-column: 1 / -1;
+  border-top: 1.5px solid var(--line);
+  padding-top: 0.28rem;
+}
+
+.building-block-question p {
+  font-size: 0.58em;
+  line-height: 1.22;
+  margin: 0 0 0.16rem;
+}
+
+.building-block-layout .svd-block-example {
+  width: 94%;
+  max-width: none;
+  margin: 0.02rem auto 0;
+}
+
+.building-block-layout > p:has(.svd-block-example),
+.building-block-layout > figure:has(.svd-block-example) {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
 }
 
 .svd-single-block-slide {
@@ -1192,7 +1268,7 @@
 }
 
 .svd-single-intro p {
-  color: var(--muted);
+  color: var(--ink);
   font-size: 0.46em;
   line-height: 1.15;
   margin: 0;
@@ -1224,22 +1300,63 @@
 }
 
 .svd-single-note {
-  border: 1.5px solid var(--line);
-  border-left: 4px solid #111111;
-  padding: 0.2rem 0.42rem;
+  border-top: 1.5px solid var(--line);
+  margin-top: 1.5rem;
+  padding-top: 0.26rem;
 }
 
 .svd-single-note p {
-  font-size: 0.38em;
-  line-height: 1.14;
+  color: var(--ink);
+  font-size: 0.48em;
+  line-height: 1.22;
   margin: 0;
+}
+
+.svd-single-note strong {
+  color: var(--ink);
 }
 
 .orthogonal-layers-example {
   display: block;
   width: 100%;
-  max-width: 560px;
-  margin: 0.24rem auto 0.32rem;
+  max-width: 650px;
+  margin: 0.34rem auto 0.42rem;
+}
+
+.orthogonal-layout {
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 1.25rem;
+  align-items: center;
+  min-height: 505px;
+}
+
+.orthogonal-layout p {
+  font-size: 0.62em;
+  line-height: 1.3;
+}
+
+.orthogonal-layout .derivation-right p {
+  font-size: 0.66em;
+}
+
+.orthogonal-layout .orthogonal-intro p {
+  font-size: 0.62em;
+  line-height: 1.3;
+}
+
+.orthogonal-layout mjx-container {
+  font-size: 1em !important;
+  margin: 0.36rem 0 !important;
+}
+
+.orthogonal-layout .uebergang {
+  margin-top: 0.35rem;
+  padding-top: 0.38rem;
+}
+
+.orthogonal-layout .uebergang p {
+  font-size: 0.5em;
+  line-height: 1.28;
 }
 
 .svd-search-start-wrap,
@@ -1260,36 +1377,84 @@
   object-fit: contain;
 }
 
+.strong-pattern-layout {
+  grid-template-rows: auto 1fr auto;
+  gap: 0.45rem 2rem;
+  align-items: start;
+  min-height: 590px;
+}
+
+.strong-pattern-layout .derivation-left ol {
+  font-size: 0.62em;
+  line-height: 1.35;
+  margin-top: 0.36rem;
+}
+
+.strong-pattern-layout .derivation-left p,
+.strong-pattern-layout .derivation-right p {
+  font-size: 0.58em;
+  line-height: 1.26;
+}
+
+.strong-pattern-layout .derivation-right mjx-container {
+  font-size: 0.92em !important;
+  margin: 0.24rem 0 !important;
+}
+
+.strong-pattern-layout .svd-search-start-wrap {
+  margin-top: 0.02rem;
+  align-self: center;
+}
+
+.strong-pattern-layout .svd-search-start {
+  width: 95%;
+  max-height: 220px;
+}
+
+.strong-pattern-layout .uebergang {
+  margin-top: 0.7rem;
+  padding-top: 0.3rem;
+  align-self: end;
+}
+
+.strong-pattern-layout .uebergang p {
+  font-size: 0.54em;
+  line-height: 1.2;
+}
+
 .av-height-response {
   display: block;
-  width: 96%;
-  max-height: 78px;
-  margin: 0.05rem auto 0;
+  width: 100%;
+  max-height: 138px;
+  margin: 0.04rem auto 0;
   object-fit: contain;
 }
 
 .av-slide {
-  gap: 0.16rem 0.75rem;
+  gap: 0.28rem 0.95rem;
+  align-items: start;
+  min-height: 540px;
 }
 
 .av-slide p {
-  font-size: 0.38em;
-  line-height: 1.07;
+  font-size: 0.48em;
+  line-height: 1.18;
 }
 
 .av-slide mjx-container {
-  font-size: 0.54em !important;
-  margin: 0.025rem 0 !important;
+  font-size: 0.72em !important;
+  margin: 0.08rem 0 !important;
 }
 
 .av-slide .derivation-fullnote {
-  padding-top: 0.07rem;
-  margin-top: 0;
+  padding-top: 0.22rem;
+  margin-top: 0.08rem;
 }
 
 .av-slide .derivation-fullnote p {
-  font-size: 0.28em;
-  line-height: 1.03;
+  font-size: 0.4em;
+  line-height: 1.16;
+  margin-bottom: 0.18rem;
 }
 
 .av-slide ul {
@@ -1348,23 +1513,23 @@
 }
 
 .ata-strength-slide {
-  gap: 0.28rem 0.95rem;
+  gap: 0.32rem 0.95rem;
   align-items: start;
 }
 
 .ata-strength-slide p {
-  font-size: 0.4em;
-  line-height: 1.1;
+  font-size: 0.45em;
+  line-height: 1.16;
 }
 
 .ata-strength-slide mjx-container {
-  font-size: 0.62em !important;
-  margin: 0.045rem 0 !important;
+  font-size: 0.68em !important;
+  margin: 0.07rem 0 !important;
 }
 
 .ata-strength-slide .uebergang p {
-  font-size: 0.34em;
-  line-height: 1.08;
+  font-size: 0.39em;
+  line-height: 1.14;
   margin: 0;
 }
 
@@ -1382,27 +1547,73 @@
   object-fit: contain;
 }
 
+.ata-solution-layout {
+  gap: 0.62rem 1.05rem;
+  align-items: start;
+}
+
+.ata-solution-layout .derivation-left p,
+.ata-solution-layout .derivation-right p {
+  font-size: 0.58em;
+  line-height: 1.32;
+}
+
+.ata-solution-layout mjx-container {
+  font-size: 0.82em !important;
+  margin: 0.2rem 0 !important;
+}
+
+.ata-important {
+  margin-top: 0.75rem;
+}
+
+.ata-solution-layout .uebergang {
+  margin-top: 0.32rem;
+}
+
+.ata-solution-layout .uebergang p {
+  font-size: 0.48em;
+  line-height: 1.25;
+}
+
 .spectral-theorem-outputs {
   grid-column: 1 / -1;
   display: block;
-  width: 92%;
-  max-height: 216px;
-  margin: 0.08rem auto 0;
+  width: 100%;
+  max-height: 178px;
+  margin: 0.02rem auto 0;
   object-fit: contain;
 }
 
+.spectral-output-slide > p:has(.spectral-theorem-outputs),
+.spectral-output-slide > figure:has(.spectral-theorem-outputs) {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
+}
+
 .spectral-output-slide {
-  gap: 0.34rem 0.95rem;
+  gap: 0.22rem 0.95rem;
 }
 
 .spectral-output-slide p {
-  font-size: 0.4em;
-  line-height: 1.1;
+  font-size: 0.44em;
+  line-height: 1.13;
 }
 
 .spectral-output-slide mjx-container {
-  font-size: 0.62em !important;
-  margin: 0.05rem 0 !important;
+  font-size: 0.66em !important;
+  margin: 0.04rem 0 !important;
+}
+
+.spectral-output-slide .uebergang {
+  padding-top: 0.16rem;
+  margin-top: 1rem;
+}
+
+.spectral-output-slide .uebergang p {
+  font-size: 0.44em;
+  line-height: 1.16;
 }
 
 .eigenvalue-graphic {
@@ -1423,23 +1634,23 @@
 }
 
 .eigen-strength-slide {
-  gap: 0.24rem 0.95rem;
+  gap: 0.28rem 0.95rem;
   align-items: start;
 }
 
 .eigen-strength-slide p {
-  font-size: 0.39em;
-  line-height: 1.08;
+  font-size: 0.48em;
+  line-height: 1.17;
 }
 
 .eigen-strength-slide mjx-container {
-  font-size: 0.61em !important;
-  margin: 0.045rem 0 !important;
+  font-size: 0.72em !important;
+  margin: 0.07rem 0 !important;
 }
 
 .eigen-strength-slide .uebergang p {
-  font-size: 0.35em;
-  line-height: 1.08;
+  font-size: 0.44em;
+  line-height: 1.16;
   margin: 0;
 }
 
@@ -1455,31 +1666,31 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 223px;
+  max-height: 205px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
 
 .from-v-to-u-slide {
-  gap: 0.14rem 0.9rem;
+  gap: 0.2rem 0.95rem;
   align-items: start;
 }
 
 .from-v-to-u-slide p {
-  font-size: 0.39em;
-  line-height: 1.1;
+  font-size: 0.45em;
+  line-height: 1.16;
 }
 
 .from-v-to-u-slide ul {
-  font-size: 0.39em;
-  line-height: 1.1;
+  font-size: 0.45em;
+  line-height: 1.16;
   margin-top: 0.04rem;
   margin-bottom: 0.04rem;
 }
 
 .from-v-to-u-slide mjx-container {
-  font-size: 0.54em !important;
-  margin: 0.02rem 0 !important;
+  font-size: 0.62em !important;
+  margin: 0.04rem 0 !important;
 }
 
 .from-v-to-u-wrap + .uebergang p {
@@ -1499,30 +1710,30 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 180px;
+  max-height: 122px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
 
 .block-from-parts-slide {
-  gap: 0.16rem 0.9rem;
+  gap: 0.2rem 0.95rem;
   align-items: start;
 }
 
 .block-from-parts-slide p {
-  font-size: 0.39em;
-  line-height: 1.1;
+  font-size: 0.41em;
+  line-height: 1.12;
 }
 
 .block-from-parts-slide ul {
-  font-size: 0.39em;
-  line-height: 1.1;
+  font-size: 0.41em;
+  line-height: 1.12;
   margin-top: 0.04rem;
   margin-bottom: 0.04rem;
 }
 
 .block-from-parts-slide mjx-container {
-  font-size: 0.56em !important;
+  font-size: 0.58em !important;
   margin: 0.025rem 0 !important;
 }
 
@@ -1532,13 +1743,13 @@
 }
 
 .block-from-parts-note p {
-  font-size: 0.33em;
-  line-height: 1.08;
+  font-size: 0.34em;
+  line-height: 1.1;
 }
 
 .svd-block-from-parts-wrap + .uebergang p {
-  font-size: 0.33em;
-  line-height: 1.08;
+  font-size: 0.34em;
+  line-height: 1.1;
 }
 
 .svd-sum-to-matrix-wrap {
@@ -1553,7 +1764,7 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 128px;
+  max-height: 122px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
@@ -1564,20 +1775,20 @@
 }
 
 .sum-to-matrix-slide p {
-  font-size: 0.3em;
-  line-height: 1.03;
+  font-size: 0.38em;
+  line-height: 1.12;
 }
 
 .sum-to-matrix-slide ul {
-  font-size: 0.3em;
-  line-height: 1.03;
+  font-size: 0.46em;
+  line-height: 1.18;
   margin-top: 0.04rem;
   margin-bottom: 0.04rem;
 }
 
 .sum-to-matrix-slide mjx-container {
-  font-size: 0.42em !important;
-  margin: 0.008rem 0 !important;
+  font-size: 0.54em !important;
+  margin: 0.018rem 0 !important;
 }
 
 .sum-to-matrix-slide .derivation-fullnote {
@@ -1602,24 +1813,24 @@
   display: block;
   width: 100%;
   max-width: 1120px;
-  max-height: 112px;
+  max-height: 122px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
 
 .truncation-slide {
-  gap: 0.06rem 0.75rem;
+  gap: 0.08rem 0.8rem;
   align-items: start;
 }
 
 .truncation-slide p {
-  font-size: 0.28em;
-  line-height: 1.025;
+  font-size: 0.32em;
+  line-height: 1.08;
 }
 
 .truncation-slide mjx-container {
-  font-size: 0.38em !important;
-  margin: 0.006rem 0 !important;
+  font-size: 0.44em !important;
+  margin: 0.01rem 0 !important;
 }
 
 .truncation-slide .derivation-fullnote {
@@ -1628,20 +1839,20 @@
 }
 
 .truncation-slide .derivation-fullnote p {
-  font-size: 0.3em;
-  line-height: 1.05;
+  font-size: 0.34em;
+  line-height: 1.1;
 }
 
 .svd-final-slide {
   display: grid;
-  gap: 0.34rem;
+  gap: 0.28rem;
   align-content: start;
 }
 
 .svd-final-summary {
   display: block;
-  width: 96%;
-  max-height: 259px;
+  width: 100%;
+  max-height: 328px;
   margin: 0.02rem auto 0;
   object-fit: contain;
 }
@@ -1661,19 +1872,19 @@
 }
 
 .svd-summary-card p {
-  font-size: 0.34em;
-  line-height: 1.08;
+  font-size: 0.38em;
+  line-height: 1.1;
   margin: 0.02rem 0;
 }
 
 .svd-summary-card mjx-container {
-  font-size: 0.58em !important;
+  font-size: 0.72em !important;
   margin: 0.02rem 0 !important;
 }
 
 .svd-final-note p {
-  font-size: 0.34em;
-  line-height: 1.08;
+  font-size: 0.38em;
+  line-height: 1.1;
   color: var(--muted);
   margin: 0.02rem 0 0;
   text-align: center;
@@ -1972,8 +2183,8 @@
 }
 
 .sources-list {
-  columns: 2;
-  column-gap: 2.4rem;
+  columns: 1;
+  max-width: 980px;
   margin-top: 0.4rem;
 }
 
@@ -1983,9 +2194,9 @@
 }
 
 .sources-list li {
-  font-size: 0.5em;
-  line-height: 1.3;
-  margin: 0 0 0.85rem;
+  font-size: 0.56em;
+  line-height: 1.32;
+  margin: 0 0 0.62rem;
   padding-left: 0;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
