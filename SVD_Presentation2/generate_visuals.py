@@ -393,7 +393,7 @@ def save_svd_bridge():
 
     # (Farbe, Pfeil-Label = SVD-Faktor, Box-Notation, Matrix-Eintraege, Schriftgroesse der Matrix)
     actions = [
-        (SVDGREEN, r"$V^T$", r"$R_{-90^\circ}$", ((r"$0$", r"$1$"), (r"$-1$", r"$0$")), 11),
+        ("#55c63a", r"$V^T$", r"$R_{-90^\circ}$", ((r"$0$", r"$1$"), (r"$-1$", r"$0$")), 11),
         (YELLOW, r"$\Sigma$", r"$\Sigma$", ((r"$0.45$", r"$0$"), (r"$0$", r"$1$")), 11),
         (SVDBLUE, r"$U$", r"$R_{-45^\circ}$", ((r"$0.71$", r"$0.71$"), (r"$-0.71$", r"$0.71$")), 9.5),
     ]
@@ -438,7 +438,7 @@ def save_dimension_reduction():
         R45 @ sigma_rank1 @ R90,
     ]
     labels = ["Start", "Vᵀ: drehen", "Σ₁: eine Richtung", "U: zurück drehen"]
-    action_labels = [("Vᵀ", SVDGREEN), ("Σ₁", YELLOW), ("U", SVDBLUE)]
+    action_labels = [("Vᵀ", "#55c63a"), ("Σ₁", YELLOW), ("U", SVDBLUE)]
 
     fig, ax = plt.subplots(figsize=(12.0, 3.9))
     ax.set_xlim(0, 12.0)
@@ -916,6 +916,119 @@ def save_duck_svd_first_component_layout():
     plt.close(fig)
 
 
+def save_duck_full_svd_equation():
+    values = duck_matrix().astype(float)
+    u, singular_values, vt = np.linalg.svd(values, full_matrices=True)
+    sigma = np.zeros_like(values)
+    np.fill_diagonal(sigma, singular_values)
+
+    fig, ax = plt.subplots(figsize=(17.0, 4.65))
+    ax.set_xlim(0, 26.4)
+    ax.set_ylim(0, 7.35)
+    ax.axis("off")
+
+    def draw_matrix(
+        matrix,
+        x,
+        y,
+        size,
+        title,
+        color,
+        formatter,
+        fill_mode="plain",
+        text_size=3.45,
+    ):
+        rows, cols = matrix.shape
+        cell = size / rows
+        ax.text(x + size / 2, y + 0.55, title, ha="center", va="bottom", fontsize=10.5, color=color, fontweight="bold")
+
+        for row in range(rows):
+            for col in range(cols):
+                value = matrix[row, col]
+                if fill_mode == "duck":
+                    fill = luminance_to_hex(value)
+                    text_color = "white" if value < 70 else INK
+                    edge = "#4f4f4f"
+                    lw = 0.22
+                elif fill_mode == "sigma":
+                    is_diagonal = row == col
+                    fill = "#fff3c4" if is_diagonal and abs(value) > 1e-10 else "#ffffff"
+                    text_color = INK if is_diagonal else MUTED
+                    edge = "#a8a8a8"
+                    lw = 0.22
+                else:
+                    fill = "#eef6ff" if color == SVDBLUE else "#eef9ef"
+                    text_color = INK
+                    edge = "#a8a8a8"
+                    lw = 0.22
+
+                ax.add_patch(
+                    plt.Rectangle(
+                        (x + col * cell, y - (row + 1) * cell),
+                        cell,
+                        cell,
+                        facecolor=fill,
+                        edgecolor=edge,
+                        linewidth=lw,
+                    )
+                )
+                ax.text(
+                    x + (col + 0.5) * cell,
+                    y - (row + 0.5) * cell,
+                    formatter(value),
+                    ha="center",
+                    va="center",
+                    fontsize=text_size,
+                    color=text_color,
+                    family="DejaVu Sans Mono",
+                )
+
+        bracket_pad = 0.09
+        top = y
+        bottom = y - size
+        left = x - bracket_pad
+        right = x + size + bracket_pad
+        hook = 0.12
+        for bx, direction in [(left, 1), (right, -1)]:
+            ax.plot([bx, bx], [bottom, top], color=color, linewidth=1.15)
+            ax.plot([bx, bx + direction * hook], [top, top], color=color, linewidth=1.15)
+            ax.plot([bx, bx + direction * hook], [bottom, bottom], color=color, linewidth=1.15)
+
+    def int_fmt(value):
+        return f"{int(round(value))}"
+
+    def unit_fmt(value):
+        rounded = 0.0 if abs(value) < 0.005 else value
+        return f"{rounded:+.2f}"
+
+    def sigma_fmt(value):
+        return "0" if abs(value) < 0.05 else f"{value:.1f}"
+
+    y_top = 5.95
+    matrix_size = 4.68
+    xs = [0.55, 7.10, 13.50, 19.90]
+    draw_matrix(values, xs[0], y_top, matrix_size, r"$A$ 13$\times$13", INK, int_fmt, fill_mode="duck", text_size=3.55)
+    draw_matrix(u, xs[1], y_top, matrix_size, r"$U$", SVDBLUE, unit_fmt, fill_mode="u", text_size=3.25)
+    draw_matrix(sigma, xs[2], y_top, matrix_size, r"$\Sigma$", YELLOW, sigma_fmt, fill_mode="sigma", text_size=3.25)
+    draw_matrix(vt, xs[3], y_top, matrix_size, r"$V^T$", SVDGREEN, unit_fmt, fill_mode="v", text_size=3.25)
+
+    ax.text(6.25, y_top - matrix_size / 2, "=", ha="center", va="center", fontsize=22, color=MUTED)
+    ax.text(12.82, y_top - matrix_size / 2, r"$\cdot$", ha="center", va="center", fontsize=20, color=MUTED)
+    ax.text(19.22, y_top - matrix_size / 2, r"$\cdot$", ha="center", va="center", fontsize=20, color=MUTED)
+    ax.text(
+        13.2,
+        0.32,
+        r"Angezeigte SVD-Werte: $A$ exakt als Pixelwerte; $U$ und $V^T$ auf zwei Dezimalstellen, $\Sigma$ auf eine Dezimalstelle gerundet.",
+        ha="center",
+        va="center",
+        fontsize=8.2,
+        color=MUTED,
+    )
+
+    fig.savefig(OUT_DIR / "duck_full_svd_equation.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
 def save_svd_rank_sum_reconstruction():
     fig, ax = plt.subplots(figsize=(13.8, 7.3))
     ax.set_xlim(0, 13.8)
@@ -1039,4 +1152,5 @@ if __name__ == "__main__":
     save_rank_approximation()
     save_duck_rank_terms()
     save_duck_svd_first_component_layout()
+    save_duck_full_svd_equation()
     save_svd_rank_sum_reconstruction()

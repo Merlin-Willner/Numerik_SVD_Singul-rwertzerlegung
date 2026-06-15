@@ -250,7 +250,7 @@ A =
 <p>Den ersten Eintrag auf <span class="math inline">\({\color{#ff3b35}0}\)</span> setzen löscht die horizontale Richtung — alle Punkte landen auf der <span class="math inline">\(y\)</span>-Achse. <em>(Die Werte stammen direkt aus dem Beispiel der Vorgängerfolie; in der kanonischen SVD wären sie absteigend sortiert.)</em></p>
 </div>
 <div class="dimension-text">
-<p>In der SVD <span class="math inline">\(A=U\Sigma{\color{#55c63a}{V^T}}\)</span> steckt die ganze Streckung in <span class="math inline">\(\Sigma\)</span>: dort stehen die <strong>Singulärwerte</strong> <span class="math inline">\(\sigma_1\ge\sigma_2\ge\dots\ge 0\)</span>.</p>
+<p>In der SVD <span class="math inline">\(A=U\Sigma V^T\)</span> steckt die ganze Streckung in <span class="math inline">\(\Sigma\)</span>: dort stehen die <strong>Singulärwerte</strong> <span class="math inline">\(\sigma_1\ge\sigma_2\ge\dots\ge 0\)</span>.</p>
 <p>Sie bestimmen, wie stark jede Richtung gewichtet wird. Einen Eintrag auf <span class="math inline">\(0\)</span> zu setzen entfernt die zugehörige Richtung vollständig — aus einer Fläche wird eine Linie.</p>
 <p>Genau das ist Dimensionsreduktion: unwichtige Richtungen weglassen. Dieselbe Idee trägt später die Bildkompression.</p>
 </div>
@@ -390,10 +390,18 @@ A = U\Sigma V^T,
 </div>
 </div>
 </section>
-<section id="svd-der-ente-erster-beitrag" class="slide level2 duck-svd-first-slide">
-<h2>SVD der Ente: erster Beitrag</h2>
-<div class="duck-svd-first-wrap">
-<p><img data-src="assets/generated/duck_svd_first_component_layout.svg" class="duck-svd-first" alt="Entenmatrix mit SVD-Matrizen U Sigma V transponiert und erstem Rang-1-Beitrag"></p>
+<section id="vollständige-svd-der-entenmatrix" class="slide level2 duck-full-svd-slide">
+<h2>Vollständige SVD der Entenmatrix</h2>
+<div class="duck-full-svd-formula">
+<p><span class="math display">\[
+A = U\Sigma V^T
+\]</span></p>
+</div>
+<div class="duck-full-svd-visual">
+<p><img data-src="assets/generated/duck_full_svd_equation.svg" class="duck-full-svd-equation" alt="Vollständige SVD der 13 mal 13 Entenmatrix mit A gleich U Sigma V transponiert und allen angezeigten Matrixwerten"></p>
+</div>
+<div class="duck-full-svd-note">
+<p>Links steht <span class="math inline">\(A\)</span> als vollständige <span class="math inline">\(13\times13\)</span>-Pixelmatrix der Ente. <span class="math inline">\(U\)</span> und <span class="math inline">\(V^T\)</span> sind orthogonale Matrizen: ihre Spalten bzw. Zeilen sind normierte, unabhängige Bildmuster. <span class="math inline">\(\Sigma\)</span> ist diagonal; die Singulärwerte stehen absteigend auf der Diagonalen und zeigen, welche Muster das Bild am stärksten prägen.</p>
 </div>
 </section>
 <section id="rang-1-beiträge-der-ente" class="slide level2">

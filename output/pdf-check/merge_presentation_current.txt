@@ -1,0 +1,1144 @@
+Singulärwertzerlegung
+  Singular Value Decomposition (SVD)
+     Erklärt anhand von Bildkomprimierung
+
+
+
+
+                                            1 / 33
+Rotation und Skalierung
+
+                     Eine Rotation ist eine Drehung um einen Winkel.
+                     Eine Skalierung streckt oder staucht entlang einer
+                     Achse.
+                     Diese beiden Operationen sind die geometrischen
+                     Bausteine, mit denen wir gleich eine lineare
+                     Abbildung in einfache Schritte zerlegen.
+
+                     Die Matrixschreibweise kommt später; hier geht es zuerst nur
+                     um die sichtbare Wirkung.
+
+
+
+
+                                                                              2 / 33
+Von einer Form zur anderen
+Bevor wir Bilder komprimieren, betrachten wir ein Rätsel: Wie kommt man nur
+durch Rotationen und Skalierungen entlang der Achsen von der linken Grafik zur
+rechten?
+
+
+
+
+                                                                                 3 / 33
+Rotation, Skalierung, Rotation
+
+
+
+
+                          0    1               0.45   0                           √2          √2
+                                                                              ⎛                    ⎞
+        R −90   ∘   = (            )   Σ = (              )                           2       2
+                          −1   0                0     1       R −45   ∘   =
+                                                                                      √2      √2
+                                                                              ⎝                    ⎠
+                                                                                  −
+                                                                                          2   2
+
+
+
+
+                                                                                                   Doch was hat das mit SVD zu tun?
+
+
+
+                                                                                                                                 4 / 33
+Die Idee der SVD
+                   Im Kern ist das das Prinzip der SVD:
+                                                             T
+                                               A = U ΣV
+
+
+
+                   Eine lineare Abbildung wird in drei lesbare Bausteine zerlegt:
+                   erst eine Rotation oder Spiegelung, dann eine Skalierung, dann
+                   erneut eine Rotation oder Spiegelung.
+                   Unser Ablauf von der vorherigen Folie ist dabei ein
+                   didaktisches Beispiel im Stil der SVD. Er zeigt das
+                   Grundprinzip, ist aber nicht die kanonische SVD, weil die
+                   Singulärwerte dort nach Größe sortiert werden und die stärkste
+                   Skalierung zuerst steht.
+                   Für dieses Beispiel entsteht die Gesamtmatrix durch
+                   Multiplikation:
+
+                                        0.45   0                  −0.707   0.318
+                        A = R −45 ∘ (              )R −90 ∘ ≈ (                     )
+                                         0     1                  −0.707   −0.318
+
+
+
+
+                                                                                        5 / 33
+Dimensionsreduktion
+
+
+
+
+                                                   0.45   0   1     0.45                        0   0   1     0
+                                           Σ = (            )( ) = (     )        ⟹         (         )( ) = ( )
+                                                    0     1   1       1                         0   1   1     1
+
+
+
+   Den ersten Eintrag auf 0 setzen löscht die horizontale Richtung — alle Punkte landen auf der y-Achse. (Die Werte stammen direkt aus dem Beispiel der
+                                            Vorgängerfolie; in der kanonischen SVD wären sie absteigend sortiert.)
+
+In der SVD A = U ΣV steckt die ganze Streckung in Σ :
+                     T
+                                                          Sie bestimmen, wie stark jede Richtung gewichtet   Genau das ist Dimensionsreduktion: unwichtige
+dort stehen die Singulärwerte σ ≥ σ ≥ ⋯ ≥ 0.
+                               1    2
+                                                          wird. Einen Eintrag auf 0 zu setzen entfernt die   Richtungen weglassen. Dieselbe Idee trägt später
+                                                          zugehörige Richtung vollständig — aus einer        die Bildkompression.
+                                                          Fläche wird eine Linie.                                                                               6 / 33
+Rang-1-Matrix
+
+
+                                                                                                                                              T
+                                                                                                                          A = uv
+
+
+
+
+             Die 4×4-Matrix links enthält 16 Zahlen. Sie lässt sich exakt als Produkt zweier Vektoren schreiben: ein blauer
+             Spaltenvektor (4 Zahlen) multipliziert mit einem grünen Zeilenvektor (4 Zahlen) — zusammen nur 8 statt
+                                                 16 Zahlen, mit identischem Ergebnis.
+
+Lineare Abhängigkeit — Zeilen, die sich als         Zeilenraum — Der Raum aller                       Rang — Die Dimension des Zeilenraums heißt
+Vielfache einer anderen schreiben lassen, liefern   Linearkombinationen der Zeilen heißt              Rang. Diese Matrix hat Rang 1, nicht Rang 4.
+keine neue Information. Alle vier Zeilen dieser     Zeilenraum. Obwohl die Matrix 4×4 groß ist,       Der Rang beschreibt nicht die Größe der Matrix,
+Matrix zeigen in dieselbe Richtung.                 spannen die Zeilen nur eine einzige Linie auf —   sondern wie viele Zeilen wirklich unabhängig
+                                                    der Zeilenraum hat Dimension 1.                   sind.
+                                                                                                                                                   7 / 33
+Höherer Rang: Summe aus Rang-1-Matrizen
+
+
+
+
+                                                                   T               T                    T
+                                                    Ak = σ1 u1 v       + σ2 u2 v       + ⋯ + σk uk v
+                                                                   1               2                    k
+
+
+
+
+Bei einer Matrix mit Rang 4 sind die Zeilen nicht     Das Grundprinzip bleibt aber gleich: Wir          Für k = r ist das die vollständige Zerlegung. Für
+mehr alle Vielfache voneinander. Die einfache         beschreiben die Matrix als Summe mehrerer Rang-   k < r entsteht eine Näherung: Je mehr Bausteine
+
+Zerlegung aus der vorherigen Folie reicht dann        1-Matrizen.                                       wir addieren, desto genauer wird sie. Für
+nicht mehr aus.                                                                                         Kompression speichern wir nur die wichtigsten
+                                                                                                        Bausteine und lassen kleine Beiträge weg.
+
+
+
+                                                                                                                                                            8 / 33
+SVD als Summe von Rang-1-Beiträgen
+
+                                            Die Produktform
+                                                                    T
+                                                   A = U ΣV
+
+
+
+                  ist gleichbedeutend mit einer Summe aus einzelnen Rang-1-Matrizen:
+                                               T               T                    T
+                                 A = σ1 u1 v       + σ2 u2 v       + ⋯ + σr ur vr .
+                                               1               2
+
+
+
+
+                                                                                    T
+        ui                          σi                                          v
+                   ×                                     ×
+                                                                                    i
+                                                                                             =   ein Rang-1-Beitrag
+   Spalte aus U              Gewichtung aus Σ                              Zeile aus V   T
+
+
+
+
+                                                                                                                      9 / 33
+SVD-Rang-1-Zerlegung
+Dieselbe Zerlegung in zwei Sichtweisen: oben als Produkt A = U ΣV , unten als Summe einzelner Rang-1-Beiträge
+                                                                T
+
+
+
+σ u v .
+         T
+ i   i   i
+
+
+
+
+                                                                                                                10 / 33
+Bild als Matrix
+                                                                                                Bis hierhin haben wir Matrizen als
+                                                                                                Summen von Rang-1-Beiträgen betrachtet.
+                                                                                                Jetzt wenden wir genau diese Idee auf ein
+                  255   255   255   150   150   150   150   255   255   255   255   255   255   Bild an.
+                  255   255   150   150   150   150   150   150   255   255   255   255   255
+
+                  255   150   150   150   150   150   150   150   150   255   255   255   255   Ein Graustufenbild ist nichts anderes als
+                  255   150   150   150    0    150   150   150   150   255   255   255   255
+                                                                                                eine Matrix A: Jeder Eintrag ist ein
+                  80    80    80    150   150   150   150   150   150   255   255   255   255
+
+                  255   80    80    150   150   150   150   150   255   255   255   255   255
+                                                                                                Pixelwert zwischen 0 und 255 .
+                  255   255   255   150   150   150   150   255   255   255   255   150   150
+                                                                                                                          T
+                  255   255   150   150   150   150   150   150   150   150   150   150   150
+                                                                                                               A = U ΣV       ,
+                  255   150   150   150   150   150   150   150   150   150   150   150   255
+
+                  255   150   150   150   150   150   150   150   150   150   150   150   255
+
+                  255   150   150   150   150   150   150   150   150   150   150   255   255
+                                                                                                zerlegt diese Pixelmatrix in geordnete
+                  255   255   150   150   150   150   150   150   150   150   255   255   255   Bildbausteine.
+                  255   255   255   150   150   150   150   150   150   255   255   255   255
+
+                                                                                                Die größten Singulärwerte beschreiben die
+     Bild                     Matrixwerte 0 bis 255                                             wichtigsten Strukturen der Ente. Für die
+                                                                                                Kompression speichern wir nur diese
+                                                                                                stärksten Beiträge und lassen kleinere
+                                                                                                Details weg.
+
+
+
+                                                                                                                                         11 / 33
+Vollständige SVD der Entenmatrix
+                                                                              T
+                                                                A = U ΣV
+
+
+
+
+Links steht A als vollständige 13 × 13 -Pixelmatrix der Ente. U und V sind orthogonale Matrizen: ihre Spalten bzw. Zeilen sind normierte,
+                                                                    T
+
+
+
+unabhängige Bildmuster. Σ ist diagonal; die Singulärwerte stehen absteigend auf der Diagonalen und zeigen, welche Muster das Bild am stärksten
+prägen.
+
+
+
+
+                                                                                                                                             12 / 33
+Rang-1-Beiträge der Ente
+
+
+
+
+Jeder Rang-1-Term σ u v ergibt ein eigenes Muster (oben). Unten: der Singulärwert σ (gelb) gewichtet das äußere Produkt u v — ein
+                    i   i
+                            T
+
+                            i
+                                                                                           i                           i
+                                                                                                                           T
+
+                                                                                                                           i
+
+Spaltenvektor mal einem Zeilenvektor. Die Summe A = σ u v + σ u v + σ u v ist akkurat berechnet und individuell auf [0, 255] skaliert.
+                                                 3     1   1
+                                                               T
+
+                                                               1
+                                                                   2   2
+                                                                           T
+
+                                                                           2
+                                                                               3   3
+                                                                                       T
+
+                                                                                       3
+
+                                                                                                                                         13 / 33
+Rang-k-Näherung der Ente
+Bei einem Bild ist A die Matrix der      Rang k = 1                        27 statt 169 Zahlen
+Pixelwerte.                                           Original   Rekonstruktion
+                  k
+
+                            T
+           Ak = ∑ σi ui v       .
+                            i
+
+                 i=1
+
+
+
+
+Mit jedem Rang kommt ein weiteres
+Muster dazu. Kleine Ränge speichern
+wenig, verlieren aber Details; größere
+Ränge nähern sich der Originalmatrix
+an.
+
+
+
+
+                                                                                         14 / 33
+Rang-k-Näherung von Albert Einstein
+Bei einem hochaufgelösten Bild wird    Rang k = 1                  1344 statt 445800 Zahlen
+die Pixelmatrix deutlich größer. Ein                Original   Rekonstruktion
+Originalbild mit m Zeilen und n
+Spalten speichert ungefähr m ⋅ n
+Helligkeitswerte.
+
+            Original: m ⋅ n
+
+        Rang-k: k(m + n + 1)
+
+
+
+Bei hoher Auflösung lohnt sich diese
+Speicherung stärker: Für kleine k
+behalten wir nur wenige wichtige
+Bildmuster, sparen aber sehr viele
+Pixelwerte ein.
+Je höher wir k wählen, desto mehr
+Details, Kanten und feine Kontraste
+kommen zurück. Gleichzeitig steigt
+aber auch die Datenmenge wieder.
+
+
+
+
+                                                                                      15 / 33
+Was war beim Einstein-Bild überraschend?
+
+
+Beim Einstein-Bild haben wir gesehen:
+ Schon wenige Terme liefern eine erkennbare Rekonstruktion.    Dabei behalten wir nur die ersten k Bildbausteine.
+ Viele Bildinformationen können weggelassen werden.
+                                                               Das funktioniert nur, wenn die Bausteine vorher nach Wichtigkeit
+ Trotzdem bleibt die grobe Struktur des Bildes erhalten.
+                                                               geordnet wurden: Die ersten Bausteine müssen die stärksten
+                                                               Bildanteile enthalten.
+                                             k
+
+
+                                  Ak = ∑ σi ui v
+                                                           T
+                                                               Wie findet die SVD solche wichtigen Bausteine?
+                                                           i
+
+                                            i=1
+
+
+
+
+                                                                                                                            16 / 33
+Ein Bild als Summe einfacher Bausteine
+                                                                                  Dabei soll gelten:
+
+Ein Bild als Matrix A ∈ R           m×n
+                                          enthält m ⋅ n Pixelwerte.                B1   : wichtigster grober Bildanteil
+                                                                                   B2   : nächster wichtiger Anteil
+Für Kompression wollen wir das Bild nicht als einzelne                             …
+
+Pixelwerte betrachten, sondern als Summe einfacher Bildanteile:                    nach k Anteilen stoppen wir
+
+
+                              A ≈ B1 + B2 + ⋯ + Bk .
+                                                                                  Jeder Baustein soll also eine einfache Struktur erklären: zuerst
+                                                                                  grobe, starke Anteile, später feinere Details.
+                                                                                  Was steckt in einem einzelnen solchen Baustein?
+
+
+ einzelne Bildbausteine                                       überlagerte Summe
+
+
+
+
+                          +               +               =
+
+
+
+
+                                                                                                                                                     17 / 33
+Was steckt in einem einzelnen SVD-Baustein?
+                                       Wir greifen den wichtigsten Baustein aus der vorherigen Folie heraus: den vertikalen Anteil.
+                   Für das Prinzip verwenden wir hier den kleinen Baustein aus Folie 17. Beim echten Bild hätten u und v entsprechend viele Einträge wie Bildzeilen und Bildspalten.
+                                                                                                                 i      i
+
+
+
+
+ 1. Baustein aus Folie 17                  2. Zerlegung in Vektoren                           3. Äußeres Produkt                             4. Wirkung von σ₁
+
+
+
+
+                                       wird zerlegt in                                          =                                          ×
+
+
+
+
+                                           Zur Veranschaulichung verwenden wir hier 0/1-Werte. In der echten SVD sind u und v normierte Vektoren.
+                                                                                                                             i       i
+
+
+
+u1 v legt die Form fest. σ ist der Singulärwert dieses Bausteins; anschaulich bestimmt er seine Stärke.
+       T
+       1                 1
+
+Die nächste Frage ist: Welche dieser Bausteine sind stark genug, um zuerst gespeichert zu werden?
+
+
+                                                                                                                                                                                       18 / 33
+Wie vermeiden wir doppelte Muster?
+Jede Schicht soll einen eigenen Anteil des Bildes erklären. Wenn
+zwei Schichten fast dasselbe Muster enthalten, wäre die
+Zerlegung redundant: dieselbe Struktur würde mehrfach
+                                                                                     Mathematisch heißt das:
+gespeichert.
+                                                                                                          v
+                                                                                                              T
+                                                                                                                  vj = 0   ü
+                                                                                                                           f r i ≠ j,
+   redundant                                neue Information                                                  i
+
+
+
+
+                                                                                     Die Muster über die Spalten haben keinen gemeinsamen Anteil im
+                   ≈                                         +                       Sinne des Skalarprodukts.
+
+                                                                                                          u
+                                                                                                           T
+                                                                                                           i
+                                                                                                                  uj = 0    ü
+                                                                                                                           f r i ≠ j.
+
+
+   zweimal fast dasselbe Muster speichern   unterschiedliche Bereiche: neue Inform
+                                                                                     Die Höhenverteilungen haben keinen gemeinsamen Anteil.
+Für Kompression wollen wir aber, dass jeder gespeicherte
+Baustein wirklich neue Information bringt.
+
+Orthogonal heißt hier nicht räumlich getrennt. Die Schichten können an denselben Bildstellen wirken. Orthogonal heißt: Als normierte Vektoren enthalten sie
+keine gemeinsame Richtung, deshalb zählt man dieselbe Struktur nicht doppelt. Jeder Baustein bringt eine neue unabhängige Bildschicht.
+Wie finden wir nun starke Muster, die gleichzeitig unabhängig sind?
+
+
+
+
+                                                                                                                                                         19 / 33
+Wie finden wir starke und unabhängige Muster?
+                                                                                      Ein kompletter Baustein hat die Form
+                                                                                                                                   T
+                                                                                                                   B i = σi ui v       .
+                                                                                                                                   i
+
+
+Aus den letzten Folien wissen wir: Ein guter SVD-Baustein soll
+                                                                                      Um ihn zu finden, starten wir mit einem Teil davon:
+zwei Bedingungen erfüllen:
+                                                                                                                               n
+1. stark:                                                                                                              v ∈ R
+   Er soll viel sichtbare Bildinformation erklären.
+2. unabhängig:                                                                        v   ist ein mögliches Muster über die Spalten.
+   Er soll nicht dasselbe Muster speichern wie ein anderer Baustein.
+                                                                                      Die nächste Frage lautet:
+                                                                                      Wie messen wir, wie stark dieses Spaltenmuster (v) im
+                                                                                      Bild (A) vorkommt?
+
+
+       Bildbaustein
+                                                                                                      Suche starten bei v
+                                             Bi =           σi u i v i   T
+                                                                                                        0     0    1     1     0           0
+                                                       später folgen σᵢ und Höhenverteilung
+                                                                                                      Muster über die Spalten
+                                                                                                      vereinfachtes 0/1-Beispiel
+
+
+                                                                                                                                               20 / 33
+Was bedeutet (Av)?
+Um zu messen, wie stark ein Spaltenmuster v im Bild vorkommt, wenden wir A auf dieses
+Muster an:                                                                                                                       Für die j-te Bildzeile gilt:
+
+                                                            Av                                                                                                                   (Av)j = Zeilej (A) ⋅ v
+
+
+
+Dabei gilt:                                                                                                                      Jede Bildzeile wird also per Skalarprodukt mit dem Spaltenmuster v verglichen.
+
+                                               v ∈ R
+                                                       n
+                                                              Av ∈ R
+                                                                         m
+                                                                             .
+                                                                                                                                 Passt das Muster gut zu einer Zeile, wird der Wert groß. Passt es kaum, wird der Wert klein.
+                                                                                                                                 Damit ist Av die Höhenantwort des Bildes auf das Spaltenmuster.
+Also: v hat einen Wert pro Bildspalte, Av einen Wert pro Bildzeile.
+
+
+
+     Bildbaustein aus Folie 20                        als Matrix A                                  Spaltenmuster v                   zeilenweise Rechnung                                   Höhenantwort Av
+                                                                                                                                      001100 · v = 2
+                                                        0    0     1    1        0   0                        0                                                                                           2
+                                                                                                                                      001100 · v = 2
+                                                        0    0     1    1        0   0                        0                                                                                           2
+                                                                                                                                      001100 · v = 2
+                                                        0    0     1    1        0   0       ·                1
+                                                                                                                                      001100 · v = 2
+                                                                                                                                                                                                          2
+                                                        0    0     1    1        0   0                        1                                                                                           2
+                                                                                                                                      000000 · v = 0
+                                                        0    0     0    0        0   0                        0                                                                                           0
+                                                                                                                                      000000 · v = 0
+                                                        0    0     0    0        0   0                        0                                                                                       0
+           vereinfachtes 0/1-Beispiel
+                                                                                                                                                                                           zeigt den Wert je Bildzeile
+
+
+Die Höhenantwort Av zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge misst die Gesamtstärke:
+                                                                                                                  −−−−−−−−−−−−−−−−−−−−−−
+                                                                                                                   2   2   2   2   2   2
+                                                                                                          ∥Av∥ = √2 + 2 + 2 + 2 + 0 + 0  = 4.
+
+
+
+Je größer ∥Av∥, desto stärker ist die Antwort des Bildes auf das Muster v. Damit wird unsere Suche konkret:
+
+                                                                                                                          max ∥Av∥.
+                                                                                                                         ∥v∥=1
+
+
+
+
+Wir suchen das normierte Spaltenmuster, das die stärkste Höhenantwort erzeugt. Im Beispiel verwenden wir 0/1-Werte. Für die eigentliche Suche normieren wir v auf ∥v∥ = 1 , damit alle Spaltenmuster gleich lang sind und ∥Av∥ nur die Antwort des Bildes auf
+dieses Muster misst – nicht eine künstliche Skalierung von v.
+
+                                                                                                                  ö
+                                                                                                       Av = H henantwort,                         ä
+                                                                                                                                 ∥Av∥ = Gesamtst rke.
+                                                                                                                                                                                                                                                         21 / 33
+Warum können wir A nicht direkt verwenden?
+Wir haben jetzt eine Suchfrage:                                                      Unsere Bildmatrix ist im Allgemeinen
+                                                                                                                                    m×n
+                                  max ∥Av∥.                                                                             A ∈ R
+                                  ∥v∥=1
+
+
+
+                                                                                     und damit oft rechteckig. Außerdem ist sie meist nicht symmetrisch:
+Dafür wäre der Spektralsatz hilfreich, weil er orthogonale Richtungen liefert.
+Für eine symmetrische Matrix S gilt:
+                                                                                                                           T
+                                                                                                                         A         ≠ A.
+
+
+
+                         S = QΛQ
+                                   T
+                                       ,   S qi = λ i qi .                           Anschaulich passiert bei A:
+                                                                                                                               n          m
+Die Spalten von Q sind orthogonale Richtungen. In unserer SVD-Herleitung                                              A : R        → R        .
+
+werden die zugehörigen Eigenwerte später zu Quadraten der Singulärwerte.
+                                                                                     Ein Spaltenmuster v wird zu einer Höhenantwort Av.
+Aber der Spektralsatz gilt für symmetrische quadratische Matrizen.
+                                                                                     Der Spektralsatz braucht dagegen eine symmetrische quadratische Matrix, die
+                                                                                     einen Vektor wieder in denselben Raum abbildet.
+
+                                                                                 Höhenantwort Av
+    Bildmatrix A             Spaltenmuster v
+                                                                  A                                       anderer Raum
+    A: Rⁿ → Rᵐ
+                                                                                                          kein direktes Eigenwertproblem
+
+
+
+
+    Spektralsatz S           Muster v                                               gleicher Raum
+                                                                  S                                                Sv = λv
+    S: Rⁿ → Rⁿ
+                                                                                                                   gleiche Richtung, nur skaliert
+
+
+
+
+                                                                                                                                                              22 / 33
+Warum führt die Normmessung zu A A?                                                                                                        T
+
+
+Unsere Suchfrage war:                                                                                   Der Vorteil: Die quadrierte Länge kann als Skalarprodukt geschrieben werden:
+                                                                                                                                                              2
+                                           max ∥Av∥.                                                                                              ∥Av∥
+                                           ∥v∥=1
+
+
+                                                                                                                                                          T
+                                                                                                                                              = (Av)          (Av)
+Da ∥Av∥ ≥ 0, dürfen wir stattdessen die quadrierte Norm maximieren:
+                                                                                                                                                     T    T
+                                                      2                                                                                        = v       A    Av.
+                                           max ∥Av∥ .
+                                          ∥v∥=1
+
+                                                                                                        Der entscheidende Schritt ist:
+Das ändert nicht, welches Muster gewinnt. Beispiel: Aus 4 > 2 wird 16 > 4 . Die                                                                   T            T   T
+Reihenfolge bleibt gleich.                                                                                                                   (Av)        = v       A   .
+
+
+
+                                                                                                        Dadurch erscheint zwischen den beiden v-Termen automatisch A A.      T
+
+
+
+
+      Höhenantwort Av
+                                  Länge²                                  als Skalarprodukt                               (Av)ᵀ = vᵀAᵀ
+
+                                                   ||Av||²                                (Av)ᵀ(Av)                                      vᵀ AᵀA v
+                                                                                                                                         Bewertungszahl für genau dieses v
+
+
+           Aha-Schritt           (Av)ᵀ(Av) =              vᵀ Aᵀ A    v                                                                     Ausblick: Kandidaten bewerten
+                                                                                                                                            v₁ → 16               v₂ → 4   v₃ → 1
+           v bleibt der getestete Kandidat; AᵀA ist die feste Bewertungsmatrix.
+                                                                                                                                            größter Wert gewinnt
+
+
+
+
+Für ein festes Spaltenmuster v ist v A Av genau dieselbe Zahl wie ∥Av∥ : die quadrierte Norm der Höhenantwort im Originalbild.
+                                  T   T                               2
+
+
+
+A A ist die Bewertungsmatrix. Die äußeren v-Terme markieren den Kandidaten, der gerade getestet wird.
+ T
+
+
+
+                                                                                                                                                                                       23 / 33
+Warum löst A A unser Suchproblem?     T
+
+
+
+                                                                       Jetzt passt A A zum Spektralsatz:
+                                                                                      T
+
+
+
+Aus der letzten Folie wurde unsere Suche:
+                                                                                                      T           n×n
+                                                                                                  A       A ∈ R
+                            2             T   T
+                  max ∥Av∥      = max v       A   Av.
+                  ∥v∥=1           ∥v∥=1
+                                                                       Start und Ziel liegen wieder im Spaltenmuster-Raum.
+Damit suchen wir nicht mehr direkt in der Höhenantwort Av,             Außerdem ist A A symmetrisch:
+                                                                                          T
+
+
+
+
+sondern bewerten jedes Spaltenmuster v mit A A.     T
+                                                                                                  T        T       T
+                                                                                                (A    A)       = A     A.
+Wichtig: A A ersetzt nicht das Bild A. Es ist die
+              T
+
+
+
+Bewertungsmatrix für die Spaltenmuster.                                Für solche Matrizen liefert der Spektralsatz orthogonale
+                                                                       Eigenrichtungen.
+
+
+
+
+    Suchproblem                           AᵀA                     quadratisch                                                 vᵢ
+                                                                                                Spektralsatz
+    max vᵀ AᵀA                    Bewertungsmatrix                  symmetrisch                                              orth.
+                                                                                               für symmetrische
+                                  bewertet Muster                Spektralsatz passt               Matrizen                   Muster
+    ||v||=1
+
+
+
+
+  Brücke: Aus der Bewertungsmatrix wird ein Spektralsatz-Problem. Erst danach erhalten wir die orthogonalen Spaltenmuster.
+
+                                                                                                                                      24 / 33
+Der Spektralsatz liefert die gesuchten Muster
+Unsere Suche lautet jetzt:                                                                                                              Der Spektralsatz liefert genau das, was wir brauchen:
+                                                                T       T
+                                                     max v          A       Av.
+                                                     ∥v∥=1
+                                                                                                                                        1. Unabhängige Spaltenmuster
+
+Wir suchen also normierte Spaltenmuster v, die von A A möglichst stark bewertet          T
+
+
+
+werden.                                                                                                                                                                    v
+                                                                                                                                                                               T
+                                                                                                                                                                               i
+                                                                                                                                                                                   vj = 0   (i ≠ j)
+
+
+Da A A symmetrisch ist, dürfen wir den Spektralsatz anwenden.
+      T
+
+                                                                                                                                        Die Muster speichern keine doppelte Richtung.
+Er liefert Eigenvektoren:
+                                                        T                                                                               2. Sortierbare Eigenwerte
+                                                    A       Av i = λ i v i .
+
+
+
+Die Eigenvektoren v sind die gesuchten Spaltenmuster.
+                               i
+                                                                                                                                                                           λ1 ≥ λ2 ≥ ⋯ ≥ 0
+
+Das bedeutet: A A verändert die Richtung v nicht, sondern skaliert sie nur mit λ .
+                           T
+                                                                    i                                                           i
+
+Solche Richtungen sind stabile Muster der Bewertungsmatrix.                                                                             Die ersten v gehören zu den größten Eigenwerten.
+                                                                                                                                                   i
+
+
+
+
+                                                                             v₁
+                                                                                                         λ₁
+                                                                             v₂
+           AᵀA                                                                                           λ₂
+
+     Bewertungsmatrix
+                                     Spektralsatz
+                                                                             v₃                          λ₃
+          symmetrisch              für symmetrische Matrizen
+
+
+   bewertet v mit vᵀAᵀAv                                                     orthogonale Spaltenmuster   λ₁ ≥ λ₂ ≥ λ₃ ≥ ...
+                                                                                                         sortierte Eigenwerte
+
+
+
+
+Wir haben jetzt unabhängige Spaltenmuster v und zugehörige Eigenwerte λ . Nächste Frage: Warum gilt λ = σ ?
+                                                                                     i                                              i                                  i
+                                                                                                                                                                               i
+                                                                                                                                                                                   2
+
+
+
+
+                                                                                                                                                                                                      25 / 33
+Warum gilt λ = σ ?                                           i
+                                                                                   2
+                                                                                   i
+Aus dem Spektralsatz kennen wir jetzt die Spaltenmuster v :                 i
+                                                                                                           Jetzt setzen wir die Eigenvektorgleichung ein:
+
+                                       T                                                                                                                2         T                         T
+                                      A    Av i = λ i v i .                                                                                   ∥Avi ∥        = v       (λ i v i ) = λ i (v       vi ).
+                                                                                                                                                                  i                         i
+
+
+
+
+Jetzt prüfen wir die Norm der Höhenantwort dieses gefundenen Musters im Originalbild                       Da v normiert ist, gilt:
+                                                                                                                   i
+
+
+A.
+                                                                                                                                                   T                               2
+                                                                                                                                               v       vi = 1,            ∥Avi ∥       = λi .
+Für ein gefundenes Spaltenmuster v messen wir:
+                                  i
+                                                                                                                                                   i
+
+
+
+
+                                                         2
+                                                                                                           Damit ist der Eigenwert λ das Quadrat des zugehörigen Singulärwerts.
+                                                                                                                                      i
+                                           ∥Avi ∥ .
+
+                                                                                                                                                            2                          −−
+                                                                                                                                          λ i = ∥Avi ∥ ,                σi = ∥Avi ∥ = √λ i .
+Aus der vorherigen Umformung wissen wir:
+                                           2         T       T
+                                 ∥Avi ∥        = v       A       Av i .
+                                                     i
+
+
+
+
+      vᵢ                                                                  Avᵢ
+    Spaltenmuster                                                Höhenantwort                           σᵢ = ||Avᵢ||
+                                      A anwenden                                       Länge messen                                       quadrieren
+                                                                                                                                                                               λᵢ = σᵢ²
+                                                                                                          Singulärwert                                                           Eigenwert
+
+
+
+
+                                                                                Beispiel: λᵢ = 16 ⇒ σᵢ = √16 = 4
+
+
+
+Merke: λ = σ und σ = ∥Av ∥ . Als Nächstes fehlt noch die Höhenverteilung u .
+           i
+               2
+               i     i      i                                                                 i
+
+
+
+
+                                                                                                                                                                                                        26 / 33
+Vom Spaltenmuster zur Höhenverteilung
+Aus der letzten Folie kennen wir:                                                                    Dazu benutzen wir wieder das Originalbild A:
+  vi   : Muster über die Spalten
+                                                                                                                                                       Av i .
+  σi   : Singulärwert des Musters
+
+Für den vollständigen Baustein fehlt:                                                                Das ist die Höhenantwort: ein Wert pro Bildzeile.
+
+                                                                                                                                                   ∥Avi ∥ = σi .
+
+  ui   : Verteilung über die Bildzeilen
+                                                                                                     Also enthält Av die Höhenform und den Singulärwert als Skalierung. Für die SVD trennen
+                                                                                                                     i
+
+
+                                                                T
+                                                                                                     wir beides:
+                                                B i = σi ui v       .
+                                                                i
+
+
+                                                                                                                                                                Avi
+Leitfrage: In welchen Bildzeilen kommt v vor?           i
+                                                                                                                                   Avi = σi ui ,       ui =           (σi > 0).
+                                                                                                                                                                σi
+
+
+
+                                                                                                     Durch das Teilen durch σ bleibt die Form über die Höhe erhalten; die Skalierung durch den
+                                                                                                                               i
+
+                                                                                                     Singulärwert wird entfernt.
+
+
+
+
+                                                                          Avᵢ                                                                         uᵢ
+                      vᵢ                                                                           σᵢ = 4                                                                   uᵢ = Avᵢ / σᵢ
+                                                                        Höhenantwort                                                         normierte Höhenverteilung
+                Spaltenmuster                 A anwenden                                Länge   Norm von Avᵢ               durch σᵢ teilen
+                                                                             2                                                                        0,5
+                                                                                                                                                                            = 1/4 · Avᵢ
+                                                                             2                  ||Avᵢ|| = √(2²+2²+2²+2²)                              0,5
+            0    0     1    1       0     0                                                                                                                                 2/4 = 0,5
+                                                                             2                                                                        0,5
+                                                                                                       =4
+                                                                             2                                                                        0,5                   0/4 = 0
+                                                                             0                                                                         0
+                                                                             0                                                                         0
+                                                                    Form + Skalierung                                                              ||uᵢ|| = 1
+
+       Die Zahlen dienen nur zur Veranschaulichung. In der echten SVD sind vᵢ und uᵢ normierte Vektoren.
+
+
+                                                                                                                                                                                            27 / 33
+Aus drei Teilen wird ein Bildbaustein
+Letzte Folie:                                                                                     Damit kennen wir alle drei Teile:
+                                                                                                                                                                           T
+                                                Avi                                                                                                        B i = σi ui v       .
+                                                                                                                                                                           i
+                                         ui =         .
+                                                σi
+
+                                                                                                       v
+                                                                                                           T
+
+                                                                                                           i
+                                                                                                               : Muster über die Spalten
+Umgestellt:                                                                                            ui      : Verteilung über die Bildzeilen
+                                                                                                       σi      : Singulärwert des Bausteins
+                                        Avi = σi ui .
+
+                                                                                                  Das äußere Produkt u v macht daraus eine 2D-Bildschicht.
+                                                                                                                                         i
+                                                                                                                                              T
+                                                                                                                                              i
+Das heißt: Die Höhenantwort des Spaltenmusters besteht aus Singulärwert mal
+normierter Höhenverteilung.
+
+
+
+        σᵢ × uᵢ × vᵢᵀ = Bᵢ
+        Singulärwert × Höhenverteilung × Spaltenmuster                                                                                                              Bᵢ = σᵢuᵢvᵢᵀ
+                                                                                                                                                                               Bildbaustein
+
+                                                          uᵢ                                vᵢᵀ
+           σᵢ = 4                                    normierte Höhenverteilung         Spaltenmuster                                              ergibt
+
+           Singulärwert                     ×                  0,5                 ×
+                                                               0,5
+                                                                                        0   0      1              1      0      0
+                                                               0,5
+                                                               0,5
+                                                                   0
+                                                                   0
+                                                                                                                                                                    vertikaler Bildanteil
+        σᵢ skaliert die Form uᵢvᵢᵀ zum sichtbaren Bildbaustein.
+
+Aus der Kernbeziehung Av = σ u wird mit v der Matrixbaustein B = σ u v .
+                       i    i   i
+                                        T
+                                        i
+                                                               i       i   i
+                                                                               T
+                                                                               i
+
+
+
+Merke: Höhenantwort plus Spaltenmuster ergibt die vollständige Bildschicht. Damit kennen wir wieder die Bausteinform aus dem Anfang der Herleitung.
+                                                                                                                                                                                              28 / 33
+Alle Bildbausteine zusammen ergeben das Bild
+Auf der letzten Folie hatten wir einen einzelnen Bildbaustein:                                                            Die Summe lässt sich kompakt als Matrixprodukt schreiben:
+                                                                                  T
+                                                                  B i = σi ui v       .                                                                           Ur = (u1 , … , ur ),     V r = (v1 , … , vr ).
+                                                                                  i
+
+
+
+Das ganze Bild entsteht, wenn wir alle nichtverschwindenden Bausteine addieren:                                                                                                   ⎛
+                                                                                                                                                                                      σ1               0
+                                                                                                                                                                                                           ⎞
+
+                                                                                                                                                                           Σr = ⎜                          ⎟
+                                                           A = B1 + B2 + ⋯ + Br                                                                                                 ⎜          ⋱               ⎟
+
+                                                                                                                                                                                  ⎝                        ⎠
+                                                                                                                                                                                      0            σr
+also:
+                                                                                                                                                                                               T
+                                                                       r                                                                                                        A = Ur Σr V r      .
+                                                                                      T
+                                                                A = ∑ σi ui v             .
+                                                                                      i
+
+                                                                      i=1                                                    Ur   : Höhenverteilungen
+                                                                                                                             Σr   : Singulärwerte
+r   ist die Anzahl der positiven Singulärwerte:                                                                               T
+                                                                                                                             Vr   : Spaltenmuster
+
+                                                                  r = rang(A).
+
+
+
+Wenn σ = 0, dann ist σ u v
+          i                  i    i
+                                      T
+                                      i
+                                          = 0   . Dieser Baustein trägt nichts zum Bild bei.
+
+
+
+        Einzelne 6×6-Bildbausteine
+        Bᵢ = σᵢuᵢvᵢᵀ
+
+                                                                                                                                     A
+                   B₁                                        B₂                                  B₃                     Summe ergibt Bild
+                                                                                                                                                                                A = Uᵣ Σᵣ Vᵣᵀ
+              vertikaler Anteil                        horizontaler Anteil                    feiner Anteil                                                                       gleiche Aussage als Matrixprodukt
+                                                                                                                                                        kompakt
+
+                                           +                                              +                   + ... =
+                                                                                                                                                                                Uᵣ             ×               Σᵣ   ×   Vᵣᵀ
+
+                                                                                                                                                                            Höhen               Singulärwerte       Spalten
+
+
+
+
+        Alle kleinen Matrizen sind 6×6. Summe der Bausteine und Matrixform beschreiben dieselbe Rekonstruktion.
+
+
+
+
+                                                                                                                                                                                                                              29 / 33
+Warum können wir kleine Bausteine weglassen?
+Aus der letzten Folie wissen wir:                                                                                                 Der Singulärwert eines Bausteins ist σ .
+                                                                                                                                                                         i
+
+
+                                                               r
+                                                                                                                                  Weil die SVD-Bausteine orthogonal zueinander sind, addieren sich die Quadrate ihrer Singulärwerte sauber:
+                                                                             T
+                                                         A = ∑ σi ui v            .
+                                                                             i
+                                                                                                                                                                                                             r
+                                                              i=1
+                                                                                                                                                                                                2                 2
+                                                                                                                                                                                       ∥A − Ak ∥     =   ∑       σ .
+                                                                                                                                                                                                F                 i
+Das Bild ist also eine Summe sortierter Bildbausteine.                                                                                                                                                   i=k+1
+
+
+
+Für Kompression behalten wir nur die ersten k Bausteine:                                                                          Der Fehler besteht genau aus der Energie der weggelassenen Bildschichten.
+                                                                 k                                                                Wenn die weggelassenen σ klein sind, ist auch der Rekonstruktionsfehler klein.
+                                                                                                                                                            i
+                                                                              T
+                                                         Ak = ∑ σi ui v           .
+
+                                                              i=1
+                                                                              i
+                                                                                                                                  Eckart-Young-Mirsky sagt zusätzlich:
+
+Die weggelassenen Bausteine bilden den Fehler:                                                                                                                               ∥A − Ak ∥F ≤ ∥A − B∥F       ü
+                                                                                                                                                                                                         f r alle rang(B) ≤ k.
+
+
+                                                                     r
+                                                                                                                                  Also ist A die beste Rang-k -Näherung im Frobeniusfehler.
+                                                                                                                                            k
+                                                                                      T
+                                                      A − Ak =       ∑     σi ui v        .
+                                                                                      i
+
+                                                                   i=k+1
+
+
+
+
+Weil die Singulärwerte absteigend sortiert sind, lassen wir genau die schwächsten Bildschichten weg.
+
+
+
+     Bausteine sind nach Singulärwerten sortiert
+     σ₁ ≥ σ₂ ≥ σ₃ ≥ σ₄ ≥ σ₅ ≥ ...
+
+                                                                                                                                                                  Aₖ = B₁+...+Bₖ                             A - Aₖ = Bₖ₊₁+...
+               B₁                                B₂                                            B₃                        B₄                                        Rekonstruktion                                      Fehler
+
+
+                                +                                    +                                        +
+
+            σ₁ groß                       σ₂ mittel                                       σ₃ kleiner                   σ₄ klein                                  starke Bausteine                                 schwache Bausteine
+
+
+                                    behalten                                                           Schnitt bei k weglassen
+
+                                                                                          Kleine σᵢ → schwache Bildschichten → kleiner Fehler
+
+
+
+                                                                                                                                                                                                                                              30 / 33
+Was bleibt von der SVD hängen?
+
+                A                                        AᵀA                                   Bᵢ = σᵢuᵢvᵢᵀ                              A = Σ σᵢuᵢvᵢᵀ                                  Aₖ
+           Bildmatrix                    suchen      Bewertungsmatrix             vᵢ, σᵢ, uᵢ        Bildbaustein            addieren          alle Bausteine            bei k            erste k
+                                                                                                                                                                      schneiden
+        z. B. Graustufenbild
+                                                     findet vᵢ    und σᵢ                                                                   exakte Rekonstruktion
+                                                                                                vᵢᵀ: Spaltenmuster
+                                                                                                uᵢ: Höhenverteilung
+                                                                                                                                                       +
+                                                           n×n                                  σᵢ: Singulärwert
+                                                                                                                                                                                        schwache
+                                                                                                                                                    =A                                  weglassen
+
+
+
+
+                                                                 Kleine σᵢ → schwache Bausteine. Für Kompression behalten wir die ersten k.
+
+
+
+
+Baustein                                                                   Sortierung                                                          Kompression
+                                               T                                                                                                                                   k
+                               B i = σi ui v                                                         σ1 ≥ σ2 ≥ …
+                                               i                                                                                                                                             T
+                                                                                                                                                                        Ak = ∑ σi ui v
+                                                                                                                                                                                             i
+
+Singulärwert × Höhenverteilung × Spaltenmuster                             Große σ bedeuten wichtige Bildanteile.
+                                                                                  i
+                                                                                                                                                                                  i=1
+
+
+
+
+                                                                                                                                               Wir behalten die stärksten Bausteine.
+                                                   Die SVD macht sichtbar, welche Bildstrukturen wichtig sind, und erlaubt dadurch eine kontrollierte Kompression.
+
+
+
+
+                                                                                                                                                                                                    31 / 33
+Quellen
+[Bae16] Bärwolff, G. Numerik für Ingenieure, Physiker und
+Informatiker. Springer, 2. Aufl., 2016 (Kap. 3).
+[Bas20] Bashier, E. Practical Numerical and Scientific Computing
+with MATLAB and Python. CRC Press, 2020 (Kap. 1).
+[Kar15] Karpfinger, C. Höhere Mathematik in Rezepten. Springer, 2.
+Aufl., 2015 (Kap. 42.3–42.4).
+[Kel21] Keller, A. Aufgaben und Lösungen zur Mathematik für den
+Studienstart. Springer, 2021 (Kap. 25.8–25.9).
+[Kel24] Keller, A. Handout Eigenwerte, Spektralsatz, Singular Value
+Decomposition und Least-Squares. THWS, 2024.
+[Mol04] Moler, C. B. Numerical Computing with MATLAB. SIAM,
+2004 (Kap. 10.1–10.4 und 10.11).
+[TB22] Trefethen, L. und Bau, D. Numerical Linear Algebra. SIAM,
+2022.
+[Str10] Strang, G. Wissenschaftliches Rechnen. Springer, 2010 (Kap.
+1).
+
+
+
+
+                                                                      32 / 33
+Eigenständigkeitserklärung
+Bei der Erstellung dieser Themenausarbeitung wurden KI-gestützte Werkzeuge gemäß der KI-Leitlinie Hochschullehre Bayern
+wie folgt eingesetzt:
+ KI-Werkzeug                                                           Einsatzzweck
+ Claude (Anthropic)                                                    Strukturierung und sprachliche Überarbeitung der Folien
+ Claude (Anthropic)                                                    Erzeugung der Python-Skripte für die generierten Visualisierungen
+ Claude (Anthropic)                                                    Unterstützung bei der Python-Implementierung der SVD-
+                                                                       Bildkompression
+
+Hiermit versichere ich, dass ich die vorliegende Arbeit eigenständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel
+verwendet habe. Alle übernommenen Inhalte sowie mit Unterstützung von KI generierten Inhalte wurden entsprechend den anerkannten
+wissenschaftlichen Grundsätzen oder entsprechend der Regelungen zur Kennzeichnung von KI-Inhalten kenntlich gemacht. Ausgenommen
+von der Kenntlichmachung sind orthografische oder grammatikalische Korrekturen, Übersetzungen sowie nicht-sinnverändernde
+Verbesserungen von Formulierungen. Ich bin mir bewusst, dass mit KI generierte Texte keine Garantie für die Qualität von Inhalten und
+Text bieten. Daher erkläre ich, dass ich KI-Werkzeuge lediglich als Hilfsmittel genutzt habe, die von KI generierten Inhalte kritisch
+überprüft habe und mein eigenständiger sowie kreativer Einfluss in dieser Arbeit überwiegt. Ich versichere, dass ich Inhalte meiner Arbeit
+vollständig verstanden habe und selbstständig vertreten kann. Ich versichere, dass ich ausschließlich KI-Werkzeuge verwendet habe, deren
+Nutzung vom Prüfer oder der Prüferin als Hilfsmittel zugelassen wurden.
+
+
+
+
+                                                                                                                                           33 / 33
+

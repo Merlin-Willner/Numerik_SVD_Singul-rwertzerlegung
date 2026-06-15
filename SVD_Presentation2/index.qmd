@@ -156,7 +156,7 @@ Den ersten Eintrag auf ${\color{#ff3b35}0}$ setzen löscht die horizontale Richt
 :::
 
 ::: {.dimension-text}
-In der SVD $A=U\Sigma{\color{#55c63a}{V^T}}$ steckt die ganze Streckung in $\Sigma$: dort stehen die **Singulärwerte** $\sigma_1\ge\sigma_2\ge\dots\ge 0$.
+In der SVD $A=U\Sigma V^T$ steckt die ganze Streckung in $\Sigma$: dort stehen die **Singulärwerte** $\sigma_1\ge\sigma_2\ge\dots\ge 0$.
 
 Sie bestimmen, wie stark jede Richtung gewichtet wird. Einen Eintrag auf $0$ zu setzen entfernt die zugehörige Richtung vollständig — aus einer Fläche wird eine Linie.
 
@@ -323,10 +323,20 @@ Die größten Singulärwerte beschreiben die wichtigsten Strukturen der Ente. F�
 
 :::
 
-## SVD der Ente: erster Beitrag {.duck-svd-first-slide}
+## Vollständige SVD der Entenmatrix {.duck-full-svd-slide}
 
-::: {.duck-svd-first-wrap}
-![](assets/generated/duck_svd_first_component_layout.svg){.duck-svd-first fig-alt="Entenmatrix mit SVD-Matrizen U Sigma V transponiert und erstem Rang-1-Beitrag"}
+::: {.duck-full-svd-formula}
+$$
+A = U\Sigma V^T
+$$
+:::
+
+::: {.duck-full-svd-visual}
+![](assets/generated/duck_full_svd_equation.svg){.duck-full-svd-equation fig-alt="Vollständige SVD der 13 mal 13 Entenmatrix mit A gleich U Sigma V transponiert und allen angezeigten Matrixwerten"}
+:::
+
+::: {.duck-full-svd-note}
+Links steht $A$ als vollständige $13\times13$-Pixelmatrix der Ente. $U$ und $V^T$ sind orthogonale Matrizen: ihre Spalten bzw. Zeilen sind normierte, unabhängige Bildmuster. $\Sigma$ ist diagonal; die Singulärwerte stehen absteigend auf der Diagonalen und zeigen, welche Muster das Bild am stärksten prägen.
 :::
 
 ## Rang-1-Beiträge der Ente
