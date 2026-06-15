@@ -425,11 +425,25 @@
   border-top: 1.5px solid var(--line);
   border-bottom: 1.5px solid var(--line);
   padding: 0.18rem 0 0.05rem;
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr;
+  column-gap: 0.45rem;
+  margin-left: 16%;
+  margin-right: 24%;
+  align-items: start;
   text-align: center;
 }
 
+.step-action-matrix {
+  min-width: 0;
+}
+
 .step-action-matrices mjx-container {
-  font-size: 0.72em !important;
+  font-size: 0.54em !important;
+}
+
+.step-action-matrix:last-child mjx-container {
+  font-size: 0.5em !important;
 }
 
 .transition-question {
@@ -512,55 +526,116 @@
 }
 
 .rank1-slide {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 0.25rem;
-  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
+/* Top area does NOT grow — avoids giant white gap around a small image */
+.rank1-top {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.8rem;
+}
+
+.rank1-visual {
+  flex: 1;
+  min-width: 0;
+}
+
+/* explicit height forces SVG to scale (natural size is only ~425x198px) */
 .rank1-matrix {
-  width: 100%;
-  max-height: 330px;
-  object-fit: contain;
+  height: 350px;
+  width: auto;
+  max-width: 100%;
   display: block;
 }
 
-.rank1-text {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr 0.9fr;
-  gap: 0.9rem;
-  align-items: start;
-  border-top: 1.5px solid var(--line);
-  padding-top: 0.45rem;
+/* matrix center at ~37% from top → 0.37 * 350px ≈ 130px ≈ 3.1rem */
+.rank1-formula {
+  flex: 0 0 auto;
+  font-size: 1.8em;
+  line-height: 1;
+  padding-right: 0.5rem;
+  margin-top: 3.1rem;
+  transform: translateX(-1.2rem);
 }
 
-.rank1-text p {
-  font-size: 0.47em;
+.rank1-formula mjx-container {
+  margin: 0 !important;
+}
+
+.rank1-desc {
+  flex: 0 0 auto;
+  font-size: 0.78em;
+  line-height: 1.35;
+  text-align: center;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-bottom: 0.2rem;
+}
+
+.rank1-desc p {
   margin: 0;
 }
 
+/* Kill any paragraph/figure margin inside the visual wrapper */
+.rank1-visual p,
+.rank1-visual figure {
+  margin: 0;
+}
+
+.rank1-text {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  border-top: 1.5px solid var(--line);
+  padding-top: 0.55rem;
+}
+
+.rank1-text p {
+  font-size: 0.48em;
+  margin: 0;
+  line-height: 1.45;
+}
+
 .rank1-text mjx-container {
-  font-size: 0.72em !important;
+  font-size: 0.76em !important;
   margin: 0 !important;
 }
 
 .rank-approx-slide {
   display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 0.25rem;
-  min-height: 520px;
+  grid-template-rows: auto auto auto;
+  gap: 0;
+  padding-bottom: 2.5rem;
 }
 
 .rank-approx {
   width: 100%;
-  max-height: 325px;
+  max-height: 240px;
   object-fit: contain;
   display: block;
+  margin-bottom: 0.1rem;
+}
+
+.rank-approx-formula {
+  text-align: center;
+  padding: 0;
+  margin-bottom: 1.1rem;
+}
+
+.rank-approx-formula mjx-container {
+  font-size: 0.88em !important;
+  margin: 0 !important;
 }
 
 .rank-approx-text {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.35fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0.75rem;
   border-top: 1.5px solid var(--line);
   padding-top: 0.45rem;
@@ -589,6 +664,42 @@
   object-fit: contain;
   display: block;
   margin: 0 auto;
+}
+
+.duck-rank-v4-slide {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 0.25rem;
+  min-height: 520px;
+}
+
+.duck-rank-v4-visual p,
+.duck-rank-v4-visual figure {
+  margin: 0;
+}
+
+.duck-rank-v4-img {
+  width: 100%;
+  max-height: 490px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.duck-rank-v4-caption {
+  border-top: 1.5px solid var(--line);
+  padding-top: 0.42rem;
+}
+
+.duck-rank-v4-caption p {
+  font-size: 0.5em;
+  line-height: 1.35;
+  margin: 0 0 0.18rem;
+  color: var(--muted);
+}
+
+.duck-rank-v4-caption mjx-container {
+  font-size: 0.86em !important;
 }
 
 .duck-rank-terms-text {
@@ -683,6 +794,10 @@
 
 .red-piece {
   border-color: #ff3b35;
+}
+
+.green-piece {
+  border-color: #55c63a;
 }
 
 .reconstruction-lead p {

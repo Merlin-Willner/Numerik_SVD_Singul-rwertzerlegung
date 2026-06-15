@@ -4,6 +4,7 @@ NUL
 # Local browser/test artifacts
 .playwright-cli/
 **/.playwright-cli/
+output/
 
 # Python caches and virtual environments
 __pycache__/

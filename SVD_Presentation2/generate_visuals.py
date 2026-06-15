@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 
 import matplotlib.pyplot as plt
-from matplotlib.patches import Arc, FancyArrowPatch, FancyBboxPatch
+from matplotlib.patches import Arc, FancyArrowPatch, FancyBboxPatch, Polygon
 import numpy as np
 from PIL import Image
 
@@ -328,13 +328,9 @@ def save_step_actions():
         sub = ax.inset_axes([x / 12.0, 0.43, 0.18, 0.55])
         draw_shape(sub, matrix=matrix)
 
-    actions = [
-        ("Rotation", "R_-90°"),
-        ("Skalierung", "Σ"),
-        ("Rotation", "R_-45°"),
-    ]
+    actions = ["Rotation", "Skalierung", "Rotation"]
     arrow_y = 2.55
-    for i, (action, formula) in enumerate(actions):
+    for i, action in enumerate(actions):
         start = xs[i] + 2.05
         end = xs[i + 1] - 0.12
         ax.add_patch(
@@ -349,7 +345,6 @@ def save_step_actions():
         )
         mid = (start + end) / 2
         ax.text(mid, 1.25, action, ha="center", va="center", fontsize=15, color=INK)
-        ax.text(mid, 0.72, formula, ha="center", va="center", fontsize=18, color=MUTED)
 
     fig.savefig(OUT_DIR / "transformation_step_actions.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
@@ -471,9 +466,10 @@ def save_dimension_reduction():
 
 
 def save_rank1_matrix():
-    fig, ax = plt.subplots(figsize=(11.0, 3.8))
-    ax.set_xlim(0, 11.0)
-    ax.set_ylim(0, 3.8)
+    # Compact layout: elements closer together so SVG ratio is ~2.1:1 (fills slide height better)
+    fig, ax = plt.subplots(figsize=(5.9, 2.75))
+    ax.set_xlim(0.30, 6.20)
+    ax.set_ylim(0.40, 3.15)
     ax.axis("off")
 
     matrix = np.array(
@@ -494,41 +490,41 @@ def save_rank1_matrix():
 
     cell_w = 0.48
     cell_h = 0.42
-    x0 = 0.85
+    x0 = 0.50
     y0 = 2.55
     for row in range(4):
         for col in range(4):
             cell(x0 + col * cell_w, y0 - row * cell_h, cell_w, cell_h, matrix[row, col])
     ax.text(x0 + 2 * cell_w, 0.72, "16 Zahlen", ha="center", va="center", fontsize=18, color=MUTED)
 
-    ax.text(3.65, 1.93, "=", ha="center", va="center", fontsize=24, color=MUTED)
+    # "=" and "·" at matrix center y=2.13 so formula aligns visually with the matrix
+    ax.text(2.90, 2.13, "=", ha="center", va="center", fontsize=24, color=MUTED)
 
-    vx = 4.40
+    vx = 3.22
     blue = "#19a7ff"
     for row, value in enumerate(left_vec):
         cell(vx, y0 - row * cell_h, cell_w, cell_h, value, fill=blue)
 
-    ax.text(5.28, 1.93, r"$\cdot$", ha="center", va="center", fontsize=24, color=MUTED)
+    ax.text(3.84, 2.13, r"$\cdot$", ha="center", va="center", fontsize=24, color=MUTED)
 
-    hx = 5.75
-    hy = 1.72
+    hx = 4.05
+    hy = 1.92  # center of row vector = 2.13 = matrix center
     green = "#55c63a"
     for col, value in enumerate(right_vec):
         cell(hx + col * cell_w, hy, cell_w, cell_h, value, fill=green)
     ax.text(hx + 2 * cell_w, 0.72, "8 Zahlen", ha="center", va="center", fontsize=18, color=MUTED)
-
-    ax.text(7.85, 2.48, r"$A = u v^T$", ha="left", va="center", fontsize=25, color=INK)
-    ax.text(7.85, 1.82, "Alle Zeilen sind Vielfache\nvon (1, 2, 3, 4).", ha="left", va="top", fontsize=15, color=INK, linespacing=1.25)
-    ax.text(7.85, 0.92, "Deshalb hat die Matrix Rang 1:\n4 Dimensionen, aber nur eine\nunabhängige Richtung.", ha="left", va="top", fontsize=14, color=MUTED, linespacing=1.25)
 
     fig.savefig(OUT_DIR / "rank1_matrix.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
 
 
 def save_rank_approximation():
-    fig, ax = plt.subplots(figsize=(11.4, 3.9))
+    SLIDE7_BLUE = "#19a7ff"
+    SLIDE7_GREEN = "#55c63a"
+
+    fig, ax = plt.subplots(figsize=(11.4, 2.6))
     ax.set_xlim(0, 11.4)
-    ax.set_ylim(0, 3.9)
+    ax.set_ylim(0.85, 3.35)
     ax.axis("off")
 
     matrix = np.array(
@@ -548,60 +544,60 @@ def save_rank_approximation():
 
     cell_w = 0.38
     cell_h = 0.36
-    x0 = 0.50
-    y0 = 2.82
+    x0 = 0.22
+    y0 = 2.88
     for row in range(4):
         for col in range(4):
             cell(x0 + col * cell_w, y0 - row * cell_h, cell_w, cell_h, matrix[row, col])
 
-    ax.text(x0 + 2 * cell_w, 1.04, "Rang 4", ha="center", va="center", fontsize=15, color=MUTED)
-    ax.text(2.40, 2.02, "=", ha="center", va="center", fontsize=24, color=MUTED)
+    matrix_center_y = y0 - cell_h
+    matrix_bottom = y0 - 4 * cell_h
+    ax.text(x0 + 2 * cell_w, matrix_bottom - 0.16, "Rang 4", ha="center", va="top", fontsize=15, color=MUTED)
+    ax.text(2.10, matrix_center_y, "=", ha="center", va="center", fontsize=26, color=MUTED)
 
-    def rank_one_block(x, idx):
-        box = FancyBboxPatch(
-            (x, 1.15),
-            2.15,
-            1.95,
-            boxstyle="round,pad=0.035,rounding_size=0.045",
-            linewidth=1.35,
-            edgecolor="#d6d6d6",
-            facecolor="none",
-        )
-        ax.add_patch(box)
+    sigma_w = 0.44
+    sigma_h = 0.44
+    u_w = 0.38
+    u_h = 1.52
+    v_w = 1.30
+    v_h = 0.38
+    gap = 0.06
+    center_y = matrix_center_y
 
-        u_x = x + 0.23
-        u_y = 2.58
-        small_w = 0.26
-        small_h = 0.28
-        for row in range(4):
-            cell(u_x, u_y - row * small_h, small_w, small_h, "", fill="none", edge=SVDBLUE)
-        ax.text(u_x + small_w / 2, 1.35, rf"$u_{idx}$", ha="center", va="center", fontsize=15, color=SVDBLUE)
+    def rank1_solid_block(x_start, idx):
+        sx = x_start
+        sy = center_y - sigma_h / 2
+        ax.add_patch(plt.Rectangle((sx, sy), sigma_w, sigma_h,
+                                    facecolor=YELLOW, edgecolor=INK, linewidth=1.2))
+        ax.text(sx + sigma_w / 2, center_y, rf"$\sigma_{idx}$",
+                ha="center", va="center", fontsize=11, color=INK)
 
-        ax.text(x + 0.78, 2.04, rf"$\sigma_{idx}$", ha="center", va="center", fontsize=17, color=YELLOW)
+        ux = sx + sigma_w + gap
+        uy = center_y - u_h / 2
+        ax.add_patch(plt.Rectangle((ux, uy), u_w, u_h,
+                                    facecolor=SLIDE7_BLUE, edgecolor=INK, linewidth=1.2))
+        ax.text(ux + u_w / 2, center_y, rf"$\mathbf{{U}}_{idx}$",
+                ha="center", va="center", fontsize=11, color=INK)
 
-        v_x = x + 1.12
-        v_y = 1.96
-        for col in range(4):
-            cell(v_x + col * small_w, v_y, small_w, small_h, "", fill="none", edge=SVDRED)
-        ax.text(v_x + 2 * small_w, 1.35, rf"$v_{idx}^T$", ha="center", va="center", fontsize=15, color=SVDRED)
+        vx = ux + u_w + gap
+        vy = center_y - v_h / 2
+        ax.add_patch(plt.Rectangle((vx, vy), v_w, v_h,
+                                    facecolor=SLIDE7_GREEN, edgecolor=INK, linewidth=1.2))
+        ax.text(vx + v_w / 2, center_y, rf"$\mathbf{{v}}_{idx}^T$",
+                ha="center", va="center", fontsize=11, color=INK)
 
-        ax.text(x + 1.08, 3.00, rf"$\sigma_{idx} u_{idx} v_{idx}^T$", ha="center", va="center", fontsize=15, color=INK)
+        block_w = sigma_w + gap + u_w + gap + v_w
+        ax.text(x_start + block_w / 2, center_y - u_h / 2 - 0.18, "Rang 1",
+                ha="center", va="top", fontsize=13, color=MUTED)
 
-    rank_one_block(3.00, "1")
-    ax.text(5.48, 2.04, "+", ha="center", va="center", fontsize=22, color=MUTED)
-    rank_one_block(5.92, "2")
-    ax.text(8.40, 2.04, "+", ha="center", va="center", fontsize=22, color=MUTED)
-    rank_one_block(8.84, "k")
+        return x_start + block_w
 
-    ax.text(
-        5.92,
-        0.45,
-        r"$A_k = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \dots + \sigma_k u_k v_k^T$",
-        ha="center",
-        va="center",
-        fontsize=19,
-        color=INK,
-    )
+    x = 2.38
+    x = rank1_solid_block(x, "1") + 0.22
+    ax.text(x, center_y, "+", ha="center", va="center", fontsize=22, color=MUTED)
+    x = rank1_solid_block(x + 0.22, "2") + 0.22
+    ax.text(x, center_y, "+", ha="center", va="center", fontsize=22, color=MUTED)
+    rank1_solid_block(x + 0.22, "3")
 
     fig.savefig(OUT_DIR / "rank_approximation.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
@@ -762,6 +758,134 @@ def save_duck_rank_terms():
     plt.close(fig)
 
 
+def save_duck_rank_terms_v4():
+    """Oben: 3 Rang-1-Pixel-Bilder + A3. Unten: sigma·U·V Zerlegung (Rang-1-Diagramm)."""
+    values = duck_matrix().astype(float)
+    u, singular_values, vt = np.linalg.svd(values, full_matrices=True)
+    VGREEN = "#55c63a"
+
+    fig, ax = plt.subplots(figsize=(12.0, 5.0))
+    ax.set_xlim(0, 12.0)
+    ax.set_ylim(0, 5.0)
+    ax.axis("off")
+
+    def draw_grid(mat, x0, y0, cell, stroke="#555"):
+        d = np.clip(np.round(mat), 0, 255).astype(int)
+        for row in range(d.shape[0]):
+            for col in range(d.shape[1]):
+                ax.add_patch(plt.Rectangle(
+                    (x0 + col * cell, y0 - (row + 1) * cell), cell, cell,
+                    facecolor=luminance_to_hex(d[row, col]), edgecolor=stroke, linewidth=0.22))
+
+    def draw_vec(vals, x0, y0, cw, ch, vertical, color):
+        sc = vals / (np.max(np.abs(vals)) or 1)
+        for i, v in enumerate(sc):
+            a = 0.15 + 0.80 * abs(v)
+            xy = (x0, y0 - (i + 1) * ch) if vertical else (x0 + i * cw, y0 - ch)
+            ax.add_patch(plt.Rectangle(xy, cw, ch,
+                                        facecolor=color, alpha=a,
+                                        edgecolor="#333", linewidth=0.22))
+
+    def norm255(mat):
+        lo, hi = mat.min(), mat.max()
+        return (mat - lo) / (hi - lo) * 255 if hi > lo else mat * 0 + 128
+
+    # ── Geometrie ──────────────────────────────────────────────────
+    sigma_w = 0.40
+    u_cw, u_ch = 0.30, 0.10   # U-Spalte: 0.30 breit, 13*0.10=1.30 hoch
+    v_cw, v_ch = 0.10, 0.28   # V-Zeile:  13*0.10=1.30 breit, 0.28 hoch
+    u_h = 13 * u_ch            # 1.30
+    v_w = 13 * v_cw            # 1.30
+    GAP = 0.10
+    u_off = sigma_w + GAP      # 0.50
+    v_off = u_off + u_cw + GAP # 0.90
+    TERM_W = v_off + v_w       # 2.20
+
+    term_cx = [2.40, 5.30, 8.20]               # horizontale Mittelpunkte der Terme
+    term_xs = [cx - TERM_W / 2 for cx in term_cx]  # linke Kanten
+
+    vec_cy = 1.60    # vertikaler Mittelpunkt der unteren Zerlegung
+    duck_y0 = 4.70   # obere Kante der Pixel-Bilder
+    img_t = 1.30     # 13 * 0.10
+    cell_t = 0.10
+
+    components = [singular_values[i] * np.outer(u[:, i], vt[i, :]) for i in range(3)]
+    cumul3 = components[0] + components[1] + components[2]
+
+    # ── Unten: σ·U·V Rang-1-Diagramm ─────────────────────────────
+    for i, tx in enumerate(term_xs):
+        # σ-Box (gelb)
+        ax.add_patch(FancyBboxPatch(
+            (tx, vec_cy - 0.20), sigma_w, 0.40,
+            boxstyle="round,pad=0.025", facecolor=YELLOW, edgecolor="#555", linewidth=1.3))
+        ax.text(tx + sigma_w / 2, vec_cy, rf"$\sigma_{i+1}$",
+                ha="center", va="center", fontsize=10, color=INK, fontweight="bold")
+
+        # U-Spalte (blau)
+        ux = tx + u_off
+        draw_vec(u[:, i], ux, vec_cy + u_h / 2, u_cw, u_ch, True, SVDBLUE)
+        ax.add_patch(plt.Rectangle((ux, vec_cy - u_h / 2), u_cw, u_h,
+                                    facecolor="none", edgecolor=SVDBLUE, linewidth=1.6))
+        ax.text(ux + u_cw / 2, vec_cy, rf"$u_{i+1}$",
+                ha="center", va="center", fontsize=8, color="white", fontweight="bold")
+
+        # V-Zeile (grün)
+        vx = tx + v_off
+        draw_vec(vt[i, :], vx, vec_cy + v_ch / 2, v_cw, v_ch, False, VGREEN)
+        ax.add_patch(plt.Rectangle((vx, vec_cy - v_ch / 2), v_w, v_ch,
+                                    facecolor="none", edgecolor=VGREEN, linewidth=1.6))
+        ax.text(vx + v_w / 2, vec_cy, rf"$v_{i+1}^T$",
+                ha="center", va="center", fontsize=8, color="white", fontweight="bold")
+
+        ax.text(term_cx[i], 0.40, "Rang 1",
+                ha="center", va="center", fontsize=11.5, color=MUTED)
+
+    # "+" zwischen unteren Termen (gleiche x wie oben)
+    for px in [(term_cx[0] + term_cx[1]) / 2, (term_cx[1] + term_cx[2]) / 2]:
+        ax.text(px, vec_cy, "+", ha="center", va="center", fontsize=22, color=MUTED)
+
+    # ── Trennlinie ─────────────────────────────────────────────────
+    ax.plot([0.20, 11.80], [3.00, 3.00], color="#d8d8d8", linewidth=1.2)
+
+    # ── Oben: Rang-1-Pixel-Bilder + A3 ───────────────────────────
+    mid_y = duck_y0 - img_t / 2  # 4.45
+
+    for i, cx in enumerate(term_cx):
+        dx = cx - img_t / 2
+        draw_grid(norm255(components[i]), dx, duck_y0, cell_t)
+        # Neutraler Rahmen (kein Farbcode pro Term)
+        ax.add_patch(plt.Rectangle((dx, duck_y0 - img_t), img_t, img_t,
+                                    facecolor="none", edgecolor="#555", linewidth=1.5))
+        # Farbige Formel-Labels oben: σᵢ gelb, uᵢ blau, vᵢᵀ grün
+        ly = duck_y0 + 0.20
+        ax.text(dx + 0.18, ly, rf"$\sigma_{i+1}$",
+                ha="center", va="bottom", fontsize=11, color=YELLOW)
+        ax.text(dx + 0.58, ly, rf"$u_{i+1}$",
+                ha="center", va="bottom", fontsize=11, color=SVDBLUE)
+        ax.text(dx + 1.00, ly, rf"$v_{i+1}^T$",
+                ha="center", va="bottom", fontsize=11, color=VGREEN)
+        # σ-Wert unter dem Bild
+        ax.text(cx, duck_y0 - img_t - 0.08,
+                rf"$\sigma_{i+1} = {singular_values[i]:.0f}$",
+                ha="center", va="top", fontsize=9, color=MUTED)
+
+    # "+" zwischen Pixel-Bildern (gleiche x wie untere "+")
+    for px in [(term_cx[0] + term_cx[1]) / 2, (term_cx[1] + term_cx[2]) / 2]:
+        ax.text(px, mid_y, "+", ha="center", va="center", fontsize=22, color=MUTED)
+
+    # "=" und A3
+    ax.text(9.65, mid_y, "=", ha="center", va="center", fontsize=22, color=INK)
+    a3x = 10.05
+    draw_grid(norm255(cumul3), a3x, duck_y0, cell_t)
+    ax.add_patch(plt.Rectangle((a3x, duck_y0 - img_t), img_t, img_t,
+                                facecolor="none", edgecolor="#555", linewidth=1.8))
+    ax.text(a3x + img_t / 2, duck_y0 + 0.20, r"$A_3$",
+            ha="center", va="bottom", fontsize=12, color=INK, fontweight="bold")
+
+    fig.savefig(OUT_DIR / "duck_rank_terms_v4.svg", format="svg", bbox_inches="tight", transparent=True)
+    plt.close(fig)
+
+
 def save_duck_svd_first_component_layout():
     values = duck_matrix().astype(float)
     u, singular_values, vt = np.linalg.svd(values, full_matrices=True)
@@ -863,26 +987,10 @@ def save_duck_svd_first_component_layout():
                     ax.text(x + (col + 0.5) * cell, y - (row + 0.5) * cell, label, ha="center", va="center", fontsize=5.7, color=INK)
         ax.text(x + 0.12, y + 0.18, r"$\Sigma$", ha="left", va="center", fontsize=13, color=YELLOW)
 
-    ax.text(0.55, 6.75, "SVD der Entenmatrix: erster Rang-1-Beitrag", ha="left", va="center", fontsize=19, color=INK)
-    draw_pixel_grid(values, 5.25, 6.50, 0.145, stroke="#333")
-    ax.text(6.19, 4.42, rf"$A$ als Pixelmatrix, Rang ${rank}$", ha="center", va="center", fontsize=14, color=MUTED)
-    ax.plot([7.45, 7.45], [4.55, 6.55], color=MUTED, linewidth=2.2)
-    ax.text(7.66, 5.58, rf"Rang {rank}", ha="left", va="center", fontsize=18, color=MUTED)
-
-    ax.add_patch(
-        FancyBboxPatch(
-            (9.15, 4.55),
-            3.95,
-            1.95,
-            boxstyle="round,pad=0.04,rounding_size=0.05",
-            edgecolor="#cfcfcf",
-            facecolor="none",
-            linewidth=1.2,
-            linestyle="--",
-        )
-    )
-    ax.text(11.13, 5.80, "Platz für Erweiterung", ha="center", va="center", fontsize=15, color=MUTED)
-    ax.text(11.13, 5.35, "weitere Ränge oder Slider", ha="center", va="center", fontsize=13, color=MUTED)
+    ax.text(0.55, 6.82, "SVD der Entenmatrix: erster Rang-1-Beitrag", ha="left", va="center", fontsize=19, color=INK)
+    draw_pixel_grid(values, 0.85, 6.40, 0.155, stroke="#333")
+    ax.text(1.86, 4.20, rf"$A$ als Pixelmatrix, Rang ${rank}$", ha="center", va="center", fontsize=14, color=MUTED)
+    ax.text(3.25, 5.36, r"$=$", ha="center", va="center", fontsize=25, color=MUTED)
 
     ax.text(0.55, 4.04, r"$U$", ha="left", va="center", fontsize=16, color=SVDBLUE)
     draw_numeric_matrix(u, 0.55, 3.85, 3.40, 1.90, highlight="col", color=SVDBLUE)
@@ -893,24 +1001,14 @@ def save_duck_svd_first_component_layout():
     draw_numeric_matrix(vt, 7.75, 3.85, 4.55, 1.90, highlight="row", color=SVDRED)
 
     component = singular_values[0] * np.outer(u[:, 0], vt[0, :])
-    ax.text(1.95, 1.92, rf"$\sigma_1={singular_values[0]:.0f}$", ha="center", va="center", fontsize=22, color=INK)
-    draw_pixel_grid(component, 1.30, 1.68, 0.10, stroke="#777", normalize=True)
-    ax.text(1.95, 0.05, r"$\sigma_1 u_1 v_1^T$  (Rang 1, zur Sichtbarkeit skaliert)", ha="center", va="bottom", fontsize=11, color=MUTED)
-
-    ax.add_patch(
-        FancyBboxPatch(
-            (3.70, 0.38),
-            8.85,
-            1.75,
-            boxstyle="round,pad=0.04,rounding_size=0.05",
-            edgecolor="#d8d8d8",
-            facecolor="none",
-            linewidth=1.2,
-            linestyle="--",
-        )
-    )
-    ax.text(8.12, 1.40, "Hier können später weitere Beiträge eingeblendet werden:", ha="center", va="center", fontsize=14, color=MUTED)
-    ax.text(8.12, 0.95, r"$\sigma_2u_2v_2^T,\ \sigma_3u_3v_3^T,\ \dots$", ha="center", va="center", fontsize=16, color=MUTED)
+    ax.text(3.05, 1.18, r"Der erste markierte Spalten-/Zeilenvektor liefert den ersten Bildbaustein:", ha="left", va="center", fontsize=14, color=INK)
+    ax.text(3.05, 0.62, r"$\sigma_1$", ha="left", va="center", fontsize=24, color=YELLOW)
+    ax.text(3.82, 0.62, r"$u_1$", ha="left", va="center", fontsize=24, color=SVDBLUE)
+    ax.text(4.35, 0.62, r"$v_1^T$", ha="left", va="center", fontsize=24, color=SVDRED)
+    ax.text(5.35, 0.62, rf"mit $\sigma_1={singular_values[0]:.0f}$", ha="left", va="center", fontsize=16, color=MUTED)
+    ax.text(9.10, 2.58, r"$\sigma_1 u_1 v_1^T$", ha="center", va="center", fontsize=22, color=INK)
+    draw_pixel_grid(component, 8.12, 2.30, 0.15, stroke="#777", normalize=True)
+    ax.text(9.10, 0.10, "Rang 1, zur Sichtbarkeit skaliert", ha="center", va="bottom", fontsize=11, color=MUTED)
 
     fig.savefig(OUT_DIR / "duck_svd_first_component_layout.svg", format="svg", bbox_inches="tight", transparent=True)
     plt.close(fig)
@@ -924,7 +1022,7 @@ def save_svd_rank_sum_reconstruction():
 
     blue = SVDBLUE      # U   – Deck-Farbschema
     sigma_red = YELLOW  # Σ   – Deck-Farbschema
-    green = SVDRED      # V^T – Deck-Farbschema
+    green = "#55c63a"   # V^T – Deck-Farbschema
     grid = "#666666"
 
     def rect(x, y, w, h, fill="none", edge=INK, lw=1.6):
@@ -1004,17 +1102,26 @@ def save_intro_symbols():
     ax.set_aspect("equal")
     ax.axis("off")
 
-    ax.add_patch(Arc((1.72, 2.42), 1.72, 1.72, theta1=28, theta2=318, linewidth=4.6, color=INK))
-    ax.add_patch(
-        FancyArrowPatch(
-            (2.30, 1.93),
-            (2.50, 1.76),
-            arrowstyle="-|>",
-            mutation_scale=27,
-            linewidth=4.6,
-            color=INK,
-        )
-    )
+    # Rotation glyph: a true circular arc so the arrowhead can be aligned
+    # exactly along the tangent (a Bezier arc3 leaves the head visibly skewed).
+    cx, cy, R = 1.78, 2.15, 1.02
+    head_ang = np.deg2rad(316.0)          # arrowhead sits at lower-right
+    tail_ang = np.deg2rad(46.0)           # open end at upper-right (gap on the right)
+    head_len = 0.42                       # tip length along the tangent
+    head_half_w = 0.29                    # half-width of the arrowhead base
+
+    tang = np.array([-np.sin(head_ang), np.cos(head_ang)])  # CCW travel direction
+    perp = np.array([-tang[1], tang[0]])
+    end_pt = np.array([cx + R * np.cos(head_ang), cy + R * np.sin(head_ang)])
+
+    # Draw the stroke counter-clockwise all the way to the head; the filled
+    # arrowhead (same colour) is overlaid on top so there is no visible seam.
+    ts = np.linspace(tail_ang, head_ang, 240)
+    ax.plot(cx + R * np.cos(ts), cy + R * np.sin(ts), color=INK, lw=4.6, solid_capstyle="round")
+
+    tip = end_pt + tang * (head_len * 0.62)
+    base = end_pt - tang * (head_len * 0.38)
+    ax.add_patch(Polygon([tip, base + perp * head_half_w, base - perp * head_half_w], closed=True, color=INK))
     ax.add_patch(FancyArrowPatch((0.55, 0.72), (3.55, 0.72), arrowstyle="<|-|>", mutation_scale=22, linewidth=4.8, color=INK))
     ax.add_patch(FancyArrowPatch((3.70, 0.95), (3.70, 3.35), arrowstyle="<|-|>", mutation_scale=22, linewidth=4.8, color=INK))
     ax.text(-1.05, 2.42, "Rotieren", fontsize=15, color=MUTED, ha="left", va="center")
@@ -1038,5 +1145,6 @@ if __name__ == "__main__":
     save_rank1_matrix()
     save_rank_approximation()
     save_duck_rank_terms()
+    save_duck_rank_terms_v4()
     save_duck_svd_first_component_layout()
     save_svd_rank_sum_reconstruction()
