@@ -6,8 +6,8 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
 
   <title>Singulärwertzerlegung (SVD)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -174,25 +174,33 @@
 <div class="step-action-slide">
 <p><img data-src="assets/generated/transformation_step_actions.svg" class="step-actions" alt="Vier Zustände mit drei Aktionen: Rotation, Skalierung, Rotation"></p>
 <div class="step-action-matrices">
+<div class="step-action-matrix">
 <p><span class="math display">\[
-{\color{#16a34a}{R_{-90^\circ}}} =
+R_{-90^\circ} =
 \begin{pmatrix}
 0 &amp; 1 \\
 -1 &amp; 0
 \end{pmatrix}
-\qquad
-{\color{#f2aa00}{\Sigma}} =
+\]</span></p>
+</div>
+<div class="step-action-matrix">
+<p><span class="math display">\[
+\Sigma =
 \begin{pmatrix}
 0.45 &amp; 0 \\
 0 &amp; 1
 \end{pmatrix}
-\qquad
-{\color{#1e88ff}{R_{-45^\circ}}} =
+\]</span></p>
+</div>
+<div class="step-action-matrix">
+<p><span class="math display">\[
+R_{-45^\circ} =
 \begin{pmatrix}
-\frac{\sqrt2}{2} &amp; \frac{\sqrt2}{2} \\
--\frac{\sqrt2}{2} &amp; \frac{\sqrt2}{2}
+\tfrac{\sqrt2}{2} &amp; \tfrac{\sqrt2}{2} \\
+-\tfrac{\sqrt2}{2} &amp; \tfrac{\sqrt2}{2}
 \end{pmatrix}
 \]</span></p>
+</div>
 </div>
 <div class="transition-question">
 <p>Doch was hat das mit SVD zu tun?</p>
@@ -208,7 +216,7 @@
 <div class="svd-bridge-text">
 <p>Im Kern ist das das Prinzip der SVD:</p>
 <p><span class="math display">\[
-A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#16a34a}{V^T}}
+A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#55c63a}{V^T}}
 \]</span></p>
 <p>Eine lineare Abbildung wird in drei lesbare Bausteine zerlegt: erst eine Rotation oder Spiegelung, dann eine Skalierung, dann erneut eine Rotation oder Spiegelung.</p>
 <p>Unser Ablauf von der vorherigen Folie ist dabei ein <strong>didaktisches Beispiel im Stil der SVD</strong>. Er zeigt das Grundprinzip, ist aber nicht die kanonische SVD, weil die Singulärwerte dort nach Größe sortiert werden und die stärkste Skalierung zuerst steht.</p>
@@ -217,7 +225,7 @@ A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#16a34a}{V^T}}
 A =
 {\color{#1e88ff}{R_{-45^\circ}}}
 {\color{#f2aa00}{\begin{pmatrix}0.45&amp;0\\0&amp;1\end{pmatrix}}}
-{\color{#16a34a}{R_{-90^\circ}}}
+{\color{#55c63a}{R_{-90^\circ}}}
 \approx
 \begin{pmatrix}
 -0.707 &amp; 0.318 \\
@@ -235,41 +243,51 @@ A =
 </div>
 <div class="dimension-example">
 <p><span class="math display">\[
-\underset{\textstyle {\color{#f2aa00}\Sigma}}{\begin{pmatrix}3&amp;0\\0&amp;2\end{pmatrix}}
-\underset{\textstyle \text{Punkte}}{\begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}}
-=\begin{pmatrix}6&amp;3\\2&amp;4\end{pmatrix}
-\qquad
-\underset{\textstyle {\color{#f2aa00}\Sigma}\ (\sigma_2={\color{#16a34a}0})}{\begin{pmatrix}3&amp;0\\0&amp;{\color{#16a34a}0}\end{pmatrix}}
-\begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}
-=\begin{pmatrix}6&amp;3\\{\color{#16a34a}0}&amp;{\color{#16a34a}0}\end{pmatrix}
+\Sigma=\begin{pmatrix}0.45&amp;0\\0&amp;1\end{pmatrix}\binom{1}{1}=\binom{0.45}{1}
+\qquad\Longrightarrow\qquad
+\begin{pmatrix}{\color{#ff3b35}0}&amp;0\\0&amp;1\end{pmatrix}\binom{1}{1}=\binom{{\color{#ff3b35}0}}{1}
 \]</span></p>
-<p>Links hat <span class="math inline">\({\color{#f2aa00}\Sigma}\)</span> die <strong>Singulärwerte</strong> <span class="math inline">\(\sigma_1=3,\ \sigma_2=2\)</span> — die <strong>Punkte</strong> (je Spalte einer) bleiben in der Fläche. Rechts ist <span class="math inline">\(\sigma_2={\color{#16a34a}0}\)</span>: die ganze <span class="math inline">\(y\)</span>-Zeile wird <span class="math inline">\(0\)</span>, alle Punkte landen auf der Linie <span class="math inline">\(y=0\)</span>.</p>
+<p>Den ersten Eintrag auf <span class="math inline">\({\color{#ff3b35}0}\)</span> setzen löscht die horizontale Richtung — alle Punkte landen auf der <span class="math inline">\(y\)</span>-Achse. <em>(Die Werte stammen direkt aus dem Beispiel der Vorgängerfolie; in der kanonischen SVD wären sie absteigend sortiert.)</em></p>
 </div>
 <div class="dimension-text">
-<p>In der SVD <span class="math inline">\(A={\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}}\)</span> steckt die ganze Streckung in <span class="math inline">\({\color{#f2aa00}{\Sigma}}\)</span>: dort stehen die <strong>Singulärwerte</strong> <span class="math inline">\({\color{#f2aa00}{\sigma_1}}\ge{\color{#f2aa00}{\sigma_2}}\ge\dots\ge 0\)</span>.</p>
-<p>Sie bestimmen die Streckung jeder Richtung. Setzt man den <strong>kleinsten Singulärwert</strong> auf <span class="math inline">\(0\)</span>, entfällt die unwichtigste Richtung.</p>
-<p>Genau das ist Dimensionsreduktion: kleine Singulärwerte weglassen. Dieselbe Idee trägt später die Bildkompression.</p>
+<p>In der SVD <span class="math inline">\(A=U\Sigma{\color{#55c63a}{V^T}}\)</span> steckt die ganze Streckung in <span class="math inline">\(\Sigma\)</span>: dort stehen die <strong>Singulärwerte</strong> <span class="math inline">\(\sigma_1\ge\sigma_2\ge\dots\ge 0\)</span>.</p>
+<p>Sie bestimmen, wie stark jede Richtung gewichtet wird. Einen Eintrag auf <span class="math inline">\(0\)</span> zu setzen entfernt die zugehörige Richtung vollständig — aus einer Fläche wird eine Linie.</p>
+<p>Genau das ist Dimensionsreduktion: unwichtige Richtungen weglassen. Dieselbe Idee trägt später die Bildkompression.</p>
 </div>
 </div>
 </section>
 <section id="rang-1-matrix" class="slide level2">
 <h2>Rang-1-Matrix</h2>
 <div class="rank1-slide">
+<div class="rank1-top">
 <div class="rank1-visual">
 <p><img data-src="assets/generated/rank1_matrix.svg" class="rank1-matrix" alt="Eine Rang-1-Matrix wird als Spaltenvektor mal Zeilenvektor dargestellt"></p>
 </div>
-<div class="rank1-text">
-<p>Diese Matrix wirkt zuerst wie 16 einzelne Zahlen. Tatsächlich steckt aber viel weniger unabhängige Information darin.</p>
-<p>Alle Zeilen sind Vielfache der ersten Zeile:</p>
-<p><span class="math display">\[
-(1,2,3,4),\quad -(1,2,3,4),\quad 2(1,2,3,4),\quad 10(1,2,3,4).
-\]</span></p>
-<p>Die Matrix hat also vier Zeilen und vier Spalten, aber nur <strong>eine unabhängige Richtung</strong>. Deshalb ist ihr Rang gleich <span class="math inline">\(1\)</span>.</p>
-<p>Statt 16 Zahlen speichern wir nur zwei Vektoren mit insgesamt 8 Zahlen:</p>
-<p><span class="math display">\[
-A = {\color{#1e88ff}{u}}\,{\color{#16a34a}{v^T}}.
-\]</span></p>
+<div class="rank1-formula">
+<p><span class="math display">\[A = {\color{#19a7ff}{u}}\,{\color{#55c63a}{v^T}}\]</span></p>
 </div>
+</div>
+<div class="rank1-desc">
+<p>Die 4×4-Matrix links enthält 16 Zahlen. Sie lässt sich exakt als Produkt zweier Vektoren schreiben: ein <strong>blauer Spaltenvektor</strong> (4 Zahlen) multipliziert mit einem <strong>grünen Zeilenvektor</strong> (4 Zahlen) — zusammen nur 8 statt 16 Zahlen, mit identischem Ergebnis.</p>
+</div>
+<div class="rank1-text">
+<p><strong>Lineare Abhängigkeit</strong> — Zeilen, die sich als Vielfache einer anderen schreiben lassen, liefern keine neue Information. Alle vier Zeilen dieser Matrix zeigen in dieselbe Richtung.</p>
+<p><strong>Zeilenraum</strong> — Der Raum aller Linearkombinationen der Zeilen heißt Zeilenraum. Obwohl die Matrix 4×4 groß ist, spannen die Zeilen nur eine einzige Linie auf — der Zeilenraum hat Dimension 1.</p>
+<p><strong>Rang</strong> — Die Dimension des Zeilenraums heißt Rang. Diese Matrix hat Rang 1, nicht Rang 4. Der Rang beschreibt nicht die Größe der Matrix, sondern wie viele Zeilen wirklich unabhängig sind.</p>
+</div>
+<aside class="notes">
+<p>Die vier Zeilen lauten <span class="math inline">\((1,2,3,4)\)</span>, <span class="math inline">\(-(1,2,3,4)\)</span>, <span class="math inline">\(2(1,2,3,4)\)</span> und <span class="math inline">\(10(1,2,3,4)\)</span> — alle skalieren denselben Zeilenvektor. Das ist das Paradebeispiel für lineare Abhängigkeit: keine der anderen drei Zeilen fügt eine neue Richtung hinzu. In späteren Folien kommt zu jedem Rang-1-Term noch ein Singulärwert <span class="math inline">\(\sigma_i\)</span> dazu.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="höherer-rang-summe-aus-rang-1-matrizen" class="slide level2">
@@ -278,12 +296,12 @@ A = {\color{#1e88ff}{u}}\,{\color{#16a34a}{v^T}}.
 <div class="rank-approx-visual">
 <p><img data-src="assets/generated/rank_approximation.svg" class="rank-approx" alt="Eine Matrix mit höherem Rang wird durch mehrere Rang-1-Matrizen angenähert"></p>
 </div>
+<div class="rank-approx-formula">
+<p><span class="math display">\[A_k = {\color{#f2aa00}{\sigma_1}} {\color{#19a7ff}{u_1}} {\color{#55c63a}{v_1^T}} + {\color{#f2aa00}{\sigma_2}} {\color{#19a7ff}{u_2}} {\color{#55c63a}{v_2^T}} + \dots + {\color{#f2aa00}{\sigma_k}} {\color{#19a7ff}{u_k}} {\color{#55c63a}{v_k^T}}\]</span></p>
+</div>
 <div class="rank-approx-text">
 <p>Bei einer Matrix mit Rang <span class="math inline">\(4\)</span> sind die Zeilen nicht mehr alle Vielfache voneinander. Die einfache Zerlegung aus der vorherigen Folie reicht dann nicht mehr aus.</p>
 <p>Das Grundprinzip bleibt aber gleich: Wir beschreiben die Matrix als Summe mehrerer Rang-1-Matrizen.</p>
-<p><span class="math display">\[
-A_k = {\color{#f2aa00}{\sigma_1}}{\color{#1e88ff}{u_1}}{\color{#16a34a}{v_1^T}} + {\color{#f2aa00}{\sigma_2}}{\color{#1e88ff}{u_2}}{\color{#16a34a}{v_2^T}} + \dots + {\color{#f2aa00}{\sigma_k}}{\color{#1e88ff}{u_k}}{\color{#16a34a}{v_k^T}}
-\]</span></p>
 <p>Für <span class="math inline">\(k=r\)</span> ist das die vollständige Zerlegung. Für <span class="math inline">\(k&lt;r\)</span> entsteht eine Näherung: Je mehr Bausteine wir addieren, desto genauer wird sie. Für Kompression speichern wir nur die wichtigsten Bausteine und lassen kleine Beiträge weg.</p>
 </div>
 </div>
@@ -297,24 +315,24 @@ A_k = {\color{#f2aa00}{\sigma_1}}{\color{#1e88ff}{u_1}}{\color{#16a34a}{v_1^T}} 
 A =
 {\color{#1e88ff}{U}}
 {\color{#f2aa00}{\Sigma}}
-{\color{#16a34a}{V^T}}
+{\color{#55c63a}{V^T}}
 \]</span></p>
 <p>ist gleichbedeutend mit einer Summe aus einzelnen Rang-1-Matrizen:</p>
 <p><span class="math display">\[
 A =
 {\color{#f2aa00}{\sigma_1}}
 {\color{#1e88ff}{u_1}}
-{\color{#16a34a}{v_1^T}}
+{\color{#55c63a}{v_1^T}}
 +
 {\color{#f2aa00}{\sigma_2}}
 {\color{#1e88ff}{u_2}}
-{\color{#16a34a}{v_2^T}}
+{\color{#55c63a}{v_2^T}}
 +
 \dots
 +
 {\color{#f2aa00}{\sigma_r}}
 {\color{#1e88ff}{u_r}}
-{\color{#16a34a}{v_r^T}}.
+{\color{#55c63a}{v_r^T}}.
 \]</span></p>
 </div>
 <div class="svd-sum-bottom">
@@ -332,7 +350,7 @@ Gewichtung aus <span class="math inline">\(\Sigma\)</span></p>
 <div class="sum-times">
 <p><span class="math inline">\(\times\)</span></p>
 </div>
-<div class="sum-piece red-piece">
+<div class="sum-piece green-piece">
 <p><span class="math inline">\(v_i^T\)</span><br>
 Zeile aus <span class="math inline">\(V^T\)</span></p>
 </div>
@@ -351,8 +369,8 @@ Zeile aus <span class="math inline">\(V^T\)</span></p>
 <p><img data-src="assets/generated/svd_rank_sum_reconstruction.svg" class="rank-sum-reconstruction" alt="SVD als Produkt A gleich U Sigma V transponiert und als Summe von vier Rang-1-Beiträgen"></p>
 </div>
 <div class="reconstruction-caption">
-<p><span class="math inline">\({\color{#1e88ff}{u_i}}\)</span> — Spalten von <span class="math inline">\(U\)</span> · <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> — Singulärwerte in <span class="math inline">\(\Sigma\)</span> · <span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span> — Zeilen von <span class="math inline">\(V^T\)</span></p>
-<p>Jeder Block <span class="math inline">\({\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}\)</span> unten ist eine <strong>Rang-1-Matrix</strong>; aufsummiert ergeben sie genau die Produktform oben.</p>
+<p><span class="math inline">\({\color{#1e88ff}{u_i}}\)</span> — Spalten von <span class="math inline">\(U\)</span> · <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> — Singulärwerte in <span class="math inline">\(\Sigma\)</span> · <span class="math inline">\({\color{#55c63a}{v_i^T}}\)</span> — Zeilen von <span class="math inline">\(V^T\)</span></p>
+<p>Jeder Block <span class="math inline">\({\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#55c63a}{v_i^T}}\)</span> unten ist eine <strong>Rang-1-Matrix</strong>; aufsummiert ergeben sie genau die Produktform oben.</p>
 </div>
 </section>
 <section id="bild-als-matrix" class="slide level2">
@@ -365,11 +383,10 @@ Zeile aus <span class="math inline">\(V^T\)</span></p>
 <p>Bis hierhin haben wir Matrizen als Summen von Rang-1-Beiträgen betrachtet. Jetzt wenden wir genau diese Idee auf ein Bild an.</p>
 <p>Ein Graustufenbild ist nichts anderes als eine Matrix <span class="math inline">\(A\)</span>: Jeder Eintrag ist ein Pixelwert zwischen <span class="math inline">\(0\)</span> und <span class="math inline">\(255\)</span>.</p>
 <p><span class="math display">\[
-A = {\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}},
+A = U\Sigma V^T,
 \]</span></p>
 <p>zerlegt diese Pixelmatrix in geordnete Bildbausteine.</p>
 <p>Die größten Singulärwerte beschreiben die wichtigsten Strukturen der Ente. Für die Kompression speichern wir nur diese stärksten Beiträge und lassen kleinere Details weg.</p>
-<p>Auf der nächsten Folie sieht man diese Beiträge einzeln.</p>
 </div>
 </div>
 </section>
@@ -381,9 +398,12 @@ A = {\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}},
 </section>
 <section id="rang-1-beiträge-der-ente" class="slide level2">
 <h2>Rang-1-Beiträge der Ente</h2>
-<div class="duck-rank-terms-slide">
-<div class="duck-rank-terms-visual">
-<p><img data-src="assets/generated/duck_rank_terms_v3.svg" class="duck-rank-terms" alt="Oben werden die ersten drei Rang-1-Beiträge der Ente zur Rekonstruktion A3 aufsummiert; darunter ist jeder Beitrag in Spaltenvektor u, Singulärwert sigma und Zeilenvektor v transponiert zerlegt"></p>
+<div class="duck-rank-v4-slide">
+<div class="duck-rank-v4-visual">
+<p><img data-src="assets/generated/duck_rank_terms_v4.svg" class="duck-rank-v4-img" alt="Links die drei einzelnen Rang-1-Beiträge der Ente mit farbigen Beschriftungen; rechts die kumulierten Bilder A1, A2, A3 mit zugehöriger Formel"></p>
+</div>
+<div class="duck-rank-v4-caption">
+<p>Jeder Rang-1-Term <span class="math inline">\(\sigma_i u_i v_i^T\)</span> ergibt ein eigenes Muster (oben). Unten: der Singulärwert <span class="math inline">\(\sigma_i\)</span> (gelb) gewichtet das äußere Produkt <span class="math inline">\(u_i v_i^T\)</span> — ein Spaltenvektor mal einem Zeilenvektor. Die Summe <span class="math inline">\(A_3 = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \sigma_3 u_3 v_3^T\)</span> ist akkurat berechnet und individuell auf <span class="math inline">\([0,255]\)</span> skaliert.</p>
 </div>
 </div>
 </section>
@@ -393,14 +413,14 @@ A = {\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}},
 <div class="rank-explanation">
 <p>Bei einem Bild ist <span class="math inline">\(A\)</span> die Matrix der Pixelwerte.</p>
 <p><span class="math display">\[
-A_k = \sum_{i=1}^{k} {\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
+A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 \]</span></p>
 <p>Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, verlieren aber Details; größere Ränge nähern sich der Originalmatrix an.</p>
 </div>
 <div class="svd-rank-demo">
   <div class="rank-control">
     <label>Rang k = <strong data-role="rank-label">1</strong></label>
-    <input data-role="rank-slider" type="range" min="1" max="13" value="1" step="1">
+    <input data-role="rank-slider" type="range" min="1" max="11" value="1" step="1">
     <span data-role="storage-label"></span>
   </div>
   <div class="rank-grids">
@@ -422,8 +442,7 @@ A_k = \sum_{i=1}^{k} {\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#1
 <div class="rank-explanation">
 <p>Bei einem hochaufgelösten Bild wird die Pixelmatrix deutlich größer. Ein Originalbild mit <span class="math inline">\(m\)</span> Zeilen und <span class="math inline">\(n\)</span> Spalten speichert ungefähr <span class="math inline">\(m\cdot n\)</span> Helligkeitswerte.</p>
 <p><span class="math display">\[
-\text{Original: } m\cdot n
-\qquad
+\text{Original: } m\cdot n \\
 \text{Rang-}k\text{: } k(m+n+1)
 \]</span></p>
 <p>Bei hoher Auflösung lohnt sich diese Speicherung stärker: Für kleine <span class="math inline">\(k\)</span> behalten wir nur wenige wichtige Bildmuster, sparen aber sehr viele Pixelwerte ein.</p>

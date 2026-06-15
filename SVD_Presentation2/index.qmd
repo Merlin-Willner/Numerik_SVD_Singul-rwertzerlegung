@@ -65,25 +65,35 @@ Bevor wir Bilder komprimieren, betrachten wir ein Rätsel: Wie kommt man nur dur
 ![](assets/generated/transformation_step_actions.svg){.step-actions fig-alt="Vier Zustände mit drei Aktionen: Rotation, Skalierung, Rotation"}
 
 ::: {.step-action-matrices}
+::: {.step-action-matrix}
 $$
-{\color{#16a34a}{R_{-90^\circ}}} =
+R_{-90^\circ} =
 \begin{pmatrix}
 0 & 1 \\
 -1 & 0
 \end{pmatrix}
-\qquad
-{\color{#f2aa00}{\Sigma}} =
+$$
+:::
+
+::: {.step-action-matrix}
+$$
+\Sigma =
 \begin{pmatrix}
 0.45 & 0 \\
 0 & 1
 \end{pmatrix}
-\qquad
-{\color{#1e88ff}{R_{-45^\circ}}} =
+$$
+:::
+
+::: {.step-action-matrix}
+$$
+R_{-45^\circ} =
 \begin{pmatrix}
-\frac{\sqrt2}{2} & \frac{\sqrt2}{2} \\
--\frac{\sqrt2}{2} & \frac{\sqrt2}{2}
+\tfrac{\sqrt2}{2} & \tfrac{\sqrt2}{2} \\
+-\tfrac{\sqrt2}{2} & \tfrac{\sqrt2}{2}
 \end{pmatrix}
 $$
+:::
 :::
 
 ::: {.transition-question}
@@ -103,7 +113,7 @@ Doch was hat das mit SVD zu tun?
 Im Kern ist das das Prinzip der SVD:
 
 $$
-A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#16a34a}{V^T}}
+A = {\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#55c63a}{V^T}}
 $$
 
 Eine lineare Abbildung wird in drei lesbare Bausteine zerlegt: erst eine Rotation oder Spiegelung, dann eine Skalierung, dann erneut eine Rotation oder Spiegelung.
@@ -116,7 +126,7 @@ $$
 A =
 {\color{#1e88ff}{R_{-45^\circ}}}
 {\color{#f2aa00}{\begin{pmatrix}0.45&0\\0&1\end{pmatrix}}}
-{\color{#16a34a}{R_{-90^\circ}}}
+{\color{#55c63a}{R_{-90^\circ}}}
 \approx
 \begin{pmatrix}
 -0.707 & 0.318 \\
@@ -137,24 +147,20 @@ $$
 
 ::: {.dimension-example}
 $$
-\underset{\textstyle {\color{#f2aa00}\Sigma}}{\begin{pmatrix}3&0\\0&2\end{pmatrix}}
-\underset{\textstyle \text{Punkte}}{\begin{pmatrix}2&1\\1&2\end{pmatrix}}
-=\begin{pmatrix}6&3\\2&4\end{pmatrix}
-\qquad
-\underset{\textstyle {\color{#f2aa00}\Sigma}\ (\sigma_2={\color{#16a34a}0})}{\begin{pmatrix}3&0\\0&{\color{#16a34a}0}\end{pmatrix}}
-\begin{pmatrix}2&1\\1&2\end{pmatrix}
-=\begin{pmatrix}6&3\\{\color{#16a34a}0}&{\color{#16a34a}0}\end{pmatrix}
+\Sigma=\begin{pmatrix}0.45&0\\0&1\end{pmatrix}\binom{1}{1}=\binom{0.45}{1}
+\qquad\Longrightarrow\qquad
+\begin{pmatrix}{\color{#ff3b35}0}&0\\0&1\end{pmatrix}\binom{1}{1}=\binom{{\color{#ff3b35}0}}{1}
 $$
 
-Links hat ${\color{#f2aa00}\Sigma}$ die **Singulärwerte** $\sigma_1=3,\ \sigma_2=2$ — die **Punkte** (je Spalte einer) bleiben in der Fläche. Rechts ist $\sigma_2={\color{#16a34a}0}$: die ganze $y$-Zeile wird $0$, alle Punkte landen auf der Linie $y=0$.
+Den ersten Eintrag auf ${\color{#ff3b35}0}$ setzen löscht die horizontale Richtung — alle Punkte landen auf der $y$-Achse. *(Die Werte stammen direkt aus dem Beispiel der Vorgängerfolie; in der kanonischen SVD wären sie absteigend sortiert.)*
 :::
 
 ::: {.dimension-text}
-In der SVD $A={\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}}$ steckt die ganze Streckung in ${\color{#f2aa00}{\Sigma}}$: dort stehen die **Singulärwerte** ${\color{#f2aa00}{\sigma_1}}\ge{\color{#f2aa00}{\sigma_2}}\ge\dots\ge 0$.
+In der SVD $A=U\Sigma{\color{#55c63a}{V^T}}$ steckt die ganze Streckung in $\Sigma$: dort stehen die **Singulärwerte** $\sigma_1\ge\sigma_2\ge\dots\ge 0$.
 
-Sie bestimmen die Streckung jeder Richtung. Setzt man den **kleinsten Singulärwert** auf $0$, entfällt die unwichtigste Richtung.
+Sie bestimmen, wie stark jede Richtung gewichtet wird. Einen Eintrag auf $0$ zu setzen entfernt die zugehörige Richtung vollständig — aus einer Fläche wird eine Linie.
 
-Genau das ist Dimensionsreduktion: kleine Singulärwerte weglassen. Dieselbe Idee trägt später die Bildkompression.
+Genau das ist Dimensionsreduktion: unwichtige Richtungen weglassen. Dieselbe Idee trägt später die Bildkompression.
 :::
 
 :::
@@ -163,26 +169,30 @@ Genau das ist Dimensionsreduktion: kleine Singulärwerte weglassen. Dieselbe Ide
 
 ::: {.rank1-slide}
 
+::: {.rank1-top}
 ::: {.rank1-visual}
 ![](assets/generated/rank1_matrix.svg){.rank1-matrix fig-alt="Eine Rang-1-Matrix wird als Spaltenvektor mal Zeilenvektor dargestellt"}
 :::
 
+::: {.rank1-formula}
+$$A = {\color{#19a7ff}{u}}\,{\color{#55c63a}{v^T}}$$
+:::
+:::
+
+::: {.rank1-desc}
+Die 4×4-Matrix links enthält 16 Zahlen. Sie lässt sich exakt als Produkt zweier Vektoren schreiben: ein **blauer Spaltenvektor** (4 Zahlen) multipliziert mit einem **grünen Zeilenvektor** (4 Zahlen) — zusammen nur 8 statt 16 Zahlen, mit identischem Ergebnis.
+:::
+
 ::: {.rank1-text}
-Diese Matrix wirkt zuerst wie 16 einzelne Zahlen. Tatsächlich steckt aber viel weniger unabhängige Information darin.
+**Lineare Abhängigkeit** — Zeilen, die sich als Vielfache einer anderen schreiben lassen, liefern keine neue Information. Alle vier Zeilen dieser Matrix zeigen in dieselbe Richtung.
 
-Alle Zeilen sind Vielfache der ersten Zeile:
+**Zeilenraum** — Der Raum aller Linearkombinationen der Zeilen heißt Zeilenraum. Obwohl die Matrix 4×4 groß ist, spannen die Zeilen nur eine einzige Linie auf — der Zeilenraum hat Dimension 1.
 
-$$
-(1,2,3,4),\quad -(1,2,3,4),\quad 2(1,2,3,4),\quad 10(1,2,3,4).
-$$
+**Rang** — Die Dimension des Zeilenraums heißt Rang. Diese Matrix hat Rang 1, nicht Rang 4. Der Rang beschreibt nicht die Größe der Matrix, sondern wie viele Zeilen wirklich unabhängig sind.
+:::
 
-Die Matrix hat also vier Zeilen und vier Spalten, aber nur **eine unabhängige Richtung**. Deshalb ist ihr Rang gleich $1$.
-
-Statt 16 Zahlen speichern wir nur zwei Vektoren mit insgesamt 8 Zahlen:
-
-$$
-A = {\color{#1e88ff}{u}}\,{\color{#16a34a}{v^T}}.
-$$
+::: {.notes}
+Die vier Zeilen lauten $(1,2,3,4)$, $-(1,2,3,4)$, $2(1,2,3,4)$ und $10(1,2,3,4)$ — alle skalieren denselben Zeilenvektor. Das ist das Paradebeispiel für lineare Abhängigkeit: keine der anderen drei Zeilen fügt eine neue Richtung hinzu. In späteren Folien kommt zu jedem Rang-1-Term noch ein Singulärwert $\sigma_i$ dazu.
 :::
 
 :::
@@ -195,14 +205,14 @@ $$
 ![](assets/generated/rank_approximation.svg){.rank-approx fig-alt="Eine Matrix mit höherem Rang wird durch mehrere Rang-1-Matrizen angenähert"}
 :::
 
+::: {.rank-approx-formula}
+$$A_k = {\color{#f2aa00}{\sigma_1}} {\color{#19a7ff}{u_1}} {\color{#55c63a}{v_1^T}} + {\color{#f2aa00}{\sigma_2}} {\color{#19a7ff}{u_2}} {\color{#55c63a}{v_2^T}} + \dots + {\color{#f2aa00}{\sigma_k}} {\color{#19a7ff}{u_k}} {\color{#55c63a}{v_k^T}}$$
+:::
+
 ::: {.rank-approx-text}
 Bei einer Matrix mit Rang $4$ sind die Zeilen nicht mehr alle Vielfache voneinander. Die einfache Zerlegung aus der vorherigen Folie reicht dann nicht mehr aus.
 
 Das Grundprinzip bleibt aber gleich: Wir beschreiben die Matrix als Summe mehrerer Rang-1-Matrizen.
-
-$$
-A_k = {\color{#f2aa00}{\sigma_1}}{\color{#1e88ff}{u_1}}{\color{#16a34a}{v_1^T}} + {\color{#f2aa00}{\sigma_2}}{\color{#1e88ff}{u_2}}{\color{#16a34a}{v_2^T}} + \dots + {\color{#f2aa00}{\sigma_k}}{\color{#1e88ff}{u_k}}{\color{#16a34a}{v_k^T}}
-$$
 
 Für $k=r$ ist das die vollständige Zerlegung. Für $k<r$ entsteht eine Näherung: Je mehr Bausteine wir addieren, desto genauer wird sie. Für Kompression speichern wir nur die wichtigsten Bausteine und lassen kleine Beiträge weg.
 :::
@@ -220,7 +230,7 @@ $$
 A =
 {\color{#1e88ff}{U}}
 {\color{#f2aa00}{\Sigma}}
-{\color{#16a34a}{V^T}}
+{\color{#55c63a}{V^T}}
 $$
 
 ist gleichbedeutend mit einer Summe aus einzelnen Rang-1-Matrizen:
@@ -229,17 +239,17 @@ $$
 A =
 {\color{#f2aa00}{\sigma_1}}
 {\color{#1e88ff}{u_1}}
-{\color{#16a34a}{v_1^T}}
+{\color{#55c63a}{v_1^T}}
 +
 {\color{#f2aa00}{\sigma_2}}
 {\color{#1e88ff}{u_2}}
-{\color{#16a34a}{v_2^T}}
+{\color{#55c63a}{v_2^T}}
 +
 \dots
 +
 {\color{#f2aa00}{\sigma_r}}
 {\color{#1e88ff}{u_r}}
-{\color{#16a34a}{v_r^T}}.
+{\color{#55c63a}{v_r^T}}.
 $$
 :::
 
@@ -262,7 +272,7 @@ Gewichtung aus $\Sigma$
 $\times$
 :::
 
-::: {.sum-piece .red-piece}
+::: {.sum-piece .green-piece}
 $v_i^T$  
 Zeile aus $V^T$
 :::
@@ -285,9 +295,9 @@ Dieselbe Zerlegung in zwei Sichtweisen: oben als **Produkt** $A=U\Sigma V^T$, un
 :::
 
 ::: {.reconstruction-caption}
-${\color{#1e88ff}{u_i}}$ — Spalten von $U$ · ${\color{#f2aa00}{\sigma_i}}$ — Singulärwerte in $\Sigma$ · ${\color{#16a34a}{v_i^T}}$ — Zeilen von $V^T$
+${\color{#1e88ff}{u_i}}$ — Spalten von $U$ · ${\color{#f2aa00}{\sigma_i}}$ — Singulärwerte in $\Sigma$ · ${\color{#55c63a}{v_i^T}}$ — Zeilen von $V^T$
 
-Jeder Block ${\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}$ unten ist eine **Rang-1-Matrix**; aufsummiert ergeben sie genau die Produktform oben.
+Jeder Block ${\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#55c63a}{v_i^T}}$ unten ist eine **Rang-1-Matrix**; aufsummiert ergeben sie genau die Produktform oben.
 :::
 
 ## Bild als Matrix
@@ -303,14 +313,12 @@ Bis hierhin haben wir Matrizen als Summen von Rang-1-Beiträgen betrachtet. Jetz
 Ein Graustufenbild ist nichts anderes als eine Matrix $A$: Jeder Eintrag ist ein Pixelwert zwischen $0$ und $255$.
 
 $$
-A = {\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}},
+A = U\Sigma V^T,
 $$
 
 zerlegt diese Pixelmatrix in geordnete Bildbausteine.
 
 Die größten Singulärwerte beschreiben die wichtigsten Strukturen der Ente. Für die Kompression speichern wir nur diese stärksten Beiträge und lassen kleinere Details weg.
-
-Auf der nächsten Folie sieht man diese Beiträge einzeln.
 :::
 
 :::
@@ -323,10 +331,14 @@ Auf der nächsten Folie sieht man diese Beiträge einzeln.
 
 ## Rang-1-Beiträge der Ente
 
-::: {.duck-rank-terms-slide}
+::: {.duck-rank-v4-slide}
 
-::: {.duck-rank-terms-visual}
-![](assets/generated/duck_rank_terms_v3.svg){.duck-rank-terms fig-alt="Oben werden die ersten drei Rang-1-Beiträge der Ente zur Rekonstruktion A3 aufsummiert; darunter ist jeder Beitrag in Spaltenvektor u, Singulärwert sigma und Zeilenvektor v transponiert zerlegt"}
+::: {.duck-rank-v4-visual}
+![](assets/generated/duck_rank_terms_v4.svg){.duck-rank-v4-img fig-alt="Links die drei einzelnen Rang-1-Beiträge der Ente mit farbigen Beschriftungen; rechts die kumulierten Bilder A1, A2, A3 mit zugehöriger Formel"}
+:::
+
+::: {.duck-rank-v4-caption}
+Jeder Rang-1-Term $\sigma_i u_i v_i^T$ ergibt ein eigenes Muster (oben). Unten: der Singulärwert $\sigma_i$ (gelb) gewichtet das äußere Produkt $u_i v_i^T$ — ein Spaltenvektor mal einem Zeilenvektor. Die Summe $A_3 = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + \sigma_3 u_3 v_3^T$ ist akkurat berechnet und individuell auf $[0,255]$ skaliert.
 :::
 
 :::
@@ -339,7 +351,7 @@ Auf der nächsten Folie sieht man diese Beiträge einzeln.
 Bei einem Bild ist $A$ die Matrix der Pixelwerte.
 
 $$
-A_k = \sum_{i=1}^{k} {\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
+A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 $$
 
 Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, verlieren aber Details; größere Ränge nähern sich der Originalmatrix an.
@@ -349,7 +361,7 @@ Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, ve
 <div class="svd-rank-demo">
   <div class="rank-control">
     <label>Rang k = <strong data-role="rank-label">1</strong></label>
-    <input data-role="rank-slider" type="range" min="1" max="13" value="1" step="1">
+    <input data-role="rank-slider" type="range" min="1" max="11" value="1" step="1">
     <span data-role="storage-label"></span>
   </div>
   <div class="rank-grids">
@@ -375,8 +387,7 @@ Mit jedem Rang kommt ein weiteres Muster dazu. Kleine Ränge speichern wenig, ve
 Bei einem hochaufgelösten Bild wird die Pixelmatrix deutlich größer. Ein Originalbild mit $m$ Zeilen und $n$ Spalten speichert ungefähr $m\cdot n$ Helligkeitswerte.
 
 $$
-\text{Original: } m\cdot n
-\qquad
+\text{Original: } m\cdot n \\
 \text{Rang-}k\text{: } k(m+n+1)
 $$
 
@@ -406,6 +417,7 @@ Je höher wir $k$ wählen, desto mehr Details, Kanten und feine Kontraste kommen
 ```
 
 :::
+
 
 ## Was war beim Einstein-Bild überraschend?
 
