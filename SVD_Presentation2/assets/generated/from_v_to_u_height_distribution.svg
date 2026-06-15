@@ -39,7 +39,7 @@
 
   <!-- Av_i -->
   <g transform="translate(292 36)">
-    <rect class="card" x="0" y="0" width="152" height="178" rx="6"/>
+    <rect class="card" x="0" y="0" width="152" height="200" rx="6"/>
     <text class="serif u" x="56" y="29" font-size="19">Avᵢ</text>
     <text class="serif muted" x="35" y="51" font-size="13">Höhenantwort</text>
     <g transform="translate(59 65)">
@@ -50,7 +50,7 @@
       <rect class="cell-light" x="0" y="72" width="34" height="18"/><text class="serif ink" x="13" y="86" font-size="11">0</text>
       <rect class="cell-light" x="0" y="90" width="34" height="18"/><text class="serif ink" x="13" y="104" font-size="11">0</text>
     </g>
-    <text class="serif sigma" x="25" y="160" font-size="13">Form + Skalierung</text>
+    <text class="serif sigma" x="25" y="190" font-size="13">Form + Skalierung</text>
   </g>
 
   <path class="arrow" d="M460 124 L520 124"/>
@@ -70,7 +70,7 @@
 
   <!-- u_i -->
   <g transform="translate(806 36)">
-    <rect class="card" x="0" y="0" width="152" height="178" rx="6"/>
+    <rect class="card" x="0" y="0" width="152" height="200" rx="6"/>
     <text class="serif u" x="64" y="29" font-size="19">uᵢ</text>
     <text class="serif muted" x="22" y="51" font-size="13">normierte Höhenverteilung</text>
     <g transform="translate(54 65)">
@@ -81,7 +81,7 @@
       <rect class="cell-light" x="0" y="72" width="44" height="18"/><text class="serif ink" x="19" y="86" font-size="11">0</text>
       <rect class="cell-light" x="0" y="90" width="44" height="18"/><text class="serif ink" x="19" y="104" font-size="11">0</text>
     </g>
-    <text class="serif u" x="49" y="160" font-size="13">||uᵢ|| = 1</text>
+    <text class="serif u" x="49" y="190" font-size="13">||uᵢ|| = 1</text>
   </g>
 
   <!-- Rechnung -->

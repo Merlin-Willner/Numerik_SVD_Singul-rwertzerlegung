@@ -152,7 +152,7 @@ Links hat ${\color{#f2aa00}\Sigma}$ die **Singulärwerte** $\sigma_1=3,\ \sigma_
 ::: {.dimension-text}
 In der SVD $A={\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}}$ steckt die ganze Streckung in ${\color{#f2aa00}{\Sigma}}$: dort stehen die **Singulärwerte** ${\color{#f2aa00}{\sigma_1}}\ge{\color{#f2aa00}{\sigma_2}}\ge\dots\ge 0$.
 
-Sie bestimmen die Streckung jeder Richtung. Der **kleinste Singulärwert** $=0$ entfernt die unwichtigste Richtung.
+Sie bestimmen die Streckung jeder Richtung. Setzt man den **kleinsten Singulärwert** auf $0$, entfällt die unwichtigste Richtung.
 
 Genau das ist Dimensionsreduktion: kleine Singulärwerte weglassen. Dieselbe Idee trägt später die Bildkompression.
 :::

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 270" role="img" aria-label="Aus Spaltenmuster, Höhenverteilung und Stärke entsteht ein SVD-Bildbaustein">
-  <rect width="980" height="270" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 284" role="img" aria-label="Aus Spaltenmuster, Höhenverteilung und Stärke entsteht ein SVD-Bildbaustein">
+  <rect width="980" height="284" fill="#ffffff"/>
   <defs>
     <style>
       .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
@@ -81,5 +81,5 @@
     <text class="serif muted" x="35" y="224" font-size="12">vertikaler Bildanteil</text>
   </g>
 
-  <text class="serif muted" x="44" y="250" font-size="13">σᵢ skaliert die Form uᵢvᵢᵀ zum sichtbaren Bildbaustein.</text>
+  <text class="serif muted" x="44" y="274" font-size="13">σᵢ skaliert die Form uᵢvᵢᵀ zum sichtbaren Bildbaustein.</text>
 </svg>
