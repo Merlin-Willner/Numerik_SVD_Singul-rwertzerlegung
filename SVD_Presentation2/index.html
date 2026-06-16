@@ -475,6 +475,121 @@ A_k = \sum_{i=1}^{k} \sigma_i u_i v_i^T.
 </div>
 </div>
 </section>
+<section id="beispiel-svd-einer-3-matrix" class="slide level2">
+<h2>Beispiel: SVD einer (3)-Matrix</h2>
+<div class="worked-svd-slide">
+<div class="worked-svd-input worked-svd-block">
+<p><strong>Gegeben</strong></p>
+<p><span class="math display">\[
+A=
+\begin{pmatrix}
+1&amp;2&amp;0\\
+1&amp;-2&amp;0\\
+0&amp;0&amp;3
+\end{pmatrix}
+\]</span></p>
+<p><strong>1. (A^TA) berechnen</strong></p>
+<p><span class="math display">\[
+A^TA=
+\begin{pmatrix}
+1&amp;1&amp;0\\
+2&amp;-2&amp;0\\
+0&amp;0&amp;3
+\end{pmatrix}
+\begin{pmatrix}
+1&amp;2&amp;0\\
+1&amp;-2&amp;0\\
+0&amp;0&amp;3
+\end{pmatrix}
+=
+\begin{pmatrix}
+2&amp;0&amp;0\\
+0&amp;8&amp;0\\
+0&amp;0&amp;9
+\end{pmatrix}
+\]</span></p>
+<div class="worked-svd-step">
+<p><strong>2. Eigenwerte und rechte Richtungen</strong></p>
+<p><span class="math display">\[
+A^TA\text{ ist diagonal}
+\Rightarrow
+\lambda=2,8,9.
+\]</span></p>
+<p>Nach Größe sortiert:</p>
+<p><span class="math display">\[
+(\lambda_1,v_1)=(9,e_3),\quad
+(\lambda_2,v_2)=(8,e_2),\quad
+(\lambda_3,v_3)=(2,e_1).
+\]</span></p>
+</div>
+</div>
+<div class="worked-svd-steps">
+<div class="worked-svd-step">
+<p><strong>3. Singulärwerte</strong></p>
+<p><span class="math display">\[
+\sigma_i=\sqrt{\lambda_i}
+\quad\Rightarrow\quad
+\sigma_1=3,\quad
+\sigma_2=2\sqrt2,\quad
+\sigma_3=\sqrt2
+\]</span></p>
+</div>
+<div class="worked-svd-step worked-svd-step-4">
+<p><strong>4. Linke Richtungen aus (u_i=)</strong></p>
+<p>Jedes gefundene Spaltenmuster wird mit (A) multipliziert. Danach trennen wir die Länge (_i) von der normierten Richtung (u_i).</p>
+<p><span class="math display">\[
+\begin{aligned}
+v_1=e_3:\quad
+Av_1&amp;=(0,0,3)^T=3(0,0,1)^T
+&amp;\Rightarrow\quad u_1&amp;=(0,0,1)^T\\
+v_2=e_2:\quad
+Av_2&amp;=(2,-2,0)^T=2\sqrt2\,\frac1{\sqrt2}(1,-1,0)^T
+&amp;\Rightarrow\quad u_2&amp;=\frac1{\sqrt2}(1,-1,0)^T\\
+v_3=e_1:\quad
+Av_3&amp;=(1,1,0)^T=\sqrt2\,\frac1{\sqrt2}(1,1,0)^T
+&amp;\Rightarrow\quad u_3&amp;=\frac1{\sqrt2}(1,1,0)^T
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<div class="worked-svd-result">
+<div class="worked-svd-factor u-factor">
+<p><strong>(U)</strong></p>
+<p><span class="math display">\[
+\left(\begin{smallmatrix}
+0&amp;\frac1{\sqrt2}&amp;\frac1{\sqrt2}\\
+0&amp;-\frac1{\sqrt2}&amp;\frac1{\sqrt2}\\
+1&amp;0&amp;0
+\end{smallmatrix}\right)
+\]</span></p>
+</div>
+<div class="worked-svd-factor sigma-factor">
+<p><strong>()</strong></p>
+<p><span class="math display">\[
+\left(\begin{smallmatrix}
+3&amp;0&amp;0\\
+0&amp;2\sqrt2&amp;0\\
+0&amp;0&amp;\sqrt2
+\end{smallmatrix}\right)
+\]</span></p>
+</div>
+<div class="worked-svd-factor v-factor">
+<p><strong>(V^T)</strong></p>
+<p><span class="math display">\[
+\left(\begin{smallmatrix}
+0&amp;0&amp;1\\
+0&amp;1&amp;0\\
+1&amp;0&amp;0
+\end{smallmatrix}\right)
+\]</span></p>
+</div>
+</div>
+<div class="worked-svd-summary">
+<p><strong>Ergebnis:</strong> <span class="math inline">\(A=U\Sigma V^T
+=3u_1v_1^T+2\sqrt2\,u_2v_2^T+\sqrt2\,u_3v_3^T\)</span>.</p>
+</div>
+</div>
+</section>
 <section id="was-war-beim-einstein-bild-überraschend" class="slide level2">
 <h2>Was war beim Einstein-Bild überraschend?</h2>
 <div class="derivation-slide two-column-derivation einstein-surprise-layout">
@@ -638,7 +753,7 @@ A{\color{#16a34a}{v}}\in\mathbb{R}^m.
 <p><img data-src="assets/generated/av_height_response.svg" class="av-height-response" alt="Matrixmultiplikation Av als Höhenantwort des Bildes auf ein Spaltenmuster"></p>
 </div>
 <div class="derivation-fullnote">
-<p>Die Höhenantwort <span class="math inline">\(A{\color{#16a34a}{v}}\)</span> zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge misst die Gesamtstärke: <span class="math inline">\(\|A{\color{#16a34a}{v}}\|=(2^2+2^2+2^2+2^2+0^2+0^2)^{1/2}=4\)</span>.</p>
+<p>Die Höhenantwort <span class="math inline">\(A{\color{#16a34a}{v}}\)</span> zeigt, wie stark das Spaltenmuster in jeder Bildzeile vorkommt. Ihre Länge misst die Gesamtstärke: <span class="math inline">\(\|A{\color{#16a34a}{v}}\|=\sqrt{2^2+2^2+2^2+2^2+0^2+0^2}=4\)</span>.</p>
 <p>Je größer <span class="math inline">\(\|A{\color{#16a34a}{v}}\|\)</span>, desto stärker ist die Antwort auf das Muster <span class="math inline">\({\color{#16a34a}{v}}\)</span>. Damit wird unsere Suche konkret: <span class="math inline">\(\max_{\|{\color{#16a34a}{v}}\|=1}\|A{\color{#16a34a}{v}}\|\)</span>.</p>
 <p>Wir suchen das normierte Spaltenmuster mit der stärksten Höhenantwort. Im Beispiel verwenden wir 0/1-Werte; für die eigentliche Suche normieren wir <span class="math inline">\(v\)</span> auf <span class="math inline">\(\|v\|=1\)</span>, damit <span class="math inline">\(\|Av\|\)</span> die Antwort des Bildes misst und nicht nur die Skalierung von <span class="math inline">\(v\)</span>.</p>
 <p><span class="math inline">\(A{\color{#16a34a}{v}}=\text{Höhenantwort}\)</span> und <span class="math inline">\(\|A{\color{#16a34a}{v}}\|=\text{Gesamtstärke}\)</span>.</p>
@@ -900,61 +1015,17 @@ A{\color{#16a34a}{v_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}},
 </div>
 </div>
 </section>
-<section id="aus-drei-teilen-wird-ein-bildbaustein" class="slide level2">
-<h2>Aus drei Teilen wird ein Bildbaustein</h2>
-<div class="derivation-slide two-column-derivation block-from-parts-slide">
-<div class="derivation-left">
-<p>Letzte Folie:</p>
-<p><span class="math display">\[
-{\color{#1e88ff}{u_i}}
-=
-\frac{A{\color{#16a34a}{v_i}}}{\sigma_i}.
-\]</span></p>
-<p>Umgestellt:</p>
-<p><span class="math display">\[
-A{\color{#16a34a}{v_i}}
-=
-{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}.
-\]</span></p>
-<p>Das heißt: Die Höhenantwort des Spaltenmusters besteht aus <strong>Singulärwert</strong> mal <strong>normierter Höhenverteilung</strong>.</p>
-</div>
-<div class="derivation-right">
-<p>Damit kennen wir alle drei Teile:</p>
-<p><span class="math display">\[
-{\color{#f2aa00}{B_i}}
-=
-{\color{#f2aa00}{\sigma_i}}
-{\color{#1e88ff}{u_i}}
-{\color{#16a34a}{v_i^T}}.
-\]</span></p>
-<ul>
-<li><span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span>: Muster über die Spalten</li>
-<li><span class="math inline">\({\color{#1e88ff}{u_i}}\)</span>: Verteilung über die Bildzeilen</li>
-<li><span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>: Singulärwert des Bausteins</li>
-</ul>
-<p>Das äußere Produkt <span class="math inline">\({\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}\)</span> macht daraus eine 2D-Bildschicht.</p>
-</div>
-<div class="svd-block-from-parts-wrap">
-<p><img data-src="assets/generated/svd_block_from_parts.svg" class="svd-block-from-parts" alt="Aus Spaltenmuster, Höhenverteilung und Singulärwert entsteht ein SVD-Bildbaustein"></p>
-</div>
-<div class="derivation-fullnote block-from-parts-note">
-<p>Aus der Kernbeziehung <span class="math inline">\(A{\color{#16a34a}{v_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}\)</span> wird mit <span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span> der Matrixbaustein <span class="math inline">\({\color{#f2aa00}{B_i}}={\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}\)</span>.</p>
-</div>
-<div class="uebergang">
-<p><strong>Merke: Höhenantwort plus Spaltenmuster ergibt die vollständige Bildschicht. Damit kennen wir wieder die Bausteinform aus dem Anfang der Herleitung.</strong></p>
-</div>
-</div>
-</section>
 <section id="alle-bildbausteine-zusammen-ergeben-das-bild" class="slide level2">
 <h2>Alle Bildbausteine zusammen ergeben das Bild</h2>
 <div class="derivation-slide two-column-derivation sum-to-matrix-slide">
 <div class="derivation-left">
-<p>Auf der letzten Folie hatten wir einen einzelnen Bildbaustein:</p>
+<p>Aus Spaltenmuster, Höhenverteilung und Singulärwert entsteht ein einzelner Bildbaustein:</p>
 <p><span class="math display">\[
 {\color{#f2aa00}{B_i}}
 =
 {\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}.
 \]</span></p>
+<p>Dabei ist <span class="math inline">\({\color{#16a34a}{v_i^T}}\)</span> das Spaltenmuster, <span class="math inline">\({\color{#1e88ff}{u_i}}\)</span> die Höhenverteilung und <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> die Stärke dieses Bausteins.</p>
 <p>Das ganze Bild entsteht, wenn wir alle nichtverschwindenden Bausteine addieren:</p>
 <p><span class="math display">\[
 A=B_1+B_2+\dots+B_r
@@ -995,48 +1066,6 @@ A={\color{#1e88ff}{U_r}}{\color{#f2aa00}{\Sigma_r}}{\color{#16a34a}{V_r^T}}.
 </div>
 <div class="svd-sum-to-matrix-wrap">
 <p><img data-src="assets/generated/svd_sum_to_matrix_form.svg" class="svd-sum-to-matrix" alt="Die Summe einzelner SVD-Bildbausteine ergibt die Bildmatrix und entspricht der Matrixform A gleich U Sigma V transponiert"></p>
-</div>
-</div>
-</section>
-<section id="warum-können-wir-kleine-bausteine-weglassen" class="slide level2">
-<h2>Warum können wir kleine Bausteine weglassen?</h2>
-<div class="derivation-slide two-column-derivation truncation-slide">
-<div class="derivation-left">
-<p>Aus der letzten Folie wissen wir:</p>
-<p><span class="math display">\[
-A=\sum_{i=1}^{r}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
-\]</span></p>
-<p>Das Bild ist also eine Summe sortierter Bildbausteine.</p>
-<p>Für Kompression behalten wir nur die ersten <span class="math inline">\(k\)</span> Bausteine:</p>
-<p><span class="math display">\[
-A_k=\sum_{i=1}^{k}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
-\]</span></p>
-<p>Die weggelassenen Bausteine bilden den Fehler:</p>
-<p><span class="math display">\[
-A-A_k=\sum_{i=k+1}^{r}{\color{#f2aa00}{\sigma_i}}u_i v_i^T.
-\]</span></p>
-<p>Weil die Singulärwerte absteigend sortiert sind, lassen wir genau die schwächsten Bildschichten weg.</p>
-</div>
-<div class="derivation-right">
-<p>Der Singulärwert eines Bausteins ist <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span>.</p>
-<p>Weil die SVD-Bausteine orthogonal zueinander sind, addieren sich die Quadrate ihrer Singulärwerte sauber:</p>
-<p><span class="math display">\[
-\|A-A_k\|_F^2
-=
-\sum_{i=k+1}^{r}{\color{#f2aa00}{\sigma_i^2}}.
-\]</span></p>
-<p>Der Fehler besteht genau aus der Energie der weggelassenen Bildschichten.</p>
-<p>Wenn die weggelassenen <span class="math inline">\({\color{#f2aa00}{\sigma_i}}\)</span> klein sind, ist auch der Rekonstruktionsfehler klein.</p>
-<p>Eckart-Young-Mirsky sagt zusätzlich:</p>
-<p><span class="math display">\[
-\|A-A_k\|_F \le \|A-B\|_F
-\quad
-\text{für alle } \operatorname{rang}(B)\le k.
-\]</span></p>
-<p>Also ist <span class="math inline">\(A_k\)</span> die beste Rang-<span class="math inline">\(k\)</span>-Näherung im Frobeniusfehler.</p>
-</div>
-<div class="svd-truncation-k-wrap">
-<p><img data-src="assets/generated/svd_truncation_k.svg" class="svd-truncation-k" alt="Abschneiden der SVD nach den ersten k stärksten Bildbausteinen"></p>
 </div>
 </div>
 </section>

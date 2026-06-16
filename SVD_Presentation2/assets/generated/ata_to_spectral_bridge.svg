@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 250" role="img" aria-label="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern">
-  <rect width="1040" height="250" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 1040 172" role="img" aria-label="Von der Bewertungsmatrix A transponiert A zum Spektralsatz und zu orthogonalen Spaltenmustern">
+  <rect y="40" width="1040" height="172" fill="#ffffff"/>
   <defs>
     <style>
       .serif { font-family: "Computer Modern Serif", "Latin Modern Roman", Georgia, serif; }
@@ -60,5 +60,5 @@
     <text class="serif muted" x="32" y="96" font-size="13" text-anchor="middle">Muster</text>
   </g>
 
-  <text class="serif muted" x="20" y="220" font-size="17">Brücke: Aus der Bewertungsmatrix wird ein Spektralsatz-Problem. Erst danach erhalten wir die orthogonalen Spaltenmuster.</text>
+  <text class="serif muted" x="20" y="201" font-size="17">Brücke: Aus der Bewertungsmatrix wird ein Spektralsatz-Problem. Erst danach erhalten wir die orthogonalen Spaltenmuster.</text>
 </svg>

@@ -82,16 +82,16 @@
       <rect class="cell-light" x="0" y="72" width="44" height="18"/><text class="serif ink" x="19" y="86" font-size="11">0</text>
       <rect class="cell-light" x="0" y="90" width="44" height="18"/><text class="serif ink" x="19" y="104" font-size="11">0</text>
     </g>
-    <text class="serif u" x="49" y="199" font-size="13">||uᵢ|| = 1</text>
+    <text class="serif u" x="76" y="190" font-size="12" text-anchor="middle">||uᵢ|| = 1</text>
   </g>
 
   <!-- Rechnung -->
-  <g transform="translate(976 48)">
-    <rect class="card" x="0" y="0" width="124" height="152" rx="6"/>
-    <text class="serif ink" x="18" y="28" font-size="15">uᵢ = Avᵢ / σᵢ</text>
-    <text class="serif ink" x="20" y="61" font-size="13">= 1/4 · Avᵢ</text>
-    <text class="serif ink" x="20" y="94" font-size="13">2/4 = 0,5</text>
-    <text class="serif ink" x="20" y="120" font-size="13">0/4 = 0</text>
+  <g transform="translate(968 48)">
+    <rect class="card" x="0" y="0" width="136" height="152" rx="6"/>
+    <text class="serif ink" x="14" y="28" font-size="14">uᵢ = Avᵢ / σᵢ</text>
+    <text class="serif ink" x="18" y="61" font-size="13">= 1/4 · Avᵢ</text>
+    <text class="serif ink" x="18" y="94" font-size="13">2/4 = 0,5</text>
+    <text class="serif ink" x="18" y="120" font-size="13">0/4 = 0</text>
   </g>
 
   <text class="serif muted" x="560" y="258" font-size="14" text-anchor="middle">Die Zahlen dienen nur zur Veranschaulichung. In der echten SVD sind vᵢ und uᵢ normierte Vektoren.</text>
