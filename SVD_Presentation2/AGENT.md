@@ -28,6 +28,9 @@
   python3 -m http.server 8765
   ```
   Danach Browser/Playwright gegen `http://127.0.0.1:8765/index.html` verwenden.
+  Hinweis: In der aktuellen Umgebung funktioniert Playwright bzw. der lokale
+  Browsercheck nicht zuverlässig. Nicht wiederholt starten, wenn der lokale
+  Server oder Playwright blockiert.
 
 ## Stolpersteine vermeiden
 

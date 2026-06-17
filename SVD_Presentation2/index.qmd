@@ -429,149 +429,6 @@ Je höher wir $k$ wählen, desto mehr Details, Kanten und feine Kontraste kommen
 :::
 
 
-## Beispiel: SVD einer \(3\times3\)-Matrix
-
-::: {.worked-svd-slide}
-
-::: {.worked-svd-input .worked-svd-block}
-**Gegeben**
-
-$$
-A=
-\begin{pmatrix}
-1&2&0\\
-1&-2&0\\
-0&0&3
-\end{pmatrix}
-$$
-
-**1. \(A^TA\) berechnen**
-
-$$
-A^TA=
-\begin{pmatrix}
-1&1&0\\
-2&-2&0\\
-0&0&3
-\end{pmatrix}
-\begin{pmatrix}
-1&2&0\\
-1&-2&0\\
-0&0&3
-\end{pmatrix}
-=
-\begin{pmatrix}
-2&0&0\\
-0&8&0\\
-0&0&9
-\end{pmatrix}
-$$
-
-::: {.worked-svd-step}
-**2. Eigenwerte und rechte Richtungen**
-
-$$
-A^TA\text{ ist diagonal}
-\Rightarrow
-\lambda=2,8,9.
-$$
-
-Nach Größe sortiert:
-
-$$
-(\lambda_1,v_1)=(9,e_3),\quad
-(\lambda_2,v_2)=(8,e_2),\quad
-(\lambda_3,v_3)=(2,e_1).
-$$
-:::
-
-:::
-
-::: {.worked-svd-steps}
-
-::: {.worked-svd-step}
-**3. Singulärwerte**
-
-$$
-\sigma_i=\sqrt{\lambda_i}
-\quad\Rightarrow\quad
-\sigma_1=3,\quad
-\sigma_2=2\sqrt2,\quad
-\sigma_3=\sqrt2
-$$
-:::
-
-::: {.worked-svd-step .worked-svd-step-4}
-**4. Linke Richtungen aus \(u_i=\frac{Av_i}{\sigma_i}\)**
-
-Jedes gefundene Spaltenmuster wird mit \(A\) multipliziert. Danach trennen wir die Länge \(\sigma_i\) von der normierten Richtung \(u_i\).
-
-$$
-\begin{aligned}
-v_1=e_3:\quad
-Av_1&=(0,0,3)^T=3(0,0,1)^T
-&\Rightarrow\quad u_1&=(0,0,1)^T\\
-v_2=e_2:\quad
-Av_2&=(2,-2,0)^T=2\sqrt2\,\frac1{\sqrt2}(1,-1,0)^T
-&\Rightarrow\quad u_2&=\frac1{\sqrt2}(1,-1,0)^T\\
-v_3=e_1:\quad
-Av_3&=(1,1,0)^T=\sqrt2\,\frac1{\sqrt2}(1,1,0)^T
-&\Rightarrow\quad u_3&=\frac1{\sqrt2}(1,1,0)^T
-\end{aligned}
-$$
-:::
-
-:::
-
-::: {.worked-svd-result}
-
-::: {.worked-svd-factor .u-factor}
-**\(U\)**
-
-$$
-\left(\begin{smallmatrix}
-0&\frac1{\sqrt2}&\frac1{\sqrt2}\\
-0&-\frac1{\sqrt2}&\frac1{\sqrt2}\\
-1&0&0
-\end{smallmatrix}\right)
-$$
-:::
-
-::: {.worked-svd-factor .sigma-factor}
-**\(\Sigma\)**
-
-$$
-\left(\begin{smallmatrix}
-3&0&0\\
-0&2\sqrt2&0\\
-0&0&\sqrt2
-\end{smallmatrix}\right)
-$$
-:::
-
-::: {.worked-svd-factor .v-factor}
-**\(V^T\)**
-
-$$
-\left(\begin{smallmatrix}
-0&0&1\\
-0&1&0\\
-1&0&0
-\end{smallmatrix}\right)
-$$
-:::
-
-:::
-
-::: {.worked-svd-summary}
-**Ergebnis:**
-$A=U\Sigma V^T
-=3u_1v_1^T+2\sqrt2\,u_2v_2^T+\sqrt2\,u_3v_3^T$.
-:::
-
-:::
-
-
 ## Was war beim Einstein-Bild überraschend?
 
 ::: {.derivation-slide .two-column-derivation .einstein-surprise-layout}
@@ -598,6 +455,714 @@ $\Rightarrow$ Die ersten Bausteine müssen die stärksten Bildanteile enthalten.
 **Wie findet die SVD solche wichtigen Bausteine?**
 :::
 
+:::
+
+## SVD (1/4): von $A$ zu den Singulärwerten {.svd-handcalc-slide}
+
+::: {.handcalc-steps .steps-2x2}
+
+::: {.handcalc-step}
+::: {.step-label}
+**I** Transponieren
+:::
+::: {.step-eq}
+$$A=\begin{pmatrix}1&1\\1&0\\0&1\end{pmatrix}\qquad A^{T}=\begin{pmatrix}1&1&0\\1&0&1\end{pmatrix}$$
+:::
+:::
+
+::: {.handcalc-step}
+::: {.step-label}
+**II** $A^{T}A$ bilden
+:::
+::: {.step-eq}
+$$A^{T}A=\begin{pmatrix}1&1&0\\1&0&1\end{pmatrix}\begin{pmatrix}1&1\\1&0\\0&1\end{pmatrix}=\begin{pmatrix}2&1\\1&2\end{pmatrix}$$
+:::
+:::
+
+::: {.handcalc-step}
+::: {.step-label}
+**III** Eigenwerte von $A^{T}A$
+:::
+::: {.step-eq}
+$$A^{T}A-\lambda I=\begin{pmatrix}2-\lambda&1\\1&2-\lambda\end{pmatrix}$$
+$$\det=(2-\lambda)^2-1=(\lambda-1)(\lambda-3)\ \Rightarrow\ \lambda_1=3,\ \lambda_2=1$$
+:::
+:::
+
+::: {.handcalc-step}
+::: {.step-label}
+**IV** Singulärwerte $\to$ ${\color{#f2aa00}{\Sigma}}$
+:::
+::: {.step-eq}
+$$\begin{aligned}\sigma_i&=\sqrt{\lambda_i}\\ \sigma_1&=\sqrt{\lambda_1}=\sqrt3\\ \sigma_2&=\sqrt{\lambda_2}=1\end{aligned}\qquad {\color{#f2aa00}{\Sigma}}=\begin{pmatrix}\sqrt3&0\\0&1\\0&0\end{pmatrix}$$
+:::
+::: {.step-hint}
+absteigend sortiert: $\sigma_1\ge\sigma_2\ge0$ (hier $\sqrt3>1$)
+:::
+:::
+
+:::
+
+## SVD (2/4): Eigenvektoren $\to$ ${\color{#16a34a}{V}}$ {.svd-handcalc-slide}
+
+::: {.step-label .calc-mainstep}
+**V** Eigenvektoren lösen: $(A^{T}A-\lambda_i I)\,v_i=0$, danach auf $\|v_i\|=1$ normieren.
+:::
+
+::: {.calc-2col}
+
+::: {.calc-case}
+::: {.case-head}
+Zu $\lambda_1={\color{#7048e8}{3}}$
+:::
+$$A^{T}A-{\color{#7048e8}{3}}I=\begin{pmatrix}2&1\\1&2\end{pmatrix}-\begin{pmatrix}{\color{#7048e8}{3}}&0\\0&{\color{#7048e8}{3}}\end{pmatrix}=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}$$
+$$\begin{pmatrix}-1&1\\1&-1\end{pmatrix}\binom{x}{y}=0\ \Rightarrow\ -x+y=0\ \Rightarrow\ y=x$$
+$$v=\binom{1}{1},\quad \|v\|=\sqrt{1^2+1^2}=\sqrt2$$
+$$v_1=\frac{v}{\|v\|}=\tfrac{1}{\sqrt2}\binom{1}{1}$$
+:::
+
+::: {.calc-case}
+::: {.case-head}
+Zu $\lambda_2={\color{#7048e8}{1}}$
+:::
+$$A^{T}A-{\color{#7048e8}{1}}\cdot I=\begin{pmatrix}2&1\\1&2\end{pmatrix}-\begin{pmatrix}{\color{#7048e8}{1}}&0\\0&{\color{#7048e8}{1}}\end{pmatrix}=\begin{pmatrix}1&1\\1&1\end{pmatrix}$$
+$$\begin{pmatrix}1&1\\1&1\end{pmatrix}\binom{x}{y}=0\ \Rightarrow\ x+y=0\ \Rightarrow\ y=-x$$
+$$v=\binom{1}{-1},\quad \|v\|=\sqrt{1^2+(-1)^2}=\sqrt2$$
+$$v_2=\frac{v}{\|v\|}=\tfrac{1}{\sqrt2}\binom{1}{-1}$$
+:::
+
+:::
+
+::: {.handcalc-result}
+$${\color{#16a34a}{V}}=(\,v_1\ \ v_2\,)=\begin{pmatrix}\tfrac{1}{\sqrt2}&\tfrac{1}{\sqrt2}\\\tfrac{1}{\sqrt2}&-\tfrac{1}{\sqrt2}\end{pmatrix}\qquad V^{T}V=I$$
+:::
+
+## SVD (3/4): linke Singulärvektoren $\to$ ${\color{#1e88ff}{U}}$ {.svd-handcalc-slide}
+
+::: {.step-label .calc-mainstep}
+**VI** Jede Spalte aus $u_i=\dfrac{Av_i}{\sigma_i}$; die fehlende Spalte $u_3$ ergänzt die orthonormale Basis.
+:::
+
+::: {.u-grid}
+
+::: {.calc-case}
+::: {.case-head}
+${\color{#1e88ff}{u_1}}$ — zu $\sigma_1=\sqrt3$
+:::
+$$Av_1=\begin{pmatrix}1&1\\1&0\\0&1\end{pmatrix}\tfrac{1}{\sqrt2}\binom{1}{1}=\tfrac{1}{\sqrt2}\begin{pmatrix}2\\1\\1\end{pmatrix}$$
+$$u_1=\frac{Av_1}{\sigma_1}=\tfrac{1}{\sqrt3}\cdot\tfrac{1}{\sqrt2}\begin{pmatrix}2\\1\\1\end{pmatrix}=\tfrac{1}{\sqrt6}\begin{pmatrix}2\\1\\1\end{pmatrix}$$
+:::
+
+::: {.calc-case}
+::: {.case-head}
+${\color{#1e88ff}{u_2}}$ — zu $\sigma_2=1$
+:::
+$$Av_2=\begin{pmatrix}1&1\\1&0\\0&1\end{pmatrix}\tfrac{1}{\sqrt2}\binom{1}{-1}=\tfrac{1}{\sqrt2}\begin{pmatrix}0\\1\\-1\end{pmatrix}$$
+$$u_2=\frac{Av_2}{\sigma_2}=\frac{Av_2}{1}=\tfrac{1}{\sqrt2}\begin{pmatrix}0\\1\\-1\end{pmatrix}$$
+:::
+
+::: {.calc-case}
+::: {.case-head}
+${\color{#1e88ff}{u_3}}$ — Basis ergänzen
+:::
+$$u_1\times u_2=\begin{pmatrix}2\\1\\1\end{pmatrix}\times\begin{pmatrix}0\\1\\-1\end{pmatrix}=\begin{pmatrix}-2\\2\\2\end{pmatrix}$$
+$$u_3=\frac{u_1\times u_2}{\sqrt{(-2)^2+2^2+2^2}}=\tfrac{1}{2\sqrt3}\begin{pmatrix}-2\\2\\2\end{pmatrix}=\tfrac{1}{\sqrt3}\begin{pmatrix}-1\\1\\1\end{pmatrix}$$
+:::
+
+::: {.calc-case .u-final}
+::: {.case-head}
+${\color{#1e88ff}{U}}$ — Spalten zusammensetzen
+:::
+$${\color{#1e88ff}{U}}=(\,u_1\ \ u_2\ \ u_3\,)=\begin{pmatrix}\tfrac{2}{\sqrt6}&0&-\tfrac{1}{\sqrt3}\\\tfrac{1}{\sqrt6}&\tfrac{1}{\sqrt2}&\tfrac{1}{\sqrt3}\\\tfrac{1}{\sqrt6}&-\tfrac{1}{\sqrt2}&\tfrac{1}{\sqrt3}\end{pmatrix}$$
+:::
+
+:::
+
+## SVD (4/4): Ergebnis & Übersicht {.svd-handcalc-slide}
+
+::: {.step-label .calc-mainstep}
+**VII** Probe: Das Produkt ${\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#16a34a}{V^{T}}}$ ergibt wieder die Ausgangsmatrix $A$.
+:::
+
+::: {.handcalc-result .result-wide}
+$$A={\color{#1e88ff}{U}}\,{\color{#f2aa00}{\Sigma}}\,{\color{#16a34a}{V^{T}}}=\begin{pmatrix}\tfrac{2}{\sqrt6}&0&-\tfrac{1}{\sqrt3}\\\tfrac{1}{\sqrt6}&\tfrac{1}{\sqrt2}&\tfrac{1}{\sqrt3}\\\tfrac{1}{\sqrt6}&-\tfrac{1}{\sqrt2}&\tfrac{1}{\sqrt3}\end{pmatrix}\begin{pmatrix}\sqrt3&0\\0&1\\0&0\end{pmatrix}\begin{pmatrix}\tfrac{1}{\sqrt2}&\tfrac{1}{\sqrt2}\\\tfrac{1}{\sqrt2}&-\tfrac{1}{\sqrt2}\end{pmatrix}=\begin{pmatrix}1&1\\1&0\\0&1\end{pmatrix}$$
+:::
+
+::: {.handcalc-overview}
+::: {.ov-card}
+**$A$**
+
+- beliebige reelle $m\times n$-Matrix (hier $3\times2$)
+- darf rechteckig sein
+:::
+::: {.ov-card}
+**$A^{T}A$**
+
+- symmetrisch: $(A^{T}A)^{T}=A^{T}A$
+- quadratisch $n\times n$
+- positiv semidefinit ($\lambda_i\ge0$)
+:::
+::: {.ov-card .ov-u}
+**${\color{#1e88ff}{U}}$**
+
+- orthogonal $m\times m$ ($U^{T}U=I$)
+- Spalten $u_i$ = linke Singulärvektoren
+:::
+::: {.ov-card .ov-sigma}
+**${\color{#f2aa00}{\Sigma}}$**
+
+- rechteckige $m\times n$-Diagonalmatrix
+- $\sigma_1\ge\sigma_2\ge\dots\ge0$
+:::
+::: {.ov-card .ov-v}
+**${\color{#16a34a}{V}}$**
+
+- orthogonal $n\times n$ ($V^{T}V=I$)
+- Spalten $v_i$ = Eigenvektoren von $A^{T}A$
+:::
+::: {.ov-card .ov-v}
+**${\color{#16a34a}{V^{T}}}$**
+
+- transponiert und zugleich invers
+- $V^{T}=V^{-1}$; orthogonal
+:::
+:::
+
+## Mathematische Herleitung der SVD: Gliederung {.formal-overview-slide}
+
+::: {.formal-overview}
+::: {.formal-overview-subtitle}
+Wir klären Schritt für Schritt, warum eine reelle Matrix in der Form
+
+$$
+A=U\Sigma V^T
+$$
+
+geschrieben werden kann.
+:::
+
+::: {.formal-overview-list}
+::: {.formal-overview-col}
+1. Ausgangspunkt: die Matrix $A^TA$
+2. Spektralsatz auf $A^TA$
+3. Definition der Singulärwerte
+4. Herleitung der linken Singulärvektoren
+5. Warum ist $u_i$ normiert?
+:::
+
+::: {.formal-overview-col}
+6. Warum sind die $u_i$ orthogonal?
+7. Zusammensetzen der Gleichungen
+8. Was passiert bei $\sigma_i=0$?
+9. Kompakte Gesamtidee
+10. Geometrische Bedeutung
+:::
+:::
+:::
+
+## Ziel der Herleitung {.formal-derivation-slide}
+
+::: {.formal-start-layout}
+::: {.formal-start-left}
+Gegeben sei eine Matrix
+
+$$
+A\in\mathbb{R}^{m\times n}.
+$$
+
+Gesucht ist eine Zerlegung der Form
+
+$$
+\boxed{A=U\Sigma V^T}.
+$$
+:::
+
+::: {.formal-panel .formal-start-right}
+Dabei sollen gelten:
+
+- $U$ und $V$ sind orthogonale Matrizen.
+- $\Sigma$ ist eine Diagonalmatrix mit nichtnegativen Einträgen.
+
+Diese Diagonaleinträge heißen später Singulärwerte.
+:::
+:::
+
+## 1. Ausgangspunkt: Die Matrix $A^TA$ {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Wir betrachten zunächst
+
+$$
+A^TA\in\mathbb{R}^{n\times n}.
+$$
+
+Diese Matrix hat zwei wichtige Eigenschaften.
+
+**Symmetrie**
+
+$$
+(A^TA)^T=A^T(A^T)^T=A^TA.
+$$
+
+Also ist $A^TA$ symmetrisch.
+:::
+
+::: {.formal-panel}
+**Positive Semidefinitheit**
+
+Für jeden Vektor $x\in\mathbb{R}^n$ gilt:
+
+$$
+x^TA^TAx=(Ax)^T(Ax)=\|Ax\|^2\geq 0.
+$$
+
+Daraus folgt, dass alle Eigenwerte von $A^TA$ nichtnegativ sind:
+
+$$
+\lambda_i\geq 0.
+$$
+:::
+:::
+
+## 2. Spektralsatz auf $A^TA$ {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Da $A^TA$ symmetrisch ist, besitzt sie eine orthonormale Eigenbasis.
+
+Es existieren also Eigenvektoren
+
+$$
+v_1,\dots,v_n
+$$
+
+mit
+
+$$
+A^TAv_i=\lambda_i v_i
+$$
+
+und
+
+$$
+v_i^Tv_j=
+\begin{cases}
+1,& i=j\\
+0,& i\neq j.
+\end{cases}
+$$
+:::
+
+::: {.formal-panel}
+Diese Eigenvektoren werden als Spalten in $V$ geschrieben:
+
+$$
+V=
+\begin{pmatrix}
+| & & |\\
+v_1 & \cdots & v_n\\
+| & & |
+\end{pmatrix}.
+$$
+
+Da die Spalten orthonormal sind:
+
+$$
+V^TV=I,\qquad V^{-1}=V^T.
+$$
+
+Außerdem kann man $A^TA$ diagonalisieren:
+
+$$
+A^TA=V\Lambda V^T,
+\qquad
+\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_n).
+$$
+:::
+:::
+
+## 3. Definition der Singulärwerte {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Da alle Eigenwerte $\lambda_i\geq 0$ sind, dürfen wir ihre Quadratwurzeln bilden.
+
+Wir definieren:
+
+$$
+\boxed{\sigma_i=\sqrt{\lambda_i}}.
+$$
+
+Diese Werte heißen Singulärwerte von $A$.
+
+Üblicherweise werden sie absteigend sortiert:
+
+$$
+\sigma_1\geq\sigma_2\geq\dots\geq 0.
+$$
+:::
+
+::: {.formal-panel}
+Die Singulärwerte werden in die Matrix $\Sigma$ eingetragen.
+
+Für eine Matrix $A\in\mathbb{R}^{m\times n}$ hat $\Sigma$ die Form
+
+$$
+\Sigma\in\mathbb{R}^{m\times n}.
+$$
+
+Zum Beispiel:
+
+$$
+\Sigma=
+\begin{pmatrix}
+\sigma_1 & 0 & \cdots\\
+0 & \sigma_2 & \cdots\\
+\vdots & \vdots & \ddots
+\end{pmatrix}.
+$$
+:::
+:::
+
+## 4. Herleitung der linken Singulärvektoren {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Aus der Eigenwertgleichung
+
+$$
+A^TAv_i=\lambda_i v_i
+$$
+
+und
+
+$$
+\lambda_i=\sigma_i^2
+$$
+
+folgt:
+
+$$
+A^TAv_i=\sigma_i^2v_i.
+$$
+:::
+
+::: {.formal-panel}
+Für $\sigma_i>0$ definieren wir
+
+$$
+\boxed{u_i=\frac{Av_i}{\sigma_i}}.
+$$
+
+Damit gilt sofort:
+
+$$
+Av_i=\sigma_i u_i.
+$$
+
+Das ist eine der zentralen Beziehungen der SVD.
+:::
+:::
+
+## 5. Warum ist $u_i$ normiert? {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Wir prüfen die Länge von $u_i$:
+
+$$
+\|u_i\|^2=u_i^Tu_i.
+$$
+
+Einsetzen von
+
+$$
+u_i=\frac{Av_i}{\sigma_i}
+$$
+
+ergibt:
+
+$$
+\|u_i\|^2
+=
+\left(\frac{Av_i}{\sigma_i}\right)^T
+\left(\frac{Av_i}{\sigma_i}\right)
+=
+\frac{1}{\sigma_i^2}v_i^TA^TAv_i.
+$$
+:::
+
+::: {.formal-panel}
+Da
+
+$$
+A^TAv_i=\sigma_i^2v_i
+$$
+
+folgt:
+
+$$
+\|u_i\|^2
+=
+\frac{1}{\sigma_i^2}
+v_i^T(\sigma_i^2v_i)
+=
+v_i^Tv_i.
+$$
+
+Da $v_i$ normiert ist:
+
+$$
+v_i^Tv_i=1,
+\qquad
+\boxed{\|u_i\|=1}.
+$$
+:::
+:::
+
+## 6. Warum sind die $u_i$ orthogonal? {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Für $i\neq j$ gilt:
+
+$$
+\begin{aligned}
+u_i^Tu_j
+&=
+\left(\frac{Av_i}{\sigma_i}\right)^T
+\left(\frac{Av_j}{\sigma_j}\right)\\
+&=
+\frac{1}{\sigma_i\sigma_j}v_i^TA^TAv_j.
+\end{aligned}
+$$
+
+Mit
+
+$$
+A^TAv_j=\sigma_j^2v_j
+$$
+
+folgt:
+
+$$
+u_i^Tu_j
+=
+\frac{\sigma_j^2}{\sigma_i\sigma_j}v_i^Tv_j.
+$$
+:::
+
+::: {.formal-panel}
+Da die $v_i$ orthogonal sind:
+
+$$
+v_i^Tv_j=0.
+$$
+
+Damit ergibt sich:
+
+$$
+\boxed{u_i^Tu_j=0}.
+$$
+
+Die Vektoren $u_i$ sind also orthonormal. Sie bilden die Spalten von $U$:
+
+$$
+U=
+\begin{pmatrix}
+| & & |\\
+u_1 & \cdots & u_m\\
+| & & |
+\end{pmatrix},
+\qquad
+U^TU=I.
+$$
+:::
+:::
+
+## 7. Zusammensetzen der Gleichungen {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Für jeden Singulärvektor gilt:
+
+$$
+Av_i=\sigma_i u_i.
+$$
+
+Schreibt man alle Gleichungen nebeneinander, erhält man:
+
+$$
+A
+\begin{pmatrix}
+| & & |\\
+v_1 & \cdots & v_n\\
+| & & |
+\end{pmatrix}
+=
+\begin{pmatrix}
+| & & |\\
+u_1 & \cdots & u_m\\
+| & & |
+\end{pmatrix}
+\Sigma.
+$$
+
+Also:
+
+$$
+AV=U\Sigma.
+$$
+:::
+
+::: {.formal-panel}
+Nun multiplizieren wir von rechts mit $V^T$:
+
+$$
+AVV^T=U\Sigma V^T.
+$$
+
+Da $V$ orthogonal ist:
+
+$$
+VV^T=I.
+$$
+
+Folglich:
+
+$$
+\boxed{A=U\Sigma V^T}.
+$$
+
+Damit ist die SVD hergeleitet.
+:::
+:::
+
+## 8. Was passiert bei $\sigma_i=0$? {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Falls
+
+$$
+\sigma_i=0,
+$$
+
+ist, gilt:
+
+$$
+\lambda_i=0
+$$
+
+und damit:
+
+$$
+A^TAv_i=0.
+$$
+
+Außerdem:
+
+$$
+\|Av_i\|^2=v_i^TA^TAv_i=0,
+\qquad
+Av_i=0.
+$$
+:::
+
+::: {.formal-panel}
+Der Vektor $v_i$ liegt dann im Kern von $A$.
+
+Die Formel
+
+$$
+u_i=\frac{Av_i}{\sigma_i}
+$$
+
+kann hier nicht verwendet werden, weil man durch null teilen würde.
+
+Die fehlenden Vektoren in $U$ werden stattdessen so ergänzt, dass alle Spalten von $U$ weiterhin eine orthonormale Basis bilden.
+:::
+:::
+
+## 9. Kompakte Gesamtidee {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Die Herleitung basiert auf:
+
+$$
+A^TA v_i=\lambda_i v_i.
+$$
+
+Dann setzt man:
+
+$$
+\sigma_i=\sqrt{\lambda_i}
+$$
+
+und
+
+$$
+u_i=\frac{Av_i}{\sigma_i}.
+$$
+:::
+
+::: {.formal-panel}
+Dadurch erhält man:
+
+$$
+Av_i=\sigma_i u_i.
+$$
+
+Für alle Vektoren gleichzeitig:
+
+$$
+AV=U\Sigma.
+$$
+
+Und schließlich:
+
+$$
+\boxed{A=U\Sigma V^T}.
+$$
+:::
+:::
+
+## 10. Geometrische Bedeutung {.formal-derivation-slide}
+
+::: {.formal-derivation-grid}
+::: {.formal-panel}
+Für einen Vektor $x$ gilt:
+
+$$
+Ax=U\Sigma V^Tx.
+$$
+
+Die Transformation läuft in drei Schritten ab:
+
+$$
+x
+\overset{V^T}{\longrightarrow}
+V^Tx
+\overset{\Sigma}{\longrightarrow}
+\Sigma V^Tx
+\overset{U}{\longrightarrow}
+U\Sigma V^Tx.
+$$
+:::
+
+::: {.formal-panel}
+- $V^T$: Wechsel in die Basis der rechten Singulärvektoren
+- $\Sigma$: Streckung oder Stauchung entlang orthogonaler Richtungen
+- $U$: Wechsel in die Basis der linken Singulärvektoren
+
+Damit beschreibt die SVD jede lineare Abbildung als
+
+$$
+\boxed{\text{Basiswechsel}\rightarrow\text{Skalierung}\rightarrow\text{Basiswechsel}}.
+$$
+:::
 :::
 
 ## Ein Bild als Summe einfacher Bausteine
@@ -642,10 +1207,10 @@ Wir greifen den wichtigsten Baustein aus der vorherigen Folie heraus: den vertik
 :::
 
 ::: {.svd-single-meta}
-Für das Prinzip verwenden wir hier den kleinen Baustein aus Folie 17. Beim echten Bild hätten $u_i$ und $v_i$ entsprechend viele Einträge wie Bildzeilen und Bildspalten.
+Für das Prinzip verwenden wir hier den kleinen Baustein aus der vorherigen Folie. Beim echten Bild hätten $u_i$ und $v_i$ entsprechend viele Einträge wie Bildzeilen und Bildspalten.
 :::
 
-![](assets/generated/svd_single_block_decomposition.svg){.svd-single-block fig-alt="Zerlegung eines einzelnen SVD-Bildbausteins in u1, v1 transponiert und sigma1"}
+![](assets/generated/svd_single_block_decomposition.svg){.svd-single-block fig-alt="Zerlegung eines einzelnen SVD-Bausteins in u1, v1 transponiert und sigma1"}
 
 ::: {.svd-single-hint}
 Zur Veranschaulichung verwenden wir hier 0/1-Werte. In der echten SVD sind $u_i$ und $v_i$ normierte Vektoren.
@@ -960,7 +1525,7 @@ $\Rightarrow$ Für solche Matrizen liefert der Spektralsatz orthogonale Eigenric
 :::
 
 ::: {.uebergang}
-Damit liefert der Spektralsatz auf $A^TA$ **genau die zwei Eigenschaften von Folie 19/20**: orthogonale, also **unabhängige** Muster, die sich nach Eigenwert **sortieren** lassen — die stärksten zuerst.
+Damit liefert der Spektralsatz auf $A^TA$ **genau die zwei Eigenschaften aus den vorherigen Folien**: orthogonale, also **unabhängige** Muster, die sich nach Eigenwert **sortieren** lassen — die stärksten zuerst.
 :::
 
 :::
@@ -1229,17 +1794,15 @@ $$
 
 Singulärwert × Höhenverteilung × Spaltenmuster
 :::
-
 ::: {.svd-summary-card}
-**Sortierung**
+**Matrixform**
 
 $$
-{\color{#f2aa00}{\sigma_1}}\ge{\color{#f2aa00}{\sigma_2}}\ge\dots
+A={\color{#1e88ff}{U}}{\color{#f2aa00}{\Sigma}}{\color{#16a34a}{V^T}}
 $$
 
-Große ${\color{#f2aa00}{\sigma_i}}$ bedeuten wichtige Bildanteile.
+$U$ und $V$ orthogonal, $\Sigma$ diagonal
 :::
-
 ::: {.svd-summary-card}
 **Kompression**
 
@@ -1247,7 +1810,7 @@ $$
 A_k=\sum_{i=1}^{k}{\color{#f2aa00}{\sigma_i}}{\color{#1e88ff}{u_i}}{\color{#16a34a}{v_i^T}}
 $$
 
-Wir behalten die stärksten Bausteine.
+nur die stärksten $k$ Terme speichern
 :::
 :::
 
@@ -1257,6 +1820,7 @@ Die SVD macht sichtbar, welche Bildstrukturen wichtig sind, und erlaubt dadurch 
 
 :::
 
+
 ## Quellen {.sources-slide}
 
 ::: {.sources-list}
@@ -1265,7 +1829,10 @@ Die SVD macht sichtbar, welche Bildstrukturen wichtig sind, und erlaubt dadurch 
 - **[Kar15]** Karpfinger, C. *Höhere Mathematik in Rezepten.* Springer, 2. Aufl., 2015 (Kap. 42.3–42.4).
 - **[Kel21]** Keller, A. *Aufgaben und Lösungen zur Mathematik für den Studienstart.* Springer, 2021 (Kap. 25.8–25.9).
 - **[Kel24]** Keller, A. *Handout Eigenwerte, Spektralsatz, Singular Value Decomposition und Least-Squares.* THWS, 2024.
+- **[MatYT]** MathemaTrick. YouTube-Kanal. <https://www.youtube.com/@MathemaTrick>
+- **[PetYT]** MathePeter. YouTube-Kanal. <https://www.youtube.com/@MathePeter>
 - **[Mol04]** Moler, C. B. *Numerical Computing with MATLAB.* SIAM, 2004 (Kap. 10.1–10.4 und 10.11).
+- **[SerYT]** Serrano Academy. YouTube-Kanal. <https://www.youtube.com/@SerranoAcademy>
 - **[TB22]** Trefethen, L. und Bau, D. *Numerical Linear Algebra.* SIAM, 2022.
 - **[Str10]** Strang, G. *Wissenschaftliches Rechnen.* Springer, 2010 (Kap. 1).
 :::
@@ -1282,6 +1849,7 @@ Bei der Erstellung dieser Themenausarbeitung wurden KI-gestützte Werkzeuge gem�
 | Claude (Anthropic) | Strukturierung und sprachliche Überarbeitung der Folien |
 | Claude (Anthropic) | Erzeugung der Python-Skripte für die generierten Visualisierungen |
 | Claude (Anthropic) | Unterstützung bei der Python-Implementierung der SVD-Bildkompression |
+| ChatGPT (OpenAI) | Entwurf der mathematischen SVD-Herleitung |
 :::
 
 ::: {.ai-decl-statement}
