@@ -2332,9 +2332,9 @@
 
 .sources-list {
   columns: 2;
-  column-gap: 1.35rem;
+  column-gap: 1.15rem;
   max-width: 1120px;
-  margin-top: 0.4rem;
+  margin-top: 0.28rem;
 }
 
 .sources-list ul {
@@ -2343,9 +2343,9 @@
 }
 
 .sources-list li {
-  font-size: 0.5em;
-  line-height: 1.24;
-  margin: 0 0 0.44rem;
+  font-size: 0.44em;
+  line-height: 1.18;
+  margin: 0 0 0.32rem;
   padding-left: 0;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
